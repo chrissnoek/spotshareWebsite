@@ -1,0 +1,28 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "targets": {
+          "ie": "11",
+          "edge": "15",
+          "safari": "10",
+          "firefox": "50",
+          "chrome": "49"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "sourceType": "unambiguous",
+  "plugins": [
+    ["@babel/plugin-transform-modules-commonjs"],
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
+    ]
+  ]
+}

@@ -1,0 +1,35 @@
+{
+    "extends": "airbnb",
+    "env": {
+        "browser": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "rules": {
+        "import/extensions": [
+            "error",
+            "always",
+            {
+                "ignorePackages": true
+            }
+        ],
+        "quotes": [
+            1,
+            "double"
+        ],
+        "no-console": "off",
+        "operator-linebreak": "off",
+        "react/prop-types": "off",
+        "arrow-parens": "off",
+        "comma-dangle": "off",
+        "indent": [
+            "error",
+            "tab"
+        ]
+    }
+}

@@ -1,8 +1,8 @@
 /* globals React */
 import React, { Component } from "react";
-import http from "../src/services/httpService";
+import http from "./services/httpService";
 
-export default class WorkshopAdd extends React.Component {
+export default class PhotoAdd extends React.Component {
     constructor() {
         super();
         this.state = {};
@@ -22,13 +22,13 @@ export default class WorkshopAdd extends React.Component {
 
     async handleSubmit(e) {
         e.preventDefault();
-        const form = document.forms.workshopAdd;
+        const form = document.forms.photoAdd;
         console.log(form);
         const formData = new FormData();
         console.log(formData);
         const uploadedFile = this.fileInput.current.files[0];
         console.log(uploadedFile);
-        formData.append("workshopImage", uploadedFile);
+        formData.append("photoImage", uploadedFile);
 
         console.log(window.ENV);
         console.log(formData);
@@ -54,7 +54,7 @@ export default class WorkshopAdd extends React.Component {
             "https://dkotwt30gflnm.cloudfront.net/" +
             resources.transforms.find(elem => elem.id === "watermark").key;
 
-        const workshop = {
+        const photo = {
             title: form.title.value,
             place: form.place.value,
             date: new Date(form.date.value).toISOString(),
@@ -66,7 +66,7 @@ export default class WorkshopAdd extends React.Component {
                 imageWatermark
             }
         };
-        this.props.createWorkshop(workshop);
+        this.props.createPhoto(photo);
         form.title.value = "";
         form.place.value = "";
         form.date.value = "";
@@ -77,13 +77,13 @@ export default class WorkshopAdd extends React.Component {
     render() {
         return (
             <form
-                name="workshopAdd"
+                name="photoAdd"
                 encType="multipart/form-data"
                 onSubmit={this.handleSubmit}
                 onChange={this.handleChange}
                 className="block py-3 px-4 border border-gray-300 rounded"
             >
-                <h3 className="my-2">Add workshop</h3>
+                <h3 className="my-2">Foto toevoegen</h3>
                 <input
                     type="text"
                     name="title"
@@ -104,7 +104,7 @@ export default class WorkshopAdd extends React.Component {
                 />
                 <input
                     type="file"
-                    name="workshopImage"
+                    name="photoImage"
                     ref={this.fileInput}
                     className="border border-gray-400 bg-gray-200 focus:bg-white text-gray-900 appearance-none inline-block w-full border rounded py-3 px-4 focus:outline-none mb-2"
                 />

@@ -1,16 +1,17 @@
 scalar GraphQLDate
 
-type Workshop {
+type Photo {
   _id: ID!
   id: Int!
   created: GraphQLDate!
   title: String!
   description: String!
   date: GraphQLDate!
-  place: String!
+  placeID: String!
   images: Images!
-  category: String
 }
+
+
 
 type Images {
   imageThumb: String!
@@ -29,7 +30,7 @@ input ImageInputs {
 # attendees: Int
 # price: Int
 
-input WorkshopInputs {
+input PhotoInputs {
   title: String!
   date: GraphQLDate!
   place: String!
@@ -42,11 +43,11 @@ input WorkshopInputs {
 # Top level declarations
 type Query {
   about: String!
-  workshopList(category: String): [Workshop!]!
-  workshop(id: Int!): Workshop!
+  photoList(category: String): [Photo!]!
+  photo(id: Int!): Photo!
 }
 
 type Mutation {
   setAboutMessage(message: String!): String
-  workshopAdd(workshop: WorkshopInputs!): Workshop!
+  photoAdd(photo: PhotoInputs!): Photo!
 }

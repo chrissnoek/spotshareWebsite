@@ -2,21 +2,21 @@
 /* eslint "react/jsx-no-undef":"off" */
 
 import React, { Component } from "react";
-import WorkshopFilter from './WorkshopFilter.jsx';
-import WorkshopAdd from './WorkshopAdd.jsx';
-import WorkshopCarousel from './WorkshopCarousel.jsx';
-import WorkshopDetail from './WorkshopDetail.jsx';
+import PhotoFilter from './PhotoFilter.jsx';
+import PhotoAdd from './PhotoAdd.jsx';
+import PhotoCarousel from './PhotoCarousel.jsx';
+import PhotoDetail from './PhotoDetail.jsx';
 import graphQLFetch from './graphQLFetch.js';
 
 /* to support IE */
 import URLSearchParams from 'url-search-params';
 import { Route } from "react-router-dom";
 
-export default class WorkshopList extends React.Component {
+export default class PhotoList extends React.Component {
     constructor() {
         super();
         this.state = {
-            workshops: []
+            photos: []
         };
     }
 
@@ -44,14 +44,13 @@ export default class WorkshopList extends React.Component {
         if (params.get('category')) vars.category = params.get('category');
 
         // build the graphql query
-        const query = `query workshopList($category: String) {
-        workshopList(category: $category) {
+        const query = `query photoList($category: String) {
+        photoList(category: $category) {
           id
           title
           date
           created
-          place
-          category
+          placeID
           images {
             imageThumb
             imageOriginal
@@ -63,22 +62,22 @@ export default class WorkshopList extends React.Component {
         // provide the query with the variables 
         const data = await graphQLFetch(query, vars);
         if (data) {
-            this.setState({ workshops: data.workshopList });
+            this.setState({ photos: data.photoList });
         }
     }
 
-    createWorkshop = async workshop => {
+    createPhoto = async photo => {
         // create a mutation query with a variable, which is passed in the body in the fetch
-        // first addAWorkshop is just a mutation name, afther is the variable and the type which is workshopinputs
-        // next is the actual mutation which is getting the $workshop variable
+        // first addAPhoto is just a mutation name, afther is the variable and the type which is photoinputs
+        // next is the actual mutation which is getting the $photo variable
         // the query should return only the id
-        const query = `mutation addAWorkshop($workshop: WorkshopInputs!) {
-          workshopAdd(workshop: $workshop) {
+        const query = `mutation addAPhoto($photo: PhotoInputs!) {
+          photoAdd(photo: $photo) {
             id
           }
       }`;
 
-        const data = await graphQLFetch(query, { workshop });
+        const data = await graphQLFetch(query, { photo });
         if (data) {
             this.loadData();
         }
@@ -88,15 +87,15 @@ export default class WorkshopList extends React.Component {
         const { match } = this.props;
         return (
             <div id="page" className="p-6">
-                <h1>Upcoming Workshops</h1>
-                <WorkshopFilter />
+                <h1>Upcoming Photos</h1>
+                <PhotoFilter />
                 <hr />
-                <WorkshopCarousel workshops={this.state.workshops} />
+                <PhotoCarousel photos={this.state.photos} />
                 <hr />
-                <WorkshopAdd createWorkshop={this.createWorkshop} />
+                <PhotoAdd createPhoto={this.createPhoto} />
                 <hr />
-                <Route path={`${match.path}/:id`} component={WorkshopDetail} />
-            </div>
+                <Route path={`${match.path}/:id`} component={PhotoDetail} />
+            </div >
         );
     }
 }

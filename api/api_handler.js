@@ -5,18 +5,18 @@ const { ApolloServer } = require("apollo-server-express");
 
 const GraphQLDate = require('./grapqh_date.js');
 const about = require('./about.js');
-const workshop = require('./workshop.js');
+const photo = require('./photo.js');
 
 
 const resolvers = {
     Query: {
         about: about.getMessage,
-        workshopList: workshop.list,
-        workshop: workshop.get
+        photoList: photo.list,
+        photo: photo.get
     },
     Mutation: {
         setAboutMessage: about.setMessage,
-        workshopAdd: workshop.add
+        photoAdd: photo.add
     },
     GraphQLDate
 };

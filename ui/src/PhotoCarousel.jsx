@@ -2,11 +2,11 @@
 import React, { Component } from "react";
 import { Link, withRouter, NavLink } from 'react-router-dom';
 
-const WorkshopView = withRouter(({ workshop, location: { search } }) => {
-    const selectedLocation = { pathname: `/workshops/${workshop.id}`, search }
+const PhotoView = withRouter(({ photo, location: { search } }) => {
+    const selectedLocation = { pathname: `/photos/${photo.id}`, search }
     return (
         <React.Fragment>
-            <div className="workshopCard rounded relative overflow-hidden my-2">
+            <div className="photoCard rounded relative overflow-hidden my-2">
                 <div className="relative rounded">
                     <NavLink
                         to={selectedLocation}
@@ -14,20 +14,20 @@ const WorkshopView = withRouter(({ workshop, location: { search } }) => {
                         title="Bekijk foto nu"
                     ></NavLink>
                     <img
-                        src={workshop.images.imageWatermark}
+                        src={photo.images.imageWatermark}
                         className="object-cover  w-full h-48  block"
                         alt="Foto"
                     />
 
-                    <div className="workshopContent p-4 absolute bottom-0 left-0">
+                    <div className="photoContent p-4 absolute bottom-0 left-0">
                         <span className="text-white">
                             {// convert date type to a readable date string
-                                workshop.date.toDateString()}
+                                photo.date.toDateString()}
                         </span>
-                        <div className="workshopInfo">
-                            <h3 className="text-white">{workshop.title}</h3>
-                            <span className="text-white">{workshop.place}</span>
-                            <p className="text-white">{workshop.category}</p>
+                        <div className="photoInfo">
+                            <h3 className="text-white">{photo.title}</h3>
+                            <span className="text-white">{photo.place}</span>
+                            <p className="text-white">{photo.category}</p>
                         </div>
                         <div className="clear"></div>
                     </div>
@@ -37,9 +37,9 @@ const WorkshopView = withRouter(({ workshop, location: { search } }) => {
     );
 });
 
-export default function WorkshopCarousel(props) {
-    const workshops = props.workshops.map(workshop => (
-        <WorkshopView key={workshop.id} workshop={workshop} />
+export default function PhotoCarousel(props) {
+    const photos = props.photos.map(photo => (
+        <PhotoView key={photo.id} photo={photo} />
     ));
-    return <div>{workshops}</div>;
+    return <div>{photos}</div>;
 }

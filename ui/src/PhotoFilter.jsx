@@ -2,7 +2,7 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
 
-class WorkshopFilter extends React.Component {
+class PhotoFilter extends React.Component {
     constructor() {
         super();
         this.onChangeStatus = this.onChangeStatus.bind(this);
@@ -15,7 +15,7 @@ class WorkshopFilter extends React.Component {
         // get the history prop to use the history.push function 
         const { history } = this.props;
         history.push({
-            pathname: '/workshops',
+            pathname: '/photos',
             search: category ? `?category=${category}` : ``
         })
     }
@@ -25,7 +25,7 @@ class WorkshopFilter extends React.Component {
             <div>
                 Category:
                 <select onChange={this.onChangeStatus}>
-                    <option value="">Alle workshops</option>
+                    <option value="">Alle photos</option>
                     <option value="landschapsfotografie">Landschapsfotografie</option>
                     <option value="nabewerking">nabewerking</option>
                     <option value="photowalk">photowalk</option>
@@ -37,4 +37,4 @@ class WorkshopFilter extends React.Component {
 }
 
 //because we need access to the this.props.history property, we use withRouter
-export default withRouter(WorkshopFilter);
+export default withRouter(PhotoFilter);

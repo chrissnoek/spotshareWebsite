@@ -3,13 +3,17 @@
 
 import React, { Component } from "react";
 import graphQLFetch from './graphQLFetch.js';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 
 
-export default class WorkshopDetail extends React.Component {
+export default class PhotoDetail extends React.Component {
     constructor() {
         super();
         this.state = {
-            workshop: { images: {}, date: "" }
+            photo: { images: {}, date: "" },
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 13,
         };
     }
 
@@ -31,14 +35,13 @@ export default class WorkshopDetail extends React.Component {
 
 
         // build the graphql query
-        const query = `query workshop($id: Int!) {
-        workshop(id: $id) {
+        const query = `query photo($id: Int!) {
+        photo(id: $id) {
           id
           title
           date
           created
-          place
-          category
+          placeID
           images {
             imageThumb
             imageOriginal
@@ -50,23 +53,35 @@ export default class WorkshopDetail extends React.Component {
         // provide the query with the variables 
         const data = await graphQLFetch(query, { id });
         if (data) {
-            this.setState({ workshop: data.workshop });
+            this.setState({ photo: data.photo });
         }
     }
 
     render() {
 
-        //const { workshop: { title, images: { imageWatermark } } } = this.state;
-        const { workshop } = this.state;
+        //const { photo: { title, images: { imageWatermark } } } = this.state;
+        const { photo } = this.state;
+        const position = [this.state.lat, this.state.lng];
 
         return (
             <div id="page" className="p-6">
-                <h1>{workshop.title}</h1>
+                <h1>{photo.title}</h1>
                 {/* <img
                     src={imageWatermark}
                     className=" w-full   block"
                     alt="Foto"
                 /> */}
+                <Map className="map" center={position} zoom={this.state.zoom}>
+                    <TileLayer
+                        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker position={position}>
+                        <Popup>
+                            A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                    </Marker>
+                </Map>
             </div>
         );
     }

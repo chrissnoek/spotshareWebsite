@@ -3,6 +3,7 @@ import 'whatwg-fetch';
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import "./css/style.scss";
+import "leaflet/dist/leaflet.css";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import Page from './Page.jsx';

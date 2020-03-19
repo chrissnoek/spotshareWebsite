@@ -4,6 +4,7 @@
 import React, { Component } from "react";
 import graphQLFetch from './graphQLFetch.js';
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Link } from 'react-router-dom';
 
 
 export default class PhotoDetail extends React.Component {
@@ -66,6 +67,7 @@ export default class PhotoDetail extends React.Component {
         return (
             <div id="page" className="p-6">
                 <h1>{photo.title}</h1>
+                <Link to={`/edit/${photo.id}`}>Bewerken</Link>
                 {/* <img
                     src={imageWatermark}
                     className=" w-full   block"

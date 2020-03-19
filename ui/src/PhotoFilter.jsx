@@ -13,6 +13,7 @@ class PhotoFilter extends React.Component {
         const category = e.target.value;
 
         // get the history prop to use the history.push function 
+        // to use history, we need to export PhotoFilter withRouter() as done at last rule
         const { history } = this.props;
         history.push({
             pathname: '/photos',

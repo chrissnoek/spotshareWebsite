@@ -10,7 +10,7 @@ import graphQLFetch from './graphQLFetch.js';
 
 /* to support IE */
 import URLSearchParams from 'url-search-params';
-import { Route } from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 
 export default class PhotoList extends React.Component {
     constructor() {
@@ -87,7 +87,7 @@ export default class PhotoList extends React.Component {
         const { match } = this.props;
         return (
             <div id="page" className="p-6">
-                <h1>Upcoming Photos</h1>
+                <h1>Recente foto's</h1>
                 <PhotoFilter />
                 <hr />
                 <PhotoCarousel photos={this.state.photos} />

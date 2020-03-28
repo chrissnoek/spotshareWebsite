@@ -6,7 +6,7 @@ const PhotoView = withRouter(({ photo, location: { search } }) => {
     const selectedLocation = { pathname: `/photos/${photo.id}`, search }
     return (
         <React.Fragment>
-            <div className="photoCard rounded relative overflow-hidden my-2">
+            <div className="photoCard rounded relative overflow-hidden w-1/3 px-2 shadow-xs">
                 <div className="relative rounded">
                     <NavLink
                         to={selectedLocation}
@@ -41,5 +41,5 @@ export default function PhotoCarousel(props) {
     const photos = props.photos.map(photo => (
         <PhotoView key={photo.id} photo={photo} />
     ));
-    return <div>{photos}</div>;
+    return <div className="-mx-2 flex">{photos}</div>;
 }

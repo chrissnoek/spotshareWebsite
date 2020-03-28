@@ -3,14 +3,13 @@
 
 import React, { Component } from "react";
 import PhotoFilter from './PhotoFilter.jsx';
-import PhotoAdd from './PhotoAdd.jsx';
 import PhotoCarousel from './PhotoCarousel.jsx';
 import PhotoDetail from './PhotoDetail.jsx';
 import graphQLFetch from './graphQLFetch.js';
 
 /* to support IE */
 import URLSearchParams from 'url-search-params';
-import { Route, Link } from "react-router-dom";
+import { Route, Link, NavLink } from "react-router-dom";
 
 export default class PhotoList extends React.Component {
     constructor() {
@@ -50,7 +49,6 @@ export default class PhotoList extends React.Component {
           title
           date
           created
-          placeID
           images {
             imageThumb
             imageOriginal
@@ -66,23 +64,6 @@ export default class PhotoList extends React.Component {
         }
     }
 
-    createPhoto = async photo => {
-        // create a mutation query with a variable, which is passed in the body in the fetch
-        // first addAPhoto is just a mutation name, afther is the variable and the type which is photoinputs
-        // next is the actual mutation which is getting the $photo variable
-        // the query should return only the id
-        const query = `mutation addAPhoto($photo: PhotoInputs!) {
-          photoAdd(photo: $photo) {
-            id
-          }
-      }`;
-
-        const data = await graphQLFetch(query, { photo });
-        if (data) {
-            this.loadData();
-        }
-    };
-
     render() {
         const { match } = this.props;
         return (
@@ -92,7 +73,7 @@ export default class PhotoList extends React.Component {
                 <hr />
                 <PhotoCarousel photos={this.state.photos} />
                 <hr />
-                <PhotoAdd createPhoto={this.createPhoto} />
+                <NavLink to="/photos/add">Foto toevoegen</NavLink>
                 <hr />
                 <Route path={`${match.path}/:id`} component={PhotoDetail} />
             </div >

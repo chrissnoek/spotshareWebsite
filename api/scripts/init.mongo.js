@@ -10,6 +10,8 @@ Atlas: mongo mongodb+srv://spotshare:shareaspot01@cluster0-wg2gb.mongodb.net/tes
 
 db.photos.remove({});
 
+
+
 const photosDB = [{
     id: 8046,
     memberId: 4790,

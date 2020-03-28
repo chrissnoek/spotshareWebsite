@@ -7,11 +7,17 @@ type Photo {
   title: String!
   description: String!
   date: GraphQLDate!
-  placeID: String!
+  # placeID: Int!
+  # eventID: Int
   images: Images!
+  brand:  String
+  shutterspeed:  String
+  ISO:  String
+  aperture:  String
+  camera: String
+  # likes: Int!
+  focalLength: String
 }
-
-
 
 type Images {
   imageThumb: String!
@@ -33,10 +39,16 @@ input ImageInputs {
 input PhotoInputs {
   title: String!
   date: GraphQLDate!
-  place: String!
   description: String!
   images: ImageInputs!
-  category: String!
+  # placeID: Int!
+  # eventID: Int
+  brand:  String
+  shutterspeed:  String
+  ISO:  String
+  aperture:  String
+  camera: String
+  focalLength: String
 }
 # memberId: Int!
 

@@ -42,7 +42,7 @@ export default class PhotoDetail extends React.Component {
           title
           date
           created
-          placeID
+          description
           images {
             imageThumb
             imageOriginal
@@ -60,19 +60,20 @@ export default class PhotoDetail extends React.Component {
 
     render() {
 
-        //const { photo: { title, images: { imageWatermark } } } = this.state;
+        const { photo: { images: { imageWatermark } } } = this.state;
         const { photo } = this.state;
         const position = [this.state.lat, this.state.lng];
 
         return (
             <div id="page" className="p-6">
                 <h1>{photo.title}</h1>
+                <p>{photo.description}</p>
                 <Link to={`/edit/${photo.id}`}>Bewerken</Link>
-                {/* <img
+                <img
                     src={imageWatermark}
                     className=" w-full   block"
                     alt="Foto"
-                /> */}
+                />
                 <Map className="map" center={position} zoom={this.state.zoom}>
                     <TileLayer
                         attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

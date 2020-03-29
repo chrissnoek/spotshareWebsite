@@ -52,10 +52,41 @@ class PhotoEdit extends Component {
         }));
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = async (e) => {
         e.preventDefault();
-        const { photo } = this.state;
-        console.log(photo);
+        const { photo, invalidFields } = this.state;
+        if (Object.keys(invalidFields).length !== 0) return;
+        const query = `mutation issueUpdate(
+            $id: Int!
+            $changes: PhotoUpdateInputs!
+        ) {
+            photoUpdate(
+                id: $id
+                changes: $changes
+            ) {
+                id
+                title
+                date
+                created
+                description
+                ISO
+                shutterspeed
+                aperture
+                images {
+                  imageThumb
+                  imageOriginal
+                  imageWatermark
+                }
+            }
+        }`;
+
+        // get the properties id and created from photo, and store the rest in changes
+        const { id, created, ...changes } = photo;
+        const data = await graphQLFetch(query, { changes, id });
+        if (data) {
+            this.setState({ photo: data.photoUpdate });
+            alert('Updated photo successfully');
+        }
     }
 
     async loadData() {

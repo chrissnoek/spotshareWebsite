@@ -19,6 +19,8 @@ type Photo {
   focalLength: String
 }
 
+
+
 type Images {
   imageThumb: String!
   imageOriginal: String!
@@ -35,6 +37,24 @@ input ImageInputs {
 # maxPlaces: Int
 # attendees: Int
 # price: Int
+
+"""Inputs for photoUpdate: all are optional. Whichever is specified will
+be set to the given value, undefined fields will remain unmodified."""
+input PhotoUpdateInputs {
+  title: String
+  description: String
+  date: GraphQLDate
+  images: ImageInputs
+  # placeID: Int
+  # eventID: Int
+  brand:  String
+  shutterspeed:  String
+  ISO:  String
+  aperture:  String
+  camera: String
+  # likes: Int
+  focalLength: String
+}
 
 input PhotoInputs {
   title: String!
@@ -62,4 +82,6 @@ type Query {
 type Mutation {
   setAboutMessage(message: String!): String
   photoAdd(photo: PhotoInputs!): Photo!
+  photoUpdate(id: Int!, changes: PhotoUpdateInputs!): Photo!
+  photoDelete(id:Int!): Boolean!
 }

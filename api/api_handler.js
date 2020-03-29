@@ -16,7 +16,9 @@ const resolvers = {
     },
     Mutation: {
         setAboutMessage: about.setMessage,
-        photoAdd: photo.add
+        photoAdd: photo.add,
+        photoUpdate: photo.update,
+        photoDelete: photo.delete
     },
     GraphQLDate
 };

@@ -110,15 +110,9 @@ export default class PhotoAdd extends React.Component {
     async handleSubmit(e) {
         e.preventDefault();
         const form = document.forms.photoAdd;
-        console.log(form);
         const formData = new FormData();
-        console.log(formData);
         const uploadedFile = this.fileInput.current.files[0];
-        console.log(uploadedFile);
         formData.append("photoImage", uploadedFile);
-
-        console.log(window.ENV);
-        console.log(formData);
 
         // Display the key/value pairs
         for (var pair of formData.entries()) {

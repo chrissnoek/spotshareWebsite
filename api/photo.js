@@ -13,6 +13,43 @@ const list = async (_, { category }) => {
     return photos;
 };
 
+const update = async (_, { id, changes }) => {
+    const db = getDb();
+    if (changes.title ||
+        changes.date ||
+        changes.shutterspeed ||
+        changes.ISO ||
+        changes.aperture ||
+        changes.description ||
+        changes.focalLength ||
+        changes.brand ||
+        changes.camera) {
+
+        const photo = await db
+            .collection("photos")
+            .findOne({ id });
+        Object.assign(photo, changes);
+        validate(photo);
+    }
+    await db.collection('photos').updateOne({ id }, { $set: changes });
+    const savedPhoto = await db.collection('photos').findOne({ id });
+    return savedPhoto;
+}
+
+const remove = async (_, { id }) => {
+    const db = getDb();
+    const photo = await db.collection('photos').findOne({ id });
+    if (!photo) return false;
+    photo.deleted = new Date();
+
+    let result = await db.collection('deleted_photos').insertOne(photo);
+    if (result.insertedId) {
+        result = await db.collection('photos').removeOne({ id });
+        return result.deletedCount === 1;
+    }
+    return false;
+}
+
 // resolver function for returning one photo with matching ID
 const get = async (_, { id }) => {
     const db = getDb();
@@ -48,4 +85,4 @@ const add = async (_, { photo }) => {
     return savedPhoto;
 };
 
-module.exports = { list, add, get }
+module.exports = { list, add, get, update, delete: remove }

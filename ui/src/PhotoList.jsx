@@ -31,6 +31,28 @@ export default class PhotoList extends React.Component {
         this.loadData();
     }
 
+    deletePhoto = async (index) => {
+        const query = `mutation photoDelete($id: Int!) {
+            photoDelete(id: $id)
+        }`;
+        const { photos } = this.state;
+        const { location: { pathname, search }, history } = this.props;
+        const { id } = photos[index];
+        const data = await graphQLFetch(query, { id });
+        if (data && data.photoDelete) {
+            this.setState((prevState) => {
+                const newList = [...prevState.photos];
+                if (pathname === `/photos/${id}`) {
+                    history.push({ pathname: '/photos', search });
+                }
+                newList.splice(index, 1);
+                return { photos: newList };
+            })
+        } else {
+            this.loadData();
+        }
+    }
+
     async loadData() {
         // get the search query string form url
         const { location: { search } } = this.props;
@@ -71,7 +93,7 @@ export default class PhotoList extends React.Component {
                 <h1>Recente foto's</h1>
                 <PhotoFilter />
                 <hr />
-                <PhotoCarousel photos={this.state.photos} />
+                <PhotoCarousel photos={this.state.photos} deletePhoto={this.deletePhoto} />
                 <hr />
                 <NavLink to="/photos/add">Foto toevoegen</NavLink>
                 <hr />

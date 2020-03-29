@@ -15,8 +15,17 @@ a {
   @apply text-blue-600 underline;
 }
 
-h3 {
-  color: blue;
+.photoCard {
+  &:hover {
+    .deletePhotoTimes {
+      display: inline-block;
+    }
+  }
+
+  .deletePhotoTimes {
+    top: -1px;
+    left: -1px;
+  }
 }
 
 .map {

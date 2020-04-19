@@ -1,4 +1,6 @@
 
+import { toast, ToastType } from 'react-toastify';
+
 // a regex to see if a value is a date
 const dateRegex = new RegExp("^\\d\\d\\d\\d-\\d\\d-\\d\\d");
 
@@ -24,13 +26,13 @@ export default async function graphQLFetch(query, variables = {}) {
             if (error.extensions.code == "BAD_USER_INPUT") {
                 console.log(error);
                 const details = error.extensions.exception.errors.join("\n ");
-                alert(`${error.message}\n ${details}`);
+                toast.error(`${error.message}\n ${details}`);
             } else {
-                alert(`${error.extensions.code}\n ${error.message}`);
+                toast.error(`${error.extensions.code}\n ${error.message}`);
             }
         }
         return result.data;
     } catch (e) {
-        alert(`Error in sending data to server: ${e.message}`);
+        toast.error(`Error in sending data to server: ${e.message}`);
     }
 }

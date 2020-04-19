@@ -6,10 +6,10 @@ import PhotoFilter from './PhotoFilter.jsx';
 import PhotoCarousel from './PhotoCarousel.jsx';
 import PhotoDetail from './PhotoDetail.jsx';
 import graphQLFetch from './graphQLFetch.js';
+import { Route, Link, NavLink } from "react-router-dom";
 
 /* to support IE */
 import URLSearchParams from 'url-search-params';
-import { Route, Link, NavLink } from "react-router-dom";
 
 export default class PhotoList extends React.Component {
     constructor() {
@@ -94,10 +94,7 @@ export default class PhotoList extends React.Component {
                 <PhotoFilter />
                 <hr />
                 <PhotoCarousel photos={this.state.photos} deletePhoto={this.deletePhoto} />
-                <hr />
-                <NavLink to="/photos/add">Foto toevoegen</NavLink>
-                <hr />
-                <Route path={`${match.path}/:id`} component={PhotoDetail} />
+
             </div >
         );
     }

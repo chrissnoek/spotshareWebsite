@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import graphQLFetch from './graphQLFetch.js';
 import DateInput from "./DateInput.jsx";
 import TextInput from "./TextInput.jsx";
+import { toast } from 'react-toastify';
 
 class PhotoEdit extends Component {
     constructor(props) {
@@ -85,7 +86,7 @@ class PhotoEdit extends Component {
         const data = await graphQLFetch(query, { changes, id });
         if (data) {
             this.setState({ photo: data.photoUpdate });
-            alert('Updated photo successfully');
+            toast.success("Succesvol geudate");
         }
     }
 
@@ -155,85 +156,69 @@ class PhotoEdit extends Component {
             );
         }
 
+        let btnClass = "block px-3 py- my-2 text-white rounded text-l";
+        let disabled = Object.keys(invalidFields).length !== 0;
+        btnClass += disabled ? " bg-gray-400" : " bg-blue-600";
+
         return (
             <form onSubmit={this.handleSubmit}>
                 <h3>{`Bewerk foto ${photo.title}`}</h3>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Foto</td>
-                            <td>
-                                <img
-                                    src={photo.images.imageWatermark}
-                                    className="object-cover  w-full h-48  block"
-                                    alt="Foto"
-                                    id="replacePhoto"
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><label htmlFor="title">Titel</label></td>
-                            <td><TextInput
-                                id="title"
-                                name="title"
-                                type="text"
-                                value={photo.title}
-                                onChange={this.onChange}
-                                key={id} /></td>
-                        </tr>
-                        <tr>
-                            <td><label htmlFor="date">Datum</label></td>
-                            <td><DateInput
-                                name="date"
-                                value={photo.date}
-                                onChange={this.onChange}
-                                onValidityChange={this.onValidityChange}
-                                key={id} /></td>
-                        </tr>
-                        <tr>
-                            <td><label htmlFor="shutterspeed">Sluitertijd</label></td>
-                            <td><TextInput
-                                id="shutterspeed"
-                                name="shutterspeed"
-                                type="text"
-                                value={photo.shutterspeed}
-                                onChange={this.onChange}
-                                key={id} /></td>
-                        </tr>
-                        <tr>
-                            <td><label htmlFor="shutterspeed">ISO</label></td>
-                            <td><TextInput
-                                id="ISO"
-                                name="ISO"
-                                type="text"
-                                value={photo.ISO}
-                                onChange={this.onChange}
-                                key={id} /></td>
-                        </tr>
-                        <tr>
-                            <td><label htmlFor="aperture">Diafragma</label></td>
-                            <td><TextInput
-                                id="aperture"
-                                name="aperture"
-                                type="text"
-                                value={photo.aperture}
-                                onChange={this.onChange}
-                                key={id} /></td>
-                        </tr>
-                        <tr>
-                            <td><label htmlFor="description">Beschrijving</label></td>
-                            <td><TextInput
-                                tag="textarea"
-                                id="description"
-                                name="description"
-                                type="text"
-                                value={photo.description}
-                                onChange={this.onChange}
-                                key={id} /></td>
-                        </tr>
-                        <tr><td></td><td><button type="submit">Opslaan</button></td></tr>
-                    </tbody>
-                </table>
+                <img
+                    src={photo.images.imageWatermark}
+                    className="object-cover w-full h-48 block"
+                    alt="Foto"
+                    id="replacePhoto"
+                />
+                <label htmlFor="title">Titel</label>
+                <TextInput
+                    id="title"
+                    name="title"
+                    type="text"
+                    value={photo.title}
+                    onChange={this.onChange}
+                />
+                <label htmlFor="date">Datum</label>
+                <DateInput
+                    name="date"
+                    value={photo.date}
+                    onChange={this.onChange}
+                    onValidityChange={this.onValidityChange}
+                />
+                <label htmlFor="shutterspeed">Sluitertijd</label>
+                <TextInput
+                    id="shutterspeed"
+                    name="shutterspeed"
+                    type="text"
+                    value={photo.shutterspeed}
+                    onChange={this.onChange}
+                />
+                <label htmlFor="shutterspeed">ISO</label>
+                <TextInput
+                    id="ISO"
+                    name="ISO"
+                    type="text"
+                    value={photo.ISO}
+                    onChange={this.onChange}
+                />
+                <label htmlFor="aperture">Diafragma</label>
+                <TextInput
+                    id="aperture"
+                    name="aperture"
+                    type="text"
+                    value={photo.aperture}
+                    onChange={this.onChange}
+                />
+                <label htmlFor="description">Beschrijving</label>
+                <TextInput
+                    tag="textarea"
+                    id="description"
+                    name="description"
+                    type="text"
+                    value={photo.description}
+                    onChange={this.onChange}
+                />
+                <button type="submit" className={btnClass}>Opslaan</button>
+
                 {validationMessage}
             </form>
         )

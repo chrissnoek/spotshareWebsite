@@ -6,7 +6,7 @@ type Photo {
   created: GraphQLDate!
   title: String!
   description: String!
-  date: GraphQLDate!
+  date: GraphQLDate
   # placeID: Int!
   # eventID: Int
   images: Images!
@@ -58,7 +58,7 @@ input PhotoUpdateInputs {
 
 input PhotoInputs {
   title: String!
-  date: GraphQLDate!
+  date: GraphQLDate
   description: String!
   images: ImageInputs!
   # placeID: Int!

@@ -15,8 +15,8 @@ class PhotoFilter extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('prevProps', prevProps.location.search);
-        console.log('thisProps', this.props.location.search);
+        //     console.log('prevProps', prevProps.location.search);
+        //     console.log('thisProps', this.props.location.search);
         const { location: { search: prevSearch } } = prevProps;
         const { location: { search } } = this.props;
         if (prevSearch !== search) {

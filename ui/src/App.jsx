@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import "./css/style.scss";
 import "leaflet/dist/leaflet.css";
 import { BrowserRouter as Router } from 'react-router-dom';
+import 'react-toastify/dist/ReactToastify.min.css';
 
 import Page from './Page.jsx';
 

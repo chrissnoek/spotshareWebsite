@@ -110,8 +110,6 @@ const storage = multerS3({
 const upload = multer({ storage });
 
 router.post("/upload", upload.single("photoImage"), (req, res) => {
-
-
   console.log(req, res);
   const { file } = req;
   console.log(file);

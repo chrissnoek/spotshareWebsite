@@ -12,7 +12,11 @@ h3 {
   @apply text-lg;
 }
 a {
-  @apply text-blue-600 underline;
+  @apply text-green-500 cursor-pointer;
+}
+
+a.active {
+  @apply bg-gray-800;
 }
 
 .photoCard {
@@ -46,11 +50,11 @@ form {
     @apply block;
   }
   label {
-    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2;
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2;
   }
   input,
   textarea {
-    @apply appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight;
+    @apply border border-gray-400 bg-gray-200 text-gray-900 appearance-none inline-block w-full border rounded text-sm py-2 px-3 mb-2;
 
     &:focus {
       @apply outline-none bg-white border-gray-500;

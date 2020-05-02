@@ -10,12 +10,47 @@ import { Route, Link, NavLink } from "react-router-dom";
 
 /* to support IE */
 import URLSearchParams from 'url-search-params';
+import store from "./store.js";
 
 export default class PhotoList extends React.Component {
+
+    static async fetchData(match, search) {
+        // get the search query string form url
+        //const { location: { search } } = this.props;
+
+        // use URLSearchParams for IE Compatibility
+        const params = new URLSearchParams(search);
+
+        // If category is provided in the query string, add them to our variables 
+        const vars = {};
+        if (params.get('category')) vars.category = params.get('category');
+
+        // build the graphql query
+        const query = `query photoList($category: String) {
+        photoList(category: $category) {
+          id
+          title
+          date
+          created
+          images {
+            imageThumb
+            imageOriginal
+            imageWatermark
+          }
+        }
+      }`;
+
+        // provide the query with the variables 
+        const data = await graphQLFetch(query, vars);
+        return data;
+    }
+
     constructor() {
+        const photos = store.initialData ? store.initialData.photoList : null;
+        delete store.initialData;
         super();
         this.state = {
-            photos: []
+            photos
         };
     }
 
@@ -28,7 +63,8 @@ export default class PhotoList extends React.Component {
     }
 
     componentDidMount() {
-        this.loadData();
+        const { photos } = this.state;
+        if (photos === null) this.loadData();
     }
 
     deletePhoto = async (index) => {
@@ -57,43 +93,23 @@ export default class PhotoList extends React.Component {
         // get the search query string form url
         const { location: { search } } = this.props;
 
-        // use URLSearchParams for IE Compatibility
-        const params = new URLSearchParams(search);
-
-        // If category is provided in the query string, add them to our variables 
-        const vars = {};
-        if (params.get('category')) vars.category = params.get('category');
-
-        // build the graphql query
-        const query = `query photoList($category: String) {
-        photoList(category: $category) {
-          id
-          title
-          date
-          created
-          images {
-            imageThumb
-            imageOriginal
-            imageWatermark
-          }
-        }
-      }`;
-
-        // provide the query with the variables 
-        const data = await graphQLFetch(query, vars);
+        // fetch data
+        const data = await PhotoList.fetchData(null, search);
         if (data) {
             this.setState({ photos: data.photoList });
         }
     }
 
     render() {
-        const { match } = this.props;
+        const { photos } = this.state;
+        if (photos === null) return null;
+
         return (
             <div id="page" className="p-6">
                 <h1>Recente foto's</h1>
                 <PhotoFilter />
                 <hr />
-                <PhotoCarousel photos={this.state.photos} deletePhoto={this.deletePhoto} />
+                <PhotoCarousel photos={photos} deletePhoto={this.deletePhoto} />
 
             </div >
         );

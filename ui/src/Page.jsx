@@ -44,6 +44,7 @@ class NavBar extends Component {
                     <NavLink onClick={this.closeMenu} exact to="/" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Home</NavLink>
                     <NavLink onClick={this.closeMenu} exact to="/photos" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Photos</NavLink>
                     <NavLink onClick={this.closeMenu} to="/report" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Report</NavLink>
+                    <NavLink onClick={this.closeMenu} to="/about" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">About</NavLink>
                 </nav >
             </header >
         );

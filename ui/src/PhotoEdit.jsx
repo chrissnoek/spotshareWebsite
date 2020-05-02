@@ -4,12 +4,45 @@ import graphQLFetch from './graphQLFetch.js';
 import DateInput from "./DateInput.jsx";
 import TextInput from "./TextInput.jsx";
 import { toast } from 'react-toastify';
+import store from "./store.js";
 
 class PhotoEdit extends Component {
+
+    static async fetchData(match, search, showError) {
+
+        // build the graphql query
+        const query = `query photo($id: Int!) {
+            photo(id: $id) {
+              id
+              title
+              date
+              created
+              description
+              ISO
+              shutterspeed
+              aperture
+              images {
+                imageThumb
+                imageOriginal
+                imageWatermark
+              }
+            }
+          }`;
+
+        let { params: { id } } = match;
+        id = parseInt(id);
+        const result = await graphQLFetch(query, { id }, showError);
+        return result;
+    }
+
     constructor(props) {
         super(props);
+
+        // when ssr the initialData is set, otherwise set to null
+        const photo = store.initialData ? store.initialData.photo : null;
+        delete store.initialData;
         this.state = {
-            photo: {},
+            photo,
             invalidFields: {}
         }
         this.onValidityChange = this.onValidityChange.bind(this);
@@ -17,7 +50,8 @@ class PhotoEdit extends Component {
     }
 
     componentDidMount() {
-        this.loadData();
+        const { photo } = this.state;
+        if (photo === null) this.loadData();
     }
 
     componentDidUpdate(prevProps) {
@@ -92,30 +126,9 @@ class PhotoEdit extends Component {
 
     async loadData() {
 
-        // build the graphql query
-        const query = `query photo($id: Int!) {
-        photo(id: $id) {
-          id
-          title
-          date
-          created
-          description
-          ISO
-          shutterspeed
-          aperture
-          images {
-            imageThumb
-            imageOriginal
-            imageWatermark
-          }
-        }
-      }`;
+        const { match } = this.props;
+        const data = await PhotoEdit.fetchData(match);
 
-        // get the search query string form url
-        const { match: { params: { id } } } = this.props;
-
-        // provide the query with the variables 
-        const data = await graphQLFetch(query, { id });
         if (data) {
             const { photo } = data;
             data.created = data.created ? data.created.toDateString() : '';
@@ -124,16 +137,20 @@ class PhotoEdit extends Component {
         } else {
             this.setState({ photo: {}, invalidFields: {} });
         }
+
     }
 
     render() {
+        const { photo } = this.state;
+        if (photo === null) return null;
         // get photo ID from state
         const { photo: { id } } = this.state;
         // get photo ID form url
         const { match: { params: { id: propsId } } } = this.props;
 
+
         // check if state has a photo
-        if (id == null) {
+        if (id === null) {
 
             // if not, but url has an id, the photo is not found
             if (propsId != null) {
@@ -145,7 +162,6 @@ class PhotoEdit extends Component {
         }
 
         const { photo: { images: { imageWatermark } } } = this.state;
-        const { photo } = this.state;
         const { invalidFields } = this.state;
         let validationMessage;
         if (Object.keys(invalidFields).length !== 0) {

@@ -1,18 +1,21 @@
 
 import { toast, ToastType } from 'react-toastify';
+import fetch from 'isomorphic-fetch';
 
-// a regex to see if a value is a date
-const dateRegex = new RegExp("^\\d\\d\\d\\d-\\d\\d-\\d\\d");
+const dateRegex = new RegExp('^\\d\\d\\d\\d-\\d\\d-\\d\\d');
 
-// a reviver to pass to the JSON parse function in fetchdata() to return the isoString to a date type
 function jsonDateReviver(key, value) {
     if (dateRegex.test(value)) return new Date(value);
     return value;
 }
 
-export default async function graphQLFetch(query, variables = {}) {
+export default async function graphQLFetch(query, variables = {}, showError = null) {
+    //console.log('query from graphQlFetch ' + query)
+    const apiEndpoint = (__isBrowser__) // eslint-disable-line no-undef
+        ? window.ENV.UI_API_ENDPOINT
+        : process.env.UI_SERVER_API_ENDPOINT;
     try {
-        const response = await fetch(window.ENV.UI_API_ENDPOINT, {
+        const response = await fetch(apiEndpoint, {
             method: "POST",
             headers: { "Content-type": "application/json" },
             body: JSON.stringify({ query, variables })

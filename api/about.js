@@ -1,10 +1,12 @@
-let aboutMessage = "This is the about message";
+let aboutMessage = "Issue Tracker API v1.0";
 
-const setMessage = (_, { message }) => {
+function setMessage(_, { message }) {
     aboutMessage = message;
     return aboutMessage;
-};
+}
 
-const getMessage = () => aboutMessage;
+function getMessage() {
+    return aboutMessage;
+}
 
 module.exports = { getMessage, setMessage }

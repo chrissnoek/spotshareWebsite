@@ -1,5 +1,25 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendor"],{
 
+/***/ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js":
+/*!**************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _assertThisInitialized; });
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime/helpers/esm/extends.js":
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/esm/extends.js ***!
@@ -2642,6 +2662,68 @@ define(String.prototype, "padRight", "".padEnd);
 );
 
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
+
+/***/ }),
+
+/***/ "./node_modules/classnames/index.js":
+/*!******************************************!*\
+  !*** ./node_modules/classnames/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+/* global define */
+
+(function () {
+	'use strict';
+
+	var hasOwn = {}.hasOwnProperty;
+
+	function classNames () {
+		var classes = [];
+
+		for (var i = 0; i < arguments.length; i++) {
+			var arg = arguments[i];
+			if (!arg) continue;
+
+			var argType = typeof arg;
+
+			if (argType === 'string' || argType === 'number') {
+				classes.push(arg);
+			} else if (Array.isArray(arg) && arg.length) {
+				var inner = classNames.apply(null, arg);
+				if (inner) {
+					classes.push(inner);
+				}
+			} else if (argType === 'object') {
+				for (var key in arg) {
+					if (hasOwn.call(arg, key) && arg[key]) {
+						classes.push(key);
+					}
+				}
+			}
+		}
+
+		return classes.join(' ');
+	}
+
+	if ( true && module.exports) {
+		classNames.default = classNames;
+		module.exports = classNames;
+	} else if (true) {
+		// register as 'classnames', consistent with npm package name
+		!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+			return classNames;
+		}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	} else {}
+}());
+
 
 /***/ }),
 
@@ -12924,6 +13006,20 @@ exports.push([module.i, "/* required styles */\n\n.leaflet-pane,\n.leaflet-tile,
 
 /***/ }),
 
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js!./node_modules/react-toastify/dist/ReactToastify.min.css":
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/src??postcss!./node_modules/sass-loader/dist/cjs.js!./node_modules/react-toastify/dist/ReactToastify.min.css ***!
+  \****************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js")(false);
+// Module
+exports.push([module.i, ".Toastify__toast-container {\n  z-index: 9999;\n  -webkit-transform: translateZ(9999px);\n  position: fixed;\n  padding: 4px;\n  width: 320px;\n  box-sizing: border-box;\n  color: #fff;\n}\n\n.Toastify__toast-container--top-left {\n  top: 1em;\n  left: 1em;\n}\n\n.Toastify__toast-container--top-center {\n  top: 1em;\n  left: 50%;\n  margin-left: -160px;\n}\n\n.Toastify__toast-container--top-right {\n  top: 1em;\n  right: 1em;\n}\n\n.Toastify__toast-container--bottom-left {\n  bottom: 1em;\n  left: 1em;\n}\n\n.Toastify__toast-container--bottom-center {\n  bottom: 1em;\n  left: 50%;\n  margin-left: -160px;\n}\n\n.Toastify__toast-container--bottom-right {\n  bottom: 1em;\n  right: 1em;\n}\n\n@media only screen and (max-width: 480px) {\n  .Toastify__toast-container {\n    width: 100vw;\n    padding: 0;\n    left: 0;\n    margin: 0;\n  }\n\n  .Toastify__toast-container--top-center, .Toastify__toast-container--top-left, .Toastify__toast-container--top-right {\n    top: 0;\n  }\n\n  .Toastify__toast-container--bottom-center, .Toastify__toast-container--bottom-left, .Toastify__toast-container--bottom-right {\n    bottom: 0;\n  }\n\n  .Toastify__toast-container--rtl {\n    right: 0;\n    left: auto;\n  }\n}\n\n.Toastify__toast {\n  position: relative;\n  min-height: 64px;\n  box-sizing: border-box;\n  margin-bottom: 1rem;\n  padding: 8px;\n  border-radius: 1px;\n  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.1), 0 2px 15px 0 rgba(0, 0, 0, 0.05);\n  display: -webkit-box;\n  display: flex;\n  -webkit-box-pack: justify;\n          justify-content: space-between;\n  max-height: 800px;\n  overflow: hidden;\n  font-family: sans-serif;\n  cursor: pointer;\n  direction: ltr;\n}\n\n.Toastify__toast--rtl {\n  direction: rtl;\n}\n\n.Toastify__toast--default {\n  background: #fff;\n  color: #aaa;\n}\n\n.Toastify__toast--info {\n  background: #3498db;\n}\n\n.Toastify__toast--success {\n  background: #07bc0c;\n}\n\n.Toastify__toast--warning {\n  background: #f1c40f;\n}\n\n.Toastify__toast--error {\n  background: #e74c3c;\n}\n\n.Toastify__toast-body {\n  margin: auto 0;\n  -webkit-box-flex: 1;\n          flex: 1;\n}\n\n@media only screen and (max-width: 480px) {\n  .Toastify__toast {\n    margin-bottom: 0;\n  }\n}\n\n.Toastify__close-button {\n  color: #fff;\n  font-weight: 700;\n  font-size: 14px;\n  background: transparent;\n  outline: none;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  opacity: .7;\n  -webkit-transition: .3s ease;\n  transition: .3s ease;\n  align-self: flex-start;\n}\n\n.Toastify__close-button--default {\n  color: #000;\n  opacity: .3;\n}\n\n.Toastify__close-button:focus, .Toastify__close-button:hover {\n  opacity: 1;\n}\n\n@-webkit-keyframes Toastify__trackProgress {\n  0% {\n    -webkit-transform: scaleX(1);\n            transform: scaleX(1);\n  }\n\n  to {\n    -webkit-transform: scaleX(0);\n            transform: scaleX(0);\n  }\n}\n\n@keyframes Toastify__trackProgress {\n  0% {\n    -webkit-transform: scaleX(1);\n            transform: scaleX(1);\n  }\n\n  to {\n    -webkit-transform: scaleX(0);\n            transform: scaleX(0);\n  }\n}\n\n.Toastify__progress-bar {\n  position: absolute;\n  bottom: 0;\n  left: 0;\n  width: 100%;\n  height: 5px;\n  z-index: 9999;\n  opacity: .7;\n  background-color: rgba(255, 255, 255, 0.7);\n  -webkit-transform-origin: left;\n          transform-origin: left;\n}\n\n.Toastify__progress-bar--animated {\n  -webkit-animation: Toastify__trackProgress linear 1 forwards;\n          animation: Toastify__trackProgress linear 1 forwards;\n}\n\n.Toastify__progress-bar--controlled {\n  -webkit-transition: -webkit-transform .2s;\n  transition: -webkit-transform .2s;\n  transition: transform .2s;\n  transition: transform .2s, -webkit-transform .2s;\n}\n\n.Toastify__progress-bar--rtl {\n  right: 0;\n  left: auto;\n  -webkit-transform-origin: right;\n          transform-origin: right;\n}\n\n.Toastify__progress-bar--default {\n  background: -webkit-gradient(linear, left top, right top, from(#4cd964), color-stop(#5ac8fa), color-stop(#007aff), color-stop(#34aadc), color-stop(#5856d6), to(#ff2d55));\n  background: linear-gradient(90deg, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);\n}\n\n@-webkit-keyframes Toastify__bounceInRight {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(3000px, 0, 0);\n            transform: translate3d(3000px, 0, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(-25px, 0, 0);\n            transform: translate3d(-25px, 0, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(-5px, 0, 0);\n            transform: translate3d(-5px, 0, 0);\n  }\n\n  to {\n    -webkit-transform: none;\n            transform: none;\n  }\n}\n\n@keyframes Toastify__bounceInRight {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(3000px, 0, 0);\n            transform: translate3d(3000px, 0, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(-25px, 0, 0);\n            transform: translate3d(-25px, 0, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(10px, 0, 0);\n            transform: translate3d(10px, 0, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(-5px, 0, 0);\n            transform: translate3d(-5px, 0, 0);\n  }\n\n  to {\n    -webkit-transform: none;\n            transform: none;\n  }\n}\n\n@-webkit-keyframes Toastify__bounceOutRight {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(-20px, 0, 0);\n            transform: translate3d(-20px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n            transform: translate3d(2000px, 0, 0);\n  }\n}\n\n@keyframes Toastify__bounceOutRight {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(-20px, 0, 0);\n            transform: translate3d(-20px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(2000px, 0, 0);\n            transform: translate3d(2000px, 0, 0);\n  }\n}\n\n@-webkit-keyframes Toastify__bounceInLeft {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(-3000px, 0, 0);\n            transform: translate3d(-3000px, 0, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(25px, 0, 0);\n            transform: translate3d(25px, 0, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(5px, 0, 0);\n            transform: translate3d(5px, 0, 0);\n  }\n\n  to {\n    -webkit-transform: none;\n            transform: none;\n  }\n}\n\n@keyframes Toastify__bounceInLeft {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(-3000px, 0, 0);\n            transform: translate3d(-3000px, 0, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(25px, 0, 0);\n            transform: translate3d(25px, 0, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(-10px, 0, 0);\n            transform: translate3d(-10px, 0, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(5px, 0, 0);\n            transform: translate3d(5px, 0, 0);\n  }\n\n  to {\n    -webkit-transform: none;\n            transform: none;\n  }\n}\n\n@-webkit-keyframes Toastify__bounceOutLeft {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(20px, 0, 0);\n            transform: translate3d(20px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n            transform: translate3d(-2000px, 0, 0);\n  }\n}\n\n@keyframes Toastify__bounceOutLeft {\n  20% {\n    opacity: 1;\n    -webkit-transform: translate3d(20px, 0, 0);\n            transform: translate3d(20px, 0, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(-2000px, 0, 0);\n            transform: translate3d(-2000px, 0, 0);\n  }\n}\n\n@-webkit-keyframes Toastify__bounceInUp {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 3000px, 0);\n            transform: translate3d(0, 3000px, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0);\n            transform: translate3d(0, -20px, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -5px, 0);\n            transform: translate3d(0, -5px, 0);\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@keyframes Toastify__bounceInUp {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 3000px, 0);\n            transform: translate3d(0, 3000px, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0);\n            transform: translate3d(0, -20px, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, -5px, 0);\n            transform: translate3d(0, -5px, 0);\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@-webkit-keyframes Toastify__bounceOutUp {\n  20% {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0);\n  }\n\n  40%, 45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 20px, 0);\n            transform: translate3d(0, 20px, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n            transform: translate3d(0, -2000px, 0);\n  }\n}\n\n@keyframes Toastify__bounceOutUp {\n  20% {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0);\n  }\n\n  40%, 45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 20px, 0);\n            transform: translate3d(0, 20px, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -2000px, 0);\n            transform: translate3d(0, -2000px, 0);\n  }\n}\n\n@-webkit-keyframes Toastify__bounceInDown {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -3000px, 0);\n            transform: translate3d(0, -3000px, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 25px, 0);\n            transform: translate3d(0, 25px, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, 5px, 0);\n            transform: translate3d(0, 5px, 0);\n  }\n\n  to {\n    -webkit-transform: none;\n            transform: none;\n  }\n}\n\n@keyframes Toastify__bounceInDown {\n  0%, 60%, 75%, 90%, to {\n    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n            animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);\n  }\n\n  0% {\n    opacity: 0;\n    -webkit-transform: translate3d(0, -3000px, 0);\n            transform: translate3d(0, -3000px, 0);\n  }\n\n  60% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, 25px, 0);\n            transform: translate3d(0, 25px, 0);\n  }\n\n  75% {\n    -webkit-transform: translate3d(0, -10px, 0);\n            transform: translate3d(0, -10px, 0);\n  }\n\n  90% {\n    -webkit-transform: translate3d(0, 5px, 0);\n            transform: translate3d(0, 5px, 0);\n  }\n\n  to {\n    -webkit-transform: none;\n            transform: none;\n  }\n}\n\n@-webkit-keyframes Toastify__bounceOutDown {\n  20% {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0);\n  }\n\n  40%, 45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0);\n            transform: translate3d(0, -20px, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n            transform: translate3d(0, 2000px, 0);\n  }\n}\n\n@keyframes Toastify__bounceOutDown {\n  20% {\n    -webkit-transform: translate3d(0, 10px, 0);\n            transform: translate3d(0, 10px, 0);\n  }\n\n  40%, 45% {\n    opacity: 1;\n    -webkit-transform: translate3d(0, -20px, 0);\n            transform: translate3d(0, -20px, 0);\n  }\n\n  to {\n    opacity: 0;\n    -webkit-transform: translate3d(0, 2000px, 0);\n            transform: translate3d(0, 2000px, 0);\n  }\n}\n\n.Toastify__bounce-enter--bottom-left, .Toastify__bounce-enter--top-left {\n  -webkit-animation-name: Toastify__bounceInLeft;\n          animation-name: Toastify__bounceInLeft;\n}\n\n.Toastify__bounce-enter--bottom-right, .Toastify__bounce-enter--top-right {\n  -webkit-animation-name: Toastify__bounceInRight;\n          animation-name: Toastify__bounceInRight;\n}\n\n.Toastify__bounce-enter--top-center {\n  -webkit-animation-name: Toastify__bounceInDown;\n          animation-name: Toastify__bounceInDown;\n}\n\n.Toastify__bounce-enter--bottom-center {\n  -webkit-animation-name: Toastify__bounceInUp;\n          animation-name: Toastify__bounceInUp;\n}\n\n.Toastify__bounce-exit--bottom-left, .Toastify__bounce-exit--top-left {\n  -webkit-animation-name: Toastify__bounceOutLeft;\n          animation-name: Toastify__bounceOutLeft;\n}\n\n.Toastify__bounce-exit--bottom-right, .Toastify__bounce-exit--top-right {\n  -webkit-animation-name: Toastify__bounceOutRight;\n          animation-name: Toastify__bounceOutRight;\n}\n\n.Toastify__bounce-exit--top-center {\n  -webkit-animation-name: Toastify__bounceOutUp;\n          animation-name: Toastify__bounceOutUp;\n}\n\n.Toastify__bounce-exit--bottom-center {\n  -webkit-animation-name: Toastify__bounceOutDown;\n          animation-name: Toastify__bounceOutDown;\n}\n\n@-webkit-keyframes Toastify__zoomIn {\n  0% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  50% {\n    opacity: 1;\n  }\n}\n\n@keyframes Toastify__zoomIn {\n  0% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  50% {\n    opacity: 1;\n  }\n}\n\n@-webkit-keyframes Toastify__zoomOut {\n  0% {\n    opacity: 1;\n  }\n\n  50% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n\n@keyframes Toastify__zoomOut {\n  0% {\n    opacity: 1;\n  }\n\n  50% {\n    opacity: 0;\n    -webkit-transform: scale3d(0.3, 0.3, 0.3);\n            transform: scale3d(0.3, 0.3, 0.3);\n  }\n\n  to {\n    opacity: 0;\n  }\n}\n\n.Toastify__zoom-enter {\n  -webkit-animation-name: Toastify__zoomIn;\n          animation-name: Toastify__zoomIn;\n}\n\n.Toastify__zoom-exit {\n  -webkit-animation-name: Toastify__zoomOut;\n          animation-name: Toastify__zoomOut;\n}\n\n@-webkit-keyframes Toastify__flipIn {\n  0% {\n    -webkit-transform: perspective(400px) rotateX(90deg);\n            transform: perspective(400px) rotateX(90deg);\n    -webkit-animation-timing-function: ease-in;\n            animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotateX(-20deg);\n            transform: perspective(400px) rotateX(-20deg);\n    -webkit-animation-timing-function: ease-in;\n            animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotateX(10deg);\n            transform: perspective(400px) rotateX(10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotateX(-5deg);\n            transform: perspective(400px) rotateX(-5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n            transform: perspective(400px);\n  }\n}\n\n@keyframes Toastify__flipIn {\n  0% {\n    -webkit-transform: perspective(400px) rotateX(90deg);\n            transform: perspective(400px) rotateX(90deg);\n    -webkit-animation-timing-function: ease-in;\n            animation-timing-function: ease-in;\n    opacity: 0;\n  }\n\n  40% {\n    -webkit-transform: perspective(400px) rotateX(-20deg);\n            transform: perspective(400px) rotateX(-20deg);\n    -webkit-animation-timing-function: ease-in;\n            animation-timing-function: ease-in;\n  }\n\n  60% {\n    -webkit-transform: perspective(400px) rotateX(10deg);\n            transform: perspective(400px) rotateX(10deg);\n    opacity: 1;\n  }\n\n  80% {\n    -webkit-transform: perspective(400px) rotateX(-5deg);\n            transform: perspective(400px) rotateX(-5deg);\n  }\n\n  to {\n    -webkit-transform: perspective(400px);\n            transform: perspective(400px);\n  }\n}\n\n@-webkit-keyframes Toastify__flipOut {\n  0% {\n    -webkit-transform: perspective(400px);\n            transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotateX(-20deg);\n            transform: perspective(400px) rotateX(-20deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotateX(90deg);\n            transform: perspective(400px) rotateX(90deg);\n    opacity: 0;\n  }\n}\n\n@keyframes Toastify__flipOut {\n  0% {\n    -webkit-transform: perspective(400px);\n            transform: perspective(400px);\n  }\n\n  30% {\n    -webkit-transform: perspective(400px) rotateX(-20deg);\n            transform: perspective(400px) rotateX(-20deg);\n    opacity: 1;\n  }\n\n  to {\n    -webkit-transform: perspective(400px) rotateX(90deg);\n            transform: perspective(400px) rotateX(90deg);\n    opacity: 0;\n  }\n}\n\n.Toastify__flip-enter {\n  -webkit-animation-name: Toastify__flipIn;\n          animation-name: Toastify__flipIn;\n}\n\n.Toastify__flip-exit {\n  -webkit-animation-name: Toastify__flipOut;\n          animation-name: Toastify__flipOut;\n}\n\n@-webkit-keyframes Toastify__slideInRight {\n  0% {\n    -webkit-transform: translate3d(110%, 0, 0);\n            transform: translate3d(110%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@keyframes Toastify__slideInRight {\n  0% {\n    -webkit-transform: translate3d(110%, 0, 0);\n            transform: translate3d(110%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@-webkit-keyframes Toastify__slideInLeft {\n  0% {\n    -webkit-transform: translate3d(-110%, 0, 0);\n            transform: translate3d(-110%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@keyframes Toastify__slideInLeft {\n  0% {\n    -webkit-transform: translate3d(-110%, 0, 0);\n            transform: translate3d(-110%, 0, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@-webkit-keyframes Toastify__slideInUp {\n  0% {\n    -webkit-transform: translate3d(0, 110%, 0);\n            transform: translate3d(0, 110%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@keyframes Toastify__slideInUp {\n  0% {\n    -webkit-transform: translate3d(0, 110%, 0);\n            transform: translate3d(0, 110%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@-webkit-keyframes Toastify__slideInDown {\n  0% {\n    -webkit-transform: translate3d(0, -110%, 0);\n            transform: translate3d(0, -110%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@keyframes Toastify__slideInDown {\n  0% {\n    -webkit-transform: translate3d(0, -110%, 0);\n            transform: translate3d(0, -110%, 0);\n    visibility: visible;\n  }\n\n  to {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n}\n\n@-webkit-keyframes Toastify__slideOutRight {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(110%, 0, 0);\n            transform: translate3d(110%, 0, 0);\n  }\n}\n\n@keyframes Toastify__slideOutRight {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(110%, 0, 0);\n            transform: translate3d(110%, 0, 0);\n  }\n}\n\n@-webkit-keyframes Toastify__slideOutLeft {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(-110%, 0, 0);\n            transform: translate3d(-110%, 0, 0);\n  }\n}\n\n@keyframes Toastify__slideOutLeft {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(-110%, 0, 0);\n            transform: translate3d(-110%, 0, 0);\n  }\n}\n\n@-webkit-keyframes Toastify__slideOutDown {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, 500px, 0);\n            transform: translate3d(0, 500px, 0);\n  }\n}\n\n@keyframes Toastify__slideOutDown {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, 500px, 0);\n            transform: translate3d(0, 500px, 0);\n  }\n}\n\n@-webkit-keyframes Toastify__slideOutUp {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -500px, 0);\n            transform: translate3d(0, -500px, 0);\n  }\n}\n\n@keyframes Toastify__slideOutUp {\n  0% {\n    -webkit-transform: translateZ(0);\n            transform: translateZ(0);\n  }\n\n  to {\n    visibility: hidden;\n    -webkit-transform: translate3d(0, -500px, 0);\n            transform: translate3d(0, -500px, 0);\n  }\n}\n\n.Toastify__slide-enter--bottom-left, .Toastify__slide-enter--top-left {\n  -webkit-animation-name: Toastify__slideInLeft;\n          animation-name: Toastify__slideInLeft;\n}\n\n.Toastify__slide-enter--bottom-right, .Toastify__slide-enter--top-right {\n  -webkit-animation-name: Toastify__slideInRight;\n          animation-name: Toastify__slideInRight;\n}\n\n.Toastify__slide-enter--top-center {\n  -webkit-animation-name: Toastify__slideInDown;\n          animation-name: Toastify__slideInDown;\n}\n\n.Toastify__slide-enter--bottom-center {\n  -webkit-animation-name: Toastify__slideInUp;\n          animation-name: Toastify__slideInUp;\n}\n\n.Toastify__slide-exit--bottom-left, .Toastify__slide-exit--top-left {\n  -webkit-animation-name: Toastify__slideOutLeft;\n          animation-name: Toastify__slideOutLeft;\n}\n\n.Toastify__slide-exit--bottom-right, .Toastify__slide-exit--top-right {\n  -webkit-animation-name: Toastify__slideOutRight;\n          animation-name: Toastify__slideOutRight;\n}\n\n.Toastify__slide-exit--top-center {\n  -webkit-animation-name: Toastify__slideOutUp;\n          animation-name: Toastify__slideOutUp;\n}\n\n.Toastify__slide-exit--bottom-center {\n  -webkit-animation-name: Toastify__slideOutDown;\n          animation-name: Toastify__slideOutDown;\n}\n", ""]);
+
+
+/***/ }),
+
 /***/ "./node_modules/css-loader/dist/runtime/api.js":
 /*!*****************************************************!*\
   !*** ./node_modules/css-loader/dist/runtime/api.js ***!
@@ -13067,6 +13163,68 @@ module.exports = function (url, options) {
 
   return url;
 };
+
+/***/ }),
+
+/***/ "./node_modules/dom-helpers/esm/addClass.js":
+/*!**************************************************!*\
+  !*** ./node_modules/dom-helpers/esm/addClass.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return addClass; });
+/* harmony import */ var _hasClass__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./hasClass */ "./node_modules/dom-helpers/esm/hasClass.js");
+
+function addClass(element, className) {
+  if (element.classList) element.classList.add(className);else if (!Object(_hasClass__WEBPACK_IMPORTED_MODULE_0__["default"])(element, className)) if (typeof element.className === 'string') element.className = element.className + " " + className;else element.setAttribute('class', (element.className && element.className.baseVal || '') + " " + className);
+}
+
+/***/ }),
+
+/***/ "./node_modules/dom-helpers/esm/hasClass.js":
+/*!**************************************************!*\
+  !*** ./node_modules/dom-helpers/esm/hasClass.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return hasClass; });
+function hasClass(element, className) {
+  if (element.classList) return !!className && element.classList.contains(className);
+  return (" " + (element.className.baseVal || element.className) + " ").indexOf(" " + className + " ") !== -1;
+}
+
+/***/ }),
+
+/***/ "./node_modules/dom-helpers/esm/removeClass.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/dom-helpers/esm/removeClass.js ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return removeClass; });
+function replaceClassName(origClass, classToRemove) {
+  return origClass.replace(new RegExp("(^|\\s)" + classToRemove + "(?:\\s|$)", 'g'), '$1').replace(/\s+/g, ' ').replace(/^\s*|\s*$/g, '');
+}
+
+function removeClass(element, className) {
+  if (element.classList) {
+    element.classList.remove(className);
+  } else if (typeof element.className === 'string') {
+    ;
+    element.className = replaceClassName(element.className, className);
+  } else {
+    element.setAttribute('class', replaceClassName(element.className && element.className.baseVal || '', className));
+  }
+}
 
 /***/ }),
 
@@ -14135,6 +14293,49 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function() {
     }
 }.call(this));
 
+
+
+/***/ }),
+
+/***/ "./node_modules/exifr/dist/full.esm.mjs":
+/*!**********************************************!*\
+  !*** ./node_modules/exifr/dist/full.esm.mjs ***!
+  \**********************************************/
+/*! exports provided: default, Exifr, Options, allFormatters, chunkedProps, createDictionary, disableAllOptions, extendDictionary, fetchUrlAsArrayBuffer, fileParsers, fileReaders, gps, gpsOnlyOptions, inheritables, orientation, orientationOnlyOptions, otherSegments, parse, readBlobAsArrayBuffer, segmentParsers, segments, segmentsAndBlocks, tagKeys, tagRevivers, tagValues, thumbnail, thumbnailOnlyOptions, thumbnailUrl, tiffBlocks, tiffExtractables */
+/***/ (function(__webpack_module__, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Exifr", function() { return $; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Options", function() { return K; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "allFormatters", function() { return V; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "chunkedProps", function() { return L; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createDictionary", function() { return A; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "disableAllOptions", function() { return Y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "extendDictionary", function() { return x; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchUrlAsArrayBuffer", function() { return T; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fileParsers", function() { return y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fileReaders", function() { return I; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gps", function() { return ne; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "gpsOnlyOptions", function() { return q; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inheritables", function() { return G; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "orientation", function() { return se; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "orientationOnlyOptions", function() { return Q; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "otherSegments", function() { return F; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parse", function() { return ee; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "readBlobAsArrayBuffer", function() { return D; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "segmentParsers", function() { return b; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "segments", function() { return U; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "segmentsAndBlocks", function() { return E; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tagKeys", function() { return v; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tagRevivers", function() { return R; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tagValues", function() { return M; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbnail", function() { return te; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbnailOnlyOptions", function() { return Z; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "thumbnailUrl", function() { return ie; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tiffBlocks", function() { return B; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "tiffExtractables", function() { return N; });
+function e(e,t,i){return t in e?Object.defineProperty(e,t,{value:i,enumerable:!0,configurable:!0,writable:!0}):e[t]=i,e}let t="undefined"!=typeof self?self:global;var i="undefined"!=typeof navigator,n=i&&"undefined"==typeof HTMLImageElement,s=!("undefined"==typeof global||"undefined"==typeof process||!process.versions||!process.versions.node);let r=t.Buffer,a=t.BigInt;var o=!!r;function l(e){return u(e)?void 0:e}const h=e=>void 0!==e;function u(e){return void 0===e||(e instanceof Map?0===e.size:0===Object.values(e).filter(h).length)}function f(e){let t=new Error(e);return delete t.stack,t}function c(e){return""===(e=function(e){for(;e.endsWith("\0");)e=e.slice(0,-1);return e}(e).trim())?void 0:e}function d(e){let t=function(e){let t=0;return e.ifd0.enabled&&(t+=1024),e.exif.enabled&&(t+=2048),e.makerNote&&(t+=2048),e.userComment&&(t+=1024),e.gps.enabled&&(t+=512),e.interop.enabled&&(t+=100),e.ifd1.enabled&&(t+=1024),t+2048}(e);return e.jfif.enabled&&(t+=50),e.xmp.enabled&&(t+=2e4),e.iptc.enabled&&(t+=14e3),e.icc.enabled&&(t+=6e3),t}const p="undefined"!=typeof TextDecoder?new TextDecoder("utf-8"):void 0;function g(e){return p?p.decode(e):o?Buffer.from(e).toString("utf8"):decodeURIComponent(escape(String.fromCharCode.apply(null,e)))}class m{static from(e,t){return e instanceof this&&e.le===t?e:new m(e,void 0,void 0,t)}constructor(e,t=0,i,n){if("boolean"==typeof n&&(this.le=n),Array.isArray(e)&&(e=new Uint8Array(e)),0===e)this.byteOffset=0,this.byteLength=0;else if(e instanceof ArrayBuffer){void 0===i&&(i=e.byteLength-t);let n=new DataView(e,t,i);this._swapDataView(n)}else if(e instanceof Uint8Array||e instanceof DataView||e instanceof m){if(void 0===i&&(i=e.byteLength-t),(t+=e.byteOffset)+i>e.byteOffset+e.byteLength)throw f("Creating view outside of available memory in ArrayBuffer");let n=new DataView(e.buffer,t,i);this._swapDataView(n)}else{if("number"!=typeof e)throw f("Invalid input argument for BufferView: "+e);{let t=new DataView(new ArrayBuffer(e));this._swapDataView(t)}}}_swapArrayBuffer(e){this._swapDataView(new DataView(e))}_swapBuffer(e){this._swapDataView(new DataView(e.buffer,e.byteOffset,e.byteLength))}_swapDataView(e){this.dataView=e,this.buffer=e.buffer,this.byteOffset=e.byteOffset,this.byteLength=e.byteLength}_lengthToEnd(e){return this.byteLength-e}set(e,t,i=m){if(e instanceof DataView||e instanceof m?e=new Uint8Array(e.buffer,e.byteOffset,e.byteLength):e instanceof ArrayBuffer&&(e=new Uint8Array(e)),!(e instanceof Uint8Array))throw f("BufferView.set(): Invalid data argument.");return this.toUint8().set(e,t),new i(this,t,e.byteLength)}subarray(e,t){return t=t||this._lengthToEnd(e),new m(this,e,t)}toUint8(){return new Uint8Array(this.buffer,this.byteOffset,this.byteLength)}getUint8Array(e,t){return new Uint8Array(this.buffer,this.byteOffset+e,t)}getString(e=0,t=this.byteLength){return g(this.getUint8Array(e,t))}getUnicodeString(e=0,t=this.byteLength){const i=[];for(let n=0;n<t&&e+n<this.byteLength;n+=2)i.push(this.getUint16(e+n));return i.map(e=>String.fromCharCode(e)).join("")}getInt8(e){return this.dataView.getInt8(e)}getUint8(e){return this.dataView.getUint8(e)}getInt16(e,t=this.le){return this.dataView.getInt16(e,t)}getInt32(e,t=this.le){return this.dataView.getInt32(e,t)}getUint16(e,t=this.le){return this.dataView.getUint16(e,t)}getUint32(e,t=this.le){return this.dataView.getUint32(e,t)}getFloat32(e,t=this.le){return this.dataView.getFloat32(e,t)}getFloat64(e,t=this.le){return this.dataView.getFloat64(e,t)}getFloat(e,t=this.le){return this.dataView.getFloat32(e,t)}getDouble(e,t=this.le){return this.dataView.getFloat64(e,t)}getUint64(e){let t=this.getUint32(e),i=this.getUint32(e+4);if(t<1048575)return t<<32|i;if(void 0!==typeof a)return console.warn("Using BigInt because of type 64uint but JS can only handle 53b numbers."),a(t)<<a(32)|a(i);throw f("Trying to read 64b value but JS can only handle 53b numbers.")}getUintBytes(e,t,i){switch(t){case 1:return this.getUint8(e,i);case 2:return this.getUint16(e,i);case 4:return this.getUint32(e,i);case 8:return this.getUint64(e,i)}}getUint(e,t,i){switch(t){case 8:return this.getUint8(e,i);case 16:return this.getUint16(e,i);case 32:return this.getUint32(e,i);case 64:return this.getUint64(e,i)}}toString(e){return this.dataView.toString(e,this.constructor.name)}ensureChunk(){}}function S(e,t){throw f("".concat(e," '").concat(t,"' was not loaded, try using full build of exifr."))}class C extends Map{constructor(e){super(),this.kind=e}get(e,t){return this.has(e)||S(this.kind,e),t&&(e in t||function(e,t){throw f("Unknown ".concat(e," '").concat(t,"'."))}(this.kind,e),t[e].enabled||S(this.kind,e)),super.get(e)}keyList(){return Array.from(this.keys())}}var y=new C("file parser"),b=new C("segment parser"),I=new C("file reader");function P(e,t){if((n=e).startsWith("data:")||n.length>1e4)return w(e,t,"base64");if(i)return k(e,t,"url",T);if(s)return w(e,t,"fs");throw f("Invalid input argument");var n}async function k(e,t,i,n){if(I.has(i))return w(e,t,i);if(n)return async function(e,t){let i=await t(e);return new m(i)}(e,n);throw f("Parser ".concat(i," is not loaded"))}async function w(e,t,i){let n=new(I.get(i))(e,t);return await n.read(),n}async function T(e){return fetch(e).then(e=>e.arrayBuffer())}async function D(e){return new Promise((t,i)=>{let n=new FileReader;n.onloadend=()=>t(n.result||new ArrayBuffer),n.onerror=i,n.readAsArrayBuffer(e)})}class O extends Map{get tagKeys(){return this.allKeys||(this.allKeys=Array.from(this.keys())),this.allKeys}get tagValues(){return this.allValues||(this.allValues=Array.from(this.values())),this.allValues}}function A(e,t,i){let n=new O;for(let[e,t]of i)n.set(e,t);if(Array.isArray(t))for(let i of t)e.set(i,n);else e.set(t,n);return n}function x(e,t,i){let n,s=e.get(t);for(n of i)s.set(n[0],n[1])}const v=new Map,M=new Map,R=new Map,L=["chunked","firstChunkSize","firstChunkSizeNode","firstChunkSizeBrowser","chunkSize","chunkLimit"],F=["jfif","xmp","icc","iptc"],U=["tiff",...F],B=["ifd0","ifd1","exif","gps","interop"],E=[...U,...B],N=["makerNote","userComment"],G=["translateKeys","translateValues","reviveValues","multiSegment"],V=[...G,"sanitize","mergeOutput"];class z{get translate(){return this.translateKeys||this.translateValues||this.reviveValues}}class H extends z{get needed(){return this.enabled||this.deps.size>0}constructor(t,i,n,s){if(super(),e(this,"enabled",!1),e(this,"skip",new Set),e(this,"pick",new Set),e(this,"deps",new Set),e(this,"translateKeys",!1),e(this,"translateValues",!1),e(this,"reviveValues",!1),this.key=t,this.enabled=i,this.parse=this.enabled,this.applyInheritables(s),this.canBeFiltered=B.includes(t),this.canBeFiltered&&(this.dict=v.get(t)),void 0!==n)if(Array.isArray(n))this.parse=this.enabled=!0,this.canBeFiltered&&n.length>0&&this.translateTagSet(n,this.pick);else if("object"==typeof n){if(this.enabled=!0,this.parse=!1!==n.parse,this.canBeFiltered){let{pick:e,skip:t}=n;e&&e.length>0&&this.translateTagSet(e,this.pick),t&&t.length>0&&this.translateTagSet(t,this.skip)}this.applyInheritables(n)}else{if(!0!==n&&!1!==n)throw f("Invalid options argument: ".concat(n));this.parse=this.enabled=n}}applyInheritables(e){let t,i;for(t of G)i=e[t],void 0!==i&&(this[t]=i)}translateTagSet(e,t){if(this.dict){let i,n,{tagKeys:s,tagValues:r}=this.dict;for(i of e)"string"==typeof i?(n=r.indexOf(i),-1===n&&(n=s.indexOf(Number(i))),-1!==n&&t.add(Number(s[n]))):t.add(i)}else for(let i of e)t.add(i)}finalizeFilters(){!this.enabled&&this.deps.size>0?(this.enabled=!0,J(this.pick,this.deps)):this.enabled&&this.pick.size>0&&J(this.pick,this.deps)}}var W={jfif:!1,tiff:!0,xmp:!1,icc:!1,iptc:!1,ifd0:!0,ifd1:!1,exif:!0,gps:!0,interop:!1,makerNote:!1,userComment:!1,multiSegment:!1,skip:[],pick:[],translateKeys:!0,translateValues:!0,reviveValues:!0,sanitize:!0,mergeOutput:!0,silentErrors:!0,chunked:!0,firstChunkSize:void 0,firstChunkSizeNode:512,firstChunkSizeBrowser:65536,chunkSize:65536,chunkLimit:5},j=new Map;class K extends z{static useCached(e){let t=j.get(e);return void 0!==t?t:(t=new this(e),j.set(e,t),t)}constructor(e){if(super(),!0===e)this.setupFromTrue();else if(void 0===e)this.setupFromUndefined();else if(Array.isArray(e))this.setupFromArray(e);else{if("object"!=typeof e)throw f("Invalid options argument ".concat(e));this.setupFromObject(e)}void 0===this.firstChunkSize&&(this.firstChunkSize=i?this.firstChunkSizeBrowser:this.firstChunkSizeNode),this.mergeOutput&&(this.ifd1.enabled=!1),this.filterNestedSegmentTags(),this.traverseTiffDependencyTree(),this.checkLoadedPlugins()}setupFromUndefined(){let e;for(e of L)this[e]=W[e];for(e of V)this[e]=W[e];for(e of N)this[e]=W[e];for(e of E)this[e]=new H(e,W[e],void 0,this)}setupFromTrue(){let e;for(e of L)this[e]=W[e];for(e of V)this[e]=W[e];for(e of N)this[e]=!0;for(e of E)this[e]=new H(e,!0,void 0,this)}setupFromArray(e){let t;for(t of L)this[t]=W[t];for(t of V)this[t]=W[t];for(t of N)this[t]=W[t];for(t of E)this[t]=new H(t,!1,void 0,this);this.setupGlobalFilters(e,void 0,B)}setupFromObject(e){let t;for(t of(B.ifd0=B.ifd0||B.image,B.ifd1=B.ifd1||B.thumbnail,Object.assign(this,e),L))this[t]=X(e[t],W[t]);for(t of V)this[t]=X(e[t],W[t]);for(t of N)this[t]=X(e[t],W[t]);for(t of U)this[t]=new H(t,W[t],e[t],this);for(t of B)this[t]=new H(t,W[t],e[t],this.tiff);this.setupGlobalFilters(e.pick,e.skip,B,E),!0===e.tiff?this.batchEnableWithBool(B,!0):!1===e.tiff?this.batchEnableWithUserValue(B,e):Array.isArray(e.tiff)?this.setupGlobalFilters(e.tiff,void 0,B):"object"==typeof e.tiff&&this.setupGlobalFilters(e.tiff.pick,e.tiff.skip,B)}batchEnableWithBool(e,t){for(let i of e)this[i].enabled=t}batchEnableWithUserValue(e,t){for(let i of e){let e=t[i];this[i].enabled=!1!==e&&void 0!==e}}setupGlobalFilters(e,t,i,n=i){if(e&&e.length){for(let e of n)this[e].enabled=!1;let t=_(e,i);for(let[e,i]of t)J(this[e].pick,i),this[e].enabled=!0}else if(t&&t.length){let e=_(t,i);for(let[t,i]of e)J(this[t].skip,i)}}filterNestedSegmentTags(){let{ifd0:e,exif:t,xmp:i,iptc:n,icc:s}=this;this.makerNote?t.deps.add(37500):t.skip.add(37500),this.userComment?t.deps.add(37510):t.skip.add(37510),i.enabled||e.skip.add(700),n.enabled||e.skip.add(33723),s.enabled||e.skip.add(34675)}traverseTiffDependencyTree(){let{ifd0:e,exif:t,gps:i,interop:n}=this;n.needed&&(t.deps.add(40965),e.deps.add(40965)),t.needed&&e.deps.add(34665),i.needed&&e.deps.add(34853),this.tiff.enabled=B.some(e=>!0===this[e].enabled)||this.makerNote||this.userComment;for(let e of B)this[e].finalizeFilters()}get onlyTiff(){return!F.map(e=>this[e].enabled).some(e=>!0===e)&&this.tiff.enabled}checkLoadedPlugins(){for(let e of U)this[e].enabled&&!b.has(e)&&S("segment parser",e)}}function _(e,t){let i,n,s,r,a=[];for(s of t){for(r of(i=v.get(s),n=[],i))(e.includes(r[0])||e.includes(r[1]))&&n.push(r[0]);n.length&&a.push([s,n])}return a}function X(e,t){return void 0!==e?e:void 0!==t?t:void 0}function J(e,t){for(let i of t)e.add(i)}e(K,"default",W);const Y={ifd0:!1,ifd1:!1,exif:!1,gps:!1,interop:!1,sanitize:!1,reviveValues:!0,translateKeys:!1,translateValues:!1,mergeOutput:!1},q=Object.assign({},Y,{firstChunkSize:4e4,gps:[1,2,3,4]}),Q=Object.assign({},Y,{firstChunkSize:4e4,ifd0:[274]}),Z=Object.assign({},Y,{tiff:!1,ifd1:!0,mergeOutput:!1});class ${constructor(t){e(this,"parsers",{}),this.options=K.useCached(t)}setup(){if(this.fileParser)return;let e,t=this.file.getUint16(0);if(18761===t||19789===t)this.file.isTiff=!0,e=y.get("tiff");else if(65496===t)this.file.isJpeg=!0,e=y.get("jpeg");else{if(!function(e){if(0!==e.getUint16(0))return!1;let t=e.getUint16(2);if(t>50)return!1;let i=16,n=[];for(;i<t;)n.push(e.getString(i,4)),i+=4;return n.includes("heic")}(this.file))throw f("Unknown file format");this.file.isHeic=!0,e=y.get("heic")}this.fileParser=new e(this.options,this.file,this.parsers)}async read(e){this.file=await function(e,t){if("string"==typeof e)return P(e,t);if(i&&!n&&e instanceof HTMLImageElement)return P(e.src,t);if(e instanceof Uint8Array||e instanceof ArrayBuffer||e instanceof DataView)return new m(e);if(i&&e instanceof Blob)return k(e,t,"blob",D);throw f("Invalid input argument")}(e,this.options)}async parse(){this.setup(),await this.fileParser.parse();let e={},t=[],i=Object.values(this.parsers).map(async i=>{let n;if(this.options.silentErrors){try{n=await i.parse()}catch(e){t.push(e)}i.errors.length&&t.push(...i.errors)}else n=await i.parse();i.assignToOutput(e,n)});return await Promise.all(i),this.options.silentErrors&&t.length>0&&(e.errors=t),e=l(e),this.file.close&&this.file.close(),e}async extractThumbnail(){this.setup();let e=b.get("tiff",this.options);var t;if(this.file.isTiff?t={start:0,type:"tiff"}:this.file.isJpeg&&(t=await this.fileParser.getOrFindSegment("tiff")),void 0===t)return;let i=await this.fileParser.ensureSegmentChunk(t),n=this.parsers.tiff=new e(i,this.options,this.file),s=await n.extractThumbnail();return this.file.close&&this.file.close(),s}}async function ee(e,t){let i=new $(t);return await i.read(e),i.parse()}async function te(e){let t=new $(Z);await t.read(e);let i=await t.extractThumbnail();return i&&o?r.from(i):i}async function ie(e){let t=await this.thumbnail(e);if(void 0!==t){let e=new Blob([t]);return URL.createObjectURL(e)}}async function ne(e){let t=new $(q);await t.read(e);let i=await t.parse();if(i&&i.gps){let{latitude:e,longitude:t}=i.gps;return{latitude:e,longitude:t}}}async function se(e){let t=new $(Q);await t.read(e);let i=await t.parse();if(i&&i.ifd0)return i.ifd0[274]}var re=Object.freeze({__proto__:null,parse:ee,thumbnail:te,thumbnailUrl:ie,gps:ne,orientation:se,Exifr:$,fileParsers:y,segmentParsers:b,fileReaders:I,tagKeys:v,tagValues:M,tagRevivers:R,createDictionary:A,extendDictionary:x,fetchUrlAsArrayBuffer:T,readBlobAsArrayBuffer:D,chunkedProps:L,otherSegments:F,segments:U,tiffBlocks:B,segmentsAndBlocks:E,tiffExtractables:N,inheritables:G,allFormatters:V,Options:K,disableAllOptions:Y,gpsOnlyOptions:q,orientationOnlyOptions:Q,thumbnailOnlyOptions:Z});class ae extends m{constructor(...t){super(...t),e(this,"ranges",new oe),0!==this.byteLength&&this.ranges.add(0,this.byteLength)}_tryExtend(e,t,i){if(0===e&&0===this.byteLength&&i){let e=new DataView(i.buffer||i,i.byteOffset,i.byteLength);this._swapDataView(e)}else{let i=e+t;if(i>this.byteLength){let{dataView:e}=this._extend(i);this._swapDataView(e)}}}_extend(e){let t;t=o?r.allocUnsafe(e):new Uint8Array(e);let i=new DataView(t.buffer,t.byteOffset,t.byteLength);return t.set(new Uint8Array(this.buffer,this.byteOffset,this.byteLength),0),{uintView:t,dataView:i}}subarray(e,t,i=!1){return t=t||this._lengthToEnd(e),i&&this._tryExtend(e,t),this.ranges.add(e,t),super.subarray(e,t)}set(e,t,i=!1){i&&this._tryExtend(t,e.byteLength,e);let n=super.set(e,t);return this.ranges.add(t,n.byteLength),n}async ensureChunk(e,t){this.chunked&&(this.ranges.available(e,t)||await this.readChunk(e,t))}available(e,t){return this.ranges.available(e,t)}}class oe{constructor(){e(this,"list",[])}get length(){return this.list.length}add(e,t,i=0){let n=e+t,s=this.list.filter(t=>le(e,t.offset,n)||le(e,t.end,n));if(s.length>0){e=Math.min(e,...s.map(e=>e.offset)),n=Math.max(n,...s.map(e=>e.end)),t=n-e;let i=s.shift();i.offset=e,i.length=t,i.end=n,this.list=this.list.filter(e=>!s.includes(e))}else this.list.push({offset:e,length:t,end:n})}available(e,t){let i=e+t;return this.list.some(t=>t.offset<=e&&i<=t.end)}}function le(e,t,i){return e<=t&&t<=i}class he extends ae{constructor(t,i){super(0),e(this,"chunksRead",0),this.input=t,this.options=i}async readWhole(){this.chunked=!1,await this.readChunk(this.nextChunkOffset)}async readChunked(){this.chunked=!0,await this.readChunk(0,this.options.firstChunkSize)}async readNextChunk(e=this.nextChunkOffset){if(this.fullyRead)return this.chunksRead++,!1;let t=this.options.chunkSize,i=await this.readChunk(e,t);return!!i&&i.byteLength===t}async readChunk(e,t){if(this.chunksRead++,0!==(t=this.safeWrapAddress(e,t)))return this._readChunk(e,t)}safeWrapAddress(e,t){return void 0!==this.size&&e+t>this.size?Math.max(0,this.size-e):t}get nextChunkOffset(){if(0!==this.ranges.list.length)return this.ranges.list[0].length}get canReadNextChunk(){return this.chunksRead<this.options.chunkLimit}get fullyRead(){return void 0!==this.size&&this.nextChunkOffset===this.size}read(){return this.options.chunked?this.readChunked():this.readWhole()}close(){}}I.set("blob",class extends he{async readWhole(){this.chunked=!1;let e=await D(this.input);this._swapArrayBuffer(e)}readChunked(){return this.chunked=!0,this.size=this.input.size,super.readChunked()}async _readChunk(e,t){let i=t?e+t:void 0,n=this.input.slice(e,i),s=await D(n);return this.set(s,e,!0)}});class ue{constructor(t,i,n){e(this,"ensureSegmentChunk",async e=>{let t=e.start,i=e.size||65536;if(this.file.chunked)if(this.file.available(t,i))e.chunk=this.file.subarray(t,i);else try{e.chunk=await this.file.readChunk(t,i)}catch(t){throw f("Couldn't read segment: ".concat(JSON.stringify(e),". ").concat(t.message))}else if(this.file.byteLength>t+i)e.chunk=this.file.subarray(t,i);else{if(void 0!==e.size)throw f("Segment unreachable: "+JSON.stringify(e));e.chunk=this.file.subarray(t)}return e.chunk}),this.extendOptions&&this.extendOptions(t),this.options=t,this.file=i,this.parsers=n}createParser(e,t){let i=new(b.get(e))(t,this.options,this.file);return this.parsers[e]=i}}class fe{static findPosition(e,t){let i=e.getUint16(t+2)+2,n="function"==typeof this.headerLength?this.headerLength(e,t,i):this.headerLength,s=t+n,r=i-n;return{offset:t,length:i,headerLength:n,start:s,size:r,end:s+r}}static parse(e,t={}){return new this(e,new K({[this.type]:t})).parse()}normalizeInput(e){return e instanceof m?e:new m(e)}constructor(t,i={},n){e(this,"errors",[]),e(this,"raw",new Map),e(this,"handleError",e=>{if(!this.options.silentErrors)throw e;this.errors.push(e.message)}),this.chunk=this.normalizeInput(t),this.file=n,this.type=this.constructor.type,this.globalOptions=this.options=i,this.localOptions=i[this.type],this.canTranslate=this.localOptions&&this.localOptions.translate}translate(){this.canTranslate&&(this.translated=this.translateBlock(this.raw,this.type))}get output(){return this.translated?this.translated:this.raw?Object.fromEntries(this.raw):void 0}translateBlock(e,t){let i=R.get(t),n=M.get(t),s=v.get(t),r=this.options[t],a=r.reviveValues&&!!i,o=r.translateValues&&!!n,l=r.translateKeys&&!!s,h={};for(let[t,r]of e)a&&i.has(t)?r=i.get(t)(r):o&&n.has(t)&&(r=this.translateValue(r,n.get(t))),l&&s.has(t)&&(t=s.get(t)||t),h[t]=r;return h}translateValue(e,t){return t[e]||e}assignToOutput(e,t){this.assignObjectToOutput(e,this.constructor.type,t)}assignObjectToOutput(e,t,i){if(this.globalOptions.mergeOutput)return Object.assign(e,i);e[t]?Object.assign(e[t],i):e[t]=i}}e(fe,"headerLength",4),e(fe,"type",void 0),e(fe,"multiSegment",!1),e(fe,"canHandle",()=>!1);function ce(e){return 192===e||194===e||196===e||219===e||221===e||218===e||254===e}function de(e){return e>=224&&e<=239}function pe(e,t){for(let[i,n]of b)if(n.canHandle(e,t))return i}y.set("jpeg",class extends ue{constructor(...t){super(...t),e(this,"appSegments",[]),e(this,"jpegSegments",[]),e(this,"unknownSegments",[])}async parse(){await this.findAppSegments(),await this.readSegments(),this.mergeMultiSegments(),this.createParsers()}async readSegments(){let e=this.appSegments.map(this.ensureSegmentChunk);await Promise.all(e)}setupSegmentFinderArgs(e){!0===e?(this.findAll=!0,this.wanted=new Set(b.keyList())):(e=void 0===e?b.keyList().filter(e=>this.options[e].enabled):e.filter(e=>this.options[e].enabled&&b.has(e)),this.findAll=!1,this.remaining=new Set(e),this.wanted=new Set(e)),this.unfinishedMultiSegment=!1}async findAppSegments(e=0,t){this.setupSegmentFinderArgs(t);let{file:i,findAll:n,wanted:s,remaining:r}=this;if(!n&&this.file.chunked&&(n=Array.from(s).some(e=>{let t=b.get(e),i=this.options[e];return t.multiSegment&&i.multiSegment}),n&&await this.file.readWhole()),e=this._findAppSegments(e,i.byteLength,n,s,r),!this.options.onlyTiff&&i.chunked){let t=!1;for(;r.size>0&&!t&&(i.canReadNextChunk||this.unfinishedMultiSegment);){let{nextChunkOffset:n}=i,s=this.appSegments.some(e=>!this.file.available(e.offset||e.start,e.length||e.size));if(t=e>n&&!s?!await i.readNextChunk(e):!await i.readNextChunk(n),void 0===(e=this._findAppSegments(e,i.byteLength)))return}}}_findAppSegments(e,t){let i,n,s,r,a,o,{file:l,findAll:h,wanted:u,remaining:f,options:c}=this;for(;e<t;e++)if(255===l.getUint8(e))if(i=l.getUint8(e+1),de(i)){if(n=l.getUint16(e+2),s=pe(l,e),s&&u.has(s)&&(r=b.get(s),a=r.findPosition(l,e),o=c[s],a.type=s,this.appSegments.push(a),!h&&(r.multiSegment&&o.multiSegment?(this.unfinishedMultiSegment=a.chunkNumber<a.chunkCount,this.unfinishedMultiSegment||f.delete(s)):f.delete(s),0===f.size)))break;c.recordUnknownSegments&&(a=fe.findPosition(l,e),a.marker=i,this.unknownSegments.push(a)),e+=n+1}else if(ce(i)){if(n=l.getUint16(e+2),218===i&&!1!==c.stopAfterSos)return;c.recordJpegSegments&&this.jpegSegments.push({offset:e,length:n,marker:i}),e+=n+1}return e}mergeMultiSegments(){if(!this.appSegments.some(e=>e.multiSegment))return;let e=function(e,t){let i,n,s,r=new Map;for(let a=0;a<e.length;a++)i=e[a],n=i[t],r.has(n)?s=r.get(n):r.set(n,s=[]),s.push(i);return Array.from(r)}(this.appSegments,"type");this.mergedAppSegments=e.map(([e,t])=>{let i=b.get(e,this.options);if(i.handleMultiSegments){return{type:e,chunk:i.handleMultiSegments(t)}}return t[0]})}async createParsers(){let e=this.mergedAppSegments||this.appSegments;for(let t of e){let{type:e,chunk:i}=t;if(!this.options[e].enabled)continue;let n=this.parsers[e];if(n&&n.append);else if(!n){let t=new(b.get(e,this.options))(i,this.options,this.file);this.parsers[e]=t}}}getSegment(e){return this.appSegments.find(t=>t.type===e)}async getOrFindSegment(e){let t=this.getSegment(e);return void 0===t&&(await this.findAppSegments(0,[e]),t=this.getSegment(e)),t}});const ge=[void 0,1,1,2,4,8,1,1,2,4,8,4,8,4];class me extends fe{parseHeader(){var e=this.chunk.getUint16();if(18761===e)this.le=!0;else{if(19789!==e)throw f("Invalid EXIF data: expected byte order marker (0x4949 or 0x4D4D).");this.le=!1}if(this.chunk.le=this.le,42!==this.chunk.getUint16(2))throw f("Invalid EXIF data: expected 0x002A.");this.headerParsed=!0}parseTags(e,t,i=new Map){let{pick:n,skip:s}=this.options[t];n=new Set(n);let r=n.size>0,a=0===s.size,o=this.chunk.getUint16(e);e+=2;for(let l=0;l<o;l++){let o=this.chunk.getUint16(e);if(r){if(n.has(o)&&(i.set(o,this.parseTag(e,o,t)),n.delete(o),0===n.size))break}else!a&&s.has(o)||i.set(o,this.parseTag(e,o,t));e+=12}return i}parseTag(e,t,i){let n=this.chunk.getUint16(e+2),s=this.chunk.getUint32(e+4),r=ge[n];if(r*s<=4?e+=8:e=this.chunk.getUint32(e+8),n<1||n>13)throw f("Invalid TIFF value type. block: ".concat(i.toUpperCase(),", tag: ").concat(t.toString(16),", type: ").concat(n,", offset ").concat(e));if(e>this.chunk.byteLength)throw f("Invalid TIFF value offset. block: ".concat(i.toUpperCase(),", tag: ").concat(t.toString(16),", type: ").concat(n,", offset ").concat(e," is outside of chunk size ").concat(this.chunk.byteLength));if(1===n)return this.chunk.getUint8Array(e,s);if(2===n)return c(this.chunk.getString(e,s));if(7===n)return this.chunk.getUint8Array(e,s);if(1===s)return this.parseTagValue(n,e);{let t=new(function(e){switch(e){case 1:return Uint8Array;case 3:return Uint16Array;case 4:return Uint32Array;case 5:return Array;case 6:return Int8Array;case 8:return Int16Array;case 9:return Int32Array;case 10:return Array;case 11:return Float32Array;case 12:return Float64Array;default:return Array}}(n))(s),i=r;for(let r=0;r<s;r++)t[r]=this.parseTagValue(n,e),e+=i;return t}}parseTagValue(e,t){switch(e){case 1:return this.chunk.getUint8(t);case 3:return this.chunk.getUint16(t);case 4:return this.chunk.getUint32(t);case 5:return this.chunk.getUint32(t)/this.chunk.getUint32(t+4);case 6:return this.chunk.getInt8(t);case 8:return this.chunk.getInt16(t);case 9:return this.chunk.getInt32(t);case 10:return this.chunk.getInt32(t)/this.chunk.getInt32(t+4);case 11:return this.chunk.getFloat(t);case 12:return this.chunk.getDouble(t);case 13:return this.chunk.getUint32(t);default:throw f("Invalid tiff type ".concat(e))}}}class Se extends me{static canHandle(e,t){return 225===e.getUint8(t+1)&&1165519206===e.getUint32(t+4)&&0===e.getUint16(t+8)}async parse(){return this.parseHeader(),this.options.ifd0.enabled&&await this.parseIfd0Block(),this.options.exif.enabled&&await this.saveParseBlock("parseExifBlock"),this.options.gps.enabled&&await this.saveParseBlock("parseGpsBlock"),this.options.interop.enabled&&await this.saveParseBlock("parseInteropBlock"),this.options.ifd1.enabled&&await this.saveParseBlock("parseThumbnailBlock"),this.createOutput()}async saveParseBlock(e){try{return await this[e]()}catch(e){this.handleError(e)}}findIfd0Offset(){void 0===this.ifd0Offset&&(this.ifd0Offset=this.chunk.getUint32(4))}findIfd1Offset(){if(void 0===this.ifd1Offset){this.findIfd0Offset();let e=this.chunk.getUint16(this.ifd0Offset),t=this.ifd0Offset+2+12*e;this.ifd1Offset=this.chunk.getUint32(t)}}parseBlock(e,t){let i=new Map;return this[t]=i,this.parseTags(e,t,i),i}async parseIfd0Block(){if(this.ifd0)return;if(this.findIfd0Offset(),this.ifd0Offset<8)throw f("Invalid EXIF data: IFD0 offset should be less than 8");if(!this.file.chunked&&this.ifd0Offset>this.file.byteLength)throw f("IFD0 offset points to outside of file.\nthis.ifd0Offset: ".concat(this.ifd0Offset,", file.byteLength: ").concat(this.file.byteLength));this.file.isTiff&&await this.file.ensureChunk(this.ifd0Offset,d(this.options));let e=this.parseBlock(this.ifd0Offset,"ifd0");return 0!==e.size?(this.exifOffset=e.get(34665),this.interopOffset=e.get(40965),this.gpsOffset=e.get(34853),this.xmp=e.get(700),this.iptc=e.get(33723),this.icc=e.get(34675),this.options.sanitize&&(e.delete(34665),e.delete(40965),e.delete(34853),e.delete(700),e.delete(33723),e.delete(34675)),e):void 0}async ensureBlockChunk(e,t){this.file.isTiff&&await this.file.ensureChunk(e,t),e>this.chunk.byteLength&&(this.chunk=m.from(this.file,this.le))}async parseExifBlock(){if(this.exif)return;if(this.ifd0||await this.parseIfd0Block(),void 0===this.exifOffset)return;this.file.isTiff&&await this.file.ensureChunk(this.exifOffset,d(this.options));let e=this.parseBlock(this.exifOffset,"exif");return this.interopOffset||(this.interopOffset=e.get(40965)),this.makerNote=e.get(37500),this.userComment=e.get(37510),this.options.sanitize&&(e.delete(40965),e.delete(37500),e.delete(37510)),this.unpack(e,41728),this.unpack(e,41729),e}unpack(e,t){let i=e.get(t);i&&1===i.length&&e.set(t,i[0])}async parseGpsBlock(){if(this.gps)return;if(this.ifd0||await this.parseIfd0Block(),void 0===this.gpsOffset)return;let e=this.parseBlock(this.gpsOffset,"gps");return e&&e.has(2)&&e.has(4)&&(e.set("latitude",Ce(...e.get(2),e.get(1))),e.set("longitude",Ce(...e.get(4),e.get(3)))),e}async parseInteropBlock(){if(!this.interop&&(this.ifd0||await this.parseIfd0Block(),void 0!==this.interopOffset||this.exif||await this.parseExifBlock(),void 0!==this.interopOffset))return this.parseBlock(this.interopOffset,"interop")}async parseThumbnailBlock(e=!1){if(!this.ifd1&&!this.ifd1Parsed&&(!this.options.mergeOutput||e))return this.findIfd1Offset(),this.ifd1Offset>0&&(this.parseBlock(this.ifd1Offset,"ifd1"),this.ifd1Parsed=!0),this.ifd1}async extractThumbnail(){if(this.headerParsed||this.parseHeader(),this.ifd1Parsed||await this.parseThumbnailBlock(!0),void 0===this.ifd1)return;let e=this.ifd1.get(513),t=this.ifd1.get(514);return this.chunk.getUint8Array(e,t)}get image(){return this.ifd0}get thumbnail(){return this.ifd1}createOutput(){let e,t,i,n={};for(t of B)if(e=this[t],!u(e))if(i=this.canTranslate?this.translateBlock(e,t):Object.fromEntries(e),this.options.mergeOutput){if("ifd1"===t)continue;Object.assign(n,i)}else n[t]=i;return this.makerNote&&(n.makerNote=this.makerNote),this.userComment&&(n.userComment=this.userComment),n}assignToOutput(e,t){if(this.globalOptions.mergeOutput)Object.assign(e,t);else for(let[i,n]of Object.entries(t))this.assignObjectToOutput(e,i,n)}}function Ce(e,t,i,n){var s=e+t/60+i/3600;return"S"!==n&&"W"!==n||(s*=-1),s}e(Se,"type","tiff"),e(Se,"headerLength",10),b.set("tiff",Se);var ye=Object.freeze({__proto__:null,default:re,parse:ee,thumbnail:te,thumbnailUrl:ie,gps:ne,orientation:se,Exifr:$,fileParsers:y,segmentParsers:b,fileReaders:I,tagKeys:v,tagValues:M,tagRevivers:R,createDictionary:A,extendDictionary:x,fetchUrlAsArrayBuffer:T,readBlobAsArrayBuffer:D,chunkedProps:L,otherSegments:F,segments:U,tiffBlocks:B,segmentsAndBlocks:E,tiffExtractables:N,inheritables:G,allFormatters:V,Options:K,disableAllOptions:Y,gpsOnlyOptions:q,orientationOnlyOptions:Q,thumbnailOnlyOptions:Z});I.set("url",class extends he{async readWhole(){this.chunked=!1;let e=await T(this.input);this._swapArrayBuffer(e)}async _readChunk(e,t){let i=t?e+t-1:void 0,n={};(e||i)&&(n.range="bytes=".concat([e,i].join("-")));let s=await fetch(this.input,{headers:n}),r=await s.arrayBuffer(),a=r.byteLength;if(416!==s.status)return a!==t&&(this.size=e+a),this.set(r,e,!0)}});class be extends ue{parseBoxes(e=0){let t=[];for(;e<this.file.byteLength-4;){let i=this.parseBoxHead(e);if(t.push(i),0===i.length)break;e+=i.length}return t}parseSubBoxes(e){e.boxes=this.parseBoxes(e.start)}findBox(e,t){return void 0===e.boxes&&this.parseSubBoxes(e),e.boxes.find(e=>e.kind===t)}parseBoxHead(e){let t=this.file.getUint32(e),i=this.file.getString(e+4,4),n=e+8;return 1===t&&(t=this.file.getUint64(e+8),n+=8),{offset:e,length:t,kind:i,start:n}}parseBoxFullHead(e){let t=this.file.getUint32(e.start);e.version=t>>24,e.start+=4}}y.set("heic",class extends be{async parse(){var e=this.file.getUint32(0);let t=this.parseBoxHead(e);await this.file.ensureChunk(t.offset,t.length),this.parseBoxFullHead(t),this.parseSubBoxes(t),this.options.icc.enabled&&await this.findIcc(t),this.options.tiff.enabled&&await this.findExif(t)}async registerSegment(e,t,i){await this.file.ensureChunk(t,i);let n=this.file.subarray(t,i);this.createParser(e,n)}async findIcc(e){let t=this.findBox(e,"iprp");if(void 0===t)return;let i=this.findBox(t,"ipco");if(void 0===i)return;let n=this.findBox(i,"colr");void 0!==n&&await this.registerSegment("icc",n.offset+12,n.length)}async findExif(e){let t=this.findBox(e,"iinf");if(void 0===t)return;let i=this.findBox(e,"iloc");if(void 0===i)return;let n=this.findExifLocIdInIinf(t),s=this.findExtentInIloc(i,n);if(void 0===s)return;let[r,a]=s;await this.file.ensureChunk(r,a);let o=4+this.file.getUint32(r);r+=o,a-=o,await this.registerSegment("tiff",r,a)}findExifLocIdInIinf(e){this.parseBoxFullHead(e);let t,i,n,s,r=e.start,a=this.file.getUint16(r);for(r+=2;a--;){if(t=this.parseBoxHead(r),this.parseBoxFullHead(t),i=t.start,t.version>=2&&(n=3===t.version?4:2,s=this.file.getString(i+n+2,4),"Exif"===s))return this.file.getUintBytes(i,n);r+=t.length}}get8bits(e){let t=this.file.getUint8(e);return[t>>4,15&t]}findExtentInIloc(e,t){this.parseBoxFullHead(e);let i=e.start,[n,s]=this.get8bits(i++),[r,a]=this.get8bits(i++),o=2===e.version?4:2,l=1===e.version||2===e.version?2:0,h=a+n+s,u=2===e.version?4:2,f=this.file.getUintBytes(i,u);for(i+=u;f--;){let e=this.file.getUintBytes(i,o);i+=o+l+2+r;let u=this.file.getUint16(i);if(i+=2,e===t)return u>1&&console.warn("ILOC box has more than one extent but we're only processing one\nPlease create an issue at https://github.com/MikeKovarik/exifr with this file"),[this.file.getUintBytes(i+a,n),this.file.getUintBytes(i+a+n,s)];i+=u*h}}}),A(v,["ifd0","ifd1"],[[256,"ImageWidth"],[257,"ImageHeight"],[258,"BitsPerSample"],[259,"Compression"],[262,"PhotometricInterpretation"],[270,"ImageDescription"],[271,"Make"],[272,"Model"],[273,"StripOffsets"],[274,"Orientation"],[277,"SamplesPerPixel"],[278,"RowsPerStrip"],[279,"StripByteCounts"],[282,"XResolution"],[283,"YResolution"],[284,"PlanarConfiguration"],[296,"ResolutionUnit"],[301,"TransferFunction"],[305,"Software"],[306,"ModifyDate"],[315,"Artist"],[316,"HostComputer"],[317,"Predictor"],[318,"WhitePoint"],[319,"PrimaryChromaticities"],[513,"ThumbnailOffset"],[514,"ThumbnailLength"],[529,"YCbCrCoefficients"],[530,"YCbCrSubSampling"],[531,"YCbCrPositioning"],[532,"ReferenceBlackWhite"],[700,"ApplicationNotes"],[33432,"Copyright"],[33723,"IPTC"],[34665,"ExifIFD"],[34675,"ICC"],[34853,"GpsIFD"],[330,"SubIFD"],[40965,"InteropIFD"],[40091,"XPTitle"],[40092,"XPComment"],[40093,"XPAuthor"],[40094,"XPKeywords"],[40095,"XPSubject"]]),A(v,"exif",[[33434,"ExposureTime"],[33437,"FNumber"],[34850,"ExposureProgram"],[34852,"SpectralSensitivity"],[34855,"ISO"],[34858,"TimeZoneOffset"],[34859,"SelfTimerMode"],[34864,"SensitivityType"],[34865,"StandardOutputSensitivity"],[34866,"RecommendedExposureIndex"],[34867,"ISOSpeed"],[34868,"ISOSpeedLatitudeyyy"],[34869,"ISOSpeedLatitudezzz"],[36864,"ExifVersion"],[36867,"DateTimeOriginal"],[36868,"CreateDate"],[36873,"GooglePlusUploadCode"],[36880,"OffsetTime"],[36881,"OffsetTimeOriginal"],[36882,"OffsetTimeDigitized"],[37121,"ComponentsConfiguration"],[37122,"CompressedBitsPerPixel"],[37377,"ShutterSpeedValue"],[37378,"ApertureValue"],[37379,"BrightnessValue"],[37380,"ExposureCompensation"],[37381,"MaxApertureValue"],[37382,"SubjectDistance"],[37383,"MeteringMode"],[37384,"LightSource"],[37385,"Flash"],[37386,"FocalLength"],[37393,"ImageNumber"],[37394,"SecurityClassification"],[37395,"ImageHistory"],[37396,"SubjectArea"],[37500,"MakerNote"],[37510,"UserComment"],[37520,"SubSecTime"],[37521,"SubSecTimeOriginal"],[37522,"SubSecTimeDigitized"],[37888,"AmbientTemperature"],[37889,"Humidity"],[37890,"Pressure"],[37891,"WaterDepth"],[37892,"Acceleration"],[37893,"CameraElevationAngle"],[40960,"FlashpixVersion"],[40961,"ColorSpace"],[40962,"ExifImageWidth"],[40963,"ExifImageHeight"],[40964,"RelatedSoundFile"],[41483,"FlashEnergy"],[41486,"FocalPlaneXResolution"],[41487,"FocalPlaneYResolution"],[41488,"FocalPlaneResolutionUnit"],[41492,"SubjectLocation"],[41493,"ExposureIndex"],[41495,"SensingMethod"],[41728,"FileSource"],[41729,"SceneType"],[41730,"CFAPattern"],[41985,"CustomRendered"],[41986,"ExposureMode"],[41987,"WhiteBalance"],[41988,"DigitalZoomRatio"],[41989,"FocalLengthIn35mmFormat"],[41990,"SceneCaptureType"],[41991,"GainControl"],[41992,"Contrast"],[41993,"Saturation"],[41994,"Sharpness"],[41996,"SubjectDistanceRange"],[42016,"ImageUniqueID"],[42032,"OwnerName"],[42033,"SerialNumber"],[42034,"LensInfo"],[42035,"LensMake"],[42036,"LensModel"],[42037,"LensSerialNumber"],[42080,"CompositeImage"],[42081,"CompositeImageCount"],[42082,"CompositeImageExposureTimes"],[42240,"Gamma"],[59932,"Padding"],[59933,"OffsetSchema"],[65e3,"OwnerName"],[65001,"SerialNumber"],[65002,"Lens"],[65100,"RawFile"],[65101,"Converter"],[65102,"WhiteBalance"],[65105,"Exposure"],[65106,"Shadows"],[65107,"Brightness"],[65108,"Contrast"],[65109,"Saturation"],[65110,"Sharpness"],[65111,"Smoothness"],[65112,"MoireFilter"],[40965,"InteropIFD"]]),A(v,"gps",[[0,"GPSVersionID"],[1,"GPSLatitudeRef"],[2,"GPSLatitude"],[3,"GPSLongitudeRef"],[4,"GPSLongitude"],[5,"GPSAltitudeRef"],[6,"GPSAltitude"],[7,"GPSTimeStamp"],[8,"GPSSatellites"],[9,"GPSStatus"],[10,"GPSMeasureMode"],[11,"GPSDOP"],[12,"GPSSpeedRef"],[13,"GPSSpeed"],[14,"GPSTrackRef"],[15,"GPSTrack"],[16,"GPSImgDirectionRef"],[17,"GPSImgDirection"],[18,"GPSMapDatum"],[19,"GPSDestLatitudeRef"],[20,"GPSDestLatitude"],[21,"GPSDestLongitudeRef"],[22,"GPSDestLongitude"],[23,"GPSDestBearingRef"],[24,"GPSDestBearing"],[25,"GPSDestDistanceRef"],[26,"GPSDestDistance"],[27,"GPSProcessingMethod"],[28,"GPSAreaInformation"],[29,"GPSDateStamp"],[30,"GPSDifferential"],[31,"GPSHPositioningError"]]),A(M,["ifd0","ifd1"],[[274,{1:"Horizontal (normal)",2:"Mirror horizontal",3:"Rotate 180",4:"Mirror vertical",5:"Mirror horizontal and rotate 270 CW",6:"Rotate 90 CW",7:"Mirror horizontal and rotate 90 CW",8:"Rotate 270 CW"}],[296,{1:"None",2:"inches",3:"cm"}]]);let Ie=A(M,"exif",[[34850,{0:"Not defined",1:"Manual",2:"Normal program",3:"Aperture priority",4:"Shutter priority",5:"Creative program",6:"Action program",7:"Portrait mode",8:"Landscape mode"}],[37121,{0:"-",1:"Y",2:"Cb",3:"Cr",4:"R",5:"G",6:"B"}],[37383,{0:"Unknown",1:"Average",2:"CenterWeightedAverage",3:"Spot",4:"MultiSpot",5:"Pattern",6:"Partial",255:"Other"}],[37384,{0:"Unknown",1:"Daylight",2:"Fluorescent",3:"Tungsten (incandescent light)",4:"Flash",9:"Fine weather",10:"Cloudy weather",11:"Shade",12:"Daylight fluorescent (D 5700 - 7100K)",13:"Day white fluorescent (N 4600 - 5400K)",14:"Cool white fluorescent (W 3900 - 4500K)",15:"White fluorescent (WW 3200 - 3700K)",17:"Standard light A",18:"Standard light B",19:"Standard light C",20:"D55",21:"D65",22:"D75",23:"D50",24:"ISO studio tungsten",255:"Other"}],[37385,{0:"Flash did not fire",1:"Flash fired",5:"Strobe return light not detected",7:"Strobe return light detected",9:"Flash fired, compulsory flash mode",13:"Flash fired, compulsory flash mode, return light not detected",15:"Flash fired, compulsory flash mode, return light detected",16:"Flash did not fire, compulsory flash mode",24:"Flash did not fire, auto mode",25:"Flash fired, auto mode",29:"Flash fired, auto mode, return light not detected",31:"Flash fired, auto mode, return light detected",32:"No flash function",65:"Flash fired, red-eye reduction mode",69:"Flash fired, red-eye reduction mode, return light not detected",71:"Flash fired, red-eye reduction mode, return light detected",73:"Flash fired, compulsory flash mode, red-eye reduction mode",77:"Flash fired, compulsory flash mode, red-eye reduction mode, return light not detected",79:"Flash fired, compulsory flash mode, red-eye reduction mode, return light detected",89:"Flash fired, auto mode, red-eye reduction mode",93:"Flash fired, auto mode, return light not detected, red-eye reduction mode",95:"Flash fired, auto mode, return light detected, red-eye reduction mode"}],[41495,{1:"Not defined",2:"One-chip color area sensor",3:"Two-chip color area sensor",4:"Three-chip color area sensor",5:"Color sequential area sensor",7:"Trilinear sensor",8:"Color sequential linear sensor"}],[41728,{1:"Film Scanner",2:"Reflection Print Scanner",3:"Digital Camera"}],[41729,{1:"Directly photographed"}],[41985,{0:"Normal",1:"Custom",2:"HDR (no original saved)",3:"HDR (original saved)",4:"Original (for HDR)",6:"Panorama",7:"Portrait HDR",8:"Portrait"}],[41986,{0:"Auto",1:"Manual",2:"Auto bracket"}],[41987,{0:"Auto",1:"Manual"}],[41990,{0:"Standard",1:"Landscape",2:"Portrait",3:"Night",4:"Other"}],[41991,{0:"None",1:"Low gain up",2:"High gain up",3:"Low gain down",4:"High gain down"}],[41996,{0:"Unknown",1:"Macro",2:"Close",3:"Distant"}],[42080,{0:"Unknown",1:"Not a Composite Image",2:"General Composite Image",3:"Composite Image Captured While Shooting"}]]);const Pe={1:"No absolute unit of measurement",2:"Inch",3:"Centimeter"};Ie.set(37392,Pe),Ie.set(41488,Pe);const ke={0:"Normal",1:"Low",2:"High"};function we(e){let t=Array.from(e).slice(1);return t[1]>15&&(t=t.map(e=>String.fromCharCode(e))),"0"!==t[2]&&0!==t[2]||t.pop(),t.join(".")}function Te(e){if("string"==typeof e){var[t,i,n,s,r,a]=e.trim().split(/[-: ]/g).map(Number),o=new Date(t,i-1,n);return Number.isNaN(s)||Number.isNaN(r)||Number.isNaN(a)||(o.setHours(s),o.setMinutes(r),o.setSeconds(a)),Number.isNaN(+o)?e:o}}function De(e){if("string"==typeof e)return e;let t=[];if(0===e[1]&&0===e[e.length-1])for(let i=0;i<e.length;i+=2)t.push(Oe(e[i+1],e[i]));else for(let i=0;i<e.length;i+=2)t.push(Oe(e[i],e[i+1]));return c(String.fromCodePoint(...t))}function Oe(e,t){return e<<8|t}Ie.set(41992,ke),Ie.set(41993,ke),Ie.set(41994,ke),A(R,["ifd0","ifd1"],[[50827,function(e){return"string"!=typeof e?g(e):e}],[306,Te],[40091,De],[40092,De],[40093,De],[40094,De],[40095,De]]),A(R,"exif",[[40960,we],[36864,we],[36867,Te],[36868,Te]]),A(R,"gps",[[0,e=>Array.from(e).join(".")],[7,e=>Array.from(e).join(":")]]);class Ae extends fe{static canHandle(e,t){return 225===e.getUint8(t+1)&&1752462448===e.getUint32(t+4)&&"http://ns.adobe.com/"===e.getString(t+4,"http://ns.adobe.com/".length)}static headerLength(e,t){return"http://ns.adobe.com/xmp/extension/"===e.getString(t+4,"http://ns.adobe.com/xmp/extension/".length)?79:4+"http://ns.adobe.com/xap/1.0/".length+1}static findPosition(e,t){let i=super.findPosition(e,t);return i.multiSegment=i.extended=79===i.headerLength,i.multiSegment?(i.chunkCount=e.getUint8(t+72),i.chunkNumber=e.getUint8(t+76),0!==e.getUint8(t+77)&&i.chunkNumber++):(i.chunkCount=1/0,i.chunkNumber=-1),i}static handleMultiSegments(e){return e.map(e=>e.chunk.getString()).join("")}normalizeInput(e){return"string"==typeof e?e:e.getString&&e.getString()}parse(e=this.chunk){if(!this.localOptions.parse)return e;e=function(e){let t={"rdf:li":1,"rdf:Seq":1,"rdf:Bag":1,"rdf:Alt":1};return e.replace(Ee,(e,i,n)=>"<"===i?"".concat(e,"#").concat(t[n]++):"".concat(e,"#").concat(--t[n]))}(e);let t=ve.findAll(e,"rdf","Description");0===t.length&&t.push(new ve("rdf","Description",void 0,e));let i,n={};for(let e of t)for(let t of e.properties)i=Fe(t.ns,n),Me(t,i);return function(e){let t;for(let i in e)t=e[i]=l(e[i]),void 0===t&&delete e[i];return l(e)}(n)}assignToOutput(e,t){if(this.localOptions.parse)for(let[i,n]of Object.entries(t))switch(i){case"tiff":this.assignObjectToOutput(e,"ifd0",n);break;case"exif":this.assignObjectToOutput(e,"exif",n);break;case"xmlns":break;default:this.assignObjectToOutput(e,i,n)}else e.xmp=t}}e(Ae,"type","xmp"),e(Ae,"multiSegment",!0),b.set("xmp",Ae);class xe{static findAll(e){return Ue(e,/([a-zA-Z0-9-]+):([a-zA-Z0-9-]+)=("[^"]*"|'[^']*')/gm).map(xe.unpackMatch)}static unpackMatch(e){let t=e[1],i=e[2],n=e[3].slice(1,-1);return n=Be(n),new xe(t,i,n)}constructor(e,t,i){this.ns=e,this.name=t,this.value=i}serialize(){return this.value}}class ve{static findAll(e,t,i){if(void 0!==t||void 0!==i){t=t||"[\\w\\d-]+",i=i||"[\\w\\d-]+";var n=new RegExp("<(".concat(t,"):(").concat(i,")(#\\d+)?((\\s+?[\\w\\d-:]+=(\"[^\"]*\"|'[^']*'))*\\s*)(\\/>|>([\\s\\S]*?)<\\/\\1:\\2\\3>)"),"gm")}else n=/<([\w\d-]+):([\w\d-]+)(#\d+)?((\s+?[\w\d-:]+=("[^"]*"|'[^']*'))*\s*)(\/>|>([\s\S]*?)<\/\1:\2\3>)/gm;return Ue(e,n).map(ve.unpackMatch)}static unpackMatch(e){let t=e[1],i=e[2],n=e[4],s=e[8];return new ve(t,i,n,s)}constructor(e,t,i,n){this.ns=e,this.name=t,this.attrString=i,this.innerXml=n,this.attrs=xe.findAll(i),this.children=ve.findAll(n),this.value=0===this.children.length?Be(n):void 0,this.properties=[...this.attrs,...this.children]}get isPrimitive(){return void 0!==this.value&&0===this.attrs.length&&0===this.children.length}get isListContainer(){return 1===this.children.length&&this.children[0].isList}get isList(){let{ns:e,name:t}=this;return"rdf"===e&&("Seq"===t||"Bag"===t||"Alt"===t)}get isListItem(){return"rdf"===this.ns&&"li"===this.name}serialize(){if(0===this.properties.length&&void 0===this.value)return;if(this.isPrimitive)return this.value;if(this.isListContainer)return this.children[0].serialize();if(this.isList)return Le(this.children.map(Re));if(this.isListItem&&1===this.children.length&&0===this.attrs.length)return this.children[0].serialize();let e={};for(let t of this.properties)Me(t,e);return void 0!==this.value&&(e.value=this.value),l(e)}}function Me(e,t){let i=e.serialize();void 0!==i&&(t[e.name]=i)}var Re=e=>e.serialize(),Le=e=>1===e.length?e[0]:e,Fe=(e,t)=>t[e]?t[e]:t[e]={};function Ue(e,t){let i,n=[];if(!e)return n;for(;null!==(i=t.exec(e));)n.push(i);return n}function Be(e){if(function(e){return null==e||"null"===e||"undefined"===e||""===e||""===e.trim()}(e))return;let t=Number(e);if(!Number.isNaN(t))return t;let i=e.toLowerCase();return"true"===i||"false"!==i&&e.trim()}const Ee=/(<|\/)(rdf:li|rdf:Seq|rdf:Bag|rdf:Alt)/g;var Ne=Object.freeze({__proto__:null,default:ye,parse:ee,thumbnail:te,thumbnailUrl:ie,gps:ne,orientation:se,Exifr:$,fileParsers:y,segmentParsers:b,fileReaders:I,tagKeys:v,tagValues:M,tagRevivers:R,createDictionary:A,extendDictionary:x,fetchUrlAsArrayBuffer:T,readBlobAsArrayBuffer:D,chunkedProps:L,otherSegments:F,segments:U,tiffBlocks:B,segmentsAndBlocks:E,tiffExtractables:N,inheritables:G,allFormatters:V,Options:K,disableAllOptions:Y,gpsOnlyOptions:q,orientationOnlyOptions:Q,thumbnailOnlyOptions:Z});if(s)try{var Ge="function"==typeof require?Promise.resolve(require("fs").promises):import(/* webpackIgnore: true */ "fs").then(e=>e.promises)}catch(e){console.warn("Couldn't load 'fs'")}I.set("fs",class extends he{async readWhole(){this.chunked=!1,this.fs=await Ge;let e=await this.fs.readFile(this.input);this._swapBuffer(e)}async readChunked(){this.chunked=!0,this.fs=await Ge,await this.open(),await this.readChunk(0,this.options.firstChunkSize)}async open(){void 0===this.fh&&(this.fh=await this.fs.open(this.input,"r"),this.size=(await this.fh.stat(this.input)).size)}async _readChunk(e,t){void 0===this.fh&&await this.open(),e+t>this.size&&(t=this.size-e);var i=this.subarray(e,t,!0);return await this.fh.read(i.dataView,0,t,e),i}async close(){if(this.fh){let e=this.fh;this.fh=void 0,await e.close()}}});I.set("base64",class extends he{constructor(...e){super(...e),this.input=this.input.replace(/^data:([^;]+);base64,/gim,""),this.size=this.input.length/4*3,this.input.endsWith("==")?this.size-=2:this.input.endsWith("=")&&(this.size-=1)}async _readChunk(e,t){let i,n,s=this.input;void 0===e?(e=0,i=0,n=0):(i=4*Math.floor(e/3),n=e-i/4*3),void 0===t&&(t=this.size);let a=e+t,l=i+4*Math.ceil(a/3);s=s.slice(i,l);let h=Math.min(t,this.size-e);if(o){let t=r.from(s,"base64").slice(n,n+h);return this.set(t,e,!0)}{let t=this.subarray(e,h,!0),i=atob(s),r=t.toUint8();for(let e=0;e<h;e++)r[e]=i.charCodeAt(n+e);return t}}});y.set("tiff",class extends ue{extendOptions(e){let{ifd0:t,xmp:i,iptc:n,icc:s}=e;i.enabled&&t.deps.add(700),n.enabled&&t.deps.add(33723),s.enabled&&t.deps.add(34675),t.finalizeFilters()}async parse(){let{tiff:e,xmp:t,iptc:i,icc:n}=this.options;if(e.enabled||t.enabled||i.enabled||n.enabled){let e=Math.max(d(this.options),this.options.chunkSize);await this.file.ensureChunk(0,e),this.createParser("tiff",this.file),this.parsers.tiff.parseHeader(),await this.parsers.tiff.parseIfd0Block(),this.adaptTiffPropAsSegment("xmp"),this.adaptTiffPropAsSegment("iptc"),this.adaptTiffPropAsSegment("icc")}}adaptTiffPropAsSegment(e){if(this.parsers.tiff[e]){let t=this.parsers.tiff[e],i=m.from(t);this.options[e].enabled&&this.createParser(e,i)}}}),A(v,"interop",[[1,"InteropIndex"],[2,"InteropVersion"],[4096,"RelatedImageFileFormat"],[4097,"RelatedImageWidth"],[4098,"RelatedImageHeight"]]),x(v,"ifd0",[[11,"ProcessingSoftware"],[254,"SubfileType"],[255,"OldSubfileType"],[263,"Thresholding"],[264,"CellWidth"],[265,"CellLength"],[266,"FillOrder"],[269,"DocumentName"],[280,"MinSampleValue"],[281,"MaxSampleValue"],[285,"PageName"],[286,"XPosition"],[287,"YPosition"],[290,"GrayResponseUnit"],[297,"PageNumber"],[321,"HalftoneHints"],[322,"TileWidth"],[323,"TileLength"],[332,"InkSet"],[337,"TargetPrinter"],[18246,"Rating"],[18249,"RatingPercent"],[33550,"PixelScale"],[34264,"ModelTransform"],[34377,"PhotoshopSettings"],[50706,"DNGVersion"],[50707,"DNGBackwardVersion"],[50708,"UniqueCameraModel"],[50709,"LocalizedCameraModel"],[50736,"DNGLensInfo"],[50739,"ShadowScale"],[50740,"DNGPrivateData"],[33920,"IntergraphMatrix"],[33922,"ModelTiePoint"],[34118,"SEMInfo"],[34735,"GeoTiffDirectory"],[34736,"GeoTiffDoubleParams"],[34737,"GeoTiffAsciiParams"],[50341,"PrintIM"],[50721,"ColorMatrix1"],[50722,"ColorMatrix2"],[50723,"CameraCalibration1"],[50724,"CameraCalibration2"],[50725,"ReductionMatrix1"],[50726,"ReductionMatrix2"],[50727,"AnalogBalance"],[50728,"AsShotNeutral"],[50729,"AsShotWhiteXY"],[50730,"BaselineExposure"],[50731,"BaselineNoise"],[50732,"BaselineSharpness"],[50734,"LinearResponseLimit"],[50735,"CameraSerialNumber"],[50741,"MakerNoteSafety"],[50778,"CalibrationIlluminant1"],[50779,"CalibrationIlluminant2"],[50781,"RawDataUniqueID"],[50827,"OriginalRawFileName"],[50828,"OriginalRawFileData"],[50831,"AsShotICCProfile"],[50832,"AsShotPreProfileMatrix"],[50833,"CurrentICCProfile"],[50834,"CurrentPreProfileMatrix"],[50879,"ColorimetricReference"],[50885,"SRawType"],[50898,"PanasonicTitle"],[50899,"PanasonicTitle2"],[50931,"CameraCalibrationSig"],[50932,"ProfileCalibrationSig"],[50933,"ProfileIFD"],[50934,"AsShotProfileName"],[50936,"ProfileName"],[50937,"ProfileHueSatMapDims"],[50938,"ProfileHueSatMapData1"],[50939,"ProfileHueSatMapData2"],[50940,"ProfileToneCurve"],[50941,"ProfileEmbedPolicy"],[50942,"ProfileCopyright"],[50964,"ForwardMatrix1"],[50965,"ForwardMatrix2"],[50966,"PreviewApplicationName"],[50967,"PreviewApplicationVersion"],[50968,"PreviewSettingsName"],[50969,"PreviewSettingsDigest"],[50970,"PreviewColorSpace"],[50971,"PreviewDateTime"],[50972,"RawImageDigest"],[50973,"OriginalRawFileDigest"],[50981,"ProfileLookTableDims"],[50982,"ProfileLookTableData"],[51043,"TimeCodes"],[51044,"FrameRate"],[51058,"TStop"],[51081,"ReelName"],[51089,"OriginalDefaultFinalSize"],[51090,"OriginalBestQualitySize"],[51091,"OriginalDefaultCropSize"],[51105,"CameraLabel"],[51107,"ProfileHueSatMapEncoding"],[51108,"ProfileLookTableEncoding"],[51109,"BaselineExposureOffset"],[51110,"DefaultBlackRender"],[51111,"NewRawImageDigest"],[51112,"RawToPreviewGain"]]);let Ve=[[273,"StripOffsets"],[279,"StripByteCounts"],[288,"FreeOffsets"],[289,"FreeByteCounts"],[291,"GrayResponseCurve"],[292,"T4Options"],[293,"T6Options"],[300,"ColorResponseUnit"],[320,"ColorMap"],[324,"TileOffsets"],[325,"TileByteCounts"],[326,"BadFaxLines"],[327,"CleanFaxData"],[328,"ConsecutiveBadFaxLines"],[330,"SubIFD"],[333,"InkNames"],[334,"NumberofInks"],[336,"DotRange"],[338,"ExtraSamples"],[339,"SampleFormat"],[340,"SMinSampleValue"],[341,"SMaxSampleValue"],[342,"TransferRange"],[343,"ClipPath"],[344,"XClipPathUnits"],[345,"YClipPathUnits"],[346,"Indexed"],[347,"JPEGTables"],[351,"OPIProxy"],[400,"GlobalParametersIFD"],[401,"ProfileType"],[402,"FaxProfile"],[403,"CodingMethods"],[404,"VersionYear"],[405,"ModeNumber"],[433,"Decode"],[434,"DefaultImageColor"],[435,"T82Options"],[437,"JPEGTables"],[512,"JPEGProc"],[515,"JPEGRestartInterval"],[517,"JPEGLosslessPredictors"],[518,"JPEGPointTransforms"],[519,"JPEGQTables"],[520,"JPEGDCTables"],[521,"JPEGACTables"],[559,"StripRowCounts"],[999,"USPTOMiscellaneous"],[18247,"XP_DIP_XML"],[18248,"StitchInfo"],[28672,"SonyRawFileType"],[28688,"SonyToneCurve"],[28721,"VignettingCorrection"],[28722,"VignettingCorrParams"],[28724,"ChromaticAberrationCorrection"],[28725,"ChromaticAberrationCorrParams"],[28726,"DistortionCorrection"],[28727,"DistortionCorrParams"],[29895,"SonyCropTopLeft"],[29896,"SonyCropSize"],[32781,"ImageID"],[32931,"WangTag1"],[32932,"WangAnnotation"],[32933,"WangTag3"],[32934,"WangTag4"],[32953,"ImageReferencePoints"],[32954,"RegionXformTackPoint"],[32955,"WarpQuadrilateral"],[32956,"AffineTransformMat"],[32995,"Matteing"],[32996,"DataType"],[32997,"ImageDepth"],[32998,"TileDepth"],[33300,"ImageFullWidth"],[33301,"ImageFullHeight"],[33302,"TextureFormat"],[33303,"WrapModes"],[33304,"FovCot"],[33305,"MatrixWorldToScreen"],[33306,"MatrixWorldToCamera"],[33405,"Model2"],[33421,"CFARepeatPatternDim"],[33422,"CFAPattern2"],[33423,"BatteryLevel"],[33424,"KodakIFD"],[33445,"MDFileTag"],[33446,"MDScalePixel"],[33447,"MDColorTable"],[33448,"MDLabName"],[33449,"MDSampleInfo"],[33450,"MDPrepDate"],[33451,"MDPrepTime"],[33452,"MDFileUnits"],[33589,"AdventScale"],[33590,"AdventRevision"],[33628,"UIC1Tag"],[33629,"UIC2Tag"],[33630,"UIC3Tag"],[33631,"UIC4Tag"],[33918,"IntergraphPacketData"],[33919,"IntergraphFlagRegisters"],[33921,"INGRReserved"],[34016,"Site"],[34017,"ColorSequence"],[34018,"IT8Header"],[34019,"RasterPadding"],[34020,"BitsPerRunLength"],[34021,"BitsPerExtendedRunLength"],[34022,"ColorTable"],[34023,"ImageColorIndicator"],[34024,"BackgroundColorIndicator"],[34025,"ImageColorValue"],[34026,"BackgroundColorValue"],[34027,"PixelIntensityRange"],[34028,"TransparencyIndicator"],[34029,"ColorCharacterization"],[34030,"HCUsage"],[34031,"TrapIndicator"],[34032,"CMYKEquivalent"],[34152,"AFCP_IPTC"],[34232,"PixelMagicJBIGOptions"],[34263,"JPLCartoIFD"],[34306,"WB_GRGBLevels"],[34310,"LeafData"],[34687,"TIFF_FXExtensions"],[34688,"MultiProfiles"],[34689,"SharedData"],[34690,"T88Options"],[34732,"ImageLayer"],[34750,"JBIGOptions"],[34856,"Opto-ElectricConvFactor"],[34857,"Interlace"],[34908,"FaxRecvParams"],[34909,"FaxSubAddress"],[34910,"FaxRecvTime"],[34929,"FedexEDR"],[34954,"LeafSubIFD"],[37387,"FlashEnergy"],[37388,"SpatialFrequencyResponse"],[37389,"Noise"],[37390,"FocalPlaneXResolution"],[37391,"FocalPlaneYResolution"],[37392,"FocalPlaneResolutionUnit"],[37397,"ExposureIndex"],[37398,"TIFF-EPStandardID"],[37399,"SensingMethod"],[37434,"CIP3DataFile"],[37435,"CIP3Sheet"],[37436,"CIP3Side"],[37439,"StoNits"],[37679,"MSDocumentText"],[37680,"MSPropertySetStorage"],[37681,"MSDocumentTextPosition"],[37724,"ImageSourceData"],[40965,"InteropIFD"],[40976,"SamsungRawPointersOffset"],[40977,"SamsungRawPointersLength"],[41217,"SamsungRawByteOrder"],[41218,"SamsungRawUnknown"],[41484,"SpatialFrequencyResponse"],[41485,"Noise"],[41489,"ImageNumber"],[41490,"SecurityClassification"],[41491,"ImageHistory"],[41494,"TIFF-EPStandardID"],[41995,"DeviceSettingDescription"],[42112,"GDALMetadata"],[42113,"GDALNoData"],[44992,"ExpandSoftware"],[44993,"ExpandLens"],[44994,"ExpandFilm"],[44995,"ExpandFilterLens"],[44996,"ExpandScanner"],[44997,"ExpandFlashLamp"],[46275,"HasselbladRawImage"],[48129,"PixelFormat"],[48130,"Transformation"],[48131,"Uncompressed"],[48132,"ImageType"],[48256,"ImageWidth"],[48257,"ImageHeight"],[48258,"WidthResolution"],[48259,"HeightResolution"],[48320,"ImageOffset"],[48321,"ImageByteCount"],[48322,"AlphaOffset"],[48323,"AlphaByteCount"],[48324,"ImageDataDiscard"],[48325,"AlphaDataDiscard"],[50215,"OceScanjobDesc"],[50216,"OceApplicationSelector"],[50217,"OceIDNumber"],[50218,"OceImageLogic"],[50255,"Annotations"],[50459,"HasselbladExif"],[50547,"OriginalFileName"],[50560,"USPTOOriginalContentType"],[50656,"CR2CFAPattern"],[50710,"CFAPlaneColor"],[50711,"CFALayout"],[50712,"LinearizationTable"],[50713,"BlackLevelRepeatDim"],[50714,"BlackLevel"],[50715,"BlackLevelDeltaH"],[50716,"BlackLevelDeltaV"],[50717,"WhiteLevel"],[50718,"DefaultScale"],[50719,"DefaultCropOrigin"],[50720,"DefaultCropSize"],[50733,"BayerGreenSplit"],[50737,"ChromaBlurRadius"],[50738,"AntiAliasStrength"],[50752,"RawImageSegmentation"],[50780,"BestQualityScale"],[50784,"AliasLayerMetadata"],[50829,"ActiveArea"],[50830,"MaskedAreas"],[50935,"NoiseReductionApplied"],[50974,"SubTileBlockSize"],[50975,"RowInterleaveFactor"],[51008,"OpcodeList1"],[51009,"OpcodeList2"],[51022,"OpcodeList3"],[51041,"NoiseProfile"],[51114,"CacheVersion"],[51125,"DefaultUserCrop"],[51157,"NikonNEFInfo"],[65024,"KdcIFD"]];x(v,"ifd0",Ve),x(v,"exif",Ve),A(M,"gps",[[23,{M:"Magnetic North",T:"True North"}],[25,{K:"Kilometers",M:"Miles",N:"Nautical Miles"}]]);class ze extends fe{static canHandle(e,t){return 224===e.getUint8(t+1)&&1246120262===e.getUint32(t+4)&&0===e.getUint8(t+8)}parse(){return{JFIFVersion:this.chunk.getUint16(0),ResolutionUnit:this.chunk.getUint8(2),XResolution:this.chunk.getUint16(3),YResolution:this.chunk.getUint16(5),ThumbnailWidth:this.chunk.getUint8(7),ThumbnailHeight:this.chunk.getUint8(8)}}}e(ze,"type","jfif"),e(ze,"headerLength",9),b.set("jfif",ze);class He extends fe{static canHandle(e,t){return 226===e.getUint8(t+1)&&1229144927===e.getUint32(t+4)}static findPosition(e,t){let i=super.findPosition(e,t);return i.chunkNumber=e.getUint8(t+16),i.chunkCount=e.getUint8(t+17),i.multiSegment=i.chunkCount>1,i}static handleMultiSegments(e){return function(e){let t=function(e){let t=e[0].constructor,i=0;for(let t of e)i+=t.length;let n=new t(i),s=0;for(let t of e)n.set(t,s),s+=t.length;return n}(e.map(e=>e.chunk.toUint8()));return new m(t)}(e)}parse(){return this.raw=new Map,this.parseHeader(),this.parseTags(),this.translate(),this.output}parseHeader(){let{raw:e}=this;if(this.chunk.byteLength<84)throw f("ICC header is too short");for(let[t,i]of Object.entries(We)){t=parseInt(t,10);let n=i(this.chunk,t);"\0\0\0\0"!==n&&e.set(t,n)}}parseTags(){let e,t,i,n,s,{raw:r}=this,a=this.chunk.getUint32(128),o=132,l=this.chunk.byteLength;for(;a--;){if(e=this.chunk.getString(o,4),t=this.chunk.getUint32(o+4),i=this.chunk.getUint32(o+8),n=this.chunk.getString(t,4),t+i>l)return void console.warn("reached the end of the first ICC chunk. Enable options.tiff.multiSegment to read all ICC segments.");s=this.parseTag(n,t,i),void 0!==s&&"\0\0\0\0"!==s&&r.set(e,s),o+=12}}parseTag(e,t,i){switch(e){case"desc":return this.parseDesc(t);case"mluc":return this.parseMluc(t);case"text":return this.parseText(t,i);case"sig ":return this.parseSig(t)}if(!(t+i>this.chunk.byteLength))return this.chunk.getUint8Array(t,i)}parseDesc(e){let t=this.chunk.getUint32(e+8)-1;return c(this.chunk.getString(e+12,t))}parseText(e,t){return c(this.chunk.getString(e+8,t-15))}parseSig(e){return c(this.chunk.getString(e+8,4))}parseMluc(e){let{chunk:t}=this,i=t.getUint32(e+8),n=t.getUint32(e+12),s=e+16,r=[];for(let a=0;a<i;a++){let i=t.getString(s+0,2),a=t.getString(s+2,2),o=t.getUint32(s+4),l=t.getUint32(s+8)+e,h=c(t.getUnicodeString(l,o));r.push({lang:i,country:a,text:h}),s+=n}return 1===i?r[0].text:r}translateValue(e,t){return"string"==typeof e?t[e]||t[e.toLowerCase()]||e:t[e]||e}}e(He,"type","icc"),e(He,"multiSegment",!0),e(He,"headerLength",18);const We={4:je,8:function(e,t){return[e.getUint8(t),e.getUint8(t+1)>>4,e.getUint8(t+1)%16].map(e=>e.toString(10)).join(".")},12:je,16:je,20:je,24:function(e,t){const i=e.getUint16(t),n=e.getUint16(t+2)-1,s=e.getUint16(t+4),r=e.getUint16(t+6),a=e.getUint16(t+8),o=e.getUint16(t+10);return new Date(Date.UTC(i,n,s,r,a,o))},36:je,40:je,48:je,52:je,64:(e,t)=>e.getUint32(t),80:je};function je(e,t){return c(e.getString(t,4))}b.set("icc",He),A(v,"icc",[[4,"ProfileCMMType"],[8,"ProfileVersion"],[12,"ProfileClass"],[16,"ColorSpaceData"],[20,"ProfileConnectionSpace"],[24,"ProfileDateTime"],[36,"ProfileFileSignature"],[40,"PrimaryPlatform"],[44,"CMMFlags"],[48,"DeviceManufacturer"],[52,"DeviceModel"],[56,"DeviceAttributes"],[64,"RenderingIntent"],[68,"ConnectionSpaceIlluminant"],[80,"ProfileCreator"],[84,"ProfileID"],["Header","ProfileHeader"],["MS00","WCSProfiles"],["bTRC","BlueTRC"],["bXYZ","BlueMatrixColumn"],["bfd","UCRBG"],["bkpt","MediaBlackPoint"],["calt","CalibrationDateTime"],["chad","ChromaticAdaptation"],["chrm","Chromaticity"],["ciis","ColorimetricIntentImageState"],["clot","ColorantTableOut"],["clro","ColorantOrder"],["clrt","ColorantTable"],["cprt","ProfileCopyright"],["crdi","CRDInfo"],["desc","ProfileDescription"],["devs","DeviceSettings"],["dmdd","DeviceModelDesc"],["dmnd","DeviceMfgDesc"],["dscm","ProfileDescriptionML"],["fpce","FocalPlaneColorimetryEstimates"],["gTRC","GreenTRC"],["gXYZ","GreenMatrixColumn"],["gamt","Gamut"],["kTRC","GrayTRC"],["lumi","Luminance"],["meas","Measurement"],["meta","Metadata"],["mmod","MakeAndModel"],["ncl2","NamedColor2"],["ncol","NamedColor"],["ndin","NativeDisplayInfo"],["pre0","Preview0"],["pre1","Preview1"],["pre2","Preview2"],["ps2i","PS2RenderingIntent"],["ps2s","PostScript2CSA"],["psd0","PostScript2CRD0"],["psd1","PostScript2CRD1"],["psd2","PostScript2CRD2"],["psd3","PostScript2CRD3"],["pseq","ProfileSequenceDesc"],["psid","ProfileSequenceIdentifier"],["psvm","PS2CRDVMSize"],["rTRC","RedTRC"],["rXYZ","RedMatrixColumn"],["resp","OutputResponse"],["rhoc","ReflectionHardcopyOrigColorimetry"],["rig0","PerceptualRenderingIntentGamut"],["rig2","SaturationRenderingIntentGamut"],["rpoc","ReflectionPrintOutputColorimetry"],["sape","SceneAppearanceEstimates"],["scoe","SceneColorimetryEstimates"],["scrd","ScreeningDesc"],["scrn","Screening"],["targ","CharTarget"],["tech","Technology"],["vcgt","VideoCardGamma"],["view","ViewingConditions"],["vued","ViewingCondDesc"],["wtpt","MediaWhitePoint"]]);const Ke={"4d2p":"Erdt Systems",AAMA:"Aamazing Technologies",ACER:"Acer",ACLT:"Acolyte Color Research",ACTI:"Actix Sytems",ADAR:"Adara Technology",ADBE:"Adobe",ADI:"ADI Systems",AGFA:"Agfa Graphics",ALMD:"Alps Electric",ALPS:"Alps Electric",ALWN:"Alwan Color Expertise",AMTI:"Amiable Technologies",AOC:"AOC International",APAG:"Apago",APPL:"Apple Computer",AST:"AST","AT&T":"AT&T",BAEL:"BARBIERI electronic",BRCO:"Barco NV",BRKP:"Breakpoint",BROT:"Brother",BULL:"Bull",BUS:"Bus Computer Systems","C-IT":"C-Itoh",CAMR:"Intel",CANO:"Canon",CARR:"Carroll Touch",CASI:"Casio",CBUS:"Colorbus PL",CEL:"Crossfield",CELx:"Crossfield",CGS:"CGS Publishing Technologies International",CHM:"Rochester Robotics",CIGL:"Colour Imaging Group, London",CITI:"Citizen",CL00:"Candela",CLIQ:"Color IQ",CMCO:"Chromaco",CMiX:"CHROMiX",COLO:"Colorgraphic Communications",COMP:"Compaq",COMp:"Compeq/Focus Technology",CONR:"Conrac Display Products",CORD:"Cordata Technologies",CPQ:"Compaq",CPRO:"ColorPro",CRN:"Cornerstone",CTX:"CTX International",CVIS:"ColorVision",CWC:"Fujitsu Laboratories",DARI:"Darius Technology",DATA:"Dataproducts",DCP:"Dry Creek Photo",DCRC:"Digital Contents Resource Center, Chung-Ang University",DELL:"Dell Computer",DIC:"Dainippon Ink and Chemicals",DICO:"Diconix",DIGI:"Digital","DL&C":"Digital Light & Color",DPLG:"Doppelganger",DS:"Dainippon Screen",DSOL:"DOOSOL",DUPN:"DuPont",EPSO:"Epson",ESKO:"Esko-Graphics",ETRI:"Electronics and Telecommunications Research Institute",EVER:"Everex Systems",EXAC:"ExactCODE",Eizo:"Eizo",FALC:"Falco Data Products",FF:"Fuji Photo Film",FFEI:"FujiFilm Electronic Imaging",FNRD:"Fnord Software",FORA:"Fora",FORE:"Forefront Technology",FP:"Fujitsu",FPA:"WayTech Development",FUJI:"Fujitsu",FX:"Fuji Xerox",GCC:"GCC Technologies",GGSL:"Global Graphics Software",GMB:"Gretagmacbeth",GMG:"GMG",GOLD:"GoldStar Technology",GOOG:"Google",GPRT:"Giantprint",GTMB:"Gretagmacbeth",GVC:"WayTech Development",GW2K:"Sony",HCI:"HCI",HDM:"Heidelberger Druckmaschinen",HERM:"Hermes",HITA:"Hitachi America",HP:"Hewlett-Packard",HTC:"Hitachi",HiTi:"HiTi Digital",IBM:"IBM",IDNT:"Scitex",IEC:"Hewlett-Packard",IIYA:"Iiyama North America",IKEG:"Ikegami Electronics",IMAG:"Image Systems",IMI:"Ingram Micro",INTC:"Intel",INTL:"N/A (INTL)",INTR:"Intra Electronics",IOCO:"Iocomm International Technology",IPS:"InfoPrint Solutions Company",IRIS:"Scitex",ISL:"Ichikawa Soft Laboratory",ITNL:"N/A (ITNL)",IVM:"IVM",IWAT:"Iwatsu Electric",Idnt:"Scitex",Inca:"Inca Digital Printers",Iris:"Scitex",JPEG:"Joint Photographic Experts Group",JSFT:"Jetsoft Development",JVC:"JVC Information Products",KART:"Scitex",KFC:"KFC Computek Components",KLH:"KLH Computers",KMHD:"Konica Minolta",KNCA:"Konica",KODA:"Kodak",KYOC:"Kyocera",Kart:"Scitex",LCAG:"Leica",LCCD:"Leeds Colour",LDAK:"Left Dakota",LEAD:"Leading Technology",LEXM:"Lexmark International",LINK:"Link Computer",LINO:"Linotronic",LITE:"Lite-On",Leaf:"Leaf",Lino:"Linotronic",MAGC:"Mag Computronic",MAGI:"MAG Innovision",MANN:"Mannesmann",MICN:"Micron Technology",MICR:"Microtek",MICV:"Microvitec",MINO:"Minolta",MITS:"Mitsubishi Electronics America",MITs:"Mitsuba",MNLT:"Minolta",MODG:"Modgraph",MONI:"Monitronix",MONS:"Monaco Systems",MORS:"Morse Technology",MOTI:"Motive Systems",MSFT:"Microsoft",MUTO:"MUTOH INDUSTRIES",Mits:"Mitsubishi Electric",NANA:"NANAO",NEC:"NEC",NEXP:"NexPress Solutions",NISS:"Nissei Sangyo America",NKON:"Nikon",NONE:"none",OCE:"Oce Technologies",OCEC:"OceColor",OKI:"Oki",OKID:"Okidata",OKIP:"Okidata",OLIV:"Olivetti",OLYM:"Olympus",ONYX:"Onyx Graphics",OPTI:"Optiquest",PACK:"Packard Bell",PANA:"Matsushita Electric Industrial",PANT:"Pantone",PBN:"Packard Bell",PFU:"PFU",PHIL:"Philips Consumer Electronics",PNTX:"HOYA",POne:"Phase One A/S",PREM:"Premier Computer Innovations",PRIN:"Princeton Graphic Systems",PRIP:"Princeton Publishing Labs",QLUX:"Hong Kong",QMS:"QMS",QPCD:"QPcard AB",QUAD:"QuadLaser",QUME:"Qume",RADI:"Radius",RDDx:"Integrated Color Solutions",RDG:"Roland DG",REDM:"REDMS Group",RELI:"Relisys",RGMS:"Rolf Gierling Multitools",RICO:"Ricoh",RNLD:"Edmund Ronald",ROYA:"Royal",RPC:"Ricoh Printing Systems",RTL:"Royal Information Electronics",SAMP:"Sampo",SAMS:"Samsung",SANT:"Jaime Santana Pomares",SCIT:"Scitex",SCRN:"Dainippon Screen",SDP:"Scitex",SEC:"Samsung",SEIK:"Seiko Instruments",SEIk:"Seikosha",SGUY:"ScanGuy.com",SHAR:"Sharp Laboratories",SICC:"International Color Consortium",SONY:"Sony",SPCL:"SpectraCal",STAR:"Star",STC:"Sampo Technology",Scit:"Scitex",Sdp:"Scitex",Sony:"Sony",TALO:"Talon Technology",TAND:"Tandy",TATU:"Tatung",TAXA:"TAXAN America",TDS:"Tokyo Denshi Sekei",TECO:"TECO Information Systems",TEGR:"Tegra",TEKT:"Tektronix",TI:"Texas Instruments",TMKR:"TypeMaker",TOSB:"Toshiba",TOSH:"Toshiba",TOTK:"TOTOKU ELECTRIC",TRIU:"Triumph",TSBT:"Toshiba",TTX:"TTX Computer Products",TVM:"TVM Professional Monitor",TW:"TW Casper",ULSX:"Ulead Systems",UNIS:"Unisys",UTZF:"Utz Fehlau & Sohn",VARI:"Varityper",VIEW:"Viewsonic",VISL:"Visual communication",VIVO:"Vivo Mobile Communication",WANG:"Wang",WLBR:"Wilbur Imaging",WTG2:"Ware To Go",WYSE:"WYSE Technology",XERX:"Xerox",XRIT:"X-Rite",ZRAN:"Zoran",Zebr:"Zebra Technologies",appl:"Apple Computer",bICC:"basICColor",berg:"bergdesign",ceyd:"Integrated Color Solutions",clsp:"MacDermid ColorSpan",ds:"Dainippon Screen",dupn:"DuPont",ffei:"FujiFilm Electronic Imaging",flux:"FluxData",iris:"Scitex",kart:"Scitex",lcms:"Little CMS",lino:"Linotronic",none:"none",ob4d:"Erdt Systems",obic:"Medigraph",quby:"Qubyx Sarl",scit:"Scitex",scrn:"Dainippon Screen",sdp:"Scitex",siwi:"SIWI GRAFIKA",yxym:"YxyMaster"},_e={scnr:"Scanner",mntr:"Monitor",prtr:"Printer",link:"Device Link",abst:"Abstract",spac:"Color Space Conversion Profile",nmcl:"Named Color",cenc:"ColorEncodingSpace profile",mid:"MultiplexIdentification profile",mlnk:"MultiplexLink profile",mvis:"MultiplexVisualization profile",nkpf:"Nikon Input Device Profile (NON-STANDARD!)"};A(M,"icc",[[4,Ke],[12,_e],[40,Object.assign({},Ke,_e)],[48,Ke],[80,Ke],[64,{0:"Perceptual",1:"Relative Colorimetric",2:"Saturation",3:"Absolute Colorimetric"}],["tech",{amd:"Active Matrix Display",crt:"Cathode Ray Tube Display",kpcd:"Photo CD",pmd:"Passive Matrix Display",dcam:"Digital Camera",dcpj:"Digital Cinema Projector",dmpc:"Digital Motion Picture Camera",dsub:"Dye Sublimation Printer",epho:"Electrophotographic Printer",esta:"Electrostatic Printer",flex:"Flexography",fprn:"Film Writer",fscn:"Film Scanner",grav:"Gravure",ijet:"Ink Jet Printer",imgs:"Photo Image Setter",mpfr:"Motion Picture Film Recorder",mpfs:"Motion Picture Film Scanner",offs:"Offset Lithography",pjtv:"Projection Television",rpho:"Photographic Paper Printer",rscn:"Reflective Scanner",silk:"Silkscreen",twax:"Thermal Wax Printer",vidc:"Video Camera",vidm:"Video Monitor"}]]);class Xe extends fe{static canHandle(e,t){return 237===e.getUint8(t+1)&&"Photoshop"===e.getString(t+4,9)}static headerLength(e,t,i){for(let s=0;s<i;s++)if(this.isIptcSegmentHead(e,t+s)){var n=e.getUint8(t+s+7);return n%2!=0&&(n+=1),0===n&&(n=4),s+8+n}}static isIptcSegmentHead(e,t){return 56===e.getUint8(t)&&66===e.getUint8(t+1)&&73===e.getUint8(t+2)&&77===e.getUint8(t+3)&&4===e.getUint8(t+4)&&4===e.getUint8(t+5)}parse(){let{raw:e}=this,t=this.chunk.byteLength;for(let i=0;i<t;i++)if(28===this.chunk.getUint8(i)&&2===this.chunk.getUint8(i+1)){let t=this.chunk.getUint16(i+3),n=this.chunk.getUint8(i+2),s=this.chunk.getString(i+5,t);e.set(n,this.pluralizeValue(e.get(n),s))}return this.translate(),this.output}pluralizeValue(e,t){return void 0!==e?e instanceof Array?(e.push(t),e):[e,t]:t}}e(Xe,"type","iptc"),e(Xe,"translateValues",!1),e(Xe,"reviveValues",!1),b.set("iptc",Xe),A(v,"iptc",[[0,"ApplicationRecordVersion"],[3,"ObjectTypeReference"],[4,"ObjectAttributeReference"],[5,"ObjectName"],[7,"EditStatus"],[8,"EditorialUpdate"],[10,"Urgency"],[12,"SubjectReference"],[15,"Category"],[20,"SupplementalCategories"],[22,"FixtureIdentifier"],[25,"Keywords"],[26,"ContentLocationCode"],[27,"ContentLocationName"],[30,"ReleaseDate"],[35,"ReleaseTime"],[37,"ExpirationDate"],[38,"ExpirationTime"],[40,"SpecialInstructions"],[42,"ActionAdvised"],[45,"ReferenceService"],[47,"ReferenceDate"],[50,"ReferenceNumber"],[55,"DateCreated"],[60,"TimeCreated"],[62,"DigitalCreationDate"],[63,"DigitalCreationTime"],[65,"OriginatingProgram"],[70,"ProgramVersion"],[75,"ObjectCycle"],[80,"Byline"],[85,"BylineTitle"],[90,"City"],[92,"Sublocation"],[95,"State"],[100,"CountryCode"],[101,"Country"],[103,"OriginalTransmissionReference"],[105,"Headline"],[110,"Credit"],[115,"Source"],[116,"CopyrightNotice"],[118,"Contact"],[120,"Caption"],[121,"LocalCaption"],[122,"Writer"],[125,"RasterizedCaption"],[130,"ImageType"],[131,"ImageOrientation"],[135,"LanguageIdentifier"],[150,"AudioType"],[151,"AudioSamplingRate"],[152,"AudioSamplingResolution"],[153,"AudioDuration"],[154,"AudioOutcue"],[184,"JobID"],[185,"MasterDocumentID"],[186,"ShortDocumentID"],[187,"UniqueDocumentID"],[188,"OwnerID"],[200,"ObjectPreviewFileFormat"],[201,"ObjectPreviewFileVersion"],[202,"ObjectPreviewData"],[221,"Prefs"],[225,"ClassifyState"],[228,"SimilarityIndex"],[230,"DocumentNotes"],[231,"DocumentHistory"],[232,"ExifCameraInfo"],[255,"CatalogSets"]]),A(M,"iptc",[[10,{0:"0 (reserved)",1:"1 (most urgent)",2:"2",3:"3",4:"4",5:"5 (normal urgency)",6:"6",7:"7",8:"8 (least urgent)",9:"9 (user-defined priority)"}],[75,{a:"Morning",b:"Both Morning and Evening",p:"Evening"}],[131,{L:"Landscape",P:"Portrait",S:"Square"}]]);/* harmony default export */ __webpack_exports__["default"] = (Ne);
 
 
 /***/ }),
@@ -68913,6 +69114,3182 @@ function pathToRegexp (path, keys, options) {
 
 /***/ }),
 
+/***/ "./node_modules/react-toastify/dist/ReactToastify.min.css":
+/*!****************************************************************!*\
+  !*** ./node_modules/react-toastify/dist/ReactToastify.min.css ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(/*! !../../css-loader/dist/cjs.js!../../postcss-loader/src??postcss!../../sass-loader/dist/cjs.js!./ReactToastify.min.css */ "./node_modules/css-loader/dist/cjs.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js!./node_modules/react-toastify/dist/ReactToastify.min.css");
+
+if (typeof content === 'string') {
+  content = [[module.i, content, '']];
+}
+
+var options = {}
+
+options.insert = "head";
+options.singleton = false;
+
+var update = __webpack_require__(/*! ../../style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js")(content, options);
+
+if (content.locals) {
+  module.exports = content.locals;
+}
+
+
+/***/ }),
+
+/***/ "./node_modules/react-toastify/esm/react-toastify.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-toastify/esm/react-toastify.js ***!
+  \***********************************************************/
+/*! exports provided: Bounce, Flip, Slide, ToastContainer, ToastPosition, ToastType, Zoom, cssTransition, toast */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Bounce", function() { return Bounce; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Flip", function() { return Flip; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Slide", function() { return Slide; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastContainer", function() { return ToastContainer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastPosition", function() { return POSITION; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastType", function() { return TYPE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Zoom", function() { return Zoom; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cssTransition", function() { return cssTransition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toast", function() { return toast; });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! classnames */ "./node_modules/classnames/index.js");
+/* harmony import */ var classnames__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(classnames__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var react_transition_group__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-transition-group */ "./node_modules/react-transition-group/esm/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_7__);
+
+
+
+
+
+
+
+
+
+var POSITION = {
+  TOP_LEFT: 'top-left',
+  TOP_RIGHT: 'top-right',
+  TOP_CENTER: 'top-center',
+  BOTTOM_LEFT: 'bottom-left',
+  BOTTOM_RIGHT: 'bottom-right',
+  BOTTOM_CENTER: 'bottom-center'
+};
+var TYPE = {
+  INFO: 'info',
+  SUCCESS: 'success',
+  WARNING: 'warning',
+  ERROR: 'error',
+  DEFAULT: 'default'
+};
+var ACTION = {
+  SHOW: 0,
+  CLEAR: 1,
+  DID_MOUNT: 2,
+  WILL_UNMOUNT: 3,
+  ON_CHANGE: 4
+};
+var NOOP = function NOOP() {};
+var RT_NAMESPACE = 'Toastify';
+
+function isValidDelay(val) {
+  return typeof val === 'number' && !isNaN(val) && val > 0;
+}
+function objectValues(obj) {
+  return Object.keys(obj).map(function (key) {
+    return obj[key];
+  });
+}
+var canUseDom = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+function withRequired(fn) {
+  fn.isRequired = function (props, propName, componentName) {
+    var prop = props[propName];
+
+    if (typeof prop === 'undefined') {
+      return new Error("The prop " + propName + " is marked as required in \n      " + componentName + ", but its value is undefined.");
+    }
+
+    fn(props, propName, componentName);
+  };
+
+  return fn;
+}
+
+var falseOrDelay = withRequired(function (props, propName, componentName) {
+  var prop = props[propName];
+
+  if (prop !== false && !isValidDelay(prop)) {
+    return new Error(componentName + " expect " + propName + " \n      to be a valid Number > 0 or equal to false. " + prop + " given.");
+  }
+
+  return null;
+});
+
+var eventManager = {
+  list: new Map(),
+  emitQueue: new Map(),
+  on: function on(event, callback) {
+    this.list.has(event) || this.list.set(event, []);
+    this.list.get(event).push(callback);
+    return this;
+  },
+  off: function off(event) {
+    this.list.delete(event);
+    return this;
+  },
+  cancelEmit: function cancelEmit(event) {
+    var timers = this.emitQueue.get(event);
+
+    if (timers) {
+      timers.forEach(function (timer) {
+        return clearTimeout(timer);
+      });
+      this.emitQueue.delete(event);
+    }
+
+    return this;
+  },
+
+  /**
+   * Enqueue the event at the end of the call stack
+   * Doing so let the user call toast as follow:
+   * toast('1')
+   * toast('2')
+   * toast('3')
+   * Without setTimemout the code above will not work
+   */
+  emit: function emit(event) {
+    var _this = this;
+
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    this.list.has(event) && this.list.get(event).forEach(function (callback) {
+      var timer = setTimeout(function () {
+        callback.apply(void 0, args);
+      }, 0);
+      _this.emitQueue.has(event) || _this.emitQueue.set(event, []);
+
+      _this.emitQueue.get(event).push(timer);
+    });
+  }
+};
+
+function cssTransition(_ref) {
+  var enter = _ref.enter,
+      exit = _ref.exit,
+      _ref$duration = _ref.duration,
+      duration = _ref$duration === void 0 ? 750 : _ref$duration,
+      _ref$appendPosition = _ref.appendPosition,
+      appendPosition = _ref$appendPosition === void 0 ? false : _ref$appendPosition;
+  return function Animation(_ref2) {
+    var children = _ref2.children,
+        position = _ref2.position,
+        preventExitTransition = _ref2.preventExitTransition,
+        props = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref2, ["children", "position", "preventExitTransition"]);
+
+    var enterClassName = appendPosition ? enter + "--" + position : enter;
+    var exitClassName = appendPosition ? exit + "--" + position : exit;
+    var enterDuration, exitDuration;
+
+    if (Array.isArray(duration) && duration.length === 2) {
+      enterDuration = duration[0];
+      exitDuration = duration[1];
+    } else {
+      enterDuration = exitDuration = duration;
+    }
+
+    var onEnter = function onEnter(node) {
+      node.classList.add(enterClassName);
+      node.style.animationFillMode = 'forwards';
+      node.style.animationDuration = enterDuration * 0.001 + "s";
+    };
+
+    var onEntered = function onEntered(node) {
+      node.classList.remove(enterClassName);
+      node.style.cssText = '';
+    };
+
+    var onExit = function onExit(node) {
+      node.classList.add(exitClassName);
+      node.style.animationFillMode = 'forwards';
+      node.style.animationDuration = exitDuration * 0.001 + "s";
+    };
+
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_6__["Transition"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+      timeout: preventExitTransition ? 0 : {
+        enter: enterDuration,
+        exit: exitDuration
+      },
+      onEnter: onEnter,
+      onEntered: onEntered,
+      onExit: preventExitTransition ? NOOP : onExit
+    }), children);
+  };
+}
+
+function ProgressBar(_ref) {
+  var _cx, _animationEvent;
+
+  var delay = _ref.delay,
+      isRunning = _ref.isRunning,
+      closeToast = _ref.closeToast,
+      type = _ref.type,
+      hide = _ref.hide,
+      className = _ref.className,
+      userStyle = _ref.style,
+      controlledProgress = _ref.controlledProgress,
+      progress = _ref.progress,
+      rtl = _ref.rtl;
+
+  var style = Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, userStyle, {
+    animationDuration: delay + "ms",
+    animationPlayState: isRunning ? 'running' : 'paused',
+    opacity: hide ? 0 : 1,
+    transform: controlledProgress ? "scaleX(" + progress + ")" : null
+  });
+
+  var classNames = classnames__WEBPACK_IMPORTED_MODULE_5___default()(RT_NAMESPACE + "__progress-bar", controlledProgress ? RT_NAMESPACE + "__progress-bar--controlled" : RT_NAMESPACE + "__progress-bar--animated", RT_NAMESPACE + "__progress-bar--" + type, (_cx = {}, _cx[RT_NAMESPACE + "__progress-bar--rtl"] = rtl, _cx), className);
+  var animationEvent = (_animationEvent = {}, _animationEvent[controlledProgress && progress >= 1 ? 'onTransitionEnd' : 'onAnimationEnd'] = controlledProgress && progress < 1 ? null : closeToast, _animationEvent);
+  return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    className: classNames,
+    style: style
+  }, animationEvent));
+}
+
+ProgressBar.propTypes = {
+  /**
+   * The animation delay which determine when to close the toast
+   */
+  delay: falseOrDelay.isRequired,
+
+  /**
+   * Whether or not the animation is running or paused
+   */
+  isRunning: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+
+  /**
+   * Func to close the current toast
+   */
+  closeToast: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+
+  /**
+   * Support rtl content
+   */
+  rtl: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+
+  /**
+   * Optional type : info, success ...
+   */
+  type: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
+
+  /**
+   * Hide or not the progress bar
+   */
+  hide: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * Optionnal className
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+
+  /**
+   * Controlled progress value
+   */
+  progress: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number,
+
+  /**
+   * Tell wether or not controlled progress bar is used
+   */
+  controlledProgress: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool
+};
+ProgressBar.defaultProps = {
+  type: TYPE.DEFAULT,
+  hide: false
+};
+
+function getX(e) {
+  return e.targetTouches && e.targetTouches.length >= 1 ? e.targetTouches[0].clientX : e.clientX;
+}
+
+function getY(e) {
+  return e.targetTouches && e.targetTouches.length >= 1 ? e.targetTouches[0].clientY : e.clientY;
+}
+
+var iLoveInternetExplorer = canUseDom && /(msie|trident)/i.test(navigator.userAgent);
+
+var Toast =
+/*#__PURE__*/
+function (_Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(Toast, _Component);
+
+  function Toast() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
+      isRunning: true,
+      preventExitTransition: false
+    };
+    _this.flag = {
+      canCloseOnClick: true,
+      canDrag: false
+    };
+    _this.drag = {
+      start: 0,
+      x: 0,
+      y: 0,
+      deltaX: 0,
+      removalDistance: 0
+    };
+    _this.boundingRect = null;
+    _this.ref = null;
+
+    _this.pauseToast = function () {
+      if (_this.props.autoClose) {
+        _this.setState({
+          isRunning: false
+        });
+      }
+    };
+
+    _this.playToast = function () {
+      if (_this.props.autoClose) {
+        _this.setState({
+          isRunning: true
+        });
+      }
+    };
+
+    _this.onDragStart = function (e) {
+      _this.flag.canCloseOnClick = true;
+      _this.flag.canDrag = true;
+      _this.boundingRect = _this.ref.getBoundingClientRect();
+      _this.ref.style.transition = '';
+      _this.drag.start = _this.drag.x = getX(e.nativeEvent);
+      _this.drag.removalDistance = _this.ref.offsetWidth * (_this.props.draggablePercent / 100);
+    };
+
+    _this.onDragMove = function (e) {
+      if (_this.flag.canDrag) {
+        if (_this.state.isRunning) {
+          _this.pauseToast();
+        }
+
+        _this.drag.x = getX(e);
+        _this.drag.deltaX = _this.drag.x - _this.drag.start;
+        _this.drag.y = getY(e); // prevent false positif during a toast click
+
+        _this.drag.start !== _this.drag.x && (_this.flag.canCloseOnClick = false);
+        _this.ref.style.transform = "translateX(" + _this.drag.deltaX + "px)";
+        _this.ref.style.opacity = 1 - Math.abs(_this.drag.deltaX / _this.drag.removalDistance);
+      }
+    };
+
+    _this.onDragEnd = function (e) {
+      if (_this.flag.canDrag) {
+        _this.flag.canDrag = false;
+
+        if (Math.abs(_this.drag.deltaX) > _this.drag.removalDistance) {
+          _this.setState({
+            preventExitTransition: true
+          }, _this.props.closeToast);
+
+          return;
+        }
+
+        _this.ref.style.transition = 'transform 0.2s, opacity 0.2s';
+        _this.ref.style.transform = 'translateX(0)';
+        _this.ref.style.opacity = 1;
+      }
+    };
+
+    _this.onDragTransitionEnd = function () {
+      if (_this.boundingRect) {
+        var _this$boundingRect = _this.boundingRect,
+            top = _this$boundingRect.top,
+            bottom = _this$boundingRect.bottom,
+            left = _this$boundingRect.left,
+            right = _this$boundingRect.right;
+
+        if (_this.props.pauseOnHover && _this.drag.x >= left && _this.drag.x <= right && _this.drag.y >= top && _this.drag.y <= bottom) {
+          _this.pauseToast();
+        } else {
+          _this.playToast();
+        }
+      }
+    };
+
+    _this.onExitTransitionEnd = function () {
+      if (iLoveInternetExplorer) {
+        _this.props.onExited();
+
+        return;
+      }
+
+      var height = _this.ref.scrollHeight;
+      var style = _this.ref.style;
+      requestAnimationFrame(function () {
+        style.minHeight = 'initial';
+        style.height = height + 'px';
+        style.transition = 'all 0.4s ';
+        requestAnimationFrame(function () {
+          style.height = 0;
+          style.padding = 0;
+          style.margin = 0;
+        });
+        setTimeout(function () {
+          return _this.props.onExited();
+        }, 400);
+      });
+    };
+
+    return _this;
+  }
+
+  var _proto = Toast.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.props.onOpen(this.props.children.props);
+
+    if (this.props.draggable) {
+      this.bindDragEvents();
+    } // Maybe I could bind the event in the ToastContainer and rely on delegation
+
+
+    if (this.props.pauseOnFocusLoss) {
+      this.bindFocusEvents();
+    }
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    if (prevProps.draggable !== this.props.draggable) {
+      if (this.props.draggable) {
+        this.bindDragEvents();
+      } else {
+        this.unbindDragEvents();
+      }
+    }
+
+    if (prevProps.pauseOnFocusLoss !== this.props.pauseOnFocusLoss) {
+      if (this.props.pauseOnFocusLoss) {
+        this.bindFocusEvents();
+      } else {
+        this.unbindFocusEvents();
+      }
+    }
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.props.onClose(this.props.children.props);
+
+    if (this.props.draggable) {
+      this.unbindDragEvents();
+    }
+
+    if (this.props.pauseOnFocusLoss) {
+      this.unbindFocusEvents();
+    }
+  };
+
+  _proto.bindFocusEvents = function bindFocusEvents() {
+    window.addEventListener('focus', this.playToast);
+    window.addEventListener('blur', this.pauseToast);
+  };
+
+  _proto.unbindFocusEvents = function unbindFocusEvents() {
+    window.removeEventListener('focus', this.playToast);
+    window.removeEventListener('blur', this.pauseToast);
+  };
+
+  _proto.bindDragEvents = function bindDragEvents() {
+    document.addEventListener('mousemove', this.onDragMove);
+    document.addEventListener('mouseup', this.onDragEnd);
+    document.addEventListener('touchmove', this.onDragMove);
+    document.addEventListener('touchend', this.onDragEnd);
+  };
+
+  _proto.unbindDragEvents = function unbindDragEvents() {
+    document.removeEventListener('mousemove', this.onDragMove);
+    document.removeEventListener('mouseup', this.onDragEnd);
+    document.removeEventListener('touchmove', this.onDragMove);
+    document.removeEventListener('touchend', this.onDragEnd);
+  };
+
+  _proto.render = function render() {
+    var _cx,
+        _this2 = this;
+
+    var _this$props = this.props,
+        closeButton = _this$props.closeButton,
+        children = _this$props.children,
+        autoClose = _this$props.autoClose,
+        pauseOnHover = _this$props.pauseOnHover,
+        onClick = _this$props.onClick,
+        closeOnClick = _this$props.closeOnClick,
+        type = _this$props.type,
+        hideProgressBar = _this$props.hideProgressBar,
+        closeToast = _this$props.closeToast,
+        Transition = _this$props.transition,
+        position = _this$props.position,
+        className = _this$props.className,
+        bodyClassName = _this$props.bodyClassName,
+        progressClassName = _this$props.progressClassName,
+        progressStyle = _this$props.progressStyle,
+        updateId = _this$props.updateId,
+        role = _this$props.role,
+        progress = _this$props.progress,
+        rtl = _this$props.rtl;
+    var toastProps = {
+      className: classnames__WEBPACK_IMPORTED_MODULE_5___default()(RT_NAMESPACE + "__toast", RT_NAMESPACE + "__toast--" + type, (_cx = {}, _cx[RT_NAMESPACE + "__toast--rtl"] = rtl, _cx), className)
+    };
+
+    if (autoClose && pauseOnHover) {
+      toastProps.onMouseEnter = this.pauseToast;
+      toastProps.onMouseLeave = this.playToast;
+    } // prevent toast from closing when user drags the toast
+
+
+    if (closeOnClick) {
+      toastProps.onClick = function (e) {
+        onClick && onClick(e);
+        _this2.flag.canCloseOnClick && closeToast();
+      };
+    }
+
+    var controlledProgress = parseFloat(progress) === progress;
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(Transition, {
+      in: this.props.in,
+      appear: true,
+      onExited: this.onExitTransitionEnd,
+      position: position,
+      preventExitTransition: this.state.preventExitTransition
+    }, react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+      onClick: onClick
+    }, toastProps, {
+      ref: function ref(_ref) {
+        return _this2.ref = _ref;
+      },
+      onMouseDown: this.onDragStart,
+      onTouchStart: this.onDragStart,
+      onMouseUp: this.onDragTransitionEnd,
+      onTouchEnd: this.onDragTransitionEnd
+    }), react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.props.in && {
+      role: role
+    }, {
+      className: classnames__WEBPACK_IMPORTED_MODULE_5___default()(RT_NAMESPACE + "__toast-body", bodyClassName)
+    }), children), closeButton && closeButton, (autoClose || controlledProgress) && react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(ProgressBar, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, updateId && !controlledProgress ? {
+      key: "pb-" + updateId
+    } : {}, {
+      rtl: rtl,
+      delay: autoClose,
+      isRunning: this.state.isRunning,
+      closeToast: closeToast,
+      hide: hideProgressBar,
+      type: type,
+      style: progressStyle,
+      className: progressClassName,
+      controlledProgress: controlledProgress,
+      progress: progress
+    }))));
+  };
+
+  return Toast;
+}(react__WEBPACK_IMPORTED_MODULE_3__["Component"]);
+
+Toast.propTypes = {
+  closeButton: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.node, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool]).isRequired,
+  autoClose: falseOrDelay.isRequired,
+  children: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.node.isRequired,
+  closeToast: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  position: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOf(objectValues(POSITION)).isRequired,
+  pauseOnHover: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+  pauseOnFocusLoss: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+  closeOnClick: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+  transition: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func.isRequired,
+  rtl: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+  hideProgressBar: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+  draggable: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool.isRequired,
+  draggablePercent: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number.isRequired,
+  in: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+  onExited: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  onOpen: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  onClose: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  type: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOf(objectValues(TYPE)),
+  className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+  bodyClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+  progressClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+  progressStyle: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
+  progress: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number,
+  updateId: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]),
+  ariaLabel: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
+  containerId: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]),
+  role: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string
+};
+Toast.defaultProps = {
+  type: TYPE.DEFAULT,
+  in: true,
+  onOpen: NOOP,
+  onClose: NOOP,
+  className: null,
+  bodyClassName: null,
+  progressClassName: null,
+  updateId: null
+};
+
+function CloseButton(_ref) {
+  var closeToast = _ref.closeToast,
+      type = _ref.type,
+      ariaLabel = _ref.ariaLabel;
+  return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("button", {
+    className: RT_NAMESPACE + "__close-button " + RT_NAMESPACE + "__close-button--" + type,
+    type: "button",
+    onClick: function onClick(e) {
+      e.stopPropagation();
+      closeToast(e);
+    },
+    "aria-label": ariaLabel
+  }, "\u2716\uFE0E");
+}
+
+CloseButton.propTypes = {
+  closeToast: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+  arialLabel: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string
+};
+CloseButton.defaultProps = {
+  ariaLabel: 'close'
+};
+
+var Bounce = cssTransition({
+  enter: RT_NAMESPACE + "__bounce-enter",
+  exit: RT_NAMESPACE + "__bounce-exit",
+  appendPosition: true
+});
+var Slide = cssTransition({
+  enter: RT_NAMESPACE + "__slide-enter",
+  exit: RT_NAMESPACE + "__slide-exit",
+  duration: [450, 750],
+  appendPosition: true
+});
+var Zoom = cssTransition({
+  enter: RT_NAMESPACE + "__zoom-enter",
+  exit: RT_NAMESPACE + "__zoom-exit"
+});
+var Flip = cssTransition({
+  enter: RT_NAMESPACE + "__flip-enter",
+  exit: RT_NAMESPACE + "__flip-exit"
+});
+
+var ToastContainer =
+/*#__PURE__*/
+function (_Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(ToastContainer, _Component);
+
+  function ToastContainer() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _Component.call.apply(_Component, [this].concat(args)) || this;
+    _this.state = {
+      toast: []
+    };
+    _this.toastKey = 1;
+    _this.collection = {};
+
+    _this.isToastActive = function (id) {
+      return _this.state.toast.indexOf(id) !== -1;
+    };
+
+    return _this;
+  }
+
+  var _proto = ToastContainer.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    var _this2 = this;
+
+    eventManager.cancelEmit(ACTION.WILL_UNMOUNT).on(ACTION.SHOW, function (content, options) {
+      return _this2.ref ? _this2.buildToast(content, options) : null;
+    }).on(ACTION.CLEAR, function (id) {
+      return !_this2.ref ? null : id == null ? _this2.clear() : _this2.removeToast(id);
+    }).emit(ACTION.DID_MOUNT, this);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    eventManager.emit(ACTION.WILL_UNMOUNT, this);
+  };
+
+  _proto.removeToast = function removeToast(id) {
+    this.setState({
+      toast: this.state.toast.filter(function (v) {
+        return v !== id;
+      })
+    }, this.dispatchChange);
+  };
+
+  _proto.dispatchChange = function dispatchChange() {
+    eventManager.emit(ACTION.ON_CHANGE, this.state.toast.length, this.props.containerId);
+  };
+
+  _proto.makeCloseButton = function makeCloseButton(toastClose, toastId, type) {
+    var _this3 = this;
+
+    var closeButton = this.props.closeButton;
+
+    if (Object(react__WEBPACK_IMPORTED_MODULE_3__["isValidElement"])(toastClose) || toastClose === false) {
+      closeButton = toastClose;
+    } else if (toastClose === true) {
+      closeButton = this.props.closeButton && typeof this.props.closeButton !== 'boolean' ? this.props.closeButton : react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(CloseButton, null);
+    }
+
+    return closeButton === false ? false : Object(react__WEBPACK_IMPORTED_MODULE_3__["cloneElement"])(closeButton, {
+      closeToast: function closeToast() {
+        return _this3.removeToast(toastId);
+      },
+      type: type
+    });
+  };
+
+  _proto.getAutoCloseDelay = function getAutoCloseDelay(toastAutoClose) {
+    return toastAutoClose === false || isValidDelay(toastAutoClose) ? toastAutoClose : this.props.autoClose;
+  };
+
+  _proto.canBeRendered = function canBeRendered(content) {
+    return Object(react__WEBPACK_IMPORTED_MODULE_3__["isValidElement"])(content) || typeof content === 'string' || typeof content === 'number' || typeof content === 'function';
+  };
+
+  _proto.parseClassName = function parseClassName(prop) {
+    if (typeof prop === 'string') {
+      return prop;
+    } else if (prop !== null && typeof prop === 'object' && 'toString' in prop) {
+      return prop.toString();
+    }
+
+    return null;
+  };
+
+  _proto.belongToContainer = function belongToContainer(_ref) {
+    var containerId = _ref.containerId;
+    return containerId === this.props.containerId;
+  };
+
+  _proto.buildToast = function buildToast(content, _ref2) {
+    var _this4 = this;
+
+    var delay = _ref2.delay,
+        options = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_ref2, ["delay"]);
+
+    if (!this.canBeRendered(content)) {
+      throw new Error("The element you provided cannot be rendered. You provided an element of type " + typeof content);
+    }
+
+    var toastId = options.toastId,
+        updateId = options.updateId; // Check for multi-container and also for duplicate toastId
+    // Maybe it would be better to extract it
+
+    if (this.props.enableMultiContainer && !this.belongToContainer(options) || this.isToastActive(toastId) && updateId == null) {
+      return;
+    }
+
+    var closeToast = function closeToast() {
+      return _this4.removeToast(toastId);
+    };
+
+    var toastOptions = {
+      id: toastId,
+      // ⚠️ if no options.key, this.toastKey - 1 is assigned
+      key: options.key || this.toastKey++,
+      type: options.type,
+      closeToast: closeToast,
+      updateId: options.updateId,
+      rtl: this.props.rtl,
+      position: options.position || this.props.position,
+      transition: options.transition || this.props.transition,
+      className: this.parseClassName(options.className || this.props.toastClassName),
+      bodyClassName: this.parseClassName(options.bodyClassName || this.props.bodyClassName),
+      onClick: options.onClick || this.props.onClick,
+      closeButton: this.makeCloseButton(options.closeButton, toastId, options.type),
+      pauseOnHover: typeof options.pauseOnHover === 'boolean' ? options.pauseOnHover : this.props.pauseOnHover,
+      pauseOnFocusLoss: typeof options.pauseOnFocusLoss === 'boolean' ? options.pauseOnFocusLoss : this.props.pauseOnFocusLoss,
+      draggable: typeof options.draggable === 'boolean' ? options.draggable : this.props.draggable,
+      draggablePercent: typeof options.draggablePercent === 'number' && !isNaN(options.draggablePercent) ? options.draggablePercent : this.props.draggablePercent,
+      closeOnClick: typeof options.closeOnClick === 'boolean' ? options.closeOnClick : this.props.closeOnClick,
+      progressClassName: this.parseClassName(options.progressClassName || this.props.progressClassName),
+      progressStyle: this.props.progressStyle,
+      autoClose: this.getAutoCloseDelay(options.autoClose),
+      hideProgressBar: typeof options.hideProgressBar === 'boolean' ? options.hideProgressBar : this.props.hideProgressBar,
+      progress: parseFloat(options.progress),
+      role: typeof options.role === 'string' ? options.role : this.props.role
+    };
+    typeof options.onOpen === 'function' && (toastOptions.onOpen = options.onOpen);
+    typeof options.onClose === 'function' && (toastOptions.onClose = options.onClose); // add closeToast function to react component only
+
+    if (Object(react__WEBPACK_IMPORTED_MODULE_3__["isValidElement"])(content) && typeof content.type !== 'string' && typeof content.type !== 'number') {
+      content = Object(react__WEBPACK_IMPORTED_MODULE_3__["cloneElement"])(content, {
+        closeToast: closeToast
+      });
+    } else if (typeof content === 'function') {
+      content = content({
+        closeToast: closeToast
+      });
+    }
+
+    if (isValidDelay(delay)) {
+      setTimeout(function () {
+        _this4.appendToast(toastOptions, content, options.staleToastId);
+      }, delay);
+    } else {
+      this.appendToast(toastOptions, content, options.staleToastId);
+    }
+  };
+
+  _proto.appendToast = function appendToast(options, content, staleToastId) {
+    var _extends2;
+
+    var id = options.id,
+        updateId = options.updateId;
+    this.collection = Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, this.collection, (_extends2 = {}, _extends2[id] = {
+      options: options,
+      content: content,
+      position: options.position
+    }, _extends2));
+    this.setState({
+      toast: (updateId ? [].concat(this.state.toast) : [].concat(this.state.toast, [id])).filter(function (id) {
+        return id !== staleToastId;
+      })
+    }, this.dispatchChange);
+  };
+
+  _proto.clear = function clear() {
+    this.setState({
+      toast: []
+    });
+  };
+
+  _proto.renderToast = function renderToast() {
+    var _this5 = this;
+
+    var toastToRender = {};
+    var _this$props = this.props,
+        className = _this$props.className,
+        style = _this$props.style,
+        newestOnTop = _this$props.newestOnTop;
+    var collection = newestOnTop ? Object.keys(this.collection).reverse() : Object.keys(this.collection); // group toast by position
+
+    collection.forEach(function (toastId) {
+      var _this5$collection$toa = _this5.collection[toastId],
+          position = _this5$collection$toa.position,
+          options = _this5$collection$toa.options,
+          content = _this5$collection$toa.content;
+      toastToRender[position] || (toastToRender[position] = []);
+
+      if (_this5.state.toast.indexOf(options.id) !== -1) {
+        toastToRender[position].push(react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(Toast, Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, options, {
+          isDocumentHidden: _this5.state.isDocumentHidden,
+          key: "toast-" + options.key
+        }), content));
+      } else {
+        toastToRender[position].push(null);
+        delete _this5.collection[toastId];
+      }
+    });
+    return Object.keys(toastToRender).map(function (position) {
+      var _cx;
+
+      var disablePointer = toastToRender[position].length === 1 && toastToRender[position][0] === null;
+      var props = {
+        className: classnames__WEBPACK_IMPORTED_MODULE_5___default()(RT_NAMESPACE + "__toast-container", RT_NAMESPACE + "__toast-container--" + position, (_cx = {}, _cx[RT_NAMESPACE + "__toast-container--rtl"] = _this5.props.rtl, _cx), _this5.parseClassName(className)),
+        style: disablePointer ? Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, style, {
+          pointerEvents: 'none'
+        }) : Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, style)
+      };
+      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(react_transition_group__WEBPACK_IMPORTED_MODULE_6__["TransitionGroup"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+        key: "container-" + position
+      }), toastToRender[position]);
+    });
+  };
+
+  _proto.render = function render() {
+    var _this6 = this;
+
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement("div", {
+      ref: function ref(node) {
+        return _this6.ref = node;
+      },
+      className: "" + RT_NAMESPACE
+    }, this.renderToast());
+  };
+
+  return ToastContainer;
+}(react__WEBPACK_IMPORTED_MODULE_3__["Component"]);
+
+ToastContainer.propTypes = {
+  /**
+   * Set toast position
+   */
+  position: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOf(objectValues(POSITION)),
+
+  /**
+   * Disable or set autoClose delay
+   */
+  autoClose: falseOrDelay,
+
+  /**
+   * Disable or set a custom react element for the close button
+   */
+  closeButton: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.node, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool]),
+
+  /**
+   * Hide or not progress bar when autoClose is enabled
+   */
+  hideProgressBar: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * Pause toast duration on hover
+   */
+  pauseOnHover: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * Dismiss toast on click
+   */
+  closeOnClick: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * Newest on top
+   */
+  newestOnTop: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * An optional className
+   */
+  className: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+
+  /**
+   * An optional style
+   */
+  style: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
+
+  /**
+   * An optional className for the toast
+   */
+  toastClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+
+  /**
+   * An optional className for the toast body
+   */
+  bodyClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+
+  /**
+   * An optional className for the toast progress bar
+   */
+  progressClassName: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object]),
+
+  /**
+   * An optional style for the toast progress bar
+   */
+  progressStyle: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.object,
+
+  /**
+   * Define enter and exit transition using react-transition-group
+   */
+  transition: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func,
+
+  /**
+   * Support rtl display
+   */
+  rtl: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * Allow toast to be draggable
+   */
+  draggable: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * The percentage of the toast's width it takes for a drag to dismiss a toast
+   */
+  draggablePercent: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number,
+
+  /**
+   * Pause the toast on focus loss
+   */
+  pauseOnFocusLoss: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * Show the toast only if it includes containerId and it's the same as containerId
+   */
+  enableMultiContainer: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * Set id to handle multiple container
+   */
+  containerId: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.number]),
+
+  /**
+   * Set role attribute for the toast body
+   */
+  role: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.string,
+
+  /**
+   * Fired when clicking inside toaster
+   */
+  onClick: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+};
+ToastContainer.defaultProps = {
+  position: POSITION.TOP_RIGHT,
+  transition: Bounce,
+  rtl: false,
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeButton: react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(CloseButton, null),
+  pauseOnHover: true,
+  pauseOnFocusLoss: true,
+  closeOnClick: true,
+  newestOnTop: false,
+  draggable: true,
+  draggablePercent: 80,
+  className: null,
+  style: null,
+  toastClassName: null,
+  bodyClassName: null,
+  progressClassName: null,
+  progressStyle: null,
+  role: 'alert'
+};
+
+var containers = new Map();
+var latestInstance = null;
+var containerDomNode = null;
+var containerConfig = {};
+var queue = [];
+var lazy = false;
+/**
+ * Check whether any container is currently mounted in the DOM
+ */
+
+function isAnyContainerMounted() {
+  return containers.size > 0;
+}
+/**
+ * Get the container by id. Returns the last container declared when no id is given.
+ */
+
+
+function getContainer(containerId) {
+  if (!isAnyContainerMounted()) return null;
+  if (!containerId) return containers.get(latestInstance);
+  return containers.get(containerId);
+}
+/**
+ * Get the toast by id, given it's in the DOM, otherwise returns null
+ */
+
+
+function getToast(toastId, _ref) {
+  var containerId = _ref.containerId;
+  var container = getContainer(containerId);
+  if (!container) return null;
+  var toast = container.collection[toastId];
+  if (typeof toast === 'undefined') return null;
+  return toast;
+}
+/**
+ * Merge provided options with the defaults settings and generate the toastId
+ */
+
+
+function mergeOptions(options, type) {
+  return Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, options, {
+    type: type,
+    toastId: getToastId(options)
+  });
+}
+/**
+ * Generate a random toastId
+ */
+
+
+function generateToastId() {
+  return (Math.random().toString(36) + Date.now().toString(36)).substr(2, 10);
+}
+/**
+ * Generate a toastId or use the one provided
+ */
+
+
+function getToastId(options) {
+  if (options && (typeof options.toastId === 'string' || typeof options.toastId === 'number' && !isNaN(options.toastId))) {
+    return options.toastId;
+  }
+
+  return generateToastId();
+}
+/**
+ * If the container is not mounted, the toast is enqueued and
+ * the container lazy mounted
+ */
+
+
+function dispatchToast(content, options) {
+  if (isAnyContainerMounted()) {
+    eventManager.emit(ACTION.SHOW, content, options);
+  } else {
+    queue.push({
+      action: ACTION.SHOW,
+      content: content,
+      options: options
+    });
+
+    if (lazy && canUseDom) {
+      lazy = false;
+      containerDomNode = document.createElement('div');
+      document.body.appendChild(containerDomNode);
+      Object(react_dom__WEBPACK_IMPORTED_MODULE_7__["render"])(react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(ToastContainer, containerConfig), containerDomNode);
+    }
+  }
+
+  return options.toastId;
+}
+
+var toast = function toast(content, options) {
+  return dispatchToast(content, mergeOptions(options, options && options.type || TYPE.DEFAULT));
+};
+/**
+ * For each available type create a shortcut
+ */
+
+
+var _loop = function _loop(t) {
+  if (TYPE[t] !== TYPE.DEFAULT) {
+    toast[TYPE[t].toLowerCase()] = function (content, options) {
+      return dispatchToast(content, mergeOptions(options, options && options.type || TYPE[t]));
+    };
+  }
+};
+
+for (var t in TYPE) {
+  _loop(t);
+}
+/**
+ * Maybe I should remove warning in favor of warn, I don't know
+ */
+
+
+toast.warn = toast.warning;
+/**
+ * Remove toast programmaticaly
+ */
+
+toast.dismiss = function (id) {
+  if (id === void 0) {
+    id = null;
+  }
+
+  return isAnyContainerMounted() && eventManager.emit(ACTION.CLEAR, id);
+};
+/**
+ * return true if one container is displaying the toast
+ */
+
+
+toast.isActive = function (id) {
+  var isToastActive = false;
+
+  if (containers.size > 0) {
+    containers.forEach(function (container) {
+      if (container.isToastActive(id)) {
+        isToastActive = true;
+      }
+    });
+  }
+
+  return isToastActive;
+};
+
+toast.update = function (toastId, options) {
+  if (options === void 0) {
+    options = {};
+  }
+
+  // if you call toast and toast.update directly nothing will be displayed
+  // this is why I defered the update
+  setTimeout(function () {
+    var toast = getToast(toastId, options);
+
+    if (toast) {
+      var oldOptions = toast.options,
+          oldContent = toast.content;
+
+      var nextOptions = Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, oldOptions, {}, options, {
+        toastId: options.toastId || toastId
+      });
+
+      if (!options.toastId || options.toastId === toastId) {
+        nextOptions.updateId = generateToastId();
+      } else {
+        nextOptions.staleToastId = toastId;
+      }
+
+      var content = typeof nextOptions.render !== 'undefined' ? nextOptions.render : oldContent;
+      delete nextOptions.render;
+      dispatchToast(content, nextOptions);
+    }
+  }, 0);
+};
+/**
+ * Used for controlled progress bar.
+ */
+
+
+toast.done = function (id) {
+  toast.update(id, {
+    progress: 1
+  });
+};
+/**
+ * Track changes. The callback get the number of toast displayed
+ */
+
+
+toast.onChange = function (callback) {
+  if (typeof callback === 'function') {
+    eventManager.on(ACTION.ON_CHANGE, callback);
+  }
+};
+/**
+ * Configure the ToastContainer when lazy mounted
+ */
+
+
+toast.configure = function (config) {
+  lazy = true;
+  containerConfig = config;
+};
+
+toast.POSITION = POSITION;
+toast.TYPE = TYPE;
+/**
+ * Wait until the ToastContainer is mounted to dispatch the toast
+ * and attach isActive method
+ */
+
+eventManager.on(ACTION.DID_MOUNT, function (containerInstance) {
+  latestInstance = containerInstance.props.containerId || containerInstance;
+  containers.set(latestInstance, containerInstance);
+  queue.forEach(function (item) {
+    eventManager.emit(item.action, item.content, item.options);
+  });
+  queue = [];
+}).on(ACTION.WILL_UNMOUNT, function (containerInstance) {
+  if (containerInstance) containers.delete(containerInstance.props.containerId || containerInstance);else containers.clear();
+
+  if (containers.size === 0) {
+    eventManager.off(ACTION.SHOW).off(ACTION.CLEAR);
+  }
+
+  if (canUseDom && containerDomNode) {
+    document.body.removeChild(containerDomNode);
+  }
+});
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/CSSTransition.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/CSSTransition.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var dom_helpers_addClass__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! dom-helpers/addClass */ "./node_modules/dom-helpers/esm/addClass.js");
+/* harmony import */ var dom_helpers_removeClass__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! dom-helpers/removeClass */ "./node_modules/dom-helpers/esm/removeClass.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _Transition__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Transition */ "./node_modules/react-transition-group/esm/Transition.js");
+/* harmony import */ var _utils_PropTypes__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./utils/PropTypes */ "./node_modules/react-transition-group/esm/utils/PropTypes.js");
+
+
+
+
+
+
+
+
+
+
+var _addClass = function addClass(node, classes) {
+  return node && classes && classes.split(' ').forEach(function (c) {
+    return Object(dom_helpers_addClass__WEBPACK_IMPORTED_MODULE_4__["default"])(node, c);
+  });
+};
+
+var removeClass = function removeClass(node, classes) {
+  return node && classes && classes.split(' ').forEach(function (c) {
+    return Object(dom_helpers_removeClass__WEBPACK_IMPORTED_MODULE_5__["default"])(node, c);
+  });
+};
+/**
+ * A transition component inspired by the excellent
+ * [ng-animate](http://www.nganimate.org/) library, you should use it if you're
+ * using CSS transitions or animations. It's built upon the
+ * [`Transition`](https://reactcommunity.org/react-transition-group/transition)
+ * component, so it inherits all of its props.
+ *
+ * `CSSTransition` applies a pair of class names during the `appear`, `enter`,
+ * and `exit` states of the transition. The first class is applied and then a
+ * second `*-active` class in order to activate the CSS transition. After the
+ * transition, matching `*-done` class names are applied to persist the
+ * transition state.
+ *
+ * ```jsx
+ * function App() {
+ *   const [inProp, setInProp] = useState(false);
+ *   return (
+ *     <div>
+ *       <CSSTransition in={inProp} timeout={200} classNames="my-node">
+ *         <div>
+ *           {"I'll receive my-node-* classes"}
+ *         </div>
+ *       </CSSTransition>
+ *       <button type="button" onClick={() => setInProp(true)}>
+ *         Click to Enter
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * When the `in` prop is set to `true`, the child component will first receive
+ * the class `example-enter`, then the `example-enter-active` will be added in
+ * the next tick. `CSSTransition` [forces a
+ * reflow](https://github.com/reactjs/react-transition-group/blob/5007303e729a74be66a21c3e2205e4916821524b/src/CSSTransition.js#L208-L215)
+ * between before adding the `example-enter-active`. This is an important trick
+ * because it allows us to transition between `example-enter` and
+ * `example-enter-active` even though they were added immediately one after
+ * another. Most notably, this is what makes it possible for us to animate
+ * _appearance_.
+ *
+ * ```css
+ * .my-node-enter {
+ *   opacity: 0;
+ * }
+ * .my-node-enter-active {
+ *   opacity: 1;
+ *   transition: opacity 200ms;
+ * }
+ * .my-node-exit {
+ *   opacity: 1;
+ * }
+ * .my-node-exit-active {
+ *   opacity: 0;
+ *   transition: opacity 200ms;
+ * }
+ * ```
+ *
+ * `*-active` classes represent which styles you want to animate **to**.
+ *
+ * **Note**: If you're using the
+ * [`appear`](http://reactcommunity.org/react-transition-group/transition#Transition-prop-appear)
+ * prop, make sure to define styles for `.appear-*` classes as well.
+ */
+
+
+var CSSTransition =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(CSSTransition, _React$Component);
+
+  function CSSTransition() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.appliedClasses = {
+      appear: {},
+      enter: {},
+      exit: {}
+    };
+
+    _this.onEnter = function (node, appearing) {
+      _this.removeClasses(node, 'exit');
+
+      _this.addClass(node, appearing ? 'appear' : 'enter', 'base');
+
+      if (_this.props.onEnter) {
+        _this.props.onEnter(node, appearing);
+      }
+    };
+
+    _this.onEntering = function (node, appearing) {
+      var type = appearing ? 'appear' : 'enter';
+
+      _this.addClass(node, type, 'active');
+
+      if (_this.props.onEntering) {
+        _this.props.onEntering(node, appearing);
+      }
+    };
+
+    _this.onEntered = function (node, appearing) {
+      var type = appearing ? 'appear' : 'enter';
+
+      _this.removeClasses(node, type);
+
+      _this.addClass(node, type, 'done');
+
+      if (_this.props.onEntered) {
+        _this.props.onEntered(node, appearing);
+      }
+    };
+
+    _this.onExit = function (node) {
+      _this.removeClasses(node, 'appear');
+
+      _this.removeClasses(node, 'enter');
+
+      _this.addClass(node, 'exit', 'base');
+
+      if (_this.props.onExit) {
+        _this.props.onExit(node);
+      }
+    };
+
+    _this.onExiting = function (node) {
+      _this.addClass(node, 'exit', 'active');
+
+      if (_this.props.onExiting) {
+        _this.props.onExiting(node);
+      }
+    };
+
+    _this.onExited = function (node) {
+      _this.removeClasses(node, 'exit');
+
+      _this.addClass(node, 'exit', 'done');
+
+      if (_this.props.onExited) {
+        _this.props.onExited(node);
+      }
+    };
+
+    _this.getClassNames = function (type) {
+      var classNames = _this.props.classNames;
+      var isStringClassNames = typeof classNames === 'string';
+      var prefix = isStringClassNames && classNames ? classNames + "-" : '';
+      var baseClassName = isStringClassNames ? "" + prefix + type : classNames[type];
+      var activeClassName = isStringClassNames ? baseClassName + "-active" : classNames[type + "Active"];
+      var doneClassName = isStringClassNames ? baseClassName + "-done" : classNames[type + "Done"];
+      return {
+        baseClassName: baseClassName,
+        activeClassName: activeClassName,
+        doneClassName: doneClassName
+      };
+    };
+
+    return _this;
+  }
+
+  var _proto = CSSTransition.prototype;
+
+  _proto.addClass = function addClass(node, type, phase) {
+    var className = this.getClassNames(type)[phase + "ClassName"];
+
+    if (type === 'appear' && phase === 'done') {
+      className += " " + this.getClassNames('enter').doneClassName;
+    } // This is for to force a repaint,
+    // which is necessary in order to transition styles when adding a class name.
+
+
+    if (phase === 'active') {
+      /* eslint-disable no-unused-expressions */
+      node && node.scrollTop;
+    }
+
+    this.appliedClasses[type][phase] = className;
+
+    _addClass(node, className);
+  };
+
+  _proto.removeClasses = function removeClasses(node, type) {
+    var _this$appliedClasses$ = this.appliedClasses[type],
+        baseClassName = _this$appliedClasses$.base,
+        activeClassName = _this$appliedClasses$.active,
+        doneClassName = _this$appliedClasses$.done;
+    this.appliedClasses[type] = {};
+
+    if (baseClassName) {
+      removeClass(node, baseClassName);
+    }
+
+    if (activeClassName) {
+      removeClass(node, activeClassName);
+    }
+
+    if (doneClassName) {
+      removeClass(node, doneClassName);
+    }
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        _ = _this$props.classNames,
+        props = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(_this$props, ["classNames"]);
+
+    return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_Transition__WEBPACK_IMPORTED_MODULE_7__["default"], Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+      onEnter: this.onEnter,
+      onEntered: this.onEntered,
+      onEntering: this.onEntering,
+      onExit: this.onExit,
+      onExiting: this.onExiting,
+      onExited: this.onExited
+    }));
+  };
+
+  return CSSTransition;
+}(react__WEBPACK_IMPORTED_MODULE_6___default.a.Component);
+
+CSSTransition.defaultProps = {
+  classNames: ''
+};
+CSSTransition.propTypes =  true ? Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, _Transition__WEBPACK_IMPORTED_MODULE_7__["default"].propTypes, {
+  /**
+   * The animation classNames applied to the component as it appears, enters,
+   * exits or has finished the transition. A single name can be provided and it
+   * will be suffixed for each stage: e.g.
+   *
+   * `classNames="fade"` applies `fade-appear`, `fade-appear-active`,
+   * `fade-appear-done`, `fade-enter`, `fade-enter-active`, `fade-enter-done`,
+   * `fade-exit`, `fade-exit-active`, and `fade-exit-done`.
+   *
+   * **Note**: `fade-appear-done` and `fade-enter-done` will _both_ be applied.
+   * This allows you to define different behavior for when appearing is done and
+   * when regular entering is done, using selectors like
+   * `.fade-enter-done:not(.fade-appear-done)`. For example, you could apply an
+   * epic entrance animation when element first appears in the DOM using
+   * [Animate.css](https://daneden.github.io/animate.css/). Otherwise you can
+   * simply use `fade-enter-done` for defining both cases.
+   *
+   * Each individual classNames can also be specified independently like:
+   *
+   * ```js
+   * classNames={{
+   *  appear: 'my-appear',
+   *  appearActive: 'my-active-appear',
+   *  appearDone: 'my-done-appear',
+   *  enter: 'my-enter',
+   *  enterActive: 'my-active-enter',
+   *  enterDone: 'my-done-enter',
+   *  exit: 'my-exit',
+   *  exitActive: 'my-active-exit',
+   *  exitDone: 'my-done-exit',
+   * }}
+   * ```
+   *
+   * If you want to set these classes using CSS Modules:
+   *
+   * ```js
+   * import styles from './styles.css';
+   * ```
+   *
+   * you might want to use camelCase in your CSS file, that way could simply
+   * spread them instead of listing them one by one:
+   *
+   * ```js
+   * classNames={{ ...styles }}
+   * ```
+   *
+   * @type {string | {
+   *  appear?: string,
+   *  appearActive?: string,
+   *  appearDone?: string,
+   *  enter?: string,
+   *  enterActive?: string,
+   *  enterDone?: string,
+   *  exit?: string,
+   *  exitActive?: string,
+   *  exitDone?: string,
+   * }}
+   */
+  classNames: _utils_PropTypes__WEBPACK_IMPORTED_MODULE_8__["classNamesShape"],
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'enter' or 'appear' class is
+   * applied.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEnter: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'enter-active' or
+   * 'appear-active' class is applied.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEntering: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'enter' or
+   * 'appear' classes are **removed** and the `done` class is added to the DOM node.
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEntered: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'exit' class is
+   * applied.
+   *
+   * @type Function(node: HtmlElement)
+   */
+  onExit: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'exit-active' is applied.
+   *
+   * @type Function(node: HtmlElement)
+   */
+  onExiting: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func,
+
+  /**
+   * A `<Transition>` callback fired immediately after the 'exit' classes
+   * are **removed** and the `exit-done` class is added to the DOM node.
+   *
+   * @type Function(node: HtmlElement)
+   */
+  onExited: prop_types__WEBPACK_IMPORTED_MODULE_3___default.a.func
+}) : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (CSSTransition);
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/ReplaceTransition.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/ReplaceTransition.js ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _TransitionGroup__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TransitionGroup */ "./node_modules/react-transition-group/esm/TransitionGroup.js");
+
+
+
+
+
+
+/**
+ * The `<ReplaceTransition>` component is a specialized `Transition` component
+ * that animates between two children.
+ *
+ * ```jsx
+ * <ReplaceTransition in>
+ *   <Fade><div>I appear first</div></Fade>
+ *   <Fade><div>I replace the above</div></Fade>
+ * </ReplaceTransition>
+ * ```
+ */
+
+var ReplaceTransition =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(ReplaceTransition, _React$Component);
+
+  function ReplaceTransition() {
+    var _this;
+
+    for (var _len = arguments.length, _args = new Array(_len), _key = 0; _key < _len; _key++) {
+      _args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(_args)) || this;
+
+    _this.handleEnter = function () {
+      for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        args[_key2] = arguments[_key2];
+      }
+
+      return _this.handleLifecycle('onEnter', 0, args);
+    };
+
+    _this.handleEntering = function () {
+      for (var _len3 = arguments.length, args = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
+      }
+
+      return _this.handleLifecycle('onEntering', 0, args);
+    };
+
+    _this.handleEntered = function () {
+      for (var _len4 = arguments.length, args = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        args[_key4] = arguments[_key4];
+      }
+
+      return _this.handleLifecycle('onEntered', 0, args);
+    };
+
+    _this.handleExit = function () {
+      for (var _len5 = arguments.length, args = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        args[_key5] = arguments[_key5];
+      }
+
+      return _this.handleLifecycle('onExit', 1, args);
+    };
+
+    _this.handleExiting = function () {
+      for (var _len6 = arguments.length, args = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        args[_key6] = arguments[_key6];
+      }
+
+      return _this.handleLifecycle('onExiting', 1, args);
+    };
+
+    _this.handleExited = function () {
+      for (var _len7 = arguments.length, args = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        args[_key7] = arguments[_key7];
+      }
+
+      return _this.handleLifecycle('onExited', 1, args);
+    };
+
+    return _this;
+  }
+
+  var _proto = ReplaceTransition.prototype;
+
+  _proto.handleLifecycle = function handleLifecycle(handler, idx, originalArgs) {
+    var _child$props;
+
+    var children = this.props.children;
+    var child = react__WEBPACK_IMPORTED_MODULE_3___default.a.Children.toArray(children)[idx];
+    if (child.props[handler]) (_child$props = child.props)[handler].apply(_child$props, originalArgs);
+    if (this.props[handler]) this.props[handler](react_dom__WEBPACK_IMPORTED_MODULE_4___default.a.findDOMNode(this));
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        children = _this$props.children,
+        inProp = _this$props.in,
+        props = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(_this$props, ["children", "in"]);
+
+    var _React$Children$toArr = react__WEBPACK_IMPORTED_MODULE_3___default.a.Children.toArray(children),
+        first = _React$Children$toArr[0],
+        second = _React$Children$toArr[1];
+
+    delete props.onEnter;
+    delete props.onEntering;
+    delete props.onEntered;
+    delete props.onExit;
+    delete props.onExiting;
+    delete props.onExited;
+    return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_TransitionGroup__WEBPACK_IMPORTED_MODULE_5__["default"], props, inProp ? react__WEBPACK_IMPORTED_MODULE_3___default.a.cloneElement(first, {
+      key: 'first',
+      onEnter: this.handleEnter,
+      onEntering: this.handleEntering,
+      onEntered: this.handleEntered
+    }) : react__WEBPACK_IMPORTED_MODULE_3___default.a.cloneElement(second, {
+      key: 'second',
+      onEnter: this.handleExit,
+      onEntering: this.handleExiting,
+      onEntered: this.handleExited
+    }));
+  };
+
+  return ReplaceTransition;
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
+
+ReplaceTransition.propTypes =  true ? {
+  in: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool.isRequired,
+  children: function children(props, propName) {
+    if (react__WEBPACK_IMPORTED_MODULE_3___default.a.Children.count(props[propName]) !== 2) return new Error("\"" + propName + "\" must be exactly two transition components.");
+    return null;
+  }
+} : undefined;
+/* harmony default export */ __webpack_exports__["default"] = (ReplaceTransition);
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/SwitchTransition.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/SwitchTransition.js ***!
+  \*********************************************************************/
+/*! exports provided: modes, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "modes", function() { return modes; });
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Transition__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Transition */ "./node_modules/react-transition-group/esm/Transition.js");
+/* harmony import */ var _TransitionGroupContext__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TransitionGroupContext */ "./node_modules/react-transition-group/esm/TransitionGroupContext.js");
+
+
+var _leaveRenders, _enterRenders;
+
+
+
+
+
+
+function areChildrenDifferent(oldChildren, newChildren) {
+  if (oldChildren === newChildren) return false;
+
+  if (react__WEBPACK_IMPORTED_MODULE_1___default.a.isValidElement(oldChildren) && react__WEBPACK_IMPORTED_MODULE_1___default.a.isValidElement(newChildren) && oldChildren.key != null && oldChildren.key === newChildren.key) {
+    return false;
+  }
+
+  return true;
+}
+/**
+ * Enum of modes for SwitchTransition component
+ * @enum { string }
+ */
+
+
+var modes = {
+  out: 'out-in',
+  in: 'in-out'
+};
+
+var callHook = function callHook(element, name, cb) {
+  return function () {
+    var _element$props;
+
+    element.props[name] && (_element$props = element.props)[name].apply(_element$props, arguments);
+    cb();
+  };
+};
+
+var leaveRenders = (_leaveRenders = {}, _leaveRenders[modes.out] = function (_ref) {
+  var current = _ref.current,
+      changeState = _ref.changeState;
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(current, {
+    in: false,
+    onExited: callHook(current, 'onExited', function () {
+      changeState(_Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERING"], null);
+    })
+  });
+}, _leaveRenders[modes.in] = function (_ref2) {
+  var current = _ref2.current,
+      changeState = _ref2.changeState,
+      children = _ref2.children;
+  return [current, react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(children, {
+    in: true,
+    onEntered: callHook(children, 'onEntered', function () {
+      changeState(_Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERING"]);
+    })
+  })];
+}, _leaveRenders);
+var enterRenders = (_enterRenders = {}, _enterRenders[modes.out] = function (_ref3) {
+  var children = _ref3.children,
+      changeState = _ref3.changeState;
+  return react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(children, {
+    in: true,
+    onEntered: callHook(children, 'onEntered', function () {
+      changeState(_Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERED"], react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(children, {
+        in: true
+      }));
+    })
+  });
+}, _enterRenders[modes.in] = function (_ref4) {
+  var current = _ref4.current,
+      children = _ref4.children,
+      changeState = _ref4.changeState;
+  return [react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(current, {
+    in: false,
+    onExited: callHook(current, 'onExited', function () {
+      changeState(_Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERED"], react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(children, {
+        in: true
+      }));
+    })
+  }), react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(children, {
+    in: true
+  })];
+}, _enterRenders);
+/**
+ * A transition component inspired by the [vue transition modes](https://vuejs.org/v2/guide/transitions.html#Transition-Modes).
+ * You can use it when you want to control the render between state transitions.
+ * Based on the selected mode and the child's key which is the `Transition` or `CSSTransition` component, the `SwitchTransition` makes a consistent transition between them.
+ *
+ * If the `out-in` mode is selected, the `SwitchTransition` waits until the old child leaves and then inserts a new child.
+ * If the `in-out` mode is selected, the `SwitchTransition` inserts a new child first, waits for the new child to enter and then removes the old child
+ *
+ * ```jsx
+ *
+ * function App() {
+ *  const [state, setState] = useState(false);
+ *  return (
+ *    <SwitchTransition>
+ *      <FadeTransition key={state ? "Goodbye, world!" : "Hello, world!"}
+ *        addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
+ *        classNames='fade' >
+ *        <button onClick={() => setState(state => !state)}>
+ *          {state ? "Goodbye, world!" : "Hello, world!"}
+ *        </button>
+ *      </FadeTransition>
+ *    </SwitchTransition>
+ *  )
+ * }
+ * ```
+ */
+
+var SwitchTransition =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(SwitchTransition, _React$Component);
+
+  function SwitchTransition() {
+    var _this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    _this = _React$Component.call.apply(_React$Component, [this].concat(args)) || this;
+    _this.state = {
+      status: _Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERED"],
+      current: null
+    };
+    _this.appeared = false;
+
+    _this.changeState = function (status, current) {
+      if (current === void 0) {
+        current = _this.state.current;
+      }
+
+      _this.setState({
+        status: status,
+        current: current
+      });
+    };
+
+    return _this;
+  }
+
+  var _proto = SwitchTransition.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.appeared = true;
+  };
+
+  SwitchTransition.getDerivedStateFromProps = function getDerivedStateFromProps(props, state) {
+    if (props.children == null) {
+      return {
+        current: null
+      };
+    }
+
+    if (state.status === _Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERING"] && props.mode === modes.in) {
+      return {
+        status: _Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERING"]
+      };
+    }
+
+    if (state.current && areChildrenDifferent(state.current, props.children)) {
+      return {
+        status: _Transition__WEBPACK_IMPORTED_MODULE_3__["EXITING"]
+      };
+    }
+
+    return {
+      current: react__WEBPACK_IMPORTED_MODULE_1___default.a.cloneElement(props.children, {
+        in: true
+      })
+    };
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        children = _this$props.children,
+        mode = _this$props.mode,
+        _this$state = this.state,
+        status = _this$state.status,
+        current = _this$state.current;
+    var data = {
+      children: children,
+      current: current,
+      changeState: this.changeState,
+      status: status
+    };
+    var component;
+
+    switch (status) {
+      case _Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERING"]:
+        component = enterRenders[mode](data);
+        break;
+
+      case _Transition__WEBPACK_IMPORTED_MODULE_3__["EXITING"]:
+        component = leaveRenders[mode](data);
+        break;
+
+      case _Transition__WEBPACK_IMPORTED_MODULE_3__["ENTERED"]:
+        component = current;
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_TransitionGroupContext__WEBPACK_IMPORTED_MODULE_4__["default"].Provider, {
+      value: {
+        isMounting: !this.appeared
+      }
+    }, component);
+  };
+
+  return SwitchTransition;
+}(react__WEBPACK_IMPORTED_MODULE_1___default.a.Component);
+
+SwitchTransition.propTypes =  true ? {
+  /**
+   * Transition modes.
+   * `out-in`: Current element transitions out first, then when complete, the new element transitions in.
+   * `in-out: New element transitions in first, then when complete, the current element transitions out.`
+   *
+   * @type {'out-in'|'in-out'}
+   */
+  mode: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOf([modes.in, modes.out]),
+
+  /**
+   * Any `Transition` or `CSSTransition` component
+   */
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.element.isRequired])
+} : undefined;
+SwitchTransition.defaultProps = {
+  mode: modes.out
+};
+/* harmony default export */ __webpack_exports__["default"] = (SwitchTransition);
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/Transition.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/Transition.js ***!
+  \***************************************************************/
+/*! exports provided: UNMOUNTED, EXITED, ENTERING, ENTERED, EXITING, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UNMOUNTED", function() { return UNMOUNTED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EXITED", function() { return EXITED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ENTERING", function() { return ENTERING; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ENTERED", function() { return ENTERED; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EXITING", function() { return EXITING; });
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./config */ "./node_modules/react-transition-group/esm/config.js");
+/* harmony import */ var _utils_PropTypes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./utils/PropTypes */ "./node_modules/react-transition-group/esm/utils/PropTypes.js");
+/* harmony import */ var _TransitionGroupContext__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TransitionGroupContext */ "./node_modules/react-transition-group/esm/TransitionGroupContext.js");
+
+
+
+
+
+
+
+
+var UNMOUNTED = 'unmounted';
+var EXITED = 'exited';
+var ENTERING = 'entering';
+var ENTERED = 'entered';
+var EXITING = 'exiting';
+/**
+ * The Transition component lets you describe a transition from one component
+ * state to another _over time_ with a simple declarative API. Most commonly
+ * it's used to animate the mounting and unmounting of a component, but can also
+ * be used to describe in-place transition states as well.
+ *
+ * ---
+ *
+ * **Note**: `Transition` is a platform-agnostic base component. If you're using
+ * transitions in CSS, you'll probably want to use
+ * [`CSSTransition`](https://reactcommunity.org/react-transition-group/css-transition)
+ * instead. It inherits all the features of `Transition`, but contains
+ * additional features necessary to play nice with CSS transitions (hence the
+ * name of the component).
+ *
+ * ---
+ *
+ * By default the `Transition` component does not alter the behavior of the
+ * component it renders, it only tracks "enter" and "exit" states for the
+ * components. It's up to you to give meaning and effect to those states. For
+ * example we can add styles to a component when it enters or exits:
+ *
+ * ```jsx
+ * import { Transition } from 'react-transition-group';
+ *
+ * const duration = 300;
+ *
+ * const defaultStyle = {
+ *   transition: `opacity ${duration}ms ease-in-out`,
+ *   opacity: 0,
+ * }
+ *
+ * const transitionStyles = {
+ *   entering: { opacity: 1 },
+ *   entered:  { opacity: 1 },
+ *   exiting:  { opacity: 0 },
+ *   exited:  { opacity: 0 },
+ * };
+ *
+ * const Fade = ({ in: inProp }) => (
+ *   <Transition in={inProp} timeout={duration}>
+ *     {state => (
+ *       <div style={{
+ *         ...defaultStyle,
+ *         ...transitionStyles[state]
+ *       }}>
+ *         I'm a fade Transition!
+ *       </div>
+ *     )}
+ *   </Transition>
+ * );
+ * ```
+ *
+ * There are 4 main states a Transition can be in:
+ *  - `'entering'`
+ *  - `'entered'`
+ *  - `'exiting'`
+ *  - `'exited'`
+ *
+ * Transition state is toggled via the `in` prop. When `true` the component
+ * begins the "Enter" stage. During this stage, the component will shift from
+ * its current transition state, to `'entering'` for the duration of the
+ * transition and then to the `'entered'` stage once it's complete. Let's take
+ * the following example (we'll use the
+ * [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook):
+ *
+ * ```jsx
+ * function App() {
+ *   const [inProp, setInProp] = useState(false);
+ *   return (
+ *     <div>
+ *       <Transition in={inProp} timeout={500}>
+ *         {state => (
+ *           // ...
+ *         )}
+ *       </Transition>
+ *       <button onClick={() => setInProp(true)}>
+ *         Click to Enter
+ *       </button>
+ *     </div>
+ *   );
+ * }
+ * ```
+ *
+ * When the button is clicked the component will shift to the `'entering'` state
+ * and stay there for 500ms (the value of `timeout`) before it finally switches
+ * to `'entered'`.
+ *
+ * When `in` is `false` the same thing happens except the state moves from
+ * `'exiting'` to `'exited'`.
+ */
+
+var Transition =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_1__["default"])(Transition, _React$Component);
+
+  function Transition(props, context) {
+    var _this;
+
+    _this = _React$Component.call(this, props, context) || this;
+    var parentGroup = context; // In the context of a TransitionGroup all enters are really appears
+
+    var appear = parentGroup && !parentGroup.isMounting ? props.enter : props.appear;
+    var initialStatus;
+    _this.appearStatus = null;
+
+    if (props.in) {
+      if (appear) {
+        initialStatus = EXITED;
+        _this.appearStatus = ENTERING;
+      } else {
+        initialStatus = ENTERED;
+      }
+    } else {
+      if (props.unmountOnExit || props.mountOnEnter) {
+        initialStatus = UNMOUNTED;
+      } else {
+        initialStatus = EXITED;
+      }
+    }
+
+    _this.state = {
+      status: initialStatus
+    };
+    _this.nextCallback = null;
+    return _this;
+  }
+
+  Transition.getDerivedStateFromProps = function getDerivedStateFromProps(_ref, prevState) {
+    var nextIn = _ref.in;
+
+    if (nextIn && prevState.status === UNMOUNTED) {
+      return {
+        status: EXITED
+      };
+    }
+
+    return null;
+  }; // getSnapshotBeforeUpdate(prevProps) {
+  //   let nextStatus = null
+  //   if (prevProps !== this.props) {
+  //     const { status } = this.state
+  //     if (this.props.in) {
+  //       if (status !== ENTERING && status !== ENTERED) {
+  //         nextStatus = ENTERING
+  //       }
+  //     } else {
+  //       if (status === ENTERING || status === ENTERED) {
+  //         nextStatus = EXITING
+  //       }
+  //     }
+  //   }
+  //   return { nextStatus }
+  // }
+
+
+  var _proto = Transition.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.updateStatus(true, this.appearStatus);
+  };
+
+  _proto.componentDidUpdate = function componentDidUpdate(prevProps) {
+    var nextStatus = null;
+
+    if (prevProps !== this.props) {
+      var status = this.state.status;
+
+      if (this.props.in) {
+        if (status !== ENTERING && status !== ENTERED) {
+          nextStatus = ENTERING;
+        }
+      } else {
+        if (status === ENTERING || status === ENTERED) {
+          nextStatus = EXITING;
+        }
+      }
+    }
+
+    this.updateStatus(false, nextStatus);
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.cancelNextCallback();
+  };
+
+  _proto.getTimeouts = function getTimeouts() {
+    var timeout = this.props.timeout;
+    var exit, enter, appear;
+    exit = enter = appear = timeout;
+
+    if (timeout != null && typeof timeout !== 'number') {
+      exit = timeout.exit;
+      enter = timeout.enter; // TODO: remove fallback for next major
+
+      appear = timeout.appear !== undefined ? timeout.appear : enter;
+    }
+
+    return {
+      exit: exit,
+      enter: enter,
+      appear: appear
+    };
+  };
+
+  _proto.updateStatus = function updateStatus(mounting, nextStatus) {
+    if (mounting === void 0) {
+      mounting = false;
+    }
+
+    if (nextStatus !== null) {
+      // nextStatus will always be ENTERING or EXITING.
+      this.cancelNextCallback();
+      var node = react_dom__WEBPACK_IMPORTED_MODULE_4___default.a.findDOMNode(this);
+
+      if (nextStatus === ENTERING) {
+        this.performEnter(node, mounting);
+      } else {
+        this.performExit(node);
+      }
+    } else if (this.props.unmountOnExit && this.state.status === EXITED) {
+      this.setState({
+        status: UNMOUNTED
+      });
+    }
+  };
+
+  _proto.performEnter = function performEnter(node, mounting) {
+    var _this2 = this;
+
+    var enter = this.props.enter;
+    var appearing = this.context ? this.context.isMounting : mounting;
+    var timeouts = this.getTimeouts();
+    var enterTimeout = appearing ? timeouts.appear : timeouts.enter; // no enter animation skip right to ENTERED
+    // if we are mounting and running this it means appear _must_ be set
+
+    if (!mounting && !enter || _config__WEBPACK_IMPORTED_MODULE_5__["default"].disabled) {
+      this.safeSetState({
+        status: ENTERED
+      }, function () {
+        _this2.props.onEntered(node);
+      });
+      return;
+    }
+
+    this.props.onEnter(node, appearing);
+    this.safeSetState({
+      status: ENTERING
+    }, function () {
+      _this2.props.onEntering(node, appearing);
+
+      _this2.onTransitionEnd(node, enterTimeout, function () {
+        _this2.safeSetState({
+          status: ENTERED
+        }, function () {
+          _this2.props.onEntered(node, appearing);
+        });
+      });
+    });
+  };
+
+  _proto.performExit = function performExit(node) {
+    var _this3 = this;
+
+    var exit = this.props.exit;
+    var timeouts = this.getTimeouts(); // no exit animation skip right to EXITED
+
+    if (!exit || _config__WEBPACK_IMPORTED_MODULE_5__["default"].disabled) {
+      this.safeSetState({
+        status: EXITED
+      }, function () {
+        _this3.props.onExited(node);
+      });
+      return;
+    }
+
+    this.props.onExit(node);
+    this.safeSetState({
+      status: EXITING
+    }, function () {
+      _this3.props.onExiting(node);
+
+      _this3.onTransitionEnd(node, timeouts.exit, function () {
+        _this3.safeSetState({
+          status: EXITED
+        }, function () {
+          _this3.props.onExited(node);
+        });
+      });
+    });
+  };
+
+  _proto.cancelNextCallback = function cancelNextCallback() {
+    if (this.nextCallback !== null) {
+      this.nextCallback.cancel();
+      this.nextCallback = null;
+    }
+  };
+
+  _proto.safeSetState = function safeSetState(nextState, callback) {
+    // This shouldn't be necessary, but there are weird race conditions with
+    // setState callbacks and unmounting in testing, so always make sure that
+    // we can cancel any pending setState callbacks after we unmount.
+    callback = this.setNextCallback(callback);
+    this.setState(nextState, callback);
+  };
+
+  _proto.setNextCallback = function setNextCallback(callback) {
+    var _this4 = this;
+
+    var active = true;
+
+    this.nextCallback = function (event) {
+      if (active) {
+        active = false;
+        _this4.nextCallback = null;
+        callback(event);
+      }
+    };
+
+    this.nextCallback.cancel = function () {
+      active = false;
+    };
+
+    return this.nextCallback;
+  };
+
+  _proto.onTransitionEnd = function onTransitionEnd(node, timeout, handler) {
+    this.setNextCallback(handler);
+    var doesNotHaveTimeoutOrListener = timeout == null && !this.props.addEndListener;
+
+    if (!node || doesNotHaveTimeoutOrListener) {
+      setTimeout(this.nextCallback, 0);
+      return;
+    }
+
+    if (this.props.addEndListener) {
+      this.props.addEndListener(node, this.nextCallback);
+    }
+
+    if (timeout != null) {
+      setTimeout(this.nextCallback, timeout);
+    }
+  };
+
+  _proto.render = function render() {
+    var status = this.state.status;
+
+    if (status === UNMOUNTED) {
+      return null;
+    }
+
+    var _this$props = this.props,
+        children = _this$props.children,
+        childProps = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(_this$props, ["children"]); // filter props for Transtition
+
+
+    delete childProps.in;
+    delete childProps.mountOnEnter;
+    delete childProps.unmountOnExit;
+    delete childProps.appear;
+    delete childProps.enter;
+    delete childProps.exit;
+    delete childProps.timeout;
+    delete childProps.addEndListener;
+    delete childProps.onEnter;
+    delete childProps.onEntering;
+    delete childProps.onEntered;
+    delete childProps.onExit;
+    delete childProps.onExiting;
+    delete childProps.onExited;
+
+    if (typeof children === 'function') {
+      // allows for nested Transitions
+      return react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_TransitionGroupContext__WEBPACK_IMPORTED_MODULE_7__["default"].Provider, {
+        value: null
+      }, children(status, childProps));
+    }
+
+    var child = react__WEBPACK_IMPORTED_MODULE_3___default.a.Children.only(children);
+    return (// allows for nested Transitions
+      react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_TransitionGroupContext__WEBPACK_IMPORTED_MODULE_7__["default"].Provider, {
+        value: null
+      }, react__WEBPACK_IMPORTED_MODULE_3___default.a.cloneElement(child, childProps))
+    );
+  };
+
+  return Transition;
+}(react__WEBPACK_IMPORTED_MODULE_3___default.a.Component);
+
+Transition.contextType = _TransitionGroupContext__WEBPACK_IMPORTED_MODULE_7__["default"];
+Transition.propTypes =  true ? {
+  /**
+   * A `function` child can be used instead of a React element. This function is
+   * called with the current transition status (`'entering'`, `'entered'`,
+   * `'exiting'`, `'exited'`), which can be used to apply context
+   * specific props to a component.
+   *
+   * ```jsx
+   * <Transition in={this.state.in} timeout={150}>
+   *   {state => (
+   *     <MyComponent className={`fade fade-${state}`} />
+   *   )}
+   * </Transition>
+   * ```
+   */
+  children: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func.isRequired, prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.element.isRequired]).isRequired,
+
+  /**
+   * Show the component; triggers the enter or exit states
+   */
+  in: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+
+  /**
+   * By default the child component is mounted immediately along with
+   * the parent `Transition` component. If you want to "lazy mount" the component on the
+   * first `in={true}` you can set `mountOnEnter`. After the first enter transition the component will stay
+   * mounted, even on "exited", unless you also specify `unmountOnExit`.
+   */
+  mountOnEnter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+
+  /**
+   * By default the child component stays mounted after it reaches the `'exited'` state.
+   * Set `unmountOnExit` if you'd prefer to unmount the component after it finishes exiting.
+   */
+  unmountOnExit: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+
+  /**
+   * Normally a component is not transitioned if it is shown when the
+   * `<Transition>` component mounts. If you want to transition on the first
+   * mount set `appear` to `true`, and the component will transition in as soon
+   * as the `<Transition>` mounts.
+   *
+   * > **Note**: there are no special appear states like `appearing`/`appeared`, this prop
+   * > only adds an additional enter transition. However, in the
+   * > `<CSSTransition>` component that first enter transition does result in
+   * > additional `.appear-*` classes, that way you can choose to style it
+   * > differently.
+   */
+  appear: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+
+  /**
+   * Enable or disable enter transitions.
+   */
+  enter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+
+  /**
+   * Enable or disable exit transitions.
+   */
+  exit: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.bool,
+
+  /**
+   * The duration of the transition, in milliseconds.
+   * Required unless `addEndListener` is provided.
+   *
+   * You may specify a single timeout for all transitions:
+   *
+   * ```jsx
+   * timeout={500}
+   * ```
+   *
+   * or individually:
+   *
+   * ```jsx
+   * timeout={{
+   *  appear: 500,
+   *  enter: 300,
+   *  exit: 500,
+   * }}
+   * ```
+   *
+   * - `appear` defaults to the value of `enter`
+   * - `enter` defaults to `0`
+   * - `exit` defaults to `0`
+   *
+   * @type {number | { enter?: number, exit?: number, appear?: number }}
+   */
+  timeout: function timeout(props) {
+    var pt = _utils_PropTypes__WEBPACK_IMPORTED_MODULE_6__["timeoutsShape"];
+    if (!props.addEndListener) pt = pt.isRequired;
+
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    return pt.apply(void 0, [props].concat(args));
+  },
+
+  /**
+   * Add a custom transition end trigger. Called with the transitioning
+   * DOM node and a `done` callback. Allows for more fine grained transition end
+   * logic. **Note:** Timeouts are still used as a fallback if provided.
+   *
+   * ```jsx
+   * addEndListener={(node, done) => {
+   *   // use the css transitionend event to mark the finish of a transition
+   *   node.addEventListener('transitionend', done, false);
+   * }}
+   * ```
+   */
+  addEndListener: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+  /**
+   * Callback fired before the "entering" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool) -> void
+   */
+  onEnter: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+  /**
+   * Callback fired after the "entering" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool)
+   */
+  onEntering: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+  /**
+   * Callback fired after the "entered" status is applied. An extra parameter
+   * `isAppearing` is supplied to indicate if the enter stage is occurring on the initial mount
+   *
+   * @type Function(node: HtmlElement, isAppearing: bool) -> void
+   */
+  onEntered: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+  /**
+   * Callback fired before the "exiting" status is applied.
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExit: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+  /**
+   * Callback fired after the "exiting" status is applied.
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExiting: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func,
+
+  /**
+   * Callback fired after the "exited" status is applied.
+   *
+   * @type Function(node: HtmlElement) -> void
+   */
+  onExited: prop_types__WEBPACK_IMPORTED_MODULE_2___default.a.func // Name the function so it is clearer in the documentation
+
+} : undefined;
+
+function noop() {}
+
+Transition.defaultProps = {
+  in: false,
+  mountOnEnter: false,
+  unmountOnExit: false,
+  appear: false,
+  enter: true,
+  exit: true,
+  onEnter: noop,
+  onEntering: noop,
+  onEntered: noop,
+  onExit: noop,
+  onExiting: noop,
+  onExited: noop
+};
+Transition.UNMOUNTED = 0;
+Transition.EXITED = 1;
+Transition.ENTERING = 2;
+Transition.ENTERED = 3;
+Transition.EXITING = 4;
+/* harmony default export */ __webpack_exports__["default"] = (Transition);
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/TransitionGroup.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/TransitionGroup.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/objectWithoutPropertiesLoose */ "./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var _babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime/helpers/esm/inheritsLoose */ "./node_modules/@babel/runtime/helpers/esm/inheritsLoose.js");
+/* harmony import */ var _babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime/helpers/esm/assertThisInitialized */ "./node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _TransitionGroupContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TransitionGroupContext */ "./node_modules/react-transition-group/esm/TransitionGroupContext.js");
+/* harmony import */ var _utils_ChildMapping__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./utils/ChildMapping */ "./node_modules/react-transition-group/esm/utils/ChildMapping.js");
+
+
+
+
+
+
+
+
+
+var values = Object.values || function (obj) {
+  return Object.keys(obj).map(function (k) {
+    return obj[k];
+  });
+};
+
+var defaultProps = {
+  component: 'div',
+  childFactory: function childFactory(child) {
+    return child;
+  }
+  /**
+   * The `<TransitionGroup>` component manages a set of transition components
+   * (`<Transition>` and `<CSSTransition>`) in a list. Like with the transition
+   * components, `<TransitionGroup>` is a state machine for managing the mounting
+   * and unmounting of components over time.
+   *
+   * Consider the example below. As items are removed or added to the TodoList the
+   * `in` prop is toggled automatically by the `<TransitionGroup>`.
+   *
+   * Note that `<TransitionGroup>`  does not define any animation behavior!
+   * Exactly _how_ a list item animates is up to the individual transition
+   * component. This means you can mix and match animations across different list
+   * items.
+   */
+
+};
+
+var TransitionGroup =
+/*#__PURE__*/
+function (_React$Component) {
+  Object(_babel_runtime_helpers_esm_inheritsLoose__WEBPACK_IMPORTED_MODULE_2__["default"])(TransitionGroup, _React$Component);
+
+  function TransitionGroup(props, context) {
+    var _this;
+
+    _this = _React$Component.call(this, props, context) || this;
+
+    var handleExited = _this.handleExited.bind(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__["default"])(Object(_babel_runtime_helpers_esm_assertThisInitialized__WEBPACK_IMPORTED_MODULE_3__["default"])(_this))); // Initial children should all be entering, dependent on appear
+
+
+    _this.state = {
+      contextValue: {
+        isMounting: true
+      },
+      handleExited: handleExited,
+      firstRender: true
+    };
+    return _this;
+  }
+
+  var _proto = TransitionGroup.prototype;
+
+  _proto.componentDidMount = function componentDidMount() {
+    this.mounted = true;
+    this.setState({
+      contextValue: {
+        isMounting: false
+      }
+    });
+  };
+
+  _proto.componentWillUnmount = function componentWillUnmount() {
+    this.mounted = false;
+  };
+
+  TransitionGroup.getDerivedStateFromProps = function getDerivedStateFromProps(nextProps, _ref) {
+    var prevChildMapping = _ref.children,
+        handleExited = _ref.handleExited,
+        firstRender = _ref.firstRender;
+    return {
+      children: firstRender ? Object(_utils_ChildMapping__WEBPACK_IMPORTED_MODULE_7__["getInitialChildMapping"])(nextProps, handleExited) : Object(_utils_ChildMapping__WEBPACK_IMPORTED_MODULE_7__["getNextChildMapping"])(nextProps, prevChildMapping, handleExited),
+      firstRender: false
+    };
+  };
+
+  _proto.handleExited = function handleExited(child, node) {
+    var currentChildMapping = Object(_utils_ChildMapping__WEBPACK_IMPORTED_MODULE_7__["getChildMapping"])(this.props.children);
+    if (child.key in currentChildMapping) return;
+
+    if (child.props.onExited) {
+      child.props.onExited(node);
+    }
+
+    if (this.mounted) {
+      this.setState(function (state) {
+        var children = Object(_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_1__["default"])({}, state.children);
+
+        delete children[child.key];
+        return {
+          children: children
+        };
+      });
+    }
+  };
+
+  _proto.render = function render() {
+    var _this$props = this.props,
+        Component = _this$props.component,
+        childFactory = _this$props.childFactory,
+        props = Object(_babel_runtime_helpers_esm_objectWithoutPropertiesLoose__WEBPACK_IMPORTED_MODULE_0__["default"])(_this$props, ["component", "childFactory"]);
+
+    var contextValue = this.state.contextValue;
+    var children = values(this.state.children).map(childFactory);
+    delete props.appear;
+    delete props.enter;
+    delete props.exit;
+
+    if (Component === null) {
+      return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_TransitionGroupContext__WEBPACK_IMPORTED_MODULE_6__["default"].Provider, {
+        value: contextValue
+      }, children);
+    }
+
+    return react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(_TransitionGroupContext__WEBPACK_IMPORTED_MODULE_6__["default"].Provider, {
+      value: contextValue
+    }, react__WEBPACK_IMPORTED_MODULE_5___default.a.createElement(Component, props, children));
+  };
+
+  return TransitionGroup;
+}(react__WEBPACK_IMPORTED_MODULE_5___default.a.Component);
+
+TransitionGroup.propTypes =  true ? {
+  /**
+   * `<TransitionGroup>` renders a `<div>` by default. You can change this
+   * behavior by providing a `component` prop.
+   * If you use React v16+ and would like to avoid a wrapping `<div>` element
+   * you can pass in `component={null}`. This is useful if the wrapping div
+   * borks your css styles.
+   */
+  component: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.any,
+
+  /**
+   * A set of `<Transition>` components, that are toggled `in` and out as they
+   * leave. the `<TransitionGroup>` will inject specific transition props, so
+   * remember to spread them through if you are wrapping the `<Transition>` as
+   * with our `<Fade>` example.
+   *
+   * While this component is meant for multiple `Transition` or `CSSTransition`
+   * children, sometimes you may want to have a single transition child with
+   * content that you want to be transitioned out and in when you change it
+   * (e.g. routes, images etc.) In that case you can change the `key` prop of
+   * the transition child as you change its content, this will cause
+   * `TransitionGroup` to transition the child out and back in.
+   */
+  children: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.node,
+
+  /**
+   * A convenience prop that enables or disables appear animations
+   * for all children. Note that specifying this will override any defaults set
+   * on individual children Transitions.
+   */
+  appear: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * A convenience prop that enables or disables enter animations
+   * for all children. Note that specifying this will override any defaults set
+   * on individual children Transitions.
+   */
+  enter: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * A convenience prop that enables or disables exit animations
+   * for all children. Note that specifying this will override any defaults set
+   * on individual children Transitions.
+   */
+  exit: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.bool,
+
+  /**
+   * You may need to apply reactive updates to a child as it is exiting.
+   * This is generally done by using `cloneElement` however in the case of an exiting
+   * child the element has already been removed and not accessible to the consumer.
+   *
+   * If you do need to update a child as it leaves you can provide a `childFactory`
+   * to wrap every child, even the ones that are leaving.
+   *
+   * @type Function(child: ReactElement) -> ReactElement
+   */
+  childFactory: prop_types__WEBPACK_IMPORTED_MODULE_4___default.a.func
+} : undefined;
+TransitionGroup.defaultProps = defaultProps;
+/* harmony default export */ __webpack_exports__["default"] = (TransitionGroup);
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/TransitionGroupContext.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/TransitionGroupContext.js ***!
+  \***************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/* harmony default export */ __webpack_exports__["default"] = (react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext(null));
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/config.js":
+/*!***********************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/config.js ***!
+  \***********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  disabled: false
+});
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/index.js ***!
+  \**********************************************************/
+/*! exports provided: CSSTransition, ReplaceTransition, SwitchTransition, TransitionGroup, Transition, config */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CSSTransition__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CSSTransition */ "./node_modules/react-transition-group/esm/CSSTransition.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CSSTransition", function() { return _CSSTransition__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _ReplaceTransition__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReplaceTransition */ "./node_modules/react-transition-group/esm/ReplaceTransition.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ReplaceTransition", function() { return _ReplaceTransition__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _SwitchTransition__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./SwitchTransition */ "./node_modules/react-transition-group/esm/SwitchTransition.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SwitchTransition", function() { return _SwitchTransition__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _TransitionGroup__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TransitionGroup */ "./node_modules/react-transition-group/esm/TransitionGroup.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransitionGroup", function() { return _TransitionGroup__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _Transition__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Transition */ "./node_modules/react-transition-group/esm/Transition.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Transition", function() { return _Transition__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./config */ "./node_modules/react-transition-group/esm/config.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "config", function() { return _config__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/utils/ChildMapping.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/utils/ChildMapping.js ***!
+  \***********************************************************************/
+/*! exports provided: getChildMapping, mergeChildMappings, getInitialChildMapping, getNextChildMapping */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getChildMapping", function() { return getChildMapping; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mergeChildMappings", function() { return mergeChildMappings; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getInitialChildMapping", function() { return getInitialChildMapping; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNextChildMapping", function() { return getNextChildMapping; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+/**
+ * Given `this.props.children`, return an object mapping key to child.
+ *
+ * @param {*} children `this.props.children`
+ * @return {object} Mapping of key to child
+ */
+
+function getChildMapping(children, mapFn) {
+  var mapper = function mapper(child) {
+    return mapFn && Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(child) ? mapFn(child) : child;
+  };
+
+  var result = Object.create(null);
+  if (children) react__WEBPACK_IMPORTED_MODULE_0__["Children"].map(children, function (c) {
+    return c;
+  }).forEach(function (child) {
+    // run the map function here instead so that the key is the computed one
+    result[child.key] = mapper(child);
+  });
+  return result;
+}
+/**
+ * When you're adding or removing children some may be added or removed in the
+ * same render pass. We want to show *both* since we want to simultaneously
+ * animate elements in and out. This function takes a previous set of keys
+ * and a new set of keys and merges them with its best guess of the correct
+ * ordering. In the future we may expose some of the utilities in
+ * ReactMultiChild to make this easy, but for now React itself does not
+ * directly have this concept of the union of prevChildren and nextChildren
+ * so we implement it here.
+ *
+ * @param {object} prev prev children as returned from
+ * `ReactTransitionChildMapping.getChildMapping()`.
+ * @param {object} next next children as returned from
+ * `ReactTransitionChildMapping.getChildMapping()`.
+ * @return {object} a key set that contains all keys in `prev` and all keys
+ * in `next` in a reasonable order.
+ */
+
+function mergeChildMappings(prev, next) {
+  prev = prev || {};
+  next = next || {};
+
+  function getValueForKey(key) {
+    return key in next ? next[key] : prev[key];
+  } // For each key of `next`, the list of keys to insert before that key in
+  // the combined list
+
+
+  var nextKeysPending = Object.create(null);
+  var pendingKeys = [];
+
+  for (var prevKey in prev) {
+    if (prevKey in next) {
+      if (pendingKeys.length) {
+        nextKeysPending[prevKey] = pendingKeys;
+        pendingKeys = [];
+      }
+    } else {
+      pendingKeys.push(prevKey);
+    }
+  }
+
+  var i;
+  var childMapping = {};
+
+  for (var nextKey in next) {
+    if (nextKeysPending[nextKey]) {
+      for (i = 0; i < nextKeysPending[nextKey].length; i++) {
+        var pendingNextKey = nextKeysPending[nextKey][i];
+        childMapping[nextKeysPending[nextKey][i]] = getValueForKey(pendingNextKey);
+      }
+    }
+
+    childMapping[nextKey] = getValueForKey(nextKey);
+  } // Finally, add the keys which didn't appear before any key in `next`
+
+
+  for (i = 0; i < pendingKeys.length; i++) {
+    childMapping[pendingKeys[i]] = getValueForKey(pendingKeys[i]);
+  }
+
+  return childMapping;
+}
+
+function getProp(child, prop, props) {
+  return props[prop] != null ? props[prop] : child.props[prop];
+}
+
+function getInitialChildMapping(props, onExited) {
+  return getChildMapping(props.children, function (child) {
+    return Object(react__WEBPACK_IMPORTED_MODULE_0__["cloneElement"])(child, {
+      onExited: onExited.bind(null, child),
+      in: true,
+      appear: getProp(child, 'appear', props),
+      enter: getProp(child, 'enter', props),
+      exit: getProp(child, 'exit', props)
+    });
+  });
+}
+function getNextChildMapping(nextProps, prevChildMapping, onExited) {
+  var nextChildMapping = getChildMapping(nextProps.children);
+  var children = mergeChildMappings(prevChildMapping, nextChildMapping);
+  Object.keys(children).forEach(function (key) {
+    var child = children[key];
+    if (!Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(child)) return;
+    var hasPrev = key in prevChildMapping;
+    var hasNext = key in nextChildMapping;
+    var prevChild = prevChildMapping[key];
+    var isLeaving = Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(prevChild) && !prevChild.props.in; // item is new (entering)
+
+    if (hasNext && (!hasPrev || isLeaving)) {
+      // console.log('entering', key)
+      children[key] = Object(react__WEBPACK_IMPORTED_MODULE_0__["cloneElement"])(child, {
+        onExited: onExited.bind(null, child),
+        in: true,
+        exit: getProp(child, 'exit', nextProps),
+        enter: getProp(child, 'enter', nextProps)
+      });
+    } else if (!hasNext && hasPrev && !isLeaving) {
+      // item is old (exiting)
+      // console.log('leaving', key)
+      children[key] = Object(react__WEBPACK_IMPORTED_MODULE_0__["cloneElement"])(child, {
+        in: false
+      });
+    } else if (hasNext && hasPrev && Object(react__WEBPACK_IMPORTED_MODULE_0__["isValidElement"])(prevChild)) {
+      // item hasn't changed transition states
+      // copy over the last transition props;
+      // console.log('unchanged', key)
+      children[key] = Object(react__WEBPACK_IMPORTED_MODULE_0__["cloneElement"])(child, {
+        onExited: onExited.bind(null, child),
+        in: prevChild.props.in,
+        exit: getProp(child, 'exit', nextProps),
+        enter: getProp(child, 'enter', nextProps)
+      });
+    }
+  });
+  return children;
+}
+
+/***/ }),
+
+/***/ "./node_modules/react-transition-group/esm/utils/PropTypes.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-transition-group/esm/utils/PropTypes.js ***!
+  \********************************************************************/
+/*! exports provided: timeoutsShape, classNamesShape */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "timeoutsShape", function() { return timeoutsShape; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "classNamesShape", function() { return classNamesShape; });
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_0__);
+
+var timeoutsShape =  true ? prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number, prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+  enter: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number,
+  exit: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number,
+  appear: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.number
+}).isRequired]) : undefined;
+var classNamesShape =  true ? prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.oneOfType([prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string, prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+  enter: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  exit: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  active: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
+}), prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.shape({
+  enter: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  enterDone: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  enterActive: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  exit: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  exitDone: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string,
+  exitActive: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.string
+})]) : undefined;
+
+/***/ }),
+
 /***/ "./node_modules/react/cjs/react.development.js":
 /*!*****************************************************!*\
   !*** ./node_modules/react/cjs/react.development.js ***!
@@ -71258,744 +74635,6 @@ module.exports = react;
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/react.development.js */ "./node_modules/react/cjs/react.development.js");
 }
-
-
-/***/ }),
-
-/***/ "./node_modules/regenerator-runtime/runtime.js":
-/*!*****************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime.js ***!
-  \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-!(function(global) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  var inModule = typeof module === "object";
-  var runtime = global.regeneratorRuntime;
-  if (runtime) {
-    if (inModule) {
-      // If regeneratorRuntime is defined globally and we're in a module,
-      // make the exports object identical to regeneratorRuntime.
-      module.exports = runtime;
-    }
-    // Don't bother evaluating the rest of this file if the runtime was
-    // already defined globally.
-    return;
-  }
-
-  // Define the runtime globally (as expected by generated code) as either
-  // module.exports (if we're in a module) or a new, empty object.
-  runtime = global.regeneratorRuntime = inModule ? module.exports : {};
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []);
-
-    // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-
-    return generator;
-  }
-  runtime.wrap = wrap;
-
-  // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-  function tryCatch(fn, obj, arg) {
-    try {
-      return { type: "normal", arg: fn.call(obj, arg) };
-    } catch (err) {
-      return { type: "throw", arg: err };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed";
-
-  // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-  var ContinueSentinel = {};
-
-  // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-  function Generator() {}
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-
-  // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-  var IteratorPrototype = {};
-  IteratorPrototype[iteratorSymbol] = function () {
-    return this;
-  };
-
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-  if (NativeIteratorPrototype &&
-      NativeIteratorPrototype !== Op &&
-      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype =
-    Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
-  GeneratorFunctionPrototype.constructor = GeneratorFunction;
-  GeneratorFunctionPrototype[toStringTagSymbol] =
-    GeneratorFunction.displayName = "GeneratorFunction";
-
-  // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function(method) {
-      prototype[method] = function(arg) {
-        return this._invoke(method, arg);
-      };
-    });
-  }
-
-  runtime.isGeneratorFunction = function(genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor
-      ? ctor === GeneratorFunction ||
-        // For the native GeneratorFunction constructor, the best we can
-        // do is to check its .name property.
-        (ctor.displayName || ctor.name) === "GeneratorFunction"
-      : false;
-  };
-
-  runtime.mark = function(genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      if (!(toStringTagSymbol in genFun)) {
-        genFun[toStringTagSymbol] = "GeneratorFunction";
-      }
-    }
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  };
-
-  // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-  runtime.awrap = function(arg) {
-    return { __await: arg };
-  };
-
-  function AsyncIterator(generator) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-        if (value &&
-            typeof value === "object" &&
-            hasOwn.call(value, "__await")) {
-          return Promise.resolve(value.__await).then(function(value) {
-            invoke("next", value, resolve, reject);
-          }, function(err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return Promise.resolve(value).then(function(unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration. If the Promise is rejected, however, the
-          // result for this iteration will be rejected with the same
-          // reason. Note that rejections of yielded Promises are not
-          // thrown back into the generator function, as is the case
-          // when an awaited Promise is rejected. This difference in
-          // behavior between yield and await is important, because it
-          // allows the consumer to decide what to do with the yielded
-          // rejection (swallow it and continue, manually .throw it back
-          // into the generator, abandon iteration, whatever). With
-          // await, by contrast, there is no opportunity to examine the
-          // rejection reason outside the generator function, so the
-          // only option is to throw it from the await expression, and
-          // let the generator function handle the exception.
-          result.value = unwrapped;
-          resolve(result);
-        }, reject);
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new Promise(function(resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise =
-        // If enqueue has been called before, then we want to wait until
-        // all previous Promises have been resolved before calling invoke,
-        // so that results are always delivered in the correct order. If
-        // enqueue has not been called before, then it is important to
-        // call invoke immediately, without waiting on a callback to fire,
-        // so that the async generator function has the opportunity to do
-        // any necessary setup in a predictable way. This predictability
-        // is why the Promise constructor synchronously invokes its
-        // executor callback, and why async functions synchronously
-        // execute code before the first await. Since we implement simple
-        // async functions in terms of async generators, it is especially
-        // important to get this right, even though it requires care.
-        previousPromise ? previousPromise.then(
-          callInvokeWithMethodAndArg,
-          // Avoid propagating failures to Promises returned by later
-          // invocations of the iterator.
-          callInvokeWithMethodAndArg
-        ) : callInvokeWithMethodAndArg();
-    }
-
-    // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
-    return this;
-  };
-  runtime.AsyncIterator = AsyncIterator;
-
-  // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-  runtime.async = function(innerFn, outerFn, self, tryLocsList) {
-    var iter = new AsyncIterator(
-      wrap(innerFn, outerFn, self, tryLocsList)
-    );
-
-    return runtime.isGeneratorFunction(outerFn)
-      ? iter // If outerFn is a generator, return the full iterator.
-      : iter.next().then(function(result) {
-          return result.done ? result.value : iter.next();
-        });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        }
-
-        // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-
-        var record = tryCatch(innerFn, self, context);
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done
-            ? GenStateCompleted
-            : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-
-        } else if (record.type === "throw") {
-          state = GenStateCompleted;
-          // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  }
-
-  // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        if (delegate.iterator.return) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError(
-          "The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (! info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value;
-
-      // Resume execution at the desired location (see delegateYield).
-      context.next = delegate.nextLoc;
-
-      // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    }
-
-    // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-    context.delegate = null;
-    return ContinueSentinel;
-  }
-
-  // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-  defineIteratorMethods(Gp);
-
-  Gp[toStringTagSymbol] = "Generator";
-
-  // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-  Gp[iteratorSymbol] = function() {
-    return this;
-  };
-
-  Gp.toString = function() {
-    return "[object Generator]";
-  };
-
-  function pushTryEntry(locs) {
-    var entry = { tryLoc: locs[0] };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{ tryLoc: "root" }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  runtime.keys = function(object) {
-    var keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
-    keys.reverse();
-
-    // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      }
-
-      // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1, next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-
-          return next;
-        };
-
-        return next.next = next;
-      }
-    }
-
-    // Return an iterator with no values.
-    return { next: doneResult };
-  }
-  runtime.values = values;
-
-  function doneResult() {
-    return { value: undefined, done: true };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-
-    reset: function(skipTempReset) {
-      this.prev = 0;
-      this.next = 0;
-      // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-
-      this.method = "next";
-      this.arg = undefined;
-
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" &&
-              hasOwn.call(this, name) &&
-              !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-
-    stop: function() {
-      this.done = true;
-
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-
-    dispatchException: function(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !! caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-
-    abrupt: function(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc <= this.prev &&
-            hasOwn.call(entry, "finallyLoc") &&
-            this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry &&
-          (type === "break" ||
-           type === "continue") &&
-          finallyEntry.tryLoc <= arg &&
-          arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-
-    complete: function(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" ||
-          record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-
-    finish: function(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-
-    "catch": function(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-          return thrown;
-        }
-      }
-
-      // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-      throw new Error("illegal catch attempt");
-    },
-
-    delegateYield: function(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  };
-})(
-  // In sloppy mode, unbound `this` refers to the global object, fallback to
-  // Function constructor if we're in global strict mode. That is sadly a form
-  // of indirect eval which violates Content Security Policy.
-  (function() { return this })() || Function("return this")()
-);
 
 
 /***/ }),

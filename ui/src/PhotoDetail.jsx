@@ -3,37 +3,14 @@
 
 import React, { Component } from "react";
 import graphQLFetch from './graphQLFetch.js';
-import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet-universal';
 import { Link } from 'react-router-dom';
+import store from "./store.js";
 
 
 export default class PhotoDetail extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            photo: { images: {}, date: "" },
-            lat: 51.505,
-            lng: -0.09,
-            zoom: 13,
-        };
-    }
 
-    componentDidUpdate(prevProps) {
-        const { match: { params: { id: prevId } } } = prevProps;
-        const { match: { params: { id } } } = this.props;
-        if (prevId !== id) {
-            this.loadData();
-        }
-    }
-
-    componentDidMount() {
-        this.loadData();
-    }
-
-    async loadData() {
-        // get the search query string form url
-        const { match: { params: { id } } } = this.props;
-
+    static async fetchData(match, search, showError) {
 
         // build the graphql query
         const query = `query photo($id: Int!) {
@@ -51,17 +28,56 @@ export default class PhotoDetail extends React.Component {
         }
       }`;
 
+        let { params: { id } } = match;
+        id = parseInt(id);
+        const result = await graphQLFetch(query, { id }, showError);
+        return result;
+    }
+
+    constructor() {
+        super();
+        console.log(store.initialData);
+        const photo = store.initialData ? store.initialData.photo : null;
+        delete store.initialData;
+        this.state = {
+            photo,
+            lat: 51.505,
+            lng: -0.09,
+            zoom: 13,
+        };
+        console.log(this.state);
+    }
+
+    componentDidUpdate(prevProps) {
+        const { match: { params: { id: prevId } } } = prevProps;
+        const { match: { params: { id } } } = this.props;
+        if (prevId !== id) {
+            this.loadData();
+        }
+    }
+
+    componentDidMount() {
+        const { photo } = this.state;
+        if (photo === null) {
+            this.loadData();
+        }
+    }
+
+    async loadData() {
+        // get the search query string form url
+        const { match } = this.props;
         // provide the query with the variables 
-        const data = await graphQLFetch(query, { id });
+        const data = await PhotoDetail.fetchData(match);
         if (data) {
             this.setState({ photo: data.photo });
         }
     }
 
     render() {
+        const { photo } = this.state;
+        if (photo === null) return null;
 
         const { photo: { images: { imageWatermark } } } = this.state;
-        const { photo } = this.state;
         const position = [this.state.lat, this.state.lng];
 
         return (

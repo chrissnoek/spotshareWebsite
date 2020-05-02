@@ -1,18 +1,25 @@
 import 'babel-polyfill';
-import 'whatwg-fetch';
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
-import "./css/style.scss";
+import "../src/css/style.scss";
 import "leaflet/dist/leaflet.css";
 import { BrowserRouter as Router } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.min.css';
 
-import Page from './Page.jsx';
+import Page from '../src/Page.jsx';
+import store from '../src/store.js';
 
-const element = <Router><Page /></Router>;
+// get the initial data from ssr page, and store it in the store object to access when hydrating
+store.initialData = window.__INITIAL_DATA__;
+
+const element = (
+    <Router>
+        <Page />
+    </Router>
+);
 
 // render
-ReactDOM.render(element, document.getElementById("contents"));
+ReactDOM.hydrate(element, document.getElementById("contents"));
 
 if (module.hot) {
     module.hot.accept();

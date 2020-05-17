@@ -40,9 +40,11 @@ class NavBar extends Component {
                     </div>
                 </div>
                 <nav className={menuClassName}>
-                    <NavLink onClick={this.closeMenu} to="/photos/add" className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1">Uploaden</NavLink>
+                    <NavLink onClick={this.closeMenu} to="/fotolocatie/volendam" className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1">TestLocatie</NavLink>
+                    <NavLink onClick={this.closeMenu} to="/foto/mooi-valencia" className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1">TestFoto</NavLink>
+                    <NavLink onClick={this.closeMenu} to="/foto/toevoegen" className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1">Uploaden</NavLink>
                     <NavLink onClick={this.closeMenu} exact to="/" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Home</NavLink>
-                    <NavLink onClick={this.closeMenu} exact to="/photos" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Photos</NavLink>
+                    <NavLink onClick={this.closeMenu} exact to="/fotos" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Photos</NavLink>
                     <NavLink onClick={this.closeMenu} to="/report" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Report</NavLink>
                     <NavLink onClick={this.closeMenu} to="/about" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">About</NavLink>
                 </nav >

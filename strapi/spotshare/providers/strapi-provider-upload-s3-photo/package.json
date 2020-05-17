@@ -1,0 +1,19 @@
+{
+  "name": "strapi-provider-upload-s3-photo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.457.0",
+    "sharp": "0.24.1"
+  },
+  "strapi": {
+    "isProvider": true
+  },
+  "author": "",
+  "license": "ISC"
+}

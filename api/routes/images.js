@@ -15,12 +15,6 @@ aws.config.update({
   region: process.env.AWS_REGION
 });
 
-// Load User model
-// const User = require("../../models/User");
-// @route POST api/images/upload
-// @desc Register user
-// @access Public
-
 const s3 = new aws.S3();
 
 // let storage = multer.diskStorage({

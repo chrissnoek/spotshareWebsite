@@ -1,0 +1,67 @@
+{
+  "kind": "collectionType",
+  "collectionName": "photos",
+  "info": {
+    "name": "Photo"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "desc": {
+      "type": "richtext"
+    },
+    "photo": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "photos"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "shutterspeed": {
+      "type": "string"
+    },
+    "camera": {
+      "type": "string"
+    },
+    "likes": {
+      "type": "integer"
+    },
+    "location": {
+      "via": "photos",
+      "model": "location"
+    },
+    "focalLength": {
+      "type": "string"
+    },
+    "iso": {
+      "type": "integer"
+    },
+    "aperture": {
+      "type": "float"
+    }
+  }
+}

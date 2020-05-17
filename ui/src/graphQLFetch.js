@@ -9,11 +9,14 @@ function jsonDateReviver(key, value) {
     return value;
 }
 
-export default async function graphQLFetch(query, variables = {}, showError = null) {
+export default async function graphQLFetch(query, variables = {}, isBlog = false) {
     //console.log('query from graphQlFetch ' + query)
-    const apiEndpoint = (__isBrowser__) // eslint-disable-line no-undef
+    let apiEndpoint = (__isBrowser__) // eslint-disable-line no-undef
         ? window.ENV.UI_API_ENDPOINT
         : process.env.UI_SERVER_API_ENDPOINT;
+
+    apiEndpoint = isBlog ? 'http://localhost:1337/graphql' : apiEndpoint;
+
     try {
         const response = await fetch(apiEndpoint, {
             method: "POST",

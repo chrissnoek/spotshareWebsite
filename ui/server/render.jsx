@@ -16,6 +16,8 @@ async function render(req, res) {
         route => matchPath(req.path, route)
     );
 
+    console.log(req.path, 'activeRoute: ', activeRoute);
+
     let initialData;
     if (activeRoute && activeRoute.component.fetchData) {
         // get the this.props.match to find the /edit/2 id from url, and send with fetchData function
@@ -28,19 +30,24 @@ async function render(req, res) {
         const search = index !== -1 ? req.url.substr(index) : null;
 
         initialData = await activeRoute.component.fetchData(match, search);
+
+        console.log(initialData);
     }
     store.initialData = initialData;
 
     const context = {};
     const element = (
-        <StaticRouter location={req.url} context>
+        <StaticRouter location={req.url} context={context}>
             <Page />
         </StaticRouter>
     );
     const body = ReactDOMServer.renderToString(element);
 
+    if (context.status === 404) {
+        res.status(404);
+    }
     if (context.url) {
-        res.redirect(301, context.url);
+        return res.redirect(301, context.url);
     } else {
         res.send(template(body, initialData));
     }

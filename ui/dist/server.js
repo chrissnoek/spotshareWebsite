@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "f7ee635272a985cc61d1";
+/******/ 	var hotCurrentHash = "4988ab11184c238fdbc2";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1013,6 +1013,7 @@ async function render(req, res) {
   // we use matchPatch from RRD to return the correct route
   // which matches our current url (req.path)
   const activeRoute = _src_routes_js__WEBPACK_IMPORTED_MODULE_6__["default"].find(route => Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["matchPath"])(req.path, route));
+  console.log(req.path, 'activeRoute: ', activeRoute);
   let initialData;
 
   if (activeRoute && activeRoute.component.fetchData) {
@@ -1023,18 +1024,23 @@ async function render(req, res) {
 
     const search = index !== -1 ? req.url.substr(index) : null;
     initialData = await activeRoute.component.fetchData(match, search);
+    console.log(initialData);
   }
 
   _src_store_js__WEBPACK_IMPORTED_MODULE_5__["default"].initialData = initialData;
   const context = {};
   const element = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["StaticRouter"], {
     location: req.url,
-    context: true
+    context: context
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_Page_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], null));
   const body = react_dom_server__WEBPACK_IMPORTED_MODULE_1___default.a.renderToString(element);
 
+  if (context.status === 404) {
+    res.status(404);
+  }
+
   if (context.url) {
-    res.redirect(301, context.url);
+    return res.redirect(301, context.url);
   } else {
     res.send(Object(_template_js__WEBPACK_IMPORTED_MODULE_4__["default"])(body, initialData));
   }
@@ -1254,6 +1260,114 @@ class About extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
 /***/ }),
 
+/***/ "./src/BlogPost.jsx":
+/*!**************************!*\
+  !*** ./src/BlogPost.jsx ***!
+  \**************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BlogPost; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store.js */ "./src/store.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_3__);
+
+
+
+
+class BlogPost extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  static async fetchData(match, search, showError) {
+    // build the graphql query
+    const query = `query articleBySlug($slug: String!){
+            articleBySlug(slug: $slug) {
+                id
+                title
+                body
+                slug
+            }
+        }`;
+    let {
+      params: {
+        [0]: slug
+      }
+    } = match;
+    slug = slug.replace(/\//g, "");
+    const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
+      slug
+    }, true);
+    return result;
+  }
+
+  constructor() {
+    super();
+    const articleBySlug = _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData != null ? _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData.articleBySlug : null;
+    delete _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData;
+    this.state = {
+      articleBySlug,
+      slug: null
+    };
+  }
+
+  componentDidUpdate(prevProps) {// const { match: { params: { id: prevId } } } = prevProps;
+    // const { match: { params: { id } } } = this.props;
+    // if (prevId !== id) {
+    //     this.loadData();
+    // }
+  }
+
+  componentDidMount() {
+    const {
+      articleBySlug
+    } = this.state;
+
+    if (articleBySlug === null) {
+      this.loadData();
+    }
+  }
+
+  async loadData() {
+    // get the search query string form url
+    const {
+      match
+    } = this.props; // provide the query with the variables 
+
+    const data = await BlogPost.fetchData(match);
+
+    if (data) {
+      this.setState({
+        articleBySlug: data.articleBySlug
+      });
+    }
+  }
+
+  render() {
+    const {
+      articleBySlug
+    } = this.state;
+
+    if (articleBySlug === null) {
+      console.log('slug is nullllll');
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+        to: "/niet-gevonden"
+      });
+    }
+
+    ;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "page",
+      className: "p-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, articleBySlug.title));
+  }
+
+}
+
+/***/ }),
+
 /***/ "./src/Contents.jsx":
 /*!**************************!*\
   !*** ./src/Contents.jsx ***!
@@ -1274,14 +1388,11 @@ function _extends() { _extends = Object.assign || function (target) { for (var i
 
 
 
-
-const NotFound = () => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Page Not Found");
-
 function Contents() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Switch"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Redirect"], {
-    exact: true,
     from: "/",
-    to: "/photos"
+    to: "/fotos",
+    exact: true
   }), _routes__WEBPACK_IMPORTED_MODULE_2__["default"].map(attrs => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], _extends({}, attrs, {
     key: attrs.path
   }))));
@@ -1405,6 +1516,299 @@ class DateInput extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 
 /***/ }),
 
+/***/ "./src/LocationDetailStrapi.jsx":
+/*!**************************************!*\
+  !*** ./src/LocationDetailStrapi.jsx ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return LocationDetailStrapi; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-leaflet-universal */ "react-leaflet-universal");
+/* harmony import */ var react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store.js */ "./src/store.js");
+/* harmony import */ var _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/userMarker.svg */ "./src/images/userMarker.svg");
+/* harmony import */ var _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/locationMarker.svg */ "./src/images/locationMarker.svg");
+/* harmony import */ var _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _images_markerShadow_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/markerShadow.png */ "./src/images/markerShadow.png");
+/* harmony import */ var _images_markerShadow_png__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_images_markerShadow_png__WEBPACK_IMPORTED_MODULE_7__);
+/* globals React */
+
+/* eslint "react/jsx-no-undef":"off" */
+
+
+
+
+
+
+
+
+
+
+class LocationDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  static async fetchData(match, search, showError) {
+    // build the graphql query
+    const query = `query locationBySlug($slug: String!){
+            locationBySlug(slug: $slug) {
+                title
+                photos {
+                    id
+                    title
+                    slug
+                    photo {
+                        id
+                        name
+                        url
+                    }
+                }
+                desc
+                slug
+                id
+                longitude
+                latitude
+            }
+        }`;
+    let {
+      params: {
+        id: slug
+      }
+    } = match;
+    console.log(match);
+    const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
+      slug
+    }, true);
+    return result;
+  }
+
+  constructor() {
+    super();
+    const locationBySlug = _store_js__WEBPACK_IMPORTED_MODULE_4__["default"].initialData ? _store_js__WEBPACK_IMPORTED_MODULE_4__["default"].initialData.locationBySlug : null;
+    delete _store_js__WEBPACK_IMPORTED_MODULE_4__["default"].initialData;
+    this.state = {
+      locationBySlug,
+      redirect: false,
+      zoom: 13,
+      userLocationKnown: false,
+      userMarker: null,
+      userLocation: {
+        longitude: null,
+        latitude: null
+      }
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      match: {
+        params: {
+          id: prevId
+        }
+      }
+    } = prevProps;
+    const {
+      match: {
+        params: {
+          id
+        }
+      }
+    } = this.props;
+
+    if (prevId !== id) {
+      this.loadData();
+    }
+  }
+
+  componentDidMount() {
+    const {
+      locationBySlug
+    } = this.state;
+
+    if (locationBySlug === null) {
+      this.loadData();
+    } // loading leaflet in componentDidMount because it doenst support SSR
+
+
+    const L = __webpack_require__(/*! leaflet */ "leaflet");
+
+    const userMarker = new L.Icon({
+      iconUrl: _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
+      iconRetinaUrl: _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
+      iconAnchor: [16, 40],
+      popupAnchor: [0, -40],
+      shadowUrl: __webpack_require__(/*! leaflet/dist/images/marker-shadow.png */ "leaflet/dist/images/marker-shadow.png").default,
+      shadowAnchor: [13, 40],
+      iconSize: new L.Point(32, 40)
+    });
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconUrl: _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6___default.a,
+      iconRetinaUrl: _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6___default.a,
+      iconAnchor: [16, 40],
+      popupAnchor: [0, -40],
+      shadowUrl: __webpack_require__(/*! leaflet/dist/images/marker-shadow.png */ "leaflet/dist/images/marker-shadow.png").default,
+      shadowAnchor: [13, 40],
+      iconSize: new L.Point(32, 40)
+    }); // get users position
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    const success = pos => {
+      var crd = pos.coords;
+      console.log('Your current position is:');
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+      this.setState(prevState => ({ ...prevState,
+        userMarker,
+        userLocationKnown: true,
+        userLocation: {
+          longitude: crd.longitude,
+          latitude: crd.latitude
+        }
+      }));
+    };
+
+    const error = err => {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+      fetch('https://ipapi.co/json').then(res => res.json()).then(location => {
+        this.setState(prevState => ({ ...prevState,
+          userMarker,
+          userLocationKnown: true,
+          userLocation: {
+            longitude: location.longitude,
+            latitude: location.latitude
+          }
+        }));
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }
+
+  async loadData() {
+    // get the search query string form url
+    const {
+      match
+    } = this.props; // provide the query with the variables 
+
+    const data = await LocationDetailStrapi.fetchData(match);
+
+    if (data.locationBySlug != null) {
+      this.setState({
+        locationBySlug: data.locationBySlug
+      });
+    } else {
+      console.log('return not found');
+      this.setState({
+        redirect: true
+      });
+      console.log(this.state);
+    }
+  }
+
+  render() {
+    const {
+      locationBySlug,
+      redirect
+    } = this.state;
+
+    if (redirect) {
+      console.log('redirect', redirect);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+        to: "/niet-gevonden"
+      });
+    }
+
+    if (locationBySlug === null) return null;
+    const {
+      userLocation,
+      userLocationKnown,
+      userMarker
+    } = this.state;
+    const {
+      photos
+    } = locationBySlug;
+    const position = [locationBySlug.longitude, locationBySlug.latitude];
+    const calculatedUserLocation = userLocation.latitude ? [userLocation.latitude, userLocation.longitude] : null;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "page"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "photoInfo",
+      className: "p-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "text-2xl font-bold mb-1 text-gray-800 block"
+    }, locationBySlug.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "text-gray-600"
+    }, locationBySlug.desc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Map"], {
+      className: "map",
+      id: "photoLocation",
+      center: position,
+      zoom: this.state.zoom
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["TileLayer"], {
+      attribution: "&copy <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors",
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Marker"], {
+      position: position
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Popup"], null, "Foto locatie")), userLocationKnown && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Marker"], {
+      position: calculatedUserLocation,
+      icon: userMarker
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Popup"], null, "Jouw locatie"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+      className: "text-xl font-bold mb-1 text-gray-800 block"
+    }, "Foto's gemaakt op fotolocatie ", locationBySlug.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "-mx-2"
+    }, photos.map(photoItem => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LocationPhotoItem, {
+        item: photoItem,
+        key: photoItem.id
+      });
+    }))));
+  }
+
+}
+
+function LocationPhotoItem(props) {
+  const itemPhoto = props.item.photo[0];
+  const selectedLocation = `/foto/${props.item.slug}`;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-full inline-block md:w-1/2 lg:w-1/3 p-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "photoCard rounded relative shadow-xs"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "relative rounded overflow-hidden"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+    to: selectedLocation,
+    className: "absolute w-full h-full z-10",
+    title: "Bekijk foto nu"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: itemPhoto.url,
+    className: "object-cover  w-full h-48  block",
+    alt: "Foto"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "photoContent p-4 absolute bottom-0 left-0"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "photoInfo"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "text-white"
+  }, props.item.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "clear"
+  }))))));
+  ;
+}
+
+/***/ }),
+
 /***/ "./src/NotFound.jsx":
 /*!**************************!*\
   !*** ./src/NotFound.jsx ***!
@@ -1417,13 +1821,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 
-
-function NotFound() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Pagina niet gevonden");
-}
-
-;
-/* harmony default export */ __webpack_exports__["default"] = (NotFound);
+/* harmony default export */ __webpack_exports__["default"] = (({
+  staticContext = {}
+}) => {
+  staticContext.status = 404;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Sorry, pagina niet gevonden");
+});
 
 /***/ }),
 
@@ -1507,7 +1910,15 @@ class NavBar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
       className: menuClassName
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
       onClick: this.closeMenu,
-      to: "/photos/add",
+      to: "/fotolocatie/volendam",
+      className: "block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
+    }, "TestLocatie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+      onClick: this.closeMenu,
+      to: "/foto/mooi-valencia",
+      className: "block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
+    }, "TestFoto"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+      onClick: this.closeMenu,
+      to: "/foto/toevoegen",
       className: "block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
     }, "Uploaden"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
       onClick: this.closeMenu,
@@ -1517,7 +1928,7 @@ class NavBar extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
       onClick: this.closeMenu,
       exact: true,
-      to: "/photos",
+      to: "/fotos",
       className: "block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
     }, "Photos"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
       onClick: this.closeMenu,
@@ -1538,16 +1949,16 @@ function Page() {
 
 /***/ }),
 
-/***/ "./src/PhotoAdd.jsx":
-/*!**************************!*\
-  !*** ./src/PhotoAdd.jsx ***!
-  \**************************/
+/***/ "./src/PhotoAddStrapi.jsx":
+/*!********************************!*\
+  !*** ./src/PhotoAddStrapi.jsx ***!
+  \********************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PhotoAdd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PhotoAddStrapi; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
@@ -1572,7 +1983,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+
+var slugify = __webpack_require__(/*! slugify */ "slugify");
+
+class PhotoAddStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
   constructor() {
     super();
 
@@ -1592,40 +2006,6 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
         stateFields['invalidFields'] = invalidFields;
         return stateFields;
       });
-    });
-
-    _defineProperty(this, "createPhoto", async photo => {
-      // create a mutation query with a variable, which is passed in the body in the fetch
-      // first addAPhoto is just a mutation name, afther is the variable and the type which is photoinputs
-      // next is the actual mutation which is getting the $photo variable
-      // the query should return only the id
-      const query = `mutation addPhoto($photo: PhotoInputs!) {
-            photoAdd(photo: $photo) {
-                id
-            }
-        }`;
-      const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
-        photo
-      });
-
-      if (data) {
-        // set the state to 100, once the photo is loaded
-        this.setState({
-          uploadPercentage: 100
-        }); //console.log(data.photoAdd.id);
-        // if the query returns an id in data, the photo is created
-        // redirect to created photo
-
-        const {
-          id
-        } = data.photoAdd;
-        const {
-          history
-        } = this.props;
-        history.push({
-          pathname: `/photos/${id}`
-        });
-      }
     });
 
     _defineProperty(this, "removeImage", () => {
@@ -1652,6 +2032,37 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       });
     });
 
+    _defineProperty(this, "checkForAvailableSlug", async slug => {
+      let query = `query photoBySlug($slug: String!){
+            photoBySlug(slug: $slug) {
+                title
+            }
+        }`;
+      const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
+        slug
+      }, true);
+      return result;
+    });
+
+    _defineProperty(this, "createSlug", async (slug, suffix) => {
+      var result = await this.checkForAvailableSlug(slug);
+
+      if (!result.photoBySlug) {
+        // slug is available, proceed
+        return slug;
+      } else {
+        // slug is not available, try again
+        if (!suffix) {
+          suffix = 1;
+        } else {
+          suffix++;
+        }
+
+        let adjustedSlug = slug + '-' + suffix;
+        return this.createSlug(adjustedSlug, suffix);
+      }
+    });
+
     this.state = {
       photo: {},
       photoLoading: false,
@@ -1668,6 +2079,9 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
   async onFileChange(e) {
     const file = e.target.files[0];
+    this.setState({
+      blob: file
+    });
 
     if (file.size > 27000000) {
       this.setState(prevState => ({ ...prevState,
@@ -1730,15 +2144,16 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
             }));
           }
 
+          console.log(exifData);
           let shutterspeedVal = exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "ExposureTime") > 1 ? exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "ExposureTime") : '1/' + 1 / exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "ExposureTime");
           let ISOVal = exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "ISOSpeedRatings");
-          let apertureVal = exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "FNumber");
+          let apertureVal = exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "FNumber").numerator / exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "FNumber").denominator;
           let focalLengthVal = exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "FocalLength") + 'mm';
           let cameraVal = exif_js__WEBPACK_IMPORTED_MODULE_3___default.a.getTag(file, "Model");
           this.setState(prevState => ({ ...prevState,
             photo: { ...prevState.photo,
               shutterspeed: shutterspeedVal,
-              ISO: ISOVal,
+              iso: ISOVal,
               aperture: apertureVal,
               focalLength: focalLengthVal,
               camera: cameraVal
@@ -1749,7 +2164,7 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
             photo: { ...prevState.photo,
               date: '',
               shutterspeed: '',
-              ISO: '',
+              iso: '',
               aperture: '',
               focalLength: '',
               camera: ''
@@ -1762,7 +2177,7 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
         photo: { ...prevState.photo,
           date: '',
           shutterspeed: '',
-          ISO: '',
+          iso: '',
           aperture: '',
           focalLength: '',
           camera: ''
@@ -1773,10 +2188,11 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
 
   async handleSubmit(e) {
     e.preventDefault();
+    e.persist();
     const {
       photoImage,
       title
-    } = this.state.photo;
+    } = this.state.photo; // check if an image is given, and title, if not show error and return null;
 
     if (!photoImage || !title) {
       if (!photoImage) {
@@ -1796,16 +2212,8 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       }
 
       return;
-    }
+    } // Progress
 
-    const form = document.forms.photoAdd;
-    const formData = new FormData();
-    const uploadedFile = this.fileInput.current.files[0];
-    formData.append("photoImage", uploadedFile); // Display the key/value pairs
-    // for (var pair of formData.entries()) {
-    //     console.log(pair[0] + ', ' + pair[1]);
-    // }
-    // Progress
 
     const options = {
       onUploadProgress: progressEvent => {
@@ -1822,36 +2230,132 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
           });
         }
       }
-    };
-    const {
-      data: resources
-    } = await _services_httpService__WEBPACK_IMPORTED_MODULE_2__["default"].post(window.ENV.UI_API_IMAGE_ENDPOINT, formData, options); //0 = thumb, 1 == watermakrk 2 == original
+    }; // check if slug is available, if not, add number
 
-    const imageThumb = "https://dkotwt30gflnm.cloudfront.net/" + resources.transforms.find(elem => elem.id === "thumbnail").key;
-    const imageOriginal = "https://dkotwt30gflnm.cloudfront.net/" + resources.transforms.find(elem => elem.id === "original").key;
-    const imageWatermark = "https://dkotwt30gflnm.cloudfront.net/" + resources.transforms.find(elem => elem.id === "watermark").key;
-    const photo = {
-      title: form.title.value,
-      //place: form.place.value,
-      date: form.date.value ? new Date(form.date.value).toISOString() : null,
-      description: form.desc.value,
-      shutterspeed: form.shutterspeed.value,
-      ISO: form.ISO.value,
-      aperture: form.aperture.value,
-      images: {
-        imageThumb,
-        imageOriginal,
-        imageWatermark
+    let slug = slugify(title, {
+      replacement: '-',
+      // replace spaces with replacement character, defaults to `-`
+      remove: undefined,
+      // remove characters that match regex, defaults to `undefined`
+      lower: true,
+      // convert to lower case, defaults to `false`
+      strict: true // strip special characters except replacement, defaults to `false`
+
+    });
+    const createdSlug = await this.createSlug(slug);
+    this.setState(prevState => ({ ...prevState,
+      photo: { ...prevState.photo,
+        slug: createdSlug,
+        date: prevState.photo.date ? new Date(prevState.photo.date) : null
       }
-    };
-    this.createPhoto(photo);
+    })); // if slug is available, add to the query and create photo page with info
+
+    const query = `mutation CreatePhoto($input: createPhotoInput) {
+            createPhoto(input: $input){
+                photo{
+                    title
+                    desc
+                    slug
+                    date
+                    brand
+                    shutterspeed
+                    iso
+                    aperture
+                    camera
+                    focalLength
+                    id
+                }
+            }
+        }`;
+    let input = {};
+    input['data'] = this.state.photo;
+    console.log(input);
+    delete input.data.photoImage;
+    const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
+      input
+    }, true);
+
+    if (data) {
+      //after pages is created, use refId to upload files with xhr request
+      console.log('photo created', data);
+      const formData = new FormData();
+      const uploadedFile = document.querySelector('#fileInput input').files[0];
+      formData.append(`files`, uploadedFile, uploadedFile.name);
+      formData.append('ref', 'photo');
+      formData.append('field', 'photo');
+      formData.append('refId', data.createPhoto.photo.id);
+      const request = new XMLHttpRequest();
+      request.open('POST', `http://localhost:1337/upload`);
+      request.send(formData); // add photo to form data
+      // refId = data.createPhoto.photo.id
+      // field = photo
+      // ref = Photo
+      // const formElement = document.querySelector('form');
+      // formElement.addEventListener('submit', e => {
+      //     e.preventDefault();
+      //     const request = new XMLHttpRequest();
+      //     request.open('POST', '/upload');
+      //     request.send(new FormData(formElement));
+    } else {
+      console.log('failed');
+    } // UPLOADTING THE IMAGE
+    // const { data: resources } = await http.post(
+    //     window.ENV.UI_API_IMAGE_ENDPOINT,
+    //     formData,
+    //     options
+    // );
+    //0 = thumb, 1 == watermakrk 2 == original
+    // const imageThumb =
+    //     "https://dkotwt30gflnm.cloudfront.net/" +
+    //     resources.transforms.find(elem => elem.id === "thumbnail").key;
+    // const imageOriginal =
+    //     "https://dkotwt30gflnm.cloudfront.net/" +
+    //     resources.transforms.find(elem => elem.id === "original").key;
+    // const imageWatermark =
+    //     "https://dkotwt30gflnm.cloudfront.net/" +
+    //     resources.transforms.find(elem => elem.id === "watermark").key;
+    // const photo = {
+    //     title: form.title.value,
+    //     //place: form.place.value,
+    //     date: form.date.value ? new Date(form.date.value).toISOString() : null,
+    //     description: form.desc.value,
+    //     shutterspeed: form.shutterspeed.value,
+    //     iso: form.iso.value,
+    //     aperture: form.aperture.value,
+    //     images: {
+    //         imageThumb,
+    //         imageOriginal,
+    //         imageWatermark
+    //     }
+    // };
+    // // {
+    // //     "input" :{
+    // //       "data": {
+    // //           "title": "Test"
+    // //         }
+    // //     }
+    // //   }
+    // const data = await graphQLFetch(query, { input }, true);
+    // if (data) {
+    //     // set the state to 100, once the photo is loaded
+    //     this.setState({ uploadPercentage: 100 });
+    //     //console.log(data.photoAdd.id);
+    //     // if the query returns an id in data, the photo is created
+    //     // redirect to created photo
+    //     const { id } = data.photoAdd;
+    //     const { history } = this.props;
+    //     history.push({
+    //         pathname: `/photos/${id}`
+    //     })
+    // }
+
   }
 
   render() {
     const {
       date,
       shutterspeed,
-      ISO,
+      iso,
       aperture,
       camera,
       focalLength
@@ -1875,7 +2379,7 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "block py-3 px-4 border border-gray-300 rounded"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
       className: "my-2 font-bold"
-    }, "Foto toevoegen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    }, "Starpi Foto toevoegen"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       id: "fileInput",
       className: showInputClass
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
@@ -1942,11 +2446,11 @@ class PhotoAdd extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
       className: "flex -mr-px"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
       className: "flex items-center  bg-grey-lighter rounded rounded-r-none border border-r-0 border-gray-400 py-2 px-3 whitespace-no-wrap text-grey-dark text-sm"
-    }, "ISO")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+    }, "iso")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
       type: "text",
-      name: "ISO",
-      placeholder: "ISO",
-      defaultValue: ISO || "",
+      name: "iso",
+      placeholder: "iso",
+      defaultValue: iso || "",
       className: "mb-0 flex-shrink flex-grow flex-auto  w-px flex-1 border h-10 border-gray-400 rounded rounded-l-none py-2 px-3 relative text-sm"
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "flex flex-wrap items-stretch w-full relative mb-2"
@@ -2237,6 +2741,269 @@ class PhotoDetail extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component
     }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Marker"], {
       position: position
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Popup"], null, "A pretty CSS3 popup. ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), " Easily customizable."))));
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/PhotoDetailStrapi.jsx":
+/*!***********************************!*\
+  !*** ./src/PhotoDetailStrapi.jsx ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PhotoDetailStrapi; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-leaflet-universal */ "react-leaflet-universal");
+/* harmony import */ var react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store.js */ "./src/store.js");
+/* harmony import */ var _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./images/userMarker.svg */ "./src/images/userMarker.svg");
+/* harmony import */ var _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./images/locationMarker.svg */ "./src/images/locationMarker.svg");
+/* harmony import */ var _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _images_markerShadow_png__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./images/markerShadow.png */ "./src/images/markerShadow.png");
+/* harmony import */ var _images_markerShadow_png__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_images_markerShadow_png__WEBPACK_IMPORTED_MODULE_7__);
+/* globals React */
+
+/* eslint "react/jsx-no-undef":"off" */
+
+
+
+
+
+
+
+
+
+class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
+  static async fetchData(match, search, showError) {
+    // build the graphql query
+    const query = `query photoBySlug($slug: String!){
+            photoBySlug(slug: $slug) {
+                title
+                desc
+                photo {
+                    url
+                }
+                slug
+                date
+                brand
+                shutterspeed
+                iso
+                aperture
+                camera
+                likes
+                focalLength
+                location {
+                    longitude
+                    latitude
+                }
+            }
+        }`;
+    let {
+      params: {
+        id: slug
+      }
+    } = match;
+    console.log(match);
+    const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
+      slug
+    }, true);
+    return result;
+  }
+
+  constructor() {
+    super();
+    const photoBySlug = _store_js__WEBPACK_IMPORTED_MODULE_4__["default"].initialData ? _store_js__WEBPACK_IMPORTED_MODULE_4__["default"].initialData.photoBySlug : null;
+    delete _store_js__WEBPACK_IMPORTED_MODULE_4__["default"].initialData;
+    this.state = {
+      photoBySlug,
+      redirect: false,
+      zoom: 13,
+      userLocationKnown: false,
+      userMarker: null,
+      userLocation: {
+        longitude: null,
+        latitude: null
+      }
+    };
+  }
+
+  componentDidUpdate(prevProps) {
+    const {
+      match: {
+        params: {
+          id: prevId
+        }
+      }
+    } = prevProps;
+    const {
+      match: {
+        params: {
+          id
+        }
+      }
+    } = this.props;
+
+    if (prevId !== id) {
+      this.loadData();
+    }
+  }
+
+  componentDidMount() {
+    const {
+      photoBySlug
+    } = this.state;
+
+    if (photoBySlug === null) {
+      this.loadData();
+    } // loading leaflet in componentDidMount because it doenst support SSR
+
+
+    const L = __webpack_require__(/*! leaflet */ "leaflet");
+
+    const userMarker = new L.Icon({
+      iconUrl: _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
+      iconRetinaUrl: _images_userMarker_svg__WEBPACK_IMPORTED_MODULE_5___default.a,
+      iconAnchor: [16, 40],
+      popupAnchor: [0, -40],
+      shadowUrl: __webpack_require__(/*! leaflet/dist/images/marker-shadow.png */ "leaflet/dist/images/marker-shadow.png").default,
+      shadowAnchor: [13, 40],
+      iconSize: new L.Point(32, 40)
+    });
+    delete L.Icon.Default.prototype._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconUrl: _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6___default.a,
+      iconRetinaUrl: _images_locationMarker_svg__WEBPACK_IMPORTED_MODULE_6___default.a,
+      iconAnchor: [16, 40],
+      popupAnchor: [0, -40],
+      shadowUrl: __webpack_require__(/*! leaflet/dist/images/marker-shadow.png */ "leaflet/dist/images/marker-shadow.png").default,
+      shadowAnchor: [13, 40],
+      iconSize: new L.Point(32, 40)
+    }); // get users position
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      maximumAge: 0
+    };
+
+    const success = pos => {
+      var crd = pos.coords;
+      console.log('Your current position is:');
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+      this.setState(prevState => ({ ...prevState,
+        userMarker,
+        userLocationKnown: true,
+        userLocation: {
+          longitude: crd.longitude,
+          latitude: crd.latitude
+        }
+      }));
+    };
+
+    const error = err => {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+      fetch('https://ipapi.co/json').then(res => res.json()).then(location => {
+        this.setState(prevState => ({ ...prevState,
+          userMarker,
+          userLocationKnown: true,
+          userLocation: {
+            longitude: location.longitude,
+            latitude: location.latitude
+          }
+        }));
+      });
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+  }
+
+  async loadData() {
+    // get the search query string form url
+    const {
+      match
+    } = this.props; // provide the query with the variables 
+
+    const data = await PhotoDetailStrapi.fetchData(match);
+
+    if (data.photoBySlug != null) {
+      console.log('Setting state');
+      this.setState({
+        photoBySlug: data.photoBySlug
+      });
+      console.log(this.state);
+    } else {
+      console.log('return not found');
+      this.setState({
+        redirect: true
+      });
+      console.log(this.state);
+    }
+  }
+
+  render() {
+    const {
+      photoBySlug,
+      redirect
+    } = this.state;
+
+    if (redirect) {
+      console.log('redirect', redirect);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+        to: "/niet-gevonden"
+      });
+    }
+
+    if (photoBySlug === null) {
+      console.log('return null from render');
+      return null;
+    }
+
+    const {
+      userLocation,
+      userLocationKnown,
+      userMarker
+    } = this.state;
+    const position = [photoBySlug.location.longitude, photoBySlug.location.latitude];
+    const calculatedUserLocation = userLocation.latitude ? [userLocation.latitude, userLocation.longitude] : null;
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "page"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+      src: photoBySlug.photo[0].url,
+      className: " w-full   block",
+      alt: "Foto"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      id: "photoInfo",
+      className: "p-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "text-2xl font-bold mb-1 text-gray-800 block"
+    }, photoBySlug.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+      className: "text-gray-600"
+    }, photoBySlug.desc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Map"], {
+      className: "map",
+      id: "photoLocation",
+      center: position,
+      zoom: this.state.zoom
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["TileLayer"], {
+      attribution: "&copy <a href=\"http://osm.org/copyright\">OpenStreetMap</a> contributors",
+      url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Marker"], {
+      position: position
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Popup"], null, "Foto locatie")), userLocationKnown && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Marker"], {
+      position: calculatedUserLocation,
+      icon: userMarker
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_leaflet_universal__WEBPACK_IMPORTED_MODULE_2__["Popup"], null, "Jouw locatie")))));
   }
 
 }
@@ -2977,10 +3744,11 @@ function jsonDateReviver(key, value) {
   return value;
 }
 
-async function graphQLFetch(query, variables = {}, showError = null) {
+async function graphQLFetch(query, variables = {}, isBlog = false) {
   //console.log('query from graphQlFetch ' + query)
-  const apiEndpoint =  false ? // eslint-disable-line no-undef
+  let apiEndpoint =  false ? // eslint-disable-line no-undef
   undefined : process.env.UI_SERVER_API_ENDPOINT;
+  apiEndpoint = isBlog ? 'http://localhost:1337/graphql' : apiEndpoint;
 
   try {
     const response = await isomorphic_fetch__WEBPACK_IMPORTED_MODULE_1___default()(apiEndpoint, {
@@ -3016,6 +3784,39 @@ async function graphQLFetch(query, variables = {}, showError = null) {
 
 /***/ }),
 
+/***/ "./src/images/locationMarker.svg":
+/*!***************************************!*\
+  !*** ./src/images/locationMarker.svg ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 28.5 35.78\"><defs><style>.cls-1{fill:#9af43b;}.cls-1,.cls-2,.cls-3{stroke:#54596e;stroke-miterlimit:10;}.cls-1,.cls-2{stroke-width:2px;}.cls-2{fill:none;}.cls-3{fill:#fff;}.cls-4{fill:#ff927d;}</style></defs><title>Asset 6</title><g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_2_copy\" data-name=\"Layer 2 copy\"><path class=\"cls-1\" d=\"M14.25,1C10.56.79,1,3.83,1,13.39S14.25,34.46,14.25,34.46,27.5,23,27.5,13.39,17.94.79,14.25,1Z\"/><path class=\"cls-2\" d=\"M8.82,15.81s4.34,4.13,10.86,0\"/><line class=\"cls-3\" x1=\"21.93\" y1=\"8.99\" x2=\"21.93\" y2=\"11.44\"/><line class=\"cls-3\" x1=\"20.47\" y1=\"10.21\" x2=\"23.32\" y2=\"10.21\"/><line class=\"cls-3\" x1=\"6.86\" y1=\"8.99\" x2=\"6.86\" y2=\"11.44\"/><line class=\"cls-3\" x1=\"5.4\" y1=\"10.21\" x2=\"8.25\" y2=\"10.21\"/><g id=\"Layer_3_copy\" data-name=\"Layer 3 copy\"><circle class=\"cls-4\" cx=\"5.58\" cy=\"13.66\" r=\"1.89\"/><circle class=\"cls-4\" cx=\"23.32\" cy=\"13.66\" r=\"1.89\"/></g></g></g></svg>");
+
+/***/ }),
+
+/***/ "./src/images/markerShadow.png":
+/*!*************************************!*\
+  !*** ./src/images/markerShadow.png ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected character '�' (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n(Source code omitted for this binary file)");
+
+/***/ }),
+
+/***/ "./src/images/userMarker.svg":
+/*!***********************************!*\
+  !*** ./src/images/userMarker.svg ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+throw new Error("Module parse failed: Unexpected token (1:0)\nYou may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders\n> <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 28.5 35.78\"><defs><style>.cls-1{fill:#fff35f;}.cls-1,.cls-2,.cls-3{stroke:#54596e;stroke-miterlimit:10;}.cls-1,.cls-2{stroke-width:2px;}.cls-2{fill:none;}.cls-3{fill:#fff;}.cls-4{fill:#ff927d;}</style></defs><title>Asset 7</title><g id=\"Layer_2\" data-name=\"Layer 2\"><g id=\"Layer_2-2\" data-name=\"Layer 2\"><path class=\"cls-1\" d=\"M14.25,1C10.56.79,1,3.83,1,13.39S14.25,34.46,14.25,34.46,27.5,23,27.5,13.39,17.94.79,14.25,1Z\"/><path class=\"cls-2\" d=\"M8.82,15.81s4.34,4.13,10.86,0\"/><line class=\"cls-3\" x1=\"21.93\" y1=\"8.99\" x2=\"21.93\" y2=\"11.44\"/><line class=\"cls-3\" x1=\"20.47\" y1=\"10.21\" x2=\"23.32\" y2=\"10.21\"/><line class=\"cls-3\" x1=\"6.86\" y1=\"8.99\" x2=\"6.86\" y2=\"11.44\"/><line class=\"cls-3\" x1=\"5.4\" y1=\"10.21\" x2=\"8.25\" y2=\"10.21\"/><g id=\"Layer_3\" data-name=\"Layer 3\"><circle class=\"cls-4\" cx=\"5.58\" cy=\"13.66\" r=\"1.89\"/><circle class=\"cls-4\" cx=\"23.32\" cy=\"13.66\" r=\"1.89\"/></g></g></g></svg>");
+
+/***/ }),
+
 /***/ "./src/routes.js":
 /*!***********************!*\
   !*** ./src/routes.js ***!
@@ -3028,10 +3829,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PhotoList_jsx__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PhotoList.jsx */ "./src/PhotoList.jsx");
 /* harmony import */ var _PhotoReport_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PhotoReport.jsx */ "./src/PhotoReport.jsx");
 /* harmony import */ var _PhotoEdit_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PhotoEdit.jsx */ "./src/PhotoEdit.jsx");
-/* harmony import */ var _PhotoDetail_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PhotoDetail.jsx */ "./src/PhotoDetail.jsx");
-/* harmony import */ var _PhotoAdd_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PhotoAdd.jsx */ "./src/PhotoAdd.jsx");
-/* harmony import */ var _About_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./About.jsx */ "./src/About.jsx");
-/* harmony import */ var _NotFound_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NotFound.jsx */ "./src/NotFound.jsx");
+/* harmony import */ var _PhotoDetailStrapi_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PhotoDetailStrapi.jsx */ "./src/PhotoDetailStrapi.jsx");
+/* harmony import */ var _LocationDetailStrapi_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./LocationDetailStrapi.jsx */ "./src/LocationDetailStrapi.jsx");
+/* harmony import */ var _PhotoAddStrapi_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PhotoAddStrapi.jsx */ "./src/PhotoAddStrapi.jsx");
+/* harmony import */ var _About_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./About.jsx */ "./src/About.jsx");
+/* harmony import */ var _NotFound_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./NotFound.jsx */ "./src/NotFound.jsx");
+/* harmony import */ var _BlogPost_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./BlogPost.jsx */ "./src/BlogPost.jsx");
+
+
 
 
 
@@ -3040,27 +3845,36 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const routes = [{
-  path: '/photos/add',
-  component: _PhotoAdd_jsx__WEBPACK_IMPORTED_MODULE_4__["default"],
+  path: '/foto/toevoegen',
+  component: _PhotoAddStrapi_jsx__WEBPACK_IMPORTED_MODULE_5__["default"],
   exact: true
 }, {
-  path: '/photos/:id',
-  component: _PhotoDetail_jsx__WEBPACK_IMPORTED_MODULE_3__["default"]
+  path: '/foto/:id',
+  component: _PhotoDetailStrapi_jsx__WEBPACK_IMPORTED_MODULE_3__["default"],
+  strict: true
 }, {
-  path: '/photos',
+  path: '/fotolocatie/:id',
+  component: _LocationDetailStrapi_jsx__WEBPACK_IMPORTED_MODULE_4__["default"],
+  strict: true
+}, {
+  path: '/fotos',
   component: _PhotoList_jsx__WEBPACK_IMPORTED_MODULE_0__["default"]
 }, {
-  path: '/edit/:id',
+  path: '/bewerken/:id',
   component: _PhotoEdit_jsx__WEBPACK_IMPORTED_MODULE_2__["default"]
 }, {
   path: '/report',
   component: _PhotoReport_jsx__WEBPACK_IMPORTED_MODULE_1__["default"]
 }, {
   path: '/about',
-  component: _About_jsx__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _About_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
-  path: '*',
-  component: _NotFound_jsx__WEBPACK_IMPORTED_MODULE_6__["default"]
+  path: '/niet-gevonden',
+  component: _NotFound_jsx__WEBPACK_IMPORTED_MODULE_7__["default"],
+  exact: true
+}, {
+  path: '/*',
+  component: _BlogPost_jsx__WEBPACK_IMPORTED_MODULE_8__["default"]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);
 
@@ -3163,7 +3977,7 @@ const browserConfig = {
         }
       }
     }, {
-      test: /\.(png|jpe?g|gif)$/i,
+      test: /\.(png|jpe?g|gif|svg)$/i,
       use: [{
         loader: 'file-loader'
       }]
@@ -3206,6 +4020,11 @@ const serverConfig = {
           plugins: ["@babel/plugin-proposal-class-properties"]
         }
       }
+    }, {
+      test: /\.(png|jpe?g|gif|svg)$/i,
+      use: [{
+        loader: 'file-loader'
+      }]
     }]
   },
   plugins: [new webpack.DefinePlugin({
@@ -3319,6 +4138,28 @@ module.exports = require("isomorphic-fetch");
 
 /***/ }),
 
+/***/ "leaflet":
+/*!**************************!*\
+  !*** external "leaflet" ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("leaflet");
+
+/***/ }),
+
+/***/ "leaflet/dist/images/marker-shadow.png":
+/*!********************************************************!*\
+  !*** external "leaflet/dist/images/marker-shadow.png" ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("leaflet/dist/images/marker-shadow.png");
+
+/***/ }),
+
 /***/ "path":
 /*!***********************!*\
   !*** external "path" ***!
@@ -3415,6 +4256,17 @@ module.exports = require("react-toastify");
 /***/ (function(module, exports) {
 
 module.exports = require("serialize-javascript");
+
+/***/ }),
+
+/***/ "slugify":
+/*!**************************!*\
+  !*** external "slugify" ***!
+  \**************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("slugify");
 
 /***/ }),
 

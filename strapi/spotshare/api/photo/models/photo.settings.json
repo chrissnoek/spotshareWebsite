@@ -31,9 +31,9 @@
       "targetField": "title"
     },
     "user": {
+      "via": "photos",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "photos"
+      "model": "user"
     },
     "date": {
       "type": "datetime"
@@ -54,14 +54,18 @@
       "via": "photos",
       "model": "location"
     },
+    "iso": {
+      "type": "string"
+    },
+    "aperture": {
+      "type": "string"
+    },
     "focalLength": {
       "type": "string"
     },
-    "iso": {
-      "type": "integer"
-    },
-    "aperture": {
-      "type": "float"
+    "photo_categories": {
+      "via": "photos",
+      "collection": "photo-category"
     }
   }
 }

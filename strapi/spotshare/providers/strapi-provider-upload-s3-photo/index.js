@@ -9,6 +9,8 @@ const path = require("path");
 module.exports = {
   init(providerOptions) {
 
+    console.log(providerOptions);
+
     AWS.config.update({
       apiVersion: '2006-03-01',
       ...providerOptions

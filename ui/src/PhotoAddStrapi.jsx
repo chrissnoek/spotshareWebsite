@@ -3,37 +3,272 @@ import React, { Component } from "react";
 import graphQLFetch from './graphQLFetch.js';
 import http from "./services/httpService";
 import EXIF from 'exif-js'
-import { AiOutlineLoading3Quarters } from 'react-icons/ai';
-import { FiTrash2 } from 'react-icons/fi';
+import { FaSpinner } from 'react-icons/fa';
 import DateInput from "./DateInput.jsx";
 import exifr from 'exifr';
-var slugify = require('slugify');
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet-universal';
+import userIcon from "./images/userMarker.svg";
+import locationIcon from "./images/locationMarker.svg";
+import shadowIcon from "./images/markerShadow.png";
+import LocationCard from "./LocationCard.jsx";
+import CreatableSelect from 'react-select/creatable';
+import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
+//import ReactLeafletSearch from "react-leaflet-search";
+import slugify from 'slugify';
+import AddPhoto from "./AddPhoto.jsx";
 
+const animatedComponents = makeAnimated();
 
 export default class PhotoAddStrapi extends React.Component {
     constructor() {
         super();
         this.state = {
+            currentStep: 1,
             photo: {},
             photoLoading: false,
             tempFile: null,
             onDrop: false,
             onDragOver: false,
             uploadPercentage: 0,
-            invalidFields: {}
+            invalidFields: {},
+            blob: null,
+            map: {
+                longitude: null,
+                latitude: null,
+                zoom: 13,
+            },
+            locationKnown: false,
+            selectedLocation: null,
+            locationCategoryValues: [],
+            monthValues: [],
+            months: null,
+            location_categories: null,
+            newLocation: false
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onFileChange = this.onFileChange.bind(this);
         this.fileInput = React.createRef();
     }
 
-    handleInputChange = e => {
+    onNewLocationClick = (e) => {
+        this.setNewLocation();
+        this.resetSelectedLocation();
+    }
+
+    setNewLocation = () => {
+        this.setState({ newLocation: true });
+    }
+
+    _next = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep >= 2 ? 3 : currentStep + 1
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+
+    _prev = () => {
+        let currentStep = this.state.currentStep
+        currentStep = currentStep <= 1 ? 1 : currentStep - 1
+        this.setState({
+            currentStep: currentStep
+        })
+    }
+
+    previousButton() {
+        let currentStep = this.state.currentStep;
+        if (currentStep !== 1) {
+            return (
+                <button
+                    className="block px-3 py- my-2 text-white rounded text-l bg-gray-700"
+                    type="button" onClick={this._prev}>
+                    Vorige
+                </button>
+            )
+        }
+        return null;
+    }
+
+    nextButton(disabled, btnClass) {
+        let currentStep = this.state.currentStep;
+        if (currentStep < 2) {
+            return (
+                <button
+                    disabled={disabled}
+                    className={btnClass}
+                    type="button" onClick={this._next}>
+                    Volgende
+                </button>
+            )
+        }
+        return null;
+    }
+
+    changeMarkers = () => {
+        // loading leaflet in componentDidMount because it doenst support SSR
+        const L = require("leaflet");
+
+        const userMarker = new L.Icon({
+            iconUrl: userIcon,
+            iconRetinaUrl: userIcon,
+
+            iconAnchor: [16, 40],
+            popupAnchor: [0, -40],
+            shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
+            shadowAnchor: [13, 40],
+            iconSize: new L.Point(32, 40),
+        });
+
+        delete L.Icon.Default.prototype._getIconUrl;
+
+        L.Icon.Default.mergeOptions({
+            iconUrl: locationIcon,
+            iconRetinaUrl: locationIcon,
+            iconAnchor: [16, 40],
+            popupAnchor: [0, -40],
+            shadowUrl: require('leaflet/dist/images/marker-shadow.png').default,
+            shadowAnchor: [13, 40],
+            iconSize: new L.Point(32, 40),
+        });
+    }
+
+    componentDidMount(prevProps, prevState) {
+        // handle blob in 'onFileChange' from state
+        // blob gets set on choosing file
+        this.changeMarkers();
+    }
+
+    onCategoryCreate = async (option) => {
+        const label = option;
+
+        // check if slug is available, if not, add number
+        const value = slugify(option, {
+            replacement: '-',  // replace spaces with replacement character, defaults to `-`
+            remove: undefined, // remove characters that match regex, defaults to `undefined`
+            lower: true,      // convert to lower case, defaults to `false`
+            strict: true,     // strip special characters except replacement, defaults to `false`
+        })
+
+        const query = `mutation CreateLocationCategory($input: createLocationCategoryInput) {
+            createLocationCategory(input: $input){
+            locationCategory{
+              label
+              value
+              id
+            }
+          }
+          }`;
+
+        let input = {};
+        input['data'] = {
+            "label": label,
+            "value": value
+        };
+
+        const data = await graphQLFetch(query, { input }, true);
+
+        if (data) {
+            const { label, value, id } = data.createLocationCategory.locationCategory;
+            this.setState((prevState) => {
+                const oldCategories = [...this.state.locationCategoryValues];
+                const newCategory = {
+                    "label": label,
+                    "value": value,
+                    "id": id
+                }
+                oldCategories.push(newCategory);
+
+                const selectedValues = this.state.location_categories != null ? this.state.location_categories : [];
+                selectedValues.push(newCategory);
+
+                const categoryIds = this.state.location.location_categories ? this.state.location.location_categories : [];
+                categoryIds.push(newCategory.id);
+
+                return ({
+                    location: { ...prevState.location, location_categories: [...categoryIds] },
+                    locationCategoryValues: [...oldCategories],
+                    location_categories: selectedValues
+                })
+            });
+            return {
+                label: label,
+                value: value
+            };
+        }
+    }
+
+    handleSelect = (newValue, name) => {
+        /*
+        set the ID of the location_categories to location object
+        and update the selected values in object location_categories in the state
+        */
+        let ids;
+        if (newValue !== null) {
+            ids = newValue.map((item) => {
+                return item.id;
+            })
+        } else {
+            ids = [];
+        }
+
+        this.setState((prevState) => ({
+            ...prevState,
+            location: { ...prevState.location, [name]: ids },
+            [name]: newValue
+        }));
+    }
+
+    createLocation = async () => {
+        console.log('creating location');
+
+        const { location, location: { title } } = this.state;
+
+        console.log(location, title);
+
+        const slug = slugify(title, {
+            replacement: '-',  // replace spaces with replacement character, defaults to `-`
+            remove: undefined, // remove characters that match regex, defaults to `undefined`
+            lower: true,      // convert to lower case, defaults to `false`
+            strict: true,     // strip special characters except replacement, defaults to `false`
+        })
+
+        const query = `mutation CreateLocation($input: createLocationInput) {
+            createLocation(input: $input){
+            location{
+              slug
+              id
+            }
+          }
+          }`;
+
+        let input = {};
+        location['slug'] = slug;
+        input['data'] = location;
+
+        console.log(input);
+        const data = await graphQLFetch(query, { input }, true);
+
+        if (data) {
+            return data.createLocation;
+        }
+    }
+
+    handleInputChange = (event, property) => {
+        console.log('handling on input chagne')
         const target = event.target;
         const value = target.type === "checkbox" ? target.checked : target.value;
         const name = target.name;
 
         this.setState((prevState) => {
-            const stateFields = { ...prevState, photo: { ...prevState.photo, [name]: value } };
+            let stateFields;
+            if (property === 'location') {
+                console.log('setting location state');
+                stateFields = { ...prevState, location: { ...prevState.location, [name]: value } };
+            } else {
+                stateFields = { ...prevState, photo: { ...prevState.photo, [name]: value } };
+            }
+
             const invalidFields = { ...prevState.invalidFields };
             if (this.state.photo.title && this.state.invalidFields.title) delete invalidFields['title'];
             stateFields['invalidFields'] = invalidFields;
@@ -42,30 +277,31 @@ export default class PhotoAddStrapi extends React.Component {
 
     };
 
-
     removeImage = () => {
         console.log('remove');
-        this.setState({ tempFile: null, photo: {} })
+        this.setState({ tempFile: null, photo: {}, blob: null, locationKnown: false })
     }
 
-
-    async onFileChange(e) {
-
-        const file = e.target.files[0];
-        this.setState({ blob: file });
-
+    photoValidation = (file) => {
         if (file.size > 27000000) {
             this.setState((prevState) => ({
-                ...prevState, invalidFields: { ...prevState.invalidFields, photoImage: 'Selecteer een afbeelding kleiner dan 27MB.' }
+                ...prevState, invalidFields: { ...prevState.invalidFields, blob: 'Selecteer een afbeelding kleiner dan 27MB.' }
             }));
             return;
         } else {
             this.setState((prevState) => {
                 const invalidFields = { ...prevState.invalidFields }
-                if (invalidFields.hasOwnProperty("photoImage")) delete invalidFields['photoImage'];
+                if (invalidFields.hasOwnProperty("blob")) delete invalidFields['blob'];
                 return { invalidFields };
             });
         }
+    }
+
+    onFileChange = async (e) => {
+        const file = e.target.files[0];
+        this.setState({ blob: e.target.files[0] });
+
+        this.photoValidation(file);
 
         this.setState({
             photoLoading: true
@@ -79,18 +315,14 @@ export default class PhotoAddStrapi extends React.Component {
 
 
         // TODO: extract lensmodel, and write location suggestion
-        // let exifrGps = await exifr.gps(file);
-        // let output = await exifr.parse(file, ['LensModel']);
+        let exifrGps = await exifr.gps(file);
+        let output = await exifr.parse(file, ['LensModel']);
 
-        // if (exifrGps) {
-        //     let { longitude, latitude } = exifrGps;
-        //     // this.setsate and get nearby locations to suggest
-        // }
-        // if (output) {
-        //     //this.setstate lensmodel (24-70mm) 
-        // }
-
-
+        // if the photo contains gps data
+        if (exifrGps) {
+            let { longitude, latitude } = exifrGps;
+            this.setState((prevState) => ({ ...prevState, locationKnown: true, photo: { ...prevState.photo, longitude, latitude } }));
+        }
 
         if (file && file.name) {
             EXIF.getData(file, () => {
@@ -111,9 +343,9 @@ export default class PhotoAddStrapi extends React.Component {
                         }));
                     }
 
-                    console.log(exifData);
 
-                    let shutterspeedVal = EXIF.getTag(file, "ExposureTime") > 1 ? EXIF.getTag(file, "ExposureTime") : '1/' + (1 / EXIF.getTag(file, "ExposureTime"));
+                    const shutterVal = (EXIF.getTag(file, "ExposureTime").numerator / EXIF.getTag(file, "ExposureTime").denominator);
+                    let shutterspeedVal = shutterVal > 1 ? shutterVal : '1/' + (1 / shutterVal);
                     let ISOVal = EXIF.getTag(file, "ISOSpeedRatings");
                     let apertureVal = EXIF.getTag(file, "FNumber").numerator / EXIF.getTag(file, "FNumber").denominator;
                     let focalLengthVal = EXIF.getTag(file, "FocalLength") + 'mm';
@@ -157,7 +389,7 @@ export default class PhotoAddStrapi extends React.Component {
         return result;
     }
 
-    createSlug = async (slug, suffix) => {
+    createSlug = async (slug, suffix, previousSuffix) => {
 
         var result = await this.checkForAvailableSlug(slug);
 
@@ -172,46 +404,67 @@ export default class PhotoAddStrapi extends React.Component {
             } else {
                 suffix++;
             }
+            var n = str.lastIndexOf(previousSuffix);
+            slug.replace(previousSlug, '');
 
-            let adjustedSlug = slug + '-' + suffix;
-            return this.createSlug(adjustedSlug, suffix);
+
+            const createdSuffix = '-' + suffix;
+            let adjustedSlug = slug + reactedSlug;
+            return this.createSlug(adjustedSlug, suffix, createdSuffix);
         }
     }
 
+
+    fetchCategories = async () => {
+        // build the graphql query
+        const query = `query locationCategories{
+            locationCategories {
+              label
+              value
+              id
+            }
+            months {
+              label
+              value
+              id
+            }
+          }`;
+        const result = await graphQLFetch(query, {}, true);
+        this.setState({ locationCategoryValues: result.locationCategories, monthValues: result.months });
+    }
+
     async handleSubmit(e) {
+        console.log('submitted');
         e.preventDefault();
         e.persist();
 
-        const { photoImage, title } = this.state.photo;
+        const { blob, newLocation, photo: { title } } = this.state;
 
         // check if an image is given, and title, if not show error and return null;
-        if (!photoImage || !title) {
-            if (!photoImage) {
-
+        if (!blob || !title) {
+            if (!blob) {
+                console.log('no blob in state');
                 this.setState((prevState) => ({
-                    ...prevState, invalidFields: { ...prevState.invalidFields, photoImage: 'Voeg je nog een foto toe? 📸' }
+                    ...prevState, invalidFields: { ...prevState.invalidFields, blob: 'Voeg je nog een foto toe? 📸' }
                 }));
             }
             if (!title) {
+                console.log('no title in state.photo');
                 this.setState((prevState) => ({
                     ...prevState, invalidFields: { ...prevState.invalidFields, title: 'Wat is de titel van je foto? 📸' }
                 }));
             }
+            console.log('returning');
             return;
         }
 
-        // Progress
-        const options = {
-            onUploadProgress: (progressEvent) => {
-                const { loaded, total } = progressEvent;
-                // Do something with the progress details
-                const progress = Math.floor(loaded / total * 100);
-                if (progress < 100) {
-                    this.setState({ uploadPercentage: progress });
-                }
-            },
-        };
-
+        let createdLocation = null;
+        if (newLocation) {
+            createdLocation = await this.createLocation();
+            console.log(createdLocation);
+        } else {
+            console.log('no new location found');
+        }
 
         // check if slug is available, if not, add number
         let slug = slugify(title, {
@@ -223,12 +476,25 @@ export default class PhotoAddStrapi extends React.Component {
 
         const createdSlug = await this.createSlug(slug);
 
-        this.setState((prevState) => ({
-            ...prevState, photo: { ...prevState.photo, slug: createdSlug, date: prevState.photo.date ? new Date(prevState.photo.date) : null }
-        }));
+        // if slug is available, add to the state
+        this.setState((prevState) => {
 
-        // if slug is available, add to the query and create photo page with info
+            return ({
+                ...prevState,
+                photo: {
+                    ...prevState.photo,
+                    slug: createdSlug,
+                    location: createdLocation !== null ? createdLocation.location.id : prevState.photo.location,
+                    date: prevState.photo.date ? new Date(prevState.photo.date) : null,
+                    iso: prevState.photo.iso ? prevState.photo.iso.toString() : null,
+                    aperture: prevState.photo.aperture ? prevState.photo.aperture.toString() : null,
+                    shutterspeed: prevState.photo.shutterspeed ? prevState.photo.shutterspeed.toString() : null
+                }
+            })
+        });
 
+        //create photo page with info
+        // query for new photo
         const query = `mutation CreatePhoto($input: createPhotoInput) {
             createPhoto(input: $input){
                 photo{
@@ -243,25 +509,42 @@ export default class PhotoAddStrapi extends React.Component {
                     camera
                     focalLength
                     id
+                    location {
+                        id
+                        title
+                        longitude
+                        latitude
+                    }
                 }
             }
         }`;
 
         let input = {};
         input['data'] = this.state.photo;
-        console.log(input);
-        delete input.data.photoImage;
+        delete input.data.blob;
+        delete input.data.longitude;
+        delete input.data.latitude;
 
         const data = await graphQLFetch(query, { input }, true);
 
 
         if (data) {
+            console.log('photo page created, uploading foto..')
             //after pages is created, use refId to upload files with xhr request
-            console.log('photo created', data);
+
+            const redirect = () => {
+                //if the query returns an id in data, the photo is created
+                // redirect to created photo
+                const { slug } = data.createPhoto.photo;
+                const { history } = this.props;
+                history.push({
+                    pathname: `/foto/${slug}`
+                })
+            }
 
             const formData = new FormData();
 
-            const uploadedFile = document.querySelector('#fileInput input').files[0];
+            const { blob: uploadedFile } = this.state;
 
             formData.append(`files`, uploadedFile, uploadedFile.name);
             formData.append('ref', 'photo');
@@ -271,229 +554,345 @@ export default class PhotoAddStrapi extends React.Component {
             const request = new XMLHttpRequest();
             request.open('POST', `http://localhost:1337/upload`);
             request.send(formData);
-
-            // add photo to form data
-            // refId = data.createPhoto.photo.id
-            // field = photo
-            // ref = Photo
-
-            // const formElement = document.querySelector('form');
-
-            // formElement.addEventListener('submit', e => {
-            //     e.preventDefault();
-
-            //     const request = new XMLHttpRequest();
-
-            //     request.open('POST', '/upload');
-
-            //     request.send(new FormData(formElement));
-
+            request.addEventListener("load", redirect);
         } else {
             console.log('failed');
         }
-
-        // UPLOADTING THE IMAGE
-        // const { data: resources } = await http.post(
-        //     window.ENV.UI_API_IMAGE_ENDPOINT,
-        //     formData,
-        //     options
-        // );
-
-        //0 = thumb, 1 == watermakrk 2 == original
-        // const imageThumb =
-        //     "https://dkotwt30gflnm.cloudfront.net/" +
-        //     resources.transforms.find(elem => elem.id === "thumbnail").key;
-        // const imageOriginal =
-        //     "https://dkotwt30gflnm.cloudfront.net/" +
-        //     resources.transforms.find(elem => elem.id === "original").key;
-        // const imageWatermark =
-        //     "https://dkotwt30gflnm.cloudfront.net/" +
-        //     resources.transforms.find(elem => elem.id === "watermark").key;
-
-        // const photo = {
-        //     title: form.title.value,
-        //     //place: form.place.value,
-        //     date: form.date.value ? new Date(form.date.value).toISOString() : null,
-        //     description: form.desc.value,
-        //     shutterspeed: form.shutterspeed.value,
-        //     iso: form.iso.value,
-        //     aperture: form.aperture.value,
-        //     images: {
-        //         imageThumb,
-        //         imageOriginal,
-        //         imageWatermark
-        //     }
-        // };
-
-        // // {
-        // //     "input" :{
-        // //       "data": {
-        // //           "title": "Test"
-        // //         }
-        // //     }
-        // //   }
-
-        // const data = await graphQLFetch(query, { input }, true);
-        // if (data) {
-
-
-        //     // set the state to 100, once the photo is loaded
-        //     this.setState({ uploadPercentage: 100 });
-
-        //     //console.log(data.photoAdd.id);
-        //     // if the query returns an id in data, the photo is created
-        //     // redirect to created photo
-        //     const { id } = data.photoAdd;
-        //     const { history } = this.props;
-        //     history.push({
-        //         pathname: `/photos/${id}`
-        //     })
-        // }
-
     }
 
+    onLocationSelect = (location) => {
+        // if existing location is selected, add to the state
+        this.setState((prevState) => ({
+            ...prevState, selectedLocation: location, photo: { ...prevState.photo, location: location.id }
+        }));
+    }
+
+    resetSelectedLocation = () => {
+        this.setState((prevState) => ({
+            ...prevState, selectedLocation: null, photo: { ...prevState.photo, location: null }
+        }));
+    }
+
+    updateNewLocationCoords = (lat, lng) => {
+        console.log(lat, lng);
+        this.setState((prevState) => ({
+            ...prevState, newLocation: false, location: { ...prevState.location, longitude: lng, latitude: lat }
+        }));
+    }
+
+    findNearbyLocations = async (lat, lng) => {
+
+        // calculate min and max latitudes
+        //echo 'submit';
+        //const lat = this.state.photo.latitude;
+        //const lng = this.state.photo.longitude;
+
+        const distance = 30;		//in km
+        const radius = 6371;		// earth's radius in km = ~6371
+
+        function rad2deg(angle) {
+            return angle * 57.29577951308232 // angle / Math.PI * 180
+        }
+
+        function deg2rad(angle) {
+            return angle * 0.017453292519943295 // (angle / 180) * Math.PI;
+        }
+
+        // latitude boundaries
+        const maxlat = lat + rad2deg(distance / radius);
+        const minlat = lat - rad2deg(distance / radius);
+
+        // longitude boundaries (longitude gets smaller when latitude increases)
+        const maxlng = lng + rad2deg(distance / radius / Math.cos(deg2rad(lat)));
+        const minlng = lng - rad2deg(distance / radius / Math.cos(deg2rad(lat)));
+
+        function distanceFromLocation(lat1, lon1, lat2, lon2) {
+            const theta = lon1 - lon2;
+            let dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+            dist = Math.acos(dist);
+            dist = rad2deg(dist);
+            const miles = dist * 60 * 1.1515;
+            return (miles * 1.609344);
+        }
+
+        //$query = "template=location, place.lat>=$minlat, place.lat<=$maxlat, place.lng>=$minlng, place.lng<=$maxlng ";
+
+        const query = `query locationsInRange($minlat:Float!, $maxlat:Float!, $minlng:Float!, $maxlng:Float!){
+            locations(where:{latitude_gte:$minlat,latitude_lte:$maxlat,longitude_gte:$minlng,longitude_lte:$maxlng}) {
+            title
+            longitude
+            latitude
+            id
+            photos {
+                id
+                likes
+                title
+                slug
+                photo {
+                    url 
+                }
+            }
+            }
+          }`
+
+        const search = { "minlat": minlat, "maxlat": maxlat, "minlng": minlng, "maxlng": maxlng }
+        const result = await graphQLFetch(query, search, true);
+
+        if (result.locations.length > 0) {
+            console.log('found locations', result.locations)
+            const locations = result.locations;
+            //sort items on distance
+            locations.forEach((location) => {
+                // lat and lng are from this.state.photo
+                const locDistance = distanceFromLocation(location.latitude, location.longitude, lat, lng);
+                location['distance'] = locDistance;
+            })
+
+            locations.sort(function (a, b) {
+                var keyA = new Date(a.distance),
+                    keyB = new Date(b.distance);
+                // Compare the 2 dates
+                if (keyA < keyB) return -1;
+                if (keyA > keyB) return 1;
+                return 0;
+            });
+
+            return locations;
+        } else {
+            return null;
+        }
+    }
+
+
     render() {
-        const { date, shutterspeed, iso, aperture, camera, focalLength } = this.state.photo;
-        const { photoLoading, tempFile } = this.state;
-
-        let showInputClass = "relative border-2 border-dashed rounded mb-2 p-4 text-center cursor-pointer hover:border-green-500";
-        showInputClass += (!tempFile && !photoLoading) ? ' block' : ' hidden';
-        showInputClass += (this.state.onDragOver && !this.state.invalidFields.photoImage) ? " border-green-400" : " border-gray-400";
-        if (this.state.invalidFields.photoImage) showInputClass += " border-red-400";
-
         let btnClass = "block px-3 py- my-2 text-white rounded text-l";
-        let disabled = this.state.uploadPercentage || Object.keys(this.state.invalidFields).length > 0;
+        let disabled = (this.state.currentStep == 1) ? this.state.photo.title === undefined || this.state.photo.title === "" || this.state.blob === null : false;
         btnClass += disabled ? " bg-gray-400" : " bg-blue-600";
 
         return (
-            <form
-                name="photoAdd"
-                encType="multipart/form-data"
-                onSubmit={this.handleSubmit}
-                onChange={this.handleInputChange}
-                className="block py-3 px-4 border border-gray-300 rounded"
-            >
-                <h1 className="my-2 font-bold">Starpi Foto toevoegen</h1>
-                {/* <input
-                    type="text"
-                    name="place"
-                    placeholder="Plaats"
-                    
-                /> */}
-                <div id="fileInput" className={showInputClass}>
-                    <input
-                        type="file"
-                        name="photoImage"
-                        ref={this.fileInput}
-                        onChange={this.onFileChange}
-                        onDrop={this.handleOnDrop}
-                        onDragOver={this.handleOnDragOver}
-                        onDragLeave={this.handleOnDragLeave}
-                        className="absolute m-0 p-0 w-full h-full outline-none pointer opacity-0 top-0 left-0"
-                    />
-                    <p className="text-xl text-black font-semibold">Drag en drop een afbeelding</p>
-                    <p className="text-base"> of <a href="#">selecteer</a> een bestand <span className="text-sm block text-gray-300"> (Hoge resolutie aangeraden, maximaal 27MB)</span></p>
-                </div>
-                <div className="text-red-500">{this.state.invalidFields.photoImage}</div>
-                {photoLoading && <AiOutlineLoading3Quarters className="fill-current text-green-500" />}
-                {tempFile &&
-                    <div id="imagePreview" className="relative relative bg-gray-300 p-4 mb-2">
+            <React.Fragment>
+                <form
+                    name="photoAdd"
+                    encType="multipart/form-data"
+                    onSubmit={this.handleSubmit}
+                    className="block py-3 px-4 border border-gray-300 rounded md:mx-auto md:my-6 md:w-9/12 lg:w-1/2 rounded md:shadow-lg md:p-6"
+                >
+                    <h1 className="my-2 font-bold">Starpi Foto toevoegen</h1>
 
-                        <div onClick={this.removeImage} className="border border-gray-600 rounded p-4 m-4 absolute top-0 right-0 cursor-pointer bg-black opacity-50 hover:opacity-100">
-                            <FiTrash2 className="stroke-current text-gray-100" />
+                    <AddPhoto
+                        currentStep={this.state.currentStep}
+                        state={this.state}
+                        fileInput={this.fileInput}
+                        onFileChange={this.onFileChange}
+                        onChange={this.handleInputChange}
+                        handleOnDrop={this.handleOnDrop}
+                        handleOnDragOver={this.handleOnDragOver}
+                        handleOnDragLeave={this.handleOnDragLeave}
+                        removeImage={this.removeImage}
+                    />
+                    {this.state.currentStep === 2 && <Step2
+                        currentStep={this.state.currentStep}
+                        state={this.state}
+                        findNearbyLocations={this.findNearbyLocations}
+                        onLocationSelect={this.onLocationSelect}
+                        resetSelectedLocation={this.resetSelectedLocation}
+                        activeLocation={this.state.selectedLocation}
+                        onChange={this.handleInputChange}
+                        updateNewLocationCoords={this.updateNewLocationCoords}
+                        handleSelect={this.handleSelect}
+                        onCategoryCreate={this.onCategoryCreate}
+                        fetchCategories={this.fetchCategories}
+                        onNewLocationClick={this.onNewLocationClick}
+                        setNewLocation={this.setNewLocation}
+                    />}
+
+                    <div className="shadow w-full bg-grey-light">
+                        <div className="bg-blue-500 text-xs leading-none py-1 text-center text-white" style={{ width: this.state.uploadPercentage + '%' }}>{this.state.uploadPercentage + '%'}</div>
+                    </div>
+
+                    {this.previousButton()}
+                    {this.nextButton(disabled, btnClass)}
+                </form>
+            </React.Fragment>
+        );
+    }
+}
+
+class Step2 extends React.Component {
+
+    constructor(props) {
+        console.log(props);
+        super(props)
+
+        const { locationKnown } = props.state;
+        const zoom = locationKnown ? props.state.map.zoom : 6;
+
+        this.state = {
+            nearbyLocations: null,
+            draggable: !props.locationKnown,
+            marker: {
+                lat: 52.243712,
+                lng: 5.4411363,
+            },
+            zoom,
+            loadingNearbyLocations: false
+        }
+    }
+
+    displayLocations = async (lat, lng) => {
+        const nearbyLocations = await this.props.findNearbyLocations(lat, lng);
+        if (nearbyLocations === null) {
+            this.props.setNewLocation();
+        }
+        this.setState({ nearbyLocations, loadingNearbyLocations: false });
+    }
+
+    async componentDidMount() {
+        if (this.props.currentStep == 2) {
+            console.log('mounting');
+            const { locationKnown } = this.props.state;
+            if (locationKnown) {
+                console.log('location known');
+                const { latitude, longitude } = this.props.state.photo;
+                console.log('getting long lat', latitude, longitude);
+                this.props.updateNewLocationCoords(latitude, longitude);
+                this.displayLocations(latitude, longitude);
+                this.setState({
+                    marker: { lat: latitude, lng: longitude }
+                })
+            }
+            this.props.fetchCategories();
+        }
+    }
+
+
+
+    refmarker = React.createRef();
+    map = React.createRef();
+
+    updatePosition = () => {
+        const marker = this.refmarker.current;
+        const map = this.map.current;
+        if (marker != null) {
+            console.log('updating position', marker.leafletElement.getLatLng())
+            this.setState({
+                marker: marker.leafletElement.getLatLng(),
+                zoom: map.leafletElement.getZoom(),
+                loadingNearbyLocations: true
+            })
+        }
+        this.displayLocations(this.state.marker.lat, this.state.marker.lng);
+        console.log(marker.leafletElement.getLatLng().lat, marker.leafletElement.getLatLng().lng);
+        this.props.updateNewLocationCoords(marker.leafletElement.getLatLng().lat, marker.leafletElement.getLatLng().lng);
+    }
+
+    onChange = (e) => {
+        this.props.onChange(e, 'location');
+    }
+
+    render() {
+        if (this.props.currentStep !== 2) {
+            return null
+        }
+
+        const { locationCategoryValues, location_categories, newLocation, monthValues } = this.props.state;
+        const { marker } = this.state;
+        const position = [marker.lat, marker.lng];
+
+        const { nearbyLocations, zoom, loadingNearbyLocations } = this.state;
+
+        return (
+            <div className="form-group">
+
+                <Map
+                    className="map"
+                    id="photoLocation"
+                    center={position}
+                    zoom={zoom}
+                    ref={this.map}
+                >
+                    <TileLayer
+                        attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    <Marker
+                        position={position}
+                        ref={this.refmarker}
+                        draggable={this.state.draggable}
+                        onDragend={this.updatePosition}
+                    >
+                        <Popup>
+                            Foto locatie
+                        </Popup>
+                    </Marker>
+                </Map>
+
+                {loadingNearbyLocations && <FaSpinner />}
+                {nearbyLocations && !newLocation &&
+                    <div>
+                        <div className="">Bedoel je misschien deze locatie?</div>
+                        <div className="flex -mx-2">
+                            {
+                                nearbyLocations.map((location) =>
+                                    <LocationCard activeLocation={this.props.activeLocation} key={location.id} location={location} onClick={this.props.onLocationSelect} />
+                                )
+                            }
                         </div>
-                        <img src={tempFile} id="output_image" className="max-w-full rounded mb-2" />
+                        <div onClick={this.props.onNewLocationClick} className="rounded bg-blue-500 text-white w-full p-2">Nee, nieuwe locatie toevoegen</div>
                     </div>
                 }
-                <input
-                    type="text"
-                    name="title"
-                    placeholder="Titel"
-
-                />
-                <div className="text-red-500">{this.state.invalidFields.title}</div>
-                <input
-                    type="date"
-                    name="date"
-                    placeholder="Datum"
-                    defaultValue={date || ""}
-
-                />
-
-                <div className="flex">
-
-                    <div className="flex flex-wrap items-stretch w-full relative mb-2 mr-2">
-
+                {newLocation &&
+                    <React.Fragment>
+                        <h2>Nieuwe locatie toevoegen</h2>
                         <input
                             type="text"
-                            name="shutterspeed"
-                            placeholder="Sluitertijd"
-                            defaultValue={shutterspeed || ""}
-                            className="mb-0 flex-shrink flex-grow flex-auto  w-px flex-1 border h-10 border-gray-400 rounded rounded-r-none py-2 px-3 relative text-sm"
+                            name="title"
+                            placeholder="Titel"
+                            onChange={this.onChange}
                         />
-                        <div className="flex -mr-px">
-                            <span className="flex items-center  bg-grey-lighter rounded rounded-l-none border border-l-0 border-gray-400 py-2 px-3 whitespace-no-wrap text-grey-dark text-sm">s</span>
-                        </div>
-                    </div>
-
-
-                    <div className="flex flex-wrap items-stretch w-full relative mb-2 mr-2">
-
-                        <div className="flex -mr-px">
-                            <span className="flex items-center  bg-grey-lighter rounded rounded-r-none border border-r-0 border-gray-400 py-2 px-3 whitespace-no-wrap text-grey-dark text-sm">iso</span>
-                        </div>
-                        <input
+                        <textarea
                             type="text"
-                            name="iso"
-                            placeholder="iso"
-                            defaultValue={iso || ""}
-                            className="mb-0 flex-shrink flex-grow flex-auto  w-px flex-1 border h-10 border-gray-400 rounded rounded-l-none py-2 px-3 relative text-sm"
+                            name="desc"
+                            onChange={this.onChange}
+                            placeholder="Beschrijving van de locatie"
                         />
-                    </div>
-
-                    <div className="flex flex-wrap items-stretch w-full relative mb-2">
-
-                        <div className="flex -mr-px">
-                            <span className="flex items-center  bg-grey-lighter rounded rounded-r-none border border-r-0 border-gray-400 py-2 px-3 whitespace-no-wrap text-grey-dark text-sm">f/</span>
-                        </div>
-                        <input
+                        <textarea
                             type="text"
-                            name="aperture"
-                            placeholder="Diafragma"
-                            defaultValue={aperture || ""}
-                            className="mb-0 flex-shrink flex-grow flex-auto  w-px flex-1 border h-10 border-gray-400 rounded rounded-l-none py-2 px-3 relative text-sm"
+                            name="directions"
+                            onChange={this.onChange}
+                            placeholder="Beste manier om hier naar toe te reizen? Is bijvoorbeeld er een parkeerplaats dichtbij, stopt er een bus?"
                         />
-                    </div>
+                        <textarea
+                            type="text"
+                            name="whattoshoot"
+                            onChange={this.onChange}
+                            placeholder="Tips en advies, wat kan je fotograferen op deze locatie?"
+                        />
+                        <Select
+                            components={animatedComponents}
+                            closeMenuOnSelect={false}
+                            isMulti
+                            options={monthValues}
+                            placeholder="Beste maand om te fotograferen"
+                            onChange={(e) => { this.props.handleSelect(e, 'months') }}
+                        />
+                        <CreatableSelect
+                            components={animatedComponents}
+                            isMulti
+                            onChange={(e) => { this.props.handleSelect(e, 'location_categories') }}
+                            options={locationCategoryValues}
+                            placeholder="Categorieën"
+                            value={location_categories}
+                            onCreateOption={this.props.onCategoryCreate}
+                            formatCreateLabel={label => `Maak nieuwe categorie: "${label}`}
 
-                </div>
-                <input
-                    type="text"
-                    name="camera"
-                    placeholder="camera"
-                    defaultValue={camera || ""}
-
-                />
-                <input
-                    type="text"
-                    name="focalLength"
-                    defaultValue={focalLength || ""}
-                    placeholder="focalLength"
-
-                />
-                <textarea
-                    type="text"
-                    name="desc"
-                    placeholder="Beschrijving"
-
-                />
-                <button className={btnClass} disabled={disabled}>
+                        />
+                    </React.Fragment>
+                }
+                <button type="submit" className="block px-3 py- my-2 text-white rounded text-l bg-blue-500">
                     Uploaden
                 </button>
-
-                <div className="shadow w-full bg-grey-light">
-                    <div className="bg-blue-500 text-xs leading-none py-1 text-center text-white" style={{ width: this.state.uploadPercentage + '%' }}>{this.state.uploadPercentage + '%'}</div>
-                </div>
-            </form>
+            </div>
         );
     }
 }

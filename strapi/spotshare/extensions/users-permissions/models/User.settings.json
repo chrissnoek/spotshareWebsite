@@ -54,8 +54,14 @@
       "configurable": false
     },
     "photos": {
-      "via": "user",
-      "collection": "photo"
+      "collection": "photo",
+      "via": "user"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "lastname": {
+      "type": "string"
     }
   }
 }

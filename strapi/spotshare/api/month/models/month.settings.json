@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "months",
+  "info": {
+    "name": "Month"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "locations": {
+      "collection": "location",
+      "via": "months",
+      "dominant": true
+    },
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "uid",
+      "targetField": "label"
+    }
+  }
+}

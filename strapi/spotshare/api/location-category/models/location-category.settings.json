@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "location_categories",
+  "info": {
+    "name": "LocationCategory"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "uid",
+      "targetField": "label"
+    },
+    "locations": {
+      "via": "location_categories",
+      "collection": "location"
+    }
+  }
+}

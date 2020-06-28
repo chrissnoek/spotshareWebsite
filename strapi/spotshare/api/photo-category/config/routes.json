@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/photo-categories",
+      "handler": "photo-category.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/photo-categories/count",
+      "handler": "photo-category.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/photo-categories/:id",
+      "handler": "photo-category.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/photo-categories",
+      "handler": "photo-category.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/photo-categories/:id",
+      "handler": "photo-category.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/photo-categories/:id",
+      "handler": "photo-category.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

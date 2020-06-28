@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Link, withRouter, NavLink } from 'react-router-dom';
 
 const PhotoView = withRouter(({ photo, location: { search }, deletePhoto, index }) => {
-    const selectedLocation = { pathname: `/photos/${photo.id}`, search }
+    const selectedLocation = { pathname: `/foto/${photo.slug}`, search }
     return (
         <React.Fragment>
             <div className="w-full inline-block md:w-1/2 lg:w-1/3 p-2">
@@ -21,7 +21,7 @@ const PhotoView = withRouter(({ photo, location: { search }, deletePhoto, index 
                             title="Bekijk foto nu"
                         ></NavLink>
                         <img
-                            src={photo.images.imageWatermark}
+                            src={photo.photo[0].url}
                             className="object-cover  w-full h-48  block"
                             alt="Foto"
                         />

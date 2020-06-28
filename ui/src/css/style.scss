@@ -49,24 +49,24 @@ div.error {
   color: red;
 }
 
-form {
-  @apply block bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4  p-8;
+// form {
+//   // @apply block bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4  p-8;
 
-  h3 {
-    @apply block;
-  }
-  label {
-    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2;
-  }
-  input,
-  textarea {
-    @apply border border-gray-400 bg-gray-200 text-gray-900 appearance-none inline-block w-full border rounded text-sm py-2 px-3 mb-2;
+//   h3 {
+//     @apply block;
+//   }
+//   label {
+//     @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2;
+//   }
+//   input,
+//   textarea {
+//     @apply border border-gray-400 bg-gray-200 text-gray-900 appearance-none inline-block w-full border rounded text-sm py-2 px-3 mb-2;
 
-    &:focus {
-      @apply outline-none bg-white border-gray-500;
-    }
-  }
-}
+//     &:focus {
+//       @apply outline-none bg-white border-gray-500;
+//     }
+//   }
+// }
 
 /*@tailwind base;
 @tailwind components;

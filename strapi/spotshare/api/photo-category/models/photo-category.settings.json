@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "photo_categories",
+  "info": {
+    "name": "PhotoCategory"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "photos": {
+      "collection": "photo",
+      "via": "photo_categories",
+      "dominant": true
+    }
+  }
+}

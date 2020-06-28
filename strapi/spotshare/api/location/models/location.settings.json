@@ -28,6 +28,21 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "location_categories": {
+      "collection": "location-category",
+      "via": "locations",
+      "dominant": true
+    },
+    "directions": {
+      "type": "text"
+    },
+    "whattoshoot": {
+      "type": "text"
+    },
+    "months": {
+      "via": "locations",
+      "collection": "month"
     }
   }
 }

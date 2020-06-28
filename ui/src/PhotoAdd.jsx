@@ -73,9 +73,7 @@ export default class PhotoAdd extends React.Component {
         this.setState({ tempFile: null, photo: {} })
     }
 
-
     async onFileChange(e) {
-
         const file = e.target.files[0];
 
         if (file.size > 27000000) {
@@ -100,21 +98,6 @@ export default class PhotoAdd extends React.Component {
             this.setState({ photoLoading: false, tempFile: URL.createObjectURL(file) });
         };
         reader.readAsDataURL(file);
-
-
-        // TODO: extract lensmodel, and write location suggestion
-        // let exifrGps = await exifr.gps(file);
-        // let output = await exifr.parse(file, ['LensModel']);
-
-        // if (exifrGps) {
-        //     let { longitude, latitude } = exifrGps;
-        //     // this.setsate and get nearby locations to suggest
-        // }
-        // if (output) {
-        //     //this.setstate lensmodel (24-70mm) 
-        // }
-
-
 
         if (file && file.name) {
             EXIF.getData(file, () => {
@@ -168,8 +151,6 @@ export default class PhotoAdd extends React.Component {
         this.setState({ onDragOver: false });
     }
 
-
-
     async handleSubmit(e) {
         e.preventDefault();
 
@@ -194,23 +175,6 @@ export default class PhotoAdd extends React.Component {
         const formData = new FormData();
         const uploadedFile = this.fileInput.current.files[0];
         formData.append("photoImage", uploadedFile);
-
-        // Display the key/value pairs
-        // for (var pair of formData.entries()) {
-        //     console.log(pair[0] + ', ' + pair[1]);
-        // }
-
-        // Progress
-        const options = {
-            onUploadProgress: (progressEvent) => {
-                const { loaded, total } = progressEvent;
-                // Do something with the progress details
-                const progress = Math.floor(loaded / total * 100);
-                if (progress < 100) {
-                    this.setState({ uploadPercentage: progress });
-                }
-            },
-        };
 
         const { data: resources } = await http.post(
             window.ENV.UI_API_IMAGE_ENDPOINT,

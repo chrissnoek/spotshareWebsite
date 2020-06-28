@@ -22,6 +22,7 @@ export default class LocationDetailStrapi extends React.Component {
             locationBySlug(slug: $slug) {
                 title
                 photos {
+                    likes
                     id
                     title
                     slug
@@ -167,12 +168,13 @@ export default class LocationDetailStrapi extends React.Component {
         const { userLocation, userLocationKnown, userMarker, } = this.state;
         const { photos } = locationBySlug;
 
-        const position = [locationBySlug.longitude, locationBySlug.latitude];
+        const position = [locationBySlug.latitude, locationBySlug.longitude];
         const calculatedUserLocation = userLocation.latitude ? [userLocation.latitude, userLocation.longitude] : null;
 
         return (
             <div id="page">
                 <div id="photoInfo" className="p-6">
+                    <img src={photos.sort((a, b) => b.likes - a.likes)[0].photo[0].url} />
                     <h1 className="text-2xl font-bold mb-1 text-gray-800 block">{locationBySlug.title}</h1>
                     <p className="text-gray-600">{locationBySlug.desc}</p>
                     <Map className="map" id="photoLocation" center={position} zoom={this.state.zoom}>

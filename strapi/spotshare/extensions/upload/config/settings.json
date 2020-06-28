@@ -1,8 +1,8 @@
 {
   "provider": "s3-photo",
   "providerOptions": {
-    "accessKeyId": "AKIAJAHJIQBYIJT2QLWQ",
-    "secretAccessKey": "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",
+    "accessKeyId": "AKIA2HLY6THUI3U2A7VP",
+    "secretAccessKey": "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",
     "region": "eu-central-1",
     "params": {
       "Bucket": "spotsharenl"

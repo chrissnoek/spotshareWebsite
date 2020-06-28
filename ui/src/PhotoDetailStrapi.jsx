@@ -171,7 +171,7 @@ export default class PhotoDetailStrapi extends React.Component {
 
         const { userLocation, userLocationKnown, userMarker } = this.state;
 
-        const position = [photoBySlug.location.longitude, photoBySlug.location.latitude];
+        const position = [photoBySlug.location.latitude, photoBySlug.location.longitude];
         const calculatedUserLocation = userLocation.latitude ? [userLocation.latitude, userLocation.longitude] : null;
 
         return (

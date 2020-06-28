@@ -9,7 +9,7 @@ function jsonDateReviver(key, value) {
     return value;
 }
 
-export default async function graphQLFetch(query, variables = {}, isBlog = false) {
+export default async function graphQLFetch(query, variables = {}, isBlog = false, returnError = false) {
     //console.log('query from graphQlFetch ' + query)
     let apiEndpoint = (__isBrowser__) // eslint-disable-line no-undef
         ? window.ENV.UI_API_ENDPOINT
@@ -33,8 +33,10 @@ export default async function graphQLFetch(query, variables = {}, isBlog = false
                 console.log(error);
                 const details = error.extensions.exception.errors.join("\n ");
                 toast.error(`${error.message}\n ${details}`);
+                if (returnError) return result;
             } else {
                 toast.error(`${error.extensions.code}\n ${error.message}`);
+                if (returnError) return result;
             }
         }
         return result.data;

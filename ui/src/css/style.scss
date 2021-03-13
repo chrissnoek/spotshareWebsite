@@ -1,11 +1,25 @@
+.container {
+  margin: 0 auto;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap");
+@import "swiper/swiper.scss";
 
 html,
 body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif;
   line-height: 1.5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
 }
 
 h1 {
@@ -39,7 +53,16 @@ a.active {
 }
 
 .map {
-  height: 250px;
+  min-height: 250px;
+}
+
+.resultMap {
+  min-height: 250px;
+  height: 100%;
+}
+
+.locationCard {
+  background: linear-gradient(0deg, #00000088 30%, #ffffff44 100%);
 }
 
 input.invalid {
@@ -49,25 +72,43 @@ div.error {
   color: red;
 }
 
-// form {
-//   // @apply block bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4  p-8;
+form.photoAdd {
+  @apply block bg-white rounded-t-lg overflow-hidden border-t border-l border-r border-gray-400 p-4  p-8;
 
-//   h3 {
-//     @apply block;
-//   }
-//   label {
-//     @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2;
-//   }
-//   input,
-//   textarea {
-//     @apply border border-gray-400 bg-gray-200 text-gray-900 appearance-none inline-block w-full border rounded text-sm py-2 px-3 mb-2;
+  h3 {
+    @apply block;
+  }
+  label {
+    @apply block uppercase tracking-wide text-gray-700 text-xs font-bold mt-2;
+  }
+  input,
+  textarea {
+    @apply border border-gray-400 bg-gray-200 text-gray-900 appearance-none inline-block border rounded text-sm py-2 px-3 mb-2;
 
-//     &:focus {
-//       @apply outline-none bg-white border-gray-500;
-//     }
-//   }
-// }
+    &:not(.special) {
+      @apply w-full;
+    }
 
-/*@tailwind base;
-@tailwind components;
-@tailwind utilities;*/
+    &:focus {
+      @apply outline-none bg-white border-gray-500;
+    }
+  }
+}
+
+.swiper-slide {
+  width: Auto;
+}
+
+.revealTooltip:hover {
+  > div:first-child {
+    display: block;
+  }
+}
+
+#notifications {
+  min-width: 296px;
+
+  @media screen and (min-width: 320px) {
+    min-width: 320px;
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "photo_comments",
+  "info": {
+    "name": "PhotoComment"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "body": {
+      "type": "richtext"
+    },
+    "photo": {
+      "model": "photo",
+      "via": "comments"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "comments"
+    },
+    "parent": {
+      "model": "photo-comment"
+    }
+  }
+}

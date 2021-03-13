@@ -66,6 +66,19 @@
     "photo_categories": {
       "via": "photos",
       "collection": "photo-category"
+    },
+    "usersLike": {
+      "via": "likedPhotos",
+      "plugin": "users-permissions",
+      "collection": "user"
+    },
+    "comments": {
+      "via": "photo",
+      "collection": "photo-comment"
+    },
+    "notifications": {
+      "via": "photo",
+      "collection": "notification"
     }
   }
 }

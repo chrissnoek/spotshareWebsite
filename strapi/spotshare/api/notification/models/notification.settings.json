@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "name": "notification",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "giver": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "gaveNotifications"
+    },
+    "receiver": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "receivedNotifications"
+    },
+    "action": {
+      "type": "enumeration",
+      "enum": [
+        "like",
+        "comment",
+        "follow"
+      ]
+    },
+    "photo": {
+      "model": "photo",
+      "via": "notifications"
+    }
+  }
+}

@@ -43,6 +43,11 @@
     "months": {
       "via": "locations",
       "collection": "month"
+    },
+    "usersFavourites": {
+      "via": "favouriteLocations",
+      "plugin": "users-permissions",
+      "collection": "user"
     }
   }
 }

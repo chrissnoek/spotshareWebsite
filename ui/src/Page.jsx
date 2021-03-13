@@ -1,66 +1,166 @@
-import React, { Component } from 'react';
-import Contents from './Contents.jsx';
-import { NavLink } from 'react-router-dom';
-import { FiMenu, FiX } from 'react-icons/fi';
-import { ToastContainer } from 'react-toastify';
+import React, { Component, useState, useEffect } from "react";
+import Contents from "./Contents.jsx";
+import { NavLink, useHistory } from "react-router-dom";
+import { FiMenu, FiX } from "react-icons/fi";
+import { ToastContainer } from "react-toastify";
+import { userContext } from "./services/userContext.js";
+import Footer from "./components/Footer.jsx";
+import Notifications from "./components/notificationCenter/notifications.jsx";
+import { IoNotificationsOutline } from "react-icons/io5";
 
-class NavBar extends Component {
-    constructor() {
-        super();
-        this.state = {
-            isOpen: false
-        }
-    }
+const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [openNotifications, setOpenNotifications] = useState(false);
+  const history = useHistory();
 
-    closeMenu = () => {
-        this.setState({ isOpen: false });
-    }
+  const closeMenu = () => {
+    setIsOpen(false);
+    setOpenNotifications(false);
+  };
 
-    toggleOpen = () => {
-        const { isOpen } = this.state;
-        this.setState({ isOpen: !isOpen });
-    }
+  const notIconClick = (e) => {
+    e.preventDefault();
+    setOpenNotifications(!openNotifications);
+  };
 
-    render() {
-        let menuClassName = 'px-2 pt-2 pb-4 sm:p-0 sm:flex';
-        menuClassName += this.state.isOpen ? ' block' : ' hidden';
+  const toggleOpen = () => {
+    setIsOpen(!isOpen);
+  };
 
-        return (
-            <header className="bg-gray-900 sm:flex sm:justify-between sm:px-6 sm:py-3 sm:items-center">
-                <div className="flex items-center justify-between px-4 py-3 sm:p-0 bg-gray-900">
-                    <div>
-                        <NavLink onClick={this.closeMenu} exact to="/">
-                            <img src="http://dkotwt30gflnm.cloudfront.net/assets/spotshare-logo.png" className="h-8" alt="Spotshare, de mooiste fotolocaties bij jou in de buurt" />
-                        </NavLink>
-                    </div>
-                    <div className="sm:hidden">
-                        <button onClick={this.toggleOpen} type="button" className="text-gray-400 hover:text-white focus:text-white focus:outline-none">
-                            {this.state.isOpen ? <FiX className="fill-current text-white" /> : <FiMenu className="fill-current text-white" />}
-                        </button>
-                    </div>
+  const onNotClick = (link) => {
+    setOpenNotifications(false);
+    history.push(link);
+  };
+
+  return (
+    <header className="bg-gray-900 sm:flex sm:justify-between sm:px-6 sm:py-3 sm:items-center">
+      <div className="flex items-center justify-between px-4 py-3 sm:p-0 bg-gray-900">
+        <div>
+          <NavLink onClick={closeMenu} exact to="/">
+            <img
+              src="http://dkotwt30gflnm.cloudfront.net/assets/spotshare-logo.png"
+              className="h-8"
+              alt="Spotshare, de mooiste fotolocaties bij jou in de buurt"
+            />
+          </NavLink>
+        </div>
+        <div className="sm:hidden">
+          <button
+            onClick={toggleOpen}
+            type="button"
+            className="text-gray-400 hover:text-white focus:text-white focus:outline-none"
+          >
+            {isOpen ? (
+              <FiX className="fill-current text-white" />
+            ) : (
+              <FiMenu className="fill-current text-white" />
+            )}
+          </button>
+        </div>
+      </div>
+      <nav
+        className={`px-2 pt-2 pb-4 sm:p-0 items-center sm:flex ${
+          isOpen ? " block" : " hidden"
+        }`}
+      >
+        <NavLink
+          onClick={closeMenu}
+          to="/fotolocatie/volendam"
+          className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
+        >
+          TestLocatie
+        </NavLink>
+        <NavLink
+          onClick={closeMenu}
+          to="/foto/haven-volendam"
+          className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
+        >
+          TestFoto
+        </NavLink>
+        <NavLink
+          onClick={closeMenu}
+          to="/foto/toevoegen"
+          className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
+        >
+          Uploaden
+        </NavLink>
+        <NavLink
+          onClick={closeMenu}
+          exact
+          to="/"
+          className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
+        >
+          Home
+        </NavLink>
+
+        <userContext.Consumer>
+          {(value) =>
+            !value.user ? (
+              <React.Fragment>
+                <NavLink
+                  onClick={closeMenu}
+                  to="/aanmelden"
+                  className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
+                >
+                  Aanmelden
+                </NavLink>
+                <NavLink
+                  onClick={closeMenu}
+                  to="/inloggen"
+                  className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
+                >
+                  Inloggen
+                </NavLink>
+              </React.Fragment>
+            ) : (
+              <React.Fragment>
+                <div className="relative">
+                  <a
+                    onClick={notIconClick}
+                    className="relative block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
+                  >
+                    <IoNotificationsOutline className="text-2xl" />
+                    {value.user.receivedNotifications &&
+                      value.user.receivedNotifications.length > 0 && (
+                        <div className="rounded-full bg-red-500 text-white absolute top-0 -mt-1 right-0 -mr-1 text-xs w-5 h-5 flex items-center justify-center">
+                          {value.user.receivedNotifications.length}
+                        </div>
+                      )}
+                  </a>
+                  {openNotifications && (
+                    <Notifications onClick={onNotClick} user={value.user} />
+                  )}
                 </div>
-                <nav className={menuClassName}>
-                    <NavLink onClick={this.closeMenu} to="/fotolocatie/volendam" className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1">TestLocatie</NavLink>
-                    <NavLink onClick={this.closeMenu} to="/foto/mooi-valencia" className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1">TestFoto</NavLink>
-                    <NavLink onClick={this.closeMenu} to="/foto/toevoegen" className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1">Uploaden</NavLink>
-                    <NavLink onClick={this.closeMenu} exact to="/" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Home</NavLink>
-                    <NavLink onClick={this.closeMenu} exact to="/fotos" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Photos</NavLink>
-                    <NavLink onClick={this.closeMenu} to="/aanmelden" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Aanmelden</NavLink>
-                    <NavLink onClick={this.closeMenu} to="/inloggen" className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2">Inloggen</NavLink>
-                </nav >
-            </header >
-        );
-    }
-}
-
+                <NavLink
+                  onClick={closeMenu}
+                  to={`/fotograaf/${value.user.slug}`}
+                  className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
+                >
+                  {value.user.username}
+                </NavLink>
+                <NavLink
+                  onClick={closeMenu}
+                  to="/uitloggen"
+                  className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
+                >
+                  Uitloggen
+                </NavLink>
+              </React.Fragment>
+            )
+          }
+        </userContext.Consumer>
+      </nav>
+    </header>
+  );
+};
 
 export default function Page() {
-    return (
-        <div>
-            <NavBar />
-            <Contents />
-            <ToastContainer />
-        </div>
-    );
-
+  return (
+    <div>
+      <NavBar />
+      <Contents />
+      <Footer />
+      <ToastContainer />
+    </div>
+  );
 }

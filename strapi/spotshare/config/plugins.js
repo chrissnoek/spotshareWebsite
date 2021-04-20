@@ -10,4 +10,15 @@ module.exports = ({ env }) => ({
       },
     },
   },
+  email: {
+    provider: "sendgrid",
+    providerOptions: {
+      apiKey: env("SENDGRID_API_KEY"),
+    },
+    settings: {
+      defaultFrom: "info@spotshare.nl",
+      defaultReplyTo: "info@spotshare.nl",
+      testAddress: "chrissnoek8@hotmail.com",
+    },
+  },
 });

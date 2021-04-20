@@ -26,8 +26,8 @@ const Heading = (props) => {
   );
 
   return (
-    <div className="py-6 px-8 bg-gray-900 text-center">
-      <div className="container pt-16 pb-10">
+    <div className="">
+      <div className="pb-8 pt-6  text-center rounded bg-gray-900 mb-6">
         <userContext.Consumer>
           {(value) =>
             !value.user ? (

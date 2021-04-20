@@ -9,6 +9,7 @@ import RegisterForm from "./RegisterHooks.jsx";
 import Login from "./LoginHooks.jsx";
 import Logout from "./Logout.jsx";
 import ForgotPassword from "./ForgotPassword.jsx";
+import PasswordReset from "./PasswordReset.jsx";
 import Profile from "./Profile.jsx";
 import FBConnect from "./FBConnect.jsx";
 import ProfileEdit from "./ProfileEdit.jsx";
@@ -19,10 +20,10 @@ import Notifications from "./components/notificationCenter/notifications.jsx";
 
 const routes = [
   { path: "/aanmelden", component: RegisterForm, exact: true },
-  { path: "/berichten", component: Notifications, exact: true },
   { path: "/inloggen", component: Login, exact: true },
   { path: "/uitloggen", component: Logout, exact: true },
   { path: "/wachtwoord-vergeten", component: ForgotPassword, exact: true },
+  { path: "/wachtwoord-resetten", component: PasswordReset, exact: true },
   { path: "/foto/toevoegen", component: PhotoAddStrapi, exact: true },
   { path: "/foto/toevoegen/:id", component: PhotoAddToLocation, exact: true },
   { path: "/fotograaf/:slug", component: Profile, exact: true },

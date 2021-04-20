@@ -2,11 +2,11 @@ import React, { useEffect, useState, useRef } from "react";
 import { findNearbyLocations } from "../FindNearbyLocations.jsx";
 /* to support IE */
 import store from "../../store.js";
-import { LocationList } from "../LocationCards.jsx";
 import useConstructor from "../ConstructorHook.jsx";
 import ResultMap from "./ResultMap.jsx";
 import CategorieFilter from "./CategorieFilter.jsx";
 import { useHistory, useLocation } from "react-router-dom";
+import LocationList from "./LocationList.jsx";
 
 const Results = (props) => {
   const [locations, setLocations] = useState();

@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Comment } from "./RecursiveComment.jsx";
 import ReplyBox from "./ReplyBox.jsx";
 
-const PhotoComment = ({ comments, photoId, addComment }) => {
+const PhotoComment = ({ comments, photoId, addComment, receiver }) => {
   const [unflattenedComments, setUnflattenedComments] = useState([]);
 
   useEffect(() => {
-    console.log("unflattening comments", comments);
     setUnflattenedComments(unflatten(comments));
-    console.log("comments", comments, unflattenedComments);
   }, [comments]);
 
   const unflatten = (arr) => {
@@ -42,7 +40,7 @@ const PhotoComment = ({ comments, photoId, addComment }) => {
 
   return (
     <>
-      <ReplyBox photoId={photoId} addComment={addComment} />
+      <ReplyBox photoId={photoId} addComment={addComment} receiver={receiver} />
 
       <div className="">
         {unflattenedComments.length
@@ -53,6 +51,7 @@ const PhotoComment = ({ comments, photoId, addComment }) => {
                   key={idx}
                   photoId={photoId}
                   addComment={addComment}
+                  receiver={receiver}
                 />
               );
             })

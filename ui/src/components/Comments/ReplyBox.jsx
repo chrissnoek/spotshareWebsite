@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import { userContext } from "../../services/userContext.js";
 import { Link } from "react-router-dom";
 
-const ReplyBox = ({ replyTo = null, photoId, addComment, closeBoxHandler }) => {
+const ReplyBox = ({
+  replyTo = null,
+  photoId,
+  addComment,
+  closeBoxHandler,
+  receiver,
+}) => {
   const [commentValue, setCommentValue] = useState("");
 
   const onChange = (event) => setCommentValue(event.target.value);
@@ -16,7 +22,7 @@ const ReplyBox = ({ replyTo = null, photoId, addComment, closeBoxHandler }) => {
     };
     let input = {};
     input["data"] = data;
-    addComment(input);
+    addComment(input, receiver);
     closeBoxHandler && closeBoxHandler();
     setCommentValue("");
   };

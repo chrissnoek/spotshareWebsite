@@ -1,73 +1,76 @@
-import React from "react";
-import graphQLFetch from './graphQLFetch.js';
+import React, { useState, useEffect } from "react";
+import graphQLFetch from "./graphQLFetch.js";
 import store from "./store.js";
 import { Redirect } from "react-router-dom";
+import useConstructor from "./components/ConstructorHook.jsx";
+import SanitizedHTML from "react-sanitized-html";
 
-export default class BlogPost extends React.Component {
+const BlogPost = (props) => {
+  const [article, setArticleBySlug] = useState(null);
 
-    static async fetchData(match, search, showError) {
-        // build the graphql query
-        const query = `query articleBySlug($slug: String!){
-            articleBySlug(slug: $slug) {
-                id
-                title
-                body
-                slug
-            }
-        }`;
-
-        let { params: { [0]: slug } } = match;
-        slug = slug.replace(/\//g, "");
-        const result = await graphQLFetch(query, { slug }, true);
-        return result;
+  const getInitialArticle = async (props) => {
+    let _article = store.initialData ? store.initialData : null;
+    delete store.initialData;
+    if (!_article) {
+      _article = await BlogPost.fetchData(props.match);
     }
+    setArticleBySlug(_article);
+  };
 
-    constructor() {
-        super();
-        const articleBySlug = store.initialData != null ? store.initialData.articleBySlug : null;
-        delete store.initialData;
-        this.state = {
-            articleBySlug,
-            slug: null
-        };
-    }
+  useConstructor(() => {
+    getInitialArticle(props);
+  });
 
-    componentDidUpdate(prevProps) {
-        // const { match: { params: { id: prevId } } } = prevProps;
-        // const { match: { params: { id } } } = this.props;
-        // if (prevId !== id) {
-        //     this.loadData();
-        // }
-    }
+  useEffect(() => {
+    getInitialArticle(props);
+  }, [props.match]);
 
-    componentDidMount() {
-        const { articleBySlug } = this.state;
-        if (articleBySlug === null) {
-            this.loadData();
+  if (article === null) {
+    console.log("slug is nullllll");
+    return <Redirect to="/niet-gevonden" />;
+  }
+
+  return (
+    <div id="page" className="px-6 py-24">
+      {article && (
+        <div className="w-full">
+          <h1 className="font-bold text-4xl leading-tight text-center">
+            {article.articleBySlug.title}
+          </h1>
+          <div className="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative">
+            <img className="" src="" alt={article.articleBySlug.title} />
+          </div>
+          <div className="px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed">
+            <SanitizedHTML
+              allowedAttributes={{ a: ["href"], img: ["src"] }}
+              allowedTags={["a", "figure", "img"]}
+              html={article.articleBySlug.body}
+            />
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+BlogPost.fetchData = async (match, search, showError) => {
+  // build the graphql query
+  const query = `query articleBySlug($slug: String!){
+        articleBySlug(slug: $slug) {
+            id
+            title
+            body
+            slug
         }
-    }
+    }`;
 
-    async loadData() {
-        // get the search query string form url
-        const { match } = this.props;
-        // provide the query with the variables 
-        const data = await BlogPost.fetchData(match);
-        if (data) {
-            this.setState({ articleBySlug: data.articleBySlug });
-        }
-    }
+  let {
+    params: { [0]: slug },
+  } = match;
+  slug = slug.replace(/\//g, "");
+  const result = await graphQLFetch(query, { slug }, true);
+  console.log(result);
+  return result;
+};
 
-    render() {
-        const { articleBySlug } = this.state;
-        if (articleBySlug === null) {
-            console.log('slug is nullllll');
-            return <Redirect to='/niet-gevonden' />;
-        };
-
-        return (
-            <div id="page" className="p-6">
-                <h1>{articleBySlug.title}</h1>
-            </div>
-        );
-    }
-}
+export default BlogPost;

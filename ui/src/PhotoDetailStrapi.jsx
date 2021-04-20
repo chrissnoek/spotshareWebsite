@@ -16,6 +16,7 @@ import UserProfilePicture from "./components/UserProfilePicture.jsx";
 import PhotoComment from "./components/Comments/Comments.jsx";
 import { IoCameraOutline } from "react-icons/io5";
 import { GoSettings } from "react-icons/go";
+import CreateNotification from "./components/CreateNotification.jsx";
 
 export default class PhotoDetailStrapi extends React.Component {
   static async fetchData(match, search, showError) {
@@ -207,7 +208,9 @@ export default class PhotoDetailStrapi extends React.Component {
     }
   }
 
-  updateFav = async (user, likedId, action) => {
+  updateFav = async (user, likedId, action, receiver) => {
+    // TODO: store user.likedPhotos in state, and map favArray from state instead of user object
+    // problem: user.likedPhotos is not updated
     const query = `
       mutation updateUser($input:updateUserInput) {
         updateUser(input: $input) {
@@ -224,6 +227,7 @@ export default class PhotoDetailStrapi extends React.Component {
     if (action === "add") {
       if (!favArray.includes(likedId)) {
         favArray.push(likedId);
+        await CreateNotification(user.id, receiver, "like", likedId);
       } else {
         // already in favourites
         return;
@@ -255,8 +259,8 @@ export default class PhotoDetailStrapi extends React.Component {
     const data = await graphQLFetch(query, variables, true);
   };
 
-  addComment = async (data) => {
-    console.log(data);
+  addComment = async (data, receiver) => {
+    console.log(data, receiver);
 
     const query = `mutation createPhotoComment($input: createPhotoCommentInput){
       createPhotoComment(
@@ -290,6 +294,12 @@ export default class PhotoDetailStrapi extends React.Component {
 
     if (response) {
       if (!response.errors) {
+        await CreateNotification(
+          data.data.user,
+          receiver,
+          "comment",
+          data.data.photo
+        );
         let _comments = [...this.state.photoBySlug.comments];
         _comments.push({
           body: response.createPhotoComment.photoComment.body,
@@ -346,6 +356,9 @@ export default class PhotoDetailStrapi extends React.Component {
               <userContext.Consumer>
                 {(value) => {
                   if (value.user) {
+                    if (value.user.id === photoBySlug.user.id) {
+                      return;
+                    }
                     let favourite;
                     if (
                       value.user &&
@@ -365,6 +378,7 @@ export default class PhotoDetailStrapi extends React.Component {
                         likedId={photoBySlug.id}
                         addTitle="Toevoegen aan favorieten"
                         removeTitle="Verwijderen uit favorieten"
+                        receiver={photoBySlug.user.id}
                       />
                     );
                   }
@@ -389,6 +403,7 @@ export default class PhotoDetailStrapi extends React.Component {
                   comments={photoBySlug.comments}
                   photoId={photoBySlug.id}
                   addComment={this.addComment}
+                  receiver={photoBySlug.user.id}
                 />
               </div>
 

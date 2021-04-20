@@ -112,6 +112,10 @@
     "receivedNotifications": {
       "via": "receiver",
       "collection": "notification"
+    },
+    "article_comments": {
+      "via": "user",
+      "collection": "article-comment"
     }
   }
 }

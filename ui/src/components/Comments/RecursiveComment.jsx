@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import { FaUserSecret } from "react-icons/fa";
 import ReplyBox from "./ReplyBox.jsx";
 
-export const Comment = ({ item, idx, photoId, addComment }) => {
+export const Comment = ({ item, idx, photoId, addComment, receiver }) => {
   const [showReplyBox, setShowReplyBox] = useState(false);
 
   const replyClick = () => {
@@ -49,6 +49,7 @@ export const Comment = ({ item, idx, photoId, addComment }) => {
               photoId={photoId}
               addComment={addComment}
               closeBoxHandler={closeReplyBox}
+              receiver={receiver}
             />
           ) : null}
         </div>
@@ -61,6 +62,7 @@ export const Comment = ({ item, idx, photoId, addComment }) => {
                   key={idx}
                   photoId={photoId}
                   addComment={addComment}
+                  receiver={receiver}
                 />
               );
             })}

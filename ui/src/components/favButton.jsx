@@ -8,14 +8,15 @@ const favButton = ({
   likedId,
   addTitle,
   removeTitle,
+  receiver,
 }) => {
   const [loading, setLoading] = useState(false);
   const [liked, setLiked] = useState(favourite);
 
   const onBtnClick = () => {
     liked
-      ? updateFav(user, likedId, "remove")
-      : updateFav(user, likedId, "add");
+      ? updateFav(user, likedId, "remove", receiver)
+      : updateFav(user, likedId, "add", receiver);
     setLiked(!liked);
   };
 

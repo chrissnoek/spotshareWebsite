@@ -11,9 +11,9 @@ export const findNearbyLocations = async (lat, lng, category) => {
   lat = parseFloat(lat);
   lng = parseFloat(lng);
 
-  //console.log(lat, lng);
+  console.log(lat, lng);
 
-  const distance = 50; //in km
+  const distance = 75; //in km
   const radius = 6371; // earth's radius in km = ~6371
 
   function rad2deg(angle) {
@@ -89,11 +89,15 @@ export const findNearbyLocations = async (lat, lng, category) => {
   //console.log(query, search);
   const result = await graphQLFetch(query, search, true);
 
-  //console.log("result from FindNearbyLocations", result);
+  console.log("result from FindNearbyLocations", result);
 
   if (result.locations.length > 0) {
     //console.log("found locations", result.locations);
-    const locations = result.locations;
+
+    // show only locations where a photo is linked to it
+    const locations = result.locations.filter(
+      (location) => location.photos.length > 0
+    );
     //sort items on distance
     locations.forEach((location) => {
       // lat and lng are from this.state.photo

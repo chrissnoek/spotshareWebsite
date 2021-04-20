@@ -84,14 +84,6 @@ const NavBar = () => {
         >
           Uploaden
         </NavLink>
-        <NavLink
-          onClick={closeMenu}
-          exact
-          to="/"
-          className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
-        >
-          Home
-        </NavLink>
 
         <userContext.Consumer>
           {(value) =>
@@ -120,16 +112,12 @@ const NavBar = () => {
                     className="relative block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
                   >
                     <IoNotificationsOutline className="text-2xl" />
-                    {value.user.receivedNotifications &&
-                      value.user.receivedNotifications.length > 0 && (
-                        <div className="rounded-full bg-red-500 text-white absolute top-0 -mt-1 right-0 -mr-1 text-xs w-5 h-5 flex items-center justify-center">
-                          {value.user.receivedNotifications.length}
-                        </div>
-                      )}
                   </a>
-                  {openNotifications && (
-                    <Notifications onClick={onNotClick} user={value.user} />
-                  )}
+                  <Notifications
+                    onClick={onNotClick}
+                    user={value.user}
+                    show={openNotifications}
+                  />
                 </div>
                 <NavLink
                   onClick={closeMenu}

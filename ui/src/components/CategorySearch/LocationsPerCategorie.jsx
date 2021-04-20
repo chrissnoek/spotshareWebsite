@@ -2,12 +2,12 @@ import React, { useEffect, useState, useRef } from "react";
 import { findNearbyLocations } from "../FindNearbyLocations.jsx";
 /* to support IE */
 import store from "../../store.js";
-import { LocationList } from "../LocationCards.jsx";
 import useConstructor from "../ConstructorHook.jsx";
 import ResultMap from "../Results/ResultMap.jsx";
 import CategorieFilter from "../Results/CategorieFilter.jsx";
 import { useHistory, useLocation } from "react-router-dom";
 import graphQLFetch from "../../graphQLFetch.js";
+import LocationList from "../Results/LocationList.jsx";
 
 const LocationsPerCategorie = (props) => {
   const [locations, setLocations] = useState();

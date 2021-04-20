@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "47e3ec9318495a9f42f6";
+/******/ 	var hotCurrentHash = "5b81892a97c832647c62";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1374,102 +1374,100 @@ function AddPhoto(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BlogPost; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
 /* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store.js */ "./src/store.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/ConstructorHook.jsx */ "./src/components/ConstructorHook.jsx");
+/* harmony import */ var react_sanitized_html__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-sanitized-html */ "react-sanitized-html");
+/* harmony import */ var react_sanitized_html__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_sanitized_html__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
 
-class BlogPost extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Component {
-  static async fetchData(match, search, showError) {
-    // build the graphql query
-    const query = `query articleBySlug($slug: String!){
-            articleBySlug(slug: $slug) {
-                id
-                title
-                body
-                slug
-            }
-        }`;
-    let {
-      params: {
-        [0]: slug
-      }
-    } = match;
-    slug = slug.replace(/\//g, "");
-    const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
-      slug
-    }, true);
-    return result;
-  }
 
-  constructor() {
-    super();
-    const articleBySlug = _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData != null ? _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData.articleBySlug : null;
+
+
+const BlogPost = props => {
+  const [article, setArticleBySlug] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null);
+
+  const getInitialArticle = async props => {
+    let _article = _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData ? _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData : null;
+
     delete _store_js__WEBPACK_IMPORTED_MODULE_2__["default"].initialData;
-    this.state = {
-      articleBySlug,
-      slug: null
-    };
-  }
 
-  componentDidUpdate(prevProps) {// const { match: { params: { id: prevId } } } = prevProps;
-    // const { match: { params: { id } } } = this.props;
-    // if (prevId !== id) {
-    //     this.loadData();
-    // }
-  }
-
-  componentDidMount() {
-    const {
-      articleBySlug
-    } = this.state;
-
-    if (articleBySlug === null) {
-      this.loadData();
-    }
-  }
-
-  async loadData() {
-    // get the search query string form url
-    const {
-      match
-    } = this.props; // provide the query with the variables 
-
-    const data = await BlogPost.fetchData(match);
-
-    if (data) {
-      this.setState({
-        articleBySlug: data.articleBySlug
-      });
-    }
-  }
-
-  render() {
-    const {
-      articleBySlug
-    } = this.state;
-
-    if (articleBySlug === null) {
-      console.log('slug is nullllll');
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
-        to: "/niet-gevonden"
-      });
+    if (!_article) {
+      _article = await BlogPost.fetchData(props.match);
     }
 
-    ;
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-      id: "page",
-      className: "p-6"
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, articleBySlug.title));
+    setArticleBySlug(_article);
+  };
+
+  Object(_components_ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_4__["default"])(() => {
+    getInitialArticle(props);
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    getInitialArticle(props);
+  }, [props.match]);
+
+  if (article === null) {
+    console.log("slug is nullllll");
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Redirect"], {
+      to: "/niet-gevonden"
+    });
   }
 
-}
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "page",
+    className: "px-6 py-24"
+  }, article && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-full"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "font-bold text-4xl leading-tight text-center"
+  }, article.articleBySlug.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    className: "",
+    src: "",
+    alt: article.articleBySlug.title
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "px-4 lg:px-0 mt-12 text-gray-700 max-w-screen-md mx-auto text-lg leading-relaxed"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_sanitized_html__WEBPACK_IMPORTED_MODULE_5___default.a, {
+    allowedAttributes: {
+      a: ["href"],
+      img: ["src"]
+    },
+    allowedTags: ["a", "figure", "img"],
+    html: article.articleBySlug.body
+  }))));
+};
+
+BlogPost.fetchData = async (match, search, showError) => {
+  // build the graphql query
+  const query = `query articleBySlug($slug: String!){
+        articleBySlug(slug: $slug) {
+            id
+            title
+            body
+            slug
+        }
+    }`;
+  let {
+    params: {
+      [0]: slug
+    }
+  } = match;
+  slug = slug.replace(/\//g, "");
+  const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, {
+    slug
+  }, true);
+  console.log(result);
+  return result;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (BlogPost);
 
 /***/ }),
 
@@ -1583,22 +1581,175 @@ class FBConnect extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+/* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @hapi/joi */ "@hapi/joi");
+/* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_hapi_joi__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Input_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Input.jsx */ "./src/Input.jsx");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
 
 
 
-class ForgotPassword extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
-  constructor(...args) {
-    super(...args);
 
-    _defineProperty(this, "state", {});
-  }
 
-  render() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Wachtwoord vergeten");
-  }
 
-}
+
+const ForgotPassword = () => {
+  const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const [errors, setErrors] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const [loginError, setLoginError] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+
+  const handleChange = ({
+    currentTarget: input
+  }) => {
+    const _errors = { ...errors
+    };
+    const errorMessage = validateProperty(input);
+    if (errorMessage) _errors[input.name] = errorMessage;else delete _errors[input.name];
+    const _data = { ...data
+    };
+    _data[input.name] = input.value;
+    setData(_data);
+    setErrors(_errors); // setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
+  };
+
+  const schema = {
+    email: _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.string().email({
+      tlds: {
+        allow: false
+      }
+    }).required().messages({
+      "string.empty": `Vul je je email nog even in? 😉.`,
+      "any.required": `Vul je je email nog even in? 😉.`,
+      "string.email": `Vul je een geldig adres in? 😉.`
+    })
+  };
+
+  const validateProperty = ({
+    name,
+    value
+  }) => {
+    console.log(name, value);
+    const object = {
+      [name]: value
+    };
+    console.log(schema);
+
+    const _schema = _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.object({
+      [name]: schema[name]
+    });
+
+    const result = _schema.validate(object);
+
+    console.log(result);
+    const error = result.error;
+    console.log("returning", error);
+    return error ? error.details[0].message : null;
+  };
+
+  const validate = () => {
+    const options = {
+      abortEarly: false,
+      allowUnknown: true
+    };
+
+    const _schema = _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.object({ ...schema
+    });
+
+    const {
+      error
+    } = _schema.validate(data, options);
+
+    console.log(error);
+    if (!error) return null;
+    const errors = {};
+
+    for (let item of error.details) {
+      errors[item.path[0]] = item.message;
+    }
+
+    return errors;
+  };
+
+  const doSubmit = async () => {
+    // call server
+    // redirect user to homepage
+    console.log("submitted");
+    const query = `mutation ForgotPassword($email:String!){
+		forgotPassword(email:$email) {
+		  ok
+		}
+	  }`;
+    const vars = {
+      email: data.email
+    };
+    console.log(vars);
+    const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_5__["default"])(query, vars, true);
+    console.log(result);
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const errors = validate();
+    setErrors(errors || {});
+    if (errors) return;
+    doSubmit();
+  };
+
+  const renderButton = (label, disable = false) => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "w-full mb-2 mt-2 text-white flex items-center justify-center font-bold py-2 px-4 rounded" + (validate() || Object.keys(errors).length !== 0 || disable ? " bg-gray-500 hover:bg-gray-600" : " bg-blue-500 hover:bg-blue-600"),
+      type: "submit",
+      disabled: validate() || Object.keys(errors).length !== 0 || disable
+    }, disable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__["FaSpinner"], {
+      className: "animate-spin"
+    }) : label);
+  };
+
+  const renderInput = (name, label, placeholder, type = "text", classes = "w-full", onBlur = () => {}) => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      classes: classes,
+      name: name,
+      label: label,
+      value: data[name] || "",
+      onChange: handleChange,
+      placeholder: placeholder,
+      error: errors[name],
+      type: type,
+      onBlur: onBlur
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "block sm:flex"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: handleSubmit,
+    className: "bg-white w-full  px-8 md:px-16 pt-6 md:py-12 flex flex-col bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "font-bold text-xl text-green-500 text-center"
+  }, "Wachtwoord resetten"), loginError && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ErrorBox, null), renderInput("email", "Email", "Emailadres"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex items-center justify-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, renderButton("Wachtwoord resetten"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex items-center justify-center"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
+    className: "inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 mr-4",
+    to: "/inloggen"
+  }, "Inloggen"), " ", "|", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["NavLink"], {
+    className: "inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4",
+    to: "/aanmelden"
+  }, "Aanmelden"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-full"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-full h-full",
+    style: {
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url(https://picsum.photos/1500/1500)`,
+      backgroundSize: `cover`,
+      backgroundPosition: `center center`
+    }
+  }))));
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (ForgotPassword);
 
@@ -2902,12 +3053,7 @@ const NavBar = () => {
     onClick: closeMenu,
     to: "/foto/toevoegen",
     className: "block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
-  }, "Uploaden"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
-    onClick: closeMenu,
-    exact: true,
-    to: "/",
-    className: "block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
-  }, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_services_userContext_js__WEBPACK_IMPORTED_MODULE_5__["userContext"].Consumer, null, value => !value.user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
+  }, "Uploaden"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_services_userContext_js__WEBPACK_IMPORTED_MODULE_5__["userContext"].Consumer, null, value => !value.user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
     onClick: closeMenu,
     to: "/aanmelden",
     className: "block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
@@ -2922,11 +3068,10 @@ const NavBar = () => {
     className: "relative block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_io5__WEBPACK_IMPORTED_MODULE_8__["IoNotificationsOutline"], {
     className: "text-2xl"
-  }), value.user.receivedNotifications && value.user.receivedNotifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "rounded-full bg-red-500 text-white absolute top-0 -mt-1 right-0 -mr-1 text-xs w-5 h-5 flex items-center justify-center"
-  }, value.user.receivedNotifications.length)), openNotifications && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_notificationCenter_notifications_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_notificationCenter_notifications_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
     onClick: onNotClick,
-    user: value.user
+    user: value.user,
+    show: openNotifications
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
     onClick: closeMenu,
     to: `/fotograaf/${value.user.slug}`,
@@ -2941,6 +3086,231 @@ const NavBar = () => {
 function Page() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(NavBar, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Contents_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Footer_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_toastify__WEBPACK_IMPORTED_MODULE_4__["ToastContainer"], null));
 }
+
+/***/ }),
+
+/***/ "./src/PasswordReset.jsx":
+/*!*******************************!*\
+  !*** ./src/PasswordReset.jsx ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @hapi/joi */ "@hapi/joi");
+/* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_hapi_joi__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Input_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Input.jsx */ "./src/Input.jsx");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var url_search_params__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! url-search-params */ "url-search-params");
+/* harmony import */ var url_search_params__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(url_search_params__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _services_authService__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/authService */ "./src/services/authService.js");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-toastify */ "react-toastify");
+/* harmony import */ var react_toastify__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(react_toastify__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+
+const PasswordReset = () => {
+  const [data, setData] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const [errors, setErrors] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const [loginError, setLoginError] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const [code, setCode] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
+  const [success, setSuccess] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
+  const location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_5__["useLocation"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    const {
+      search
+    } = location;
+    const params = new url_search_params__WEBPACK_IMPORTED_MODULE_6___default.a(search);
+
+    const _code = params.get("code");
+
+    setCode(_code);
+  }, [location]);
+
+  const handleChange = ({
+    currentTarget: input
+  }) => {
+    const _errors = { ...errors
+    };
+    const errorMessage = validateProperty(input);
+    if (errorMessage) _errors[input.name] = errorMessage;else delete _errors[input.name];
+    const _data = { ...data
+    };
+    _data[input.name] = input.value;
+    setData(_data);
+    setErrors(_errors); // setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
+  };
+
+  const schema = {
+    password: _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.string().required().messages({
+      "string.empty": `Vul je je wachtwoord nog even in? 😉.`,
+      "any.required": `Vul je je wachtwoord nog even in? 😉.`
+    }),
+    passwordConfirmation: _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.string().required().equal(_hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.ref("password")).messages({
+      "string.empty": `Vul je je wachtwoord nog even in? 😉.`,
+      "any.required": `Vul je je wachtwoord nog even in? 😉.`,
+      "any.only": `Moet gelijk zijn 😉.`
+    })
+  };
+
+  const validateProperty = ({
+    name,
+    value
+  }) => {
+    const object = {
+      [name]: value
+    }; //const _schema = Joi.object({ [name]: schema[name] });
+
+    const _schemaObject = {
+      [name]: schema[name]
+    };
+
+    if (name.endsWith("Confirmation")) {
+      const dependentInput = name.substring(0, name.indexOf("Confirmation"));
+      object[dependentInput] = data[dependentInput];
+      _schemaObject[dependentInput] = schema[dependentInput];
+    }
+
+    const _schema = _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.object(_schemaObject);
+
+    const result = _schema.validate(object);
+
+    const error = result.error;
+    console.log("returning", error);
+    return error ? error.details[0].message : null;
+  };
+
+  const validate = () => {
+    const options = {
+      abortEarly: false,
+      allowUnknown: true
+    };
+
+    const _schema = _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default.a.object({ ...schema
+    });
+
+    const {
+      error
+    } = _schema.validate(data, options);
+
+    console.log(error);
+    if (!error) return null;
+    const errors = {};
+
+    for (let item of error.details) {
+      errors[item.path[0]] = item.message;
+    }
+
+    return errors;
+  };
+
+  const doSubmit = async () => {
+    // call server
+    // redirect user to homepage
+    console.log("submitted");
+    const query = `mutation resetPassword($password: String!, $passwordConfirmation: String!, $code: String!){
+        resetPassword(password:$password, passwordConfirmation:$passwordConfirmation, code:$code) {
+          jwt
+        }
+      }`;
+    const vars = {
+      password: data.password,
+      passwordConfirmation: data.passwordConfirmation,
+      code: code
+    };
+    console.log(vars);
+    const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_4__["default"])(query, vars, true, true);
+    console.log(result);
+
+    if (result.resetPassword !== null) {
+      _services_authService__WEBPACK_IMPORTED_MODULE_7__["default"].setToken(result.resetPassword.jwt);
+      setSuccess(true);
+    } else {
+      // error message
+      console.log("ERROR!");
+      react_toastify__WEBPACK_IMPORTED_MODULE_8__["toast"].error("Je code is verlopen, probeer het opnieuw.");
+    }
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const errors = validate();
+    setErrors(errors || {});
+    if (errors) return;
+    doSubmit();
+  };
+
+  const renderButton = (label, disable = false) => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      className: "w-full mb-2 mt-2 text-white flex items-center justify-center font-bold py-2 px-4 rounded" + (validate() || Object.keys(errors).length !== 0 || disable ? " bg-gray-500 hover:bg-gray-600" : " bg-blue-500 hover:bg-blue-600"),
+      type: "submit",
+      disabled: validate() || Object.keys(errors).length !== 0 || disable
+    }, disable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_3__["FaSpinner"], {
+      className: "animate-spin"
+    }) : label);
+  };
+
+  const renderInput = (name, label, placeholder, type = "text", classes = "w-full", onBlur = () => {}) => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      classes: classes,
+      name: name,
+      label: label,
+      value: data[name] || "",
+      onChange: handleChange,
+      placeholder: placeholder,
+      error: errors[name],
+      type: type,
+      onBlur: onBlur
+    });
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "block sm:flex"
+  }, success ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "bg-white w-full   px-8 md:px-16 pt-6 md:py-12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "font-bold text-xl text-green-500 text-center"
+  }, "Wachtwoord gewijzigd!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "p-6 rounded bg-green-100 border border-green-200 mt-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
+    className: "text-green-500"
+  }, "Wachtwoord succesvol gewijzigd.", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+    className: "font-bold",
+    href: "/"
+  }, "Klik hier"), " ", "om naar je dashboard te gaan!"))) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+    onSubmit: handleSubmit,
+    className: "bg-white w-full  px-8 md:px-16 pt-6 md:py-12 flex flex-col bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "font-bold text-xl text-green-500 text-center"
+  }, "Wachtwoord resetten"), loginError && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ErrorBox, null), renderInput("password", "Wachtwoord", "Vul je wachtwoord in", "password"), renderInput("passwordConfirmation", "Wachtwoord nogmaals", "Herhaal je wachtwoord", "password"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex items-center justify-between"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, renderButton("Wachtwoord resetten")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-full"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "w-full h-full",
+    style: {
+      backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3)), url(https://picsum.photos/1500/1500)`,
+      backgroundSize: `cover`,
+      backgroundPosition: `center center`
+    }
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PasswordReset);
 
 /***/ }),
 
@@ -4565,11 +4935,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_io5__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_icons_io5__WEBPACK_IMPORTED_MODULE_12__);
 /* harmony import */ var react_icons_go__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-icons/go */ "react-icons/go");
 /* harmony import */ var react_icons_go__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_icons_go__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _components_CreateNotification_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/CreateNotification.jsx */ "./src/components/CreateNotification.jsx");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 /* globals React */
 
 /* eslint "react/jsx-no-undef":"off" */
+
 
 
 
@@ -4656,7 +5028,9 @@ class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
   constructor() {
     super();
 
-    _defineProperty(this, "updateFav", async (user, likedId, action) => {
+    _defineProperty(this, "updateFav", async (user, likedId, action, receiver) => {
+      // TODO: store user.likedPhotos in state, and map favArray from state instead of user object
+      // problem: user.likedPhotos is not updated
       const query = `
       mutation updateUser($input:updateUserInput) {
         updateUser(input: $input) {
@@ -4672,6 +5046,7 @@ class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       if (action === "add") {
         if (!favArray.includes(likedId)) {
           favArray.push(likedId);
+          await Object(_components_CreateNotification_jsx__WEBPACK_IMPORTED_MODULE_14__["default"])(user.id, receiver, "like", likedId);
         } else {
           // already in favourites
           return;
@@ -4703,8 +5078,8 @@ class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_1__["default"])(query, variables, true);
     });
 
-    _defineProperty(this, "addComment", async data => {
-      console.log(data);
+    _defineProperty(this, "addComment", async (data, receiver) => {
+      console.log(data, receiver);
       const query = `mutation createPhotoComment($input: createPhotoCommentInput){
       createPhotoComment(
         input: $input
@@ -4737,6 +5112,7 @@ class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
 
       if (response) {
         if (!response.errors) {
+          await Object(_components_CreateNotification_jsx__WEBPACK_IMPORTED_MODULE_14__["default"])(data.data.user, receiver, "comment", data.data.photo);
           let _comments = [...this.state.photoBySlug.comments];
 
           _comments.push({
@@ -4928,6 +5304,10 @@ class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
       className: "absolute right-0 bottom-0 m-6"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_services_userContext_js__WEBPACK_IMPORTED_MODULE_8__["userContext"].Consumer, null, value => {
       if (value.user) {
+        if (value.user.id === photoBySlug.user.id) {
+          return;
+        }
+
         let favourite;
 
         if (value.user && photoBySlug.usersLike.filter(favourites => favourites.id === value.user.id).length > 0) {
@@ -4942,7 +5322,8 @@ class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
           user: value.user,
           likedId: photoBySlug.id,
           addTitle: "Toevoegen aan favorieten",
-          removeTitle: "Verwijderen uit favorieten"
+          removeTitle: "Verwijderen uit favorieten",
+          receiver: photoBySlug.user.id
         });
       }
     }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -4961,7 +5342,8 @@ class PhotoDetailStrapi extends react__WEBPACK_IMPORTED_MODULE_0___default.a.Com
     }, photoBySlug.desc), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Comments_Comments_jsx__WEBPACK_IMPORTED_MODULE_11__["default"], {
       comments: photoBySlug.comments,
       photoId: photoBySlug.id,
-      addComment: this.addComment
+      addComment: this.addComment,
+      receiver: photoBySlug.user.id
     })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "w-full"
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -5045,6 +5427,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_followButton_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/followButton.jsx */ "./src/components/followButton.jsx");
 /* harmony import */ var _components_ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/ConstructorHook.jsx */ "./src/components/ConstructorHook.jsx");
 /* harmony import */ var _components_UserProfilePicture_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/UserProfilePicture.jsx */ "./src/components/UserProfilePicture.jsx");
+/* harmony import */ var _components_CreateNotification_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/CreateNotification.jsx */ "./src/components/CreateNotification.jsx");
+/* harmony import */ var _components_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/LocationCards.jsx */ "./src/components/LocationCards.jsx");
+
+
 
 
 
@@ -5088,7 +5474,7 @@ const UserProfile = props => {
     getProfile();
   }, [props]);
 
-  const updateFollow = async (followId, action) => {
+  const updateFollow = async followId => {
     //console.log(followId);
     const query = `
       mutation updateUser($input:updateUserInput) {
@@ -5101,10 +5487,12 @@ const UserProfile = props => {
         }
       }`;
     let profileFollowersArray = profile.followers.map(following => following.id); //console.log("before adjusting", profileFollowersArray);
-    // if the id that is being followed is not already in the array, add it
+
+    let action; // if the id that is being followed is not already in the array, add it
 
     if (!profileFollowersArray.includes(followId)) {
       profileFollowersArray.push(followId);
+      action = "add";
     } else if (profileFollowersArray.includes(followId)) {
       // followId is in array, so remove it from array
       const index = profileFollowersArray.indexOf(followId);
@@ -5112,6 +5500,8 @@ const UserProfile = props => {
       if (index > -1) {
         profileFollowersArray.splice(index, 1);
       }
+
+      action = "remove";
     } //console.log("after adjusting", profileFollowersArray);
 
 
@@ -5142,6 +5532,10 @@ const UserProfile = props => {
       if (data.errors) {
         console.log("an error happened");
         setProfile(prevProfile);
+      } else {
+        if (action === "add") {
+          await Object(_components_CreateNotification_jsx__WEBPACK_IMPORTED_MODULE_12__["default"])(followId, profile.id, "follow");
+        }
       }
     }
   };
@@ -5226,6 +5620,22 @@ UserProfile.fetchData = async (match, search, showError) => {
             }
             followings {
               id
+            }
+            favouriteLocations {
+              id
+              title
+              slug
+              location_categories {
+                id
+                label
+              }
+              photos {
+                likes
+                photo {
+                  url
+                  
+                }
+              }
             }
             photos {
               likes
@@ -5361,13 +5771,27 @@ const UserProfileComponent = props => {
     className: "block font-bold text-sm"
   }, numberOfLikes), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "text-gray-500 text-sm"
-  }, "likes"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  }, "likes"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    className: "my-3"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    className: "my-3"
+  }, "Foto's"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
   }, profile.photos.map((photo, index) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_PhotoCarousel_jsx__WEBPACK_IMPORTED_MODULE_7__["PhotoView"], {
     key: photo.id,
     index: index,
     deletePhoto: !isServer && curUser && curUser.id === profile.id ? deletePhoto : null,
     photo: photo
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", {
+    className: "my-3"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
+    id: "fav",
+    className: "my-3"
+  }, "Favoriete locaties"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4"
+  }, profile.favouriteLocations.map(location => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_13__["default"], {
+    key: location.id,
+    location: location
   })))));
 };
 
@@ -6004,13 +6428,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _FindNearbyLocations_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FindNearbyLocations.jsx */ "./src/components/FindNearbyLocations.jsx");
 /* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store.js */ "./src/store.js");
-/* harmony import */ var _LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LocationCards.jsx */ "./src/components/LocationCards.jsx");
-/* harmony import */ var _ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ConstructorHook.jsx */ "./src/components/ConstructorHook.jsx");
-/* harmony import */ var _Results_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Results/ResultMap.jsx */ "./src/components/Results/ResultMap.jsx");
-/* harmony import */ var _Results_CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Results/CategorieFilter.jsx */ "./src/components/Results/CategorieFilter.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var _ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ConstructorHook.jsx */ "./src/components/ConstructorHook.jsx");
+/* harmony import */ var _Results_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Results/ResultMap.jsx */ "./src/components/Results/ResultMap.jsx");
+/* harmony import */ var _Results_CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Results/CategorieFilter.jsx */ "./src/components/Results/CategorieFilter.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var _Results_LocationList_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../Results/LocationList.jsx */ "./src/components/Results/LocationList.jsx");
 
 
 /* to support IE */
@@ -6028,8 +6452,8 @@ const LocationsPerCategorie = props => {
   const [filteredLocations, setFilteredLocations] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
   const [selectedLocation, setSelectedLocation] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
   const [showMap, setShowMap] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
-  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["useHistory"])();
-  let location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["useLocation"])();
+  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["useHistory"])();
+  let location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["useLocation"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     !locations && getLocations();
 
@@ -6080,7 +6504,7 @@ const LocationsPerCategorie = props => {
     }
   };
 
-  Object(_ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_4__["default"])(() => {
+  Object(_ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_3__["default"])(() => {
     const _activeFilter = getActiveFilter();
 
     if (_activeFilter) {
@@ -6104,7 +6528,7 @@ const LocationsPerCategorie = props => {
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Resultaten"), locations && (filteredLocations.length > 0 ? filteredLocations.map(location => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     key: location.id,
     className: "w-full"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__["LocationList"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Results_LocationList_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
     size: "large",
     location: location,
     key: location.id,
@@ -6113,7 +6537,7 @@ const LocationsPerCategorie = props => {
   }))) : locations.map(location => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     key: location.id,
     className: "w-full"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__["LocationList"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Results_LocationList_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
     size: "large",
     location: location,
     key: location.id,
@@ -6121,11 +6545,11 @@ const LocationsPerCategorie = props => {
     selectLocation: selectLocation
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mb-10 w-full h-full"
-  }, showMap && locations && (filteredLocations.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Results_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, showMap && locations && (filteredLocations.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Results_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     locations: filteredLocations,
     selectLocation: selectLocation,
     active: selectedLocation
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Results_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Results_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     locations: locations,
     selectLocation: selectLocation,
     active: selectedLocation
@@ -6173,7 +6597,7 @@ LocationsPerCategorie.fetchData = async (match, search, showError) => {
     }
   }
   }`;
-  const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_8__["default"])(query, {
+  const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_7__["default"])(query, {
     value
   }, true);
 
@@ -6215,13 +6639,12 @@ __webpack_require__.r(__webpack_exports__);
 const PhotoComment = ({
   comments,
   photoId,
-  addComment
+  addComment,
+  receiver
 }) => {
   const [unflattenedComments, setUnflattenedComments] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log("unflattening comments", comments);
     setUnflattenedComments(unflatten(comments));
-    console.log("comments", comments, unflattenedComments);
   }, [comments]);
 
   const unflatten = arr => {
@@ -6254,7 +6677,8 @@ const PhotoComment = ({
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ReplyBox_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
     photoId: photoId,
-    addComment: addComment
+    addComment: addComment,
+    receiver: receiver
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: ""
   }, unflattenedComments.length ? unflattenedComments.map((item, idx) => {
@@ -6262,7 +6686,8 @@ const PhotoComment = ({
       item: item,
       key: idx,
       photoId: photoId,
-      addComment: addComment
+      addComment: addComment,
+      receiver: receiver
     });
   }) : ""));
 };
@@ -6293,7 +6718,8 @@ const Comment = ({
   item,
   idx,
   photoId,
-  addComment
+  addComment,
+  receiver
 }) => {
   const [showReplyBox, setShowReplyBox] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
 
@@ -6330,7 +6756,8 @@ const Comment = ({
     replyTo: item.id,
     photoId: photoId,
     addComment: addComment,
-    closeBoxHandler: closeReplyBox
+    closeBoxHandler: closeReplyBox,
+    receiver: receiver
   }) : null), item.children && item.children.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "ml-10 mt-2"
   }, item.children.map((item, idx) => {
@@ -6338,7 +6765,8 @@ const Comment = ({
       item: item,
       key: idx,
       photoId: photoId,
-      addComment: addComment
+      addComment: addComment,
+      receiver: receiver
     });
   }))));
 };
@@ -6367,7 +6795,8 @@ const ReplyBox = ({
   replyTo = null,
   photoId,
   addComment,
-  closeBoxHandler
+  closeBoxHandler,
+  receiver
 }) => {
   const [commentValue, setCommentValue] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
 
@@ -6382,7 +6811,7 @@ const ReplyBox = ({
     };
     let input = {};
     input["data"] = data;
-    addComment(input);
+    addComment(input, receiver);
     closeBoxHandler && closeBoxHandler();
     setCommentValue("");
   };
@@ -6457,6 +6886,42 @@ const useConstructor = (callBack = () => {}) => {
 
 /***/ }),
 
+/***/ "./src/components/CreateNotification.jsx":
+/*!***********************************************!*\
+  !*** ./src/components/CreateNotification.jsx ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _graphQLFetch__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../graphQLFetch */ "./src/graphQLFetch.js");
+
+
+const CreateNotification = async (giver, receiver, action, photo) => {
+  const query = `mutation createNotification($input:createNotificationInput!) {
+        createNotification(input:$input) {
+          notification {
+            id
+          }
+        }
+      }`;
+  let input = {
+    data: {}
+  };
+  input.data.giver = giver;
+  input.data.receiver = receiver;
+  input.data.action = action;
+  if (photo) input.data.photo = photo;
+  const result = await Object(_graphQLFetch__WEBPACK_IMPORTED_MODULE_0__["default"])(query, {
+    input
+  }, true);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CreateNotification);
+
+/***/ }),
+
 /***/ "./src/components/Dashboard/CategorieList.jsx":
 /*!****************************************************!*\
   !*** ./src/components/Dashboard/CategorieList.jsx ***!
@@ -6479,21 +6944,17 @@ __webpack_require__.r(__webpack_exports__);
 const CategorieList = ({
   categories
 }) => {
+  console.log(categories);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "relative container px-6 py-4"
+    className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
     className: "text-black mb-2"
   }, "Zoek locatie op categorie"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex flex-wrap"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(swiper_react__WEBPACK_IMPORTED_MODULE_1__["Swiper"], {
-    spaceBetween: 0,
-    slidesPerView: "auto"
-  }, categories && categories.map(categorie => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(swiper_react__WEBPACK_IMPORTED_MODULE_1__["SwiperSlide"], {
-    key: categorie.value
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategorieLabel, {
+  }, categories && categories.filter(categorie => categorie.value != "").map(categorie => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(CategorieLabel, {
     categorie: categorie,
     key: categorie.value
-  }))))));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CategorieList);
@@ -6506,7 +6967,7 @@ const CategorieLabel = ({
 }) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["Link"], {
     to: `/fotolocaties/categorie/${value}`,
-    className: "block py-2 px-4 rounded-full mr-2 bg-green-100 text-green-400 font-bold hover:bg-green-200 hover:text-green-500"
+    className: "block py-2 px-4 rounded-full mr-2 mb-2 bg-green-100 text-green-400 font-bold hover:bg-green-200 hover:text-green-500"
   }, label);
 };
 
@@ -6533,6 +6994,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../ConstructorHook.jsx */ "./src/components/ConstructorHook.jsx");
 /* harmony import */ var _MostRecent_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./MostRecent.jsx */ "./src/components/Dashboard/MostRecent.jsx");
+/* harmony import */ var _UserProfilePicture_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../UserProfilePicture.jsx */ "./src/components/UserProfilePicture.jsx");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var react_icons_io5__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! react-icons/io5 */ "react-icons/io5");
+/* harmony import */ var react_icons_io5__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(react_icons_io5__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! react-icons/fi */ "react-icons/fi");
+/* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(react_icons_fi__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _NotificationBoard_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./NotificationBoard.jsx */ "./src/components/Dashboard/NotificationBoard.jsx");
+
+
+
+
+
 
 
 
@@ -6546,8 +7020,14 @@ __webpack_require__.r(__webpack_exports__);
 
 const Dashboard = props => {
   const [categories, setCategories] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
+  const [showNotifications, setShowNotifications] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
+  const match = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["useRouteMatch"])();
 
   const getCategories = async () => {
+    console.log({
+      match
+    });
+
     let _categories = _store_js__WEBPACK_IMPORTED_MODULE_5__["default"].initialData ? _store_js__WEBPACK_IMPORTED_MODULE_5__["default"].initialData : null;
 
     delete _store_js__WEBPACK_IMPORTED_MODULE_5__["default"].initialData;
@@ -6568,14 +7048,59 @@ const Dashboard = props => {
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_services_userContext_js__WEBPACK_IMPORTED_MODULE_6__["userContext"].Consumer, null, value => {
-    console.log(value);
     return !value.user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Redirect"], {
       to: "/"
+    }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "block md:flex mt-8"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "w-full md:w-1/4 px-8"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "flex items-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "mr-4"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProfilePicture_jsx__WEBPACK_IMPORTED_MODULE_10__["default"], {
+      profile: value.user,
+      size: 10
+    })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "font-bold text-xl leading-tight text-center sm:text-left"
+    }, value.user.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      className: "mt-6"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      className: `block py-3 flex items-center ${!showNotifications ? `text-blue-500 font-bold` : `text-gray-900 hover:text-blue-500 hover:font-bold`}`,
+      onClick: () => setShowNotifications(false)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_11__["FaHome"], {
+      className: "mr-2"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Dashboard")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+      className: "block py-3 text-gray-900 hover:text-blue-500 hover:font-bold flex items-center",
+      to: `/fotograaf/${value.user.slug}#fav`
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_11__["FaBookmark"], {
+      className: "mr-2"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Opgeslagen locaties"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+      className: "block py-3 text-gray-900 hover:text-blue-500 hover:font-bold flex items-center",
+      to: "/foto/toevoegen"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_11__["FaPlus"], {
+      className: "mr-2"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Foto uploaden"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+      className: `block py-3 flex items-center ${showNotifications ? `text-blue-500 font-bold` : `text-gray-900 hover:text-blue-500 hover:font-bold`}`,
+      onClick: () => setShowNotifications(true)
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_io5__WEBPACK_IMPORTED_MODULE_12__["IoNotifications"], {
+      className: "mr-2"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Berichten"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["Link"], {
+      className: "block py-3 text-gray-900 hover:text-blue-500 hover:font-bold border-t border-gray-200 pt-6 mt-6 flex items-center",
+      to: ""
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fi__WEBPACK_IMPORTED_MODULE_13__["FiLogOut"], {
+      className: "mr-2"
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Uitloggen"))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "w-full md:w-1/2"
+    }, showNotifications ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_NotificationBoard_jsx__WEBPACK_IMPORTED_MODULE_14__["default"], {
+      user: value.user
     }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Heading_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
       redirect: redirect
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationsNearby_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CategorieList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MostRecent_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "w-full md:w-1/4  px-8"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationsNearby_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CategorieList_jsx__WEBPACK_IMPORTED_MODULE_3__["default"], {
       categories: categories
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_MostRecent_jsx__WEBPACK_IMPORTED_MODULE_9__["default"], null));
+    }))));
   });
 };
 
@@ -6586,14 +7111,18 @@ Dashboard.fetchData = async (match, search, showError) => {
   const query = `query {
 		locationCategories{
 		  label
-		  value
+      value
+      locations {
+        id
+      }
 		}
 	  }`;
   const vars = {};
   const {
     locationCategories: result
-  } = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_4__["default"])(query, vars, true);
-  return result;
+  } = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_4__["default"])(query, vars, true); // only return categories with available locations
+
+  return result.filter(cat => cat.locations.length > 0);
 };
 
 /***/ }),
@@ -6632,9 +7161,9 @@ const Heading = props => {
   }, "fotolocatie"), "."));
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "py-6 px-8 bg-gray-900 text-center"
+    className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container pt-16 pb-10"
+    className: "pb-8 pt-6  text-center rounded bg-gray-900 mb-6"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_services_userContext__WEBPACK_IMPORTED_MODULE_1__["userContext"].Consumer, null, value => !value.user ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
     className: "mb-4 text-white"
   }, "De mooiste fotolocaties, gewoon bij jou in de buurt.") : personalHeading(value.user.firstname ? value.user.firstname : value.user.username)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SearchBox_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
@@ -6661,9 +7190,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LocationCards_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../LocationCards.jsx */ "./src/components/LocationCards.jsx");
 /* harmony import */ var swiper_react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! swiper/react */ "swiper/react");
 /* harmony import */ var swiper_react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(swiper_react__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var react_cool_img__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-cool-img */ "react-cool-img");
+/* harmony import */ var react_cool_img__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_cool_img__WEBPACK_IMPORTED_MODULE_5__);
 
 
  // Import Swiper React components
+
+
 
 
 
@@ -6682,6 +7217,7 @@ const LocationsNearby = () => {
     };
 
     const success = async pos => {
+      console.log("succes");
       var crd = pos.coords;
 
       const _locations = await Object(_FindNearbyLocations_jsx__WEBPACK_IMPORTED_MODULE_1__["findNearbyLocations"])(crd.latitude, crd.longitude);
@@ -6690,9 +7226,11 @@ const LocationsNearby = () => {
     };
 
     const error = async err => {
+      console.log("err");
       fetch("https://ipapi.co/json").then(res => res.json()).then(async location => {
-        const _locations = await Object(_FindNearbyLocations_jsx__WEBPACK_IMPORTED_MODULE_1__["findNearbyLocations"])(location.longitude, location.longitude);
+        const _locations = await Object(_FindNearbyLocations_jsx__WEBPACK_IMPORTED_MODULE_1__["findNearbyLocations"])(location.latitude, location.longitude);
 
+        console.log(location, _locations);
         setLocations(_locations);
       });
     };
@@ -6701,24 +7239,31 @@ const LocationsNearby = () => {
   };
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "relative py-4 "
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "absolute top-0 left-0 bg-gray-900 h-32 w-full"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "relative container px-6"
+    className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", {
-    className: "text-white mb-4"
-  }, "Locaties in de buurt"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(swiper_react__WEBPACK_IMPORTED_MODULE_3__["Swiper"], {
-    spaceBetween: 0,
-    slidesPerView: "auto"
-  }, locations && locations.map(location => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(swiper_react__WEBPACK_IMPORTED_MODULE_3__["SwiperSlide"], {
-      key: location.id
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      location: location,
-      key: location.id
-    }));
-  }))));
+    className: "text-black mb-4"
+  }, "Locaties in de buurt"), locations && locations.map(location => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      key: location.id,
+      className: `overflow-hidden relative rounded shadow hover:shadow-lg transition-shadow duration-500 ease-in-out mb-4`
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["Link"], {
+      className: "absolute w-full h-full top-0 left-0 z-10",
+      to: `/fotolocatie/${location.slug}`
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "flex items-center"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_cool_img__WEBPACK_IMPORTED_MODULE_5___default.a, {
+      className: `block max-w-none w-20 h-20 object-cover mr-4`,
+      src: location.photos.sort((a, b) => b.likes - a.likes)[0].photo[0].url.replace(/-original|-watermark/gi, "-small"),
+      alt: `Bekijk locatie ${location.title}`
+    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "w-full"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      className: "text-black text-sm"
+    }, location.title), location.location_categories.map(category => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_2__["LocationHashtag"], {
+      key: category.id,
+      category: category
+    })))));
+  }));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (LocationsNearby);
@@ -6765,9 +7310,9 @@ const MostRecent = () => {
     getMostRecent();
   });
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "container px-6 py-6"
+    className: ""
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Meest Recent"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "grid grid-cols-3 grid-rows-2 gap-4"
+    className: ""
   }, recentPhotos && recentPhotos.photos.map(photo => {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_SocialCard_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
       key: photo.id,
@@ -6834,6 +7379,136 @@ id
   const vars = {};
   const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_3__["default"])(query, vars, true);
   return result;
+};
+
+/***/ }),
+
+/***/ "./src/components/Dashboard/NotificationBoard.jsx":
+/*!********************************************************!*\
+  !*** ./src/components/Dashboard/NotificationBoard.jsx ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _UserProfilePicture_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserProfilePicture.jsx */ "./src/components/UserProfilePicture.jsx");
+/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/io */ "react-icons/io");
+/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_icons_io__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../graphQLFetch.js */ "./src/graphQLFetch.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+
+const NotificationBoard = ({
+  user
+}) => {
+  const [notifications, setNotifications] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    setNotifications(user.receivedNotifications);
+  }, [user.receivedNotifications]);
+
+  const deleteNotification = async id => {
+    const oldNotifications = notifications;
+
+    const _notifications = notifications.filter(notification => {
+      return notification.id != id;
+    });
+
+    setNotifications(_notifications);
+    const query = `mutation deleteNotification($id:ID!){
+        deleteNotification(input: { where: { id: $id } }) {
+          notification {
+            id
+          }
+        }
+      }`;
+    let vars = {};
+    vars.id = id;
+    const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_3__["default"])(query, vars, true);
+
+    if (!data.deleteNotification.notification) {
+      setNotifications(oldNotifications);
+    }
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "py-6",
+    id: "notifications"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+    className: "text-black pl-6"
+  }, "Meldingen"), notifications && !notifications.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "my-2 px-6 py-4"
+  }, "Er zijn geen notificaties voor je!") : notifications && notifications.map(notification => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Notification, {
+      key: notification.id,
+      notification: notification,
+      onDeleteNotification: deleteNotification
+    });
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NotificationBoard);
+
+const Notification = ({
+  notification,
+  onDeleteNotification
+}) => {
+  const {
+    giver,
+    photo
+  } = notification;
+  const history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_4__["useHistory"])();
+
+  const generateText = () => {
+    if (notification.action === "like") {
+      return `${!giver.firstame ? giver.username : giver.firstname} vind je foto ${photo.title} leuk`;
+    }
+
+    if (notification.action === "comment") {
+      return `${!giver.firstame ? giver.username : giver.firstname} heeft gereageerd op je foto ${photo.title}`;
+    }
+
+    if (notification.action === "follow") {
+      return `${!giver.firstame ? giver.username : giver.firstname} volgt je nu!`;
+    }
+  };
+
+  const goToPage = () => {
+    if (notification.action === "like" || notification.action === "comment") {
+      history.push(`/foto/${photo.slug}`);
+    }
+
+    if (notification.action === "follow") {
+      history.push(`/fotograaf/${giver.slug}`);
+    }
+  };
+
+  const deleteNotification = e => {
+    e.stopPropagation();
+    onDeleteNotification(notification.id);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onClick: goToPage,
+    className: "flex items-center relative my-2 px-6 py-4 hover:bg-gray-100 cursor-pointer z-10"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mr-4"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProfilePicture_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    profile: notification.giver,
+    size: 8
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, generateText()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto",
+    onClick: deleteNotification
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_io__WEBPACK_IMPORTED_MODULE_2__["IoIosCloseCircle"], {
+    className: "text-gray-500 hover:text-gray-600 text-2xl"
+  }), " ")));
 };
 
 /***/ }),
@@ -6946,7 +7621,7 @@ const SearchBox = props => {
     name: "lng",
     id: "lng"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-    className: "rounded px-4 py-2 w-full top-0 left-0 focus:rounded-t",
+    className: "rounded border border-gray-300 px-4 py-2 w-full top-0 left-0 focus:rounded-t",
     type: "search",
     placeholder: "Locatie zoeken",
     onFocus: () => {
@@ -7040,9 +7715,9 @@ const findNearbyLocations = async (lat, lng, category) => {
   //const lng = this.state.photo.longitude;
   category && console.log(category);
   lat = parseFloat(lat);
-  lng = parseFloat(lng); //console.log(lat, lng);
-
-  const distance = 50; //in km
+  lng = parseFloat(lng);
+  console.log(lat, lng);
+  const distance = 75; //in km
 
   const radius = 6371; // earth's radius in km = ~6371
 
@@ -7110,11 +7785,13 @@ const findNearbyLocations = async (lat, lng, category) => {
   } //console.log(query, search);
 
 
-  const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_0__["default"])(query, search, true); //console.log("result from FindNearbyLocations", result);
+  const result = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_0__["default"])(query, search, true);
+  console.log("result from FindNearbyLocations", result);
 
   if (result.locations.length > 0) {
     //console.log("found locations", result.locations);
-    const locations = result.locations; //sort items on distance
+    // show only locations where a photo is linked to it
+    const locations = result.locations.filter(location => location.photos.length > 0); //sort items on distance
 
     locations.forEach(location => {
       // lat and lng are from this.state.photo
@@ -7281,12 +7958,12 @@ const Footer = () => {
 /*!******************************************!*\
   !*** ./src/components/LocationCards.jsx ***!
   \******************************************/
-/*! exports provided: default, LocationList */
+/*! exports provided: LocationHashtag, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocationList", function() { return LocationList; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LocationHashtag", function() { return LocationHashtag; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
@@ -7298,12 +7975,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const LocationCard = props => {
-  let {
-    location,
-    size,
-    active
-  } = props;
+const LocationCard = ({
+  location,
+  size,
+  active
+}) => {
   let cardClass;
   let imageClass;
   let imageStyle;
@@ -7352,63 +8028,10 @@ const LocationHashtag = ({
   category
 }) => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
-    className: "text-gray-400 mr-2 text-xs"
+    className: "text-gray-400 mr-2 text-xs inline-block"
   }, "#", category.label.toLowerCase());
 };
-
 /* harmony default export */ __webpack_exports__["default"] = (LocationCard);
-const LocationList = ({
-  location,
-  active,
-  selectLocation
-}) => {
-  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["useHistory"])();
-  let cardClass = active ? "w-full mb-1 border-2 border-green-500" : "w-full mb-1 border-2 border-white";
-
-  const goToLocation = (slug, id) => {
-    let data = [];
-
-    if (sessionStorage.getItem("visitedLocations")) {
-      data = JSON.parse(sessionStorage.getItem("visitedLocations"));
-    }
-
-    if (data.indexOf(id) === -1) {
-      data.push(id);
-    }
-
-    sessionStorage.setItem("visitedLocations", JSON.stringify(data));
-    history.push(`/fotolocatie/${slug}`);
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    onMouseOver: () => {
-      selectLocation(location.id);
-    },
-    onMouseOut: () => {
-      selectLocation("");
-    },
-    className: `relative shadow hover:shadow-lg transition ease-in-out rounded ${cardClass}`
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "flex items-center p-1",
-    onClick: () => {
-      goToLocation(location.slug, location.id);
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_cool_img__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    className: `rounded block max-w-none w-20 h-16 object-cover`,
-    style: {
-      backgroundColor: "grey"
-    },
-    src: location.photos.sort((a, b) => b.likes - a.likes)[0].photo[0].url.replace(/-original|-watermark/gi, "-small"),
-    alt: `Bekijk locatie ${location.title}`
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "px-5 py-2"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
-    className: "text-black text-lg"
-  }, location.title), location.location_categories.map(category => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(LocationHashtag, {
-    key: category.id,
-    category: category
-  }))))));
-};
 
 /***/ }),
 
@@ -7480,6 +8103,84 @@ const CategorieFilter = ({
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (CategorieFilter);
+
+/***/ }),
+
+/***/ "./src/components/Results/LocationList.jsx":
+/*!*************************************************!*\
+  !*** ./src/components/Results/LocationList.jsx ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_cool_img__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-cool-img */ "react-cool-img");
+/* harmony import */ var react_cool_img__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_cool_img__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LocationCards.jsx */ "./src/components/LocationCards.jsx");
+
+
+
+
+
+const LocationList = ({
+  location,
+  active,
+  selectLocation
+}) => {
+  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["useHistory"])();
+  let cardClass = active ? "w-full mb-1 border-2 border-green-500" : "w-full mb-1 border-2 border-white";
+
+  const goToLocation = (slug, id) => {
+    let data = [];
+
+    if (sessionStorage.getItem("visitedLocations")) {
+      data = JSON.parse(sessionStorage.getItem("visitedLocations"));
+    }
+
+    if (data.indexOf(id) === -1) {
+      data.push(id);
+    }
+
+    sessionStorage.setItem("visitedLocations", JSON.stringify(data));
+    history.push(`/fotolocatie/${slug}`);
+  };
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    onMouseOver: () => {
+      selectLocation(location.id);
+    },
+    onMouseOut: () => {
+      selectLocation("");
+    },
+    className: `relative shadow hover:shadow-lg transition ease-in-out rounded ${cardClass}`
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "flex items-center p-1",
+    onClick: () => {
+      goToLocation(location.slug, location.id);
+    }
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_cool_img__WEBPACK_IMPORTED_MODULE_1___default.a, {
+    className: `rounded block max-w-none w-20 h-16 object-cover`,
+    style: {
+      backgroundColor: "grey"
+    },
+    src: location.photos.sort((a, b) => b.likes - a.likes)[0].photo[0].url.replace(/-original|-watermark/gi, "-small"),
+    alt: `Bekijk locatie ${location.title}`
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "px-5 py-2"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+    className: "text-black text-lg"
+  }, location.title), location.location_categories.map(category => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__["LocationHashtag"], {
+    key: category.id,
+    category: category
+  }))))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (LocationList);
 
 /***/ }),
 
@@ -7687,12 +8388,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _FindNearbyLocations_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FindNearbyLocations.jsx */ "./src/components/FindNearbyLocations.jsx");
 /* harmony import */ var _store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../store.js */ "./src/store.js");
-/* harmony import */ var _LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../LocationCards.jsx */ "./src/components/LocationCards.jsx");
-/* harmony import */ var _ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ConstructorHook.jsx */ "./src/components/ConstructorHook.jsx");
-/* harmony import */ var _ResultMap_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ResultMap.jsx */ "./src/components/Results/ResultMap.jsx");
-/* harmony import */ var _CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./CategorieFilter.jsx */ "./src/components/Results/CategorieFilter.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ConstructorHook.jsx */ "./src/components/ConstructorHook.jsx");
+/* harmony import */ var _ResultMap_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ResultMap.jsx */ "./src/components/Results/ResultMap.jsx");
+/* harmony import */ var _CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CategorieFilter.jsx */ "./src/components/Results/CategorieFilter.jsx");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _LocationList_jsx__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./LocationList.jsx */ "./src/components/Results/LocationList.jsx");
 
 
 /* to support IE */
@@ -7710,8 +8411,8 @@ const Results = props => {
   const [activeFilter, setActiveFilter] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])("");
   const [selectedLocation, setSelectedLocation] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
   const [showMap, setShowMap] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
-  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["useHistory"])();
-  let location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_7__["useLocation"])();
+  let history = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["useHistory"])();
+  let location = Object(react_router_dom__WEBPACK_IMPORTED_MODULE_6__["useLocation"])();
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     !locations && getLocations();
 
@@ -7762,7 +8463,7 @@ const Results = props => {
     }
   };
 
-  Object(_ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_4__["default"])(() => {
+  Object(_ConstructorHook_jsx__WEBPACK_IMPORTED_MODULE_3__["default"])(() => {
     const _activeFilter = getActiveFilter();
 
     if (_activeFilter) {
@@ -7803,13 +8504,13 @@ const Results = props => {
     className: "mb-2 flex"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "mr-2"
-  }, "Filter op categorie:"), locations && (filteredLocations.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }, "Filter op categorie:"), locations && (filteredLocations.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     active: activeFilter,
     onFilterChange: onFilterChange,
     categories: filteredLocations.map(location => {
       return location.location_categories;
     })
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_CategorieFilter_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
     active: activeFilter,
     onFilterChange: onFilterChange,
     categories: locations.map(location => {
@@ -7818,7 +8519,7 @@ const Results = props => {
   }))), locations && (filteredLocations.length > 0 ? filteredLocations.map(location => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     key: location.id,
     className: "w-full"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__["LocationList"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationList_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
     size: "large",
     location: location,
     key: location.id,
@@ -7827,7 +8528,7 @@ const Results = props => {
   }))) : locations.map(location => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     key: location.id,
     className: "w-full"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationCards_jsx__WEBPACK_IMPORTED_MODULE_3__["LocationList"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_LocationList_jsx__WEBPACK_IMPORTED_MODULE_7__["default"], {
     size: "large",
     location: location,
     key: location.id,
@@ -7835,11 +8536,11 @@ const Results = props => {
     selectLocation: selectLocation
   }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mb-10 w-full h-full"
-  }, showMap && locations && (filteredLocations.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }, showMap && locations && (filteredLocations.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     locations: filteredLocations,
     selectLocation: selectLocation,
     active: selectedLocation
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ResultMap_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
     locations: locations,
     selectLocation: selectLocation,
     active: selectedLocation
@@ -7929,13 +8630,14 @@ const favButton = ({
   user,
   likedId,
   addTitle,
-  removeTitle
+  removeTitle,
+  receiver
 }) => {
   const [loading, setLoading] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false);
   const [liked, setLiked] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(favourite);
 
   const onBtnClick = () => {
-    liked ? updateFav(user, likedId, "remove") : updateFav(user, likedId, "add");
+    liked ? updateFav(user, likedId, "remove", receiver) : updateFav(user, likedId, "add", receiver);
     setLiked(!liked);
   };
 
@@ -8011,38 +8713,84 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _UserProfilePicture_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UserProfilePicture.jsx */ "./src/components/UserProfilePicture.jsx");
+/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/io */ "react-icons/io");
+/* harmony import */ var react_icons_io__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_icons_io__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _graphQLFetch_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../graphQLFetch.js */ "./src/graphQLFetch.js");
+
+
 
 
 
 const Notifications = ({
   user,
-  onClick
+  onClick,
+  show
 }) => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "absolute bg-white rounded py-6 border z-10 right-0 shadow-lg",
-    id: "notifications"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
-    className: "text-black pl-6"
-  }, "Meldingen"), user.receivedNotifications && user.receivedNotifications.map(notification => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Notification, {
-      onClick: onClick,
-      key: notification.id,
-      notification: notification
+  const [notifications, setNotifications] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    setNotifications(user.receivedNotifications);
+  }, [user.receivedNotifications]);
+
+  const deleteNotification = async id => {
+    const oldNotifications = notifications;
+
+    const _notifications = notifications.filter(notification => {
+      return notification.id != id;
     });
-  })));
+
+    setNotifications(_notifications);
+    const query = `mutation deleteNotification($id:ID!){
+        deleteNotification(input: { where: { id: $id } }) {
+          notification {
+            id
+          }
+        }
+      }`;
+    let vars = {};
+    vars.id = id;
+    const data = await Object(_graphQLFetch_js__WEBPACK_IMPORTED_MODULE_3__["default"])(query, vars, true);
+
+    if (!data.deleteNotification.notification) {
+      setNotifications(oldNotifications);
+    }
+  };
+
+  if (!show) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, notifications && notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "rounded-full bg-red-500 text-white absolute top-0 -mt-1 right-0 -mr-1 text-xs w-5 h-5 flex items-center justify-center"
+    }, notifications.length));
+  } else {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, notifications && notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "rounded-full bg-red-500 text-white absolute top-0 -mt-1 right-0 -mr-1 text-xs w-5 h-5 flex items-center justify-center"
+    }, notifications.length), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "absolute bg-white rounded py-6 border z-20 right-0 shadow-lg",
+      id: "notifications"
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      className: "text-black pl-6"
+    }, "Meldingen"), notifications && !notifications.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      className: "my-2 px-6 py-4"
+    }, "Er zijn geen notificaties voor je!") : notifications && notifications.map(notification => {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Notification, {
+        onClick: onClick,
+        key: notification.id,
+        notification: notification,
+        onDeleteNotification: deleteNotification
+      });
+    })));
+  }
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Notifications);
 
 const Notification = ({
   notification,
-  onClick
+  onClick,
+  onDeleteNotification
 }) => {
   const {
     giver,
     photo
   } = notification;
-  console.log(notification);
 
   const generateText = () => {
     if (notification.action === "like") {
@@ -8068,15 +8816,25 @@ const Notification = ({
     }
   };
 
+  const deleteNotification = e => {
+    e.stopPropagation();
+    onDeleteNotification(notification.id);
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     onClick: goToPage,
-    className: "flex items-center relative my-2 px-6 py-4 hover:bg-gray-100"
+    className: "flex items-center relative my-2 px-6 py-4 hover:bg-gray-100 cursor-pointer z-10"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "mr-4"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_UserProfilePicture_jsx__WEBPACK_IMPORTED_MODULE_1__["default"], {
     profile: notification.giver,
     size: 8
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, generateText())));
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, generateText()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "ml-auto",
+    onClick: deleteNotification
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_io__WEBPACK_IMPORTED_MODULE_2__["IoIosCloseCircle"], {
+    className: "text-gray-500 hover:text-gray-600 text-2xl"
+  }), " ")));
 };
 
 /***/ }),
@@ -8218,13 +8976,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _LoginHooks_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LoginHooks.jsx */ "./src/LoginHooks.jsx");
 /* harmony import */ var _Logout_jsx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Logout.jsx */ "./src/Logout.jsx");
 /* harmony import */ var _ForgotPassword_jsx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ForgotPassword.jsx */ "./src/ForgotPassword.jsx");
-/* harmony import */ var _Profile_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Profile.jsx */ "./src/Profile.jsx");
-/* harmony import */ var _FBConnect_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./FBConnect.jsx */ "./src/FBConnect.jsx");
-/* harmony import */ var _ProfileEdit_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ProfileEdit.jsx */ "./src/ProfileEdit.jsx");
-/* harmony import */ var _components_CategorySearch_LocationsPerCategorie_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/CategorySearch/LocationsPerCategorie.jsx */ "./src/components/CategorySearch/LocationsPerCategorie.jsx");
-/* harmony import */ var _components_Results_Results_jsx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/Results/Results.jsx */ "./src/components/Results/Results.jsx");
-/* harmony import */ var _components_Dashboard_Dashboard_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Dashboard/Dashboard.jsx */ "./src/components/Dashboard/Dashboard.jsx");
-/* harmony import */ var _components_notificationCenter_notifications_jsx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/notificationCenter/notifications.jsx */ "./src/components/notificationCenter/notifications.jsx");
+/* harmony import */ var _PasswordReset_jsx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./PasswordReset.jsx */ "./src/PasswordReset.jsx");
+/* harmony import */ var _Profile_jsx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Profile.jsx */ "./src/Profile.jsx");
+/* harmony import */ var _FBConnect_jsx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./FBConnect.jsx */ "./src/FBConnect.jsx");
+/* harmony import */ var _ProfileEdit_jsx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ProfileEdit.jsx */ "./src/ProfileEdit.jsx");
+/* harmony import */ var _components_CategorySearch_LocationsPerCategorie_jsx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/CategorySearch/LocationsPerCategorie.jsx */ "./src/components/CategorySearch/LocationsPerCategorie.jsx");
+/* harmony import */ var _components_Results_Results_jsx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/Results/Results.jsx */ "./src/components/Results/Results.jsx");
+/* harmony import */ var _components_Dashboard_Dashboard_jsx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/Dashboard/Dashboard.jsx */ "./src/components/Dashboard/Dashboard.jsx");
+/* harmony import */ var _components_notificationCenter_notifications_jsx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/notificationCenter/notifications.jsx */ "./src/components/notificationCenter/notifications.jsx");
+
 
 
 
@@ -8248,10 +9008,6 @@ const routes = [{
   component: _RegisterHooks_jsx__WEBPACK_IMPORTED_MODULE_7__["default"],
   exact: true
 }, {
-  path: "/berichten",
-  component: _components_notificationCenter_notifications_jsx__WEBPACK_IMPORTED_MODULE_17__["default"],
-  exact: true
-}, {
   path: "/inloggen",
   component: _LoginHooks_jsx__WEBPACK_IMPORTED_MODULE_8__["default"],
   exact: true
@@ -8264,6 +9020,10 @@ const routes = [{
   component: _ForgotPassword_jsx__WEBPACK_IMPORTED_MODULE_10__["default"],
   exact: true
 }, {
+  path: "/wachtwoord-resetten",
+  component: _PasswordReset_jsx__WEBPACK_IMPORTED_MODULE_11__["default"],
+  exact: true
+}, {
   path: "/foto/toevoegen",
   component: _PhotoAddStrapi_jsx__WEBPACK_IMPORTED_MODULE_2__["default"],
   exact: true
@@ -8273,7 +9033,7 @@ const routes = [{
   exact: true
 }, {
   path: "/fotograaf/:slug",
-  component: _Profile_jsx__WEBPACK_IMPORTED_MODULE_11__["default"],
+  component: _Profile_jsx__WEBPACK_IMPORTED_MODULE_12__["default"],
   exact: true
 }, {
   path: "/foto/:id",
@@ -8285,20 +9045,20 @@ const routes = [{
   exact: true
 }, {
   path: "/fotolocaties/categorie/:value",
-  component: _components_CategorySearch_LocationsPerCategorie_jsx__WEBPACK_IMPORTED_MODULE_14__["default"],
+  component: _components_CategorySearch_LocationsPerCategorie_jsx__WEBPACK_IMPORTED_MODULE_15__["default"],
   exact: true
 }, {
   path: "/fotolocaties/resultaten",
-  component: _components_Results_Results_jsx__WEBPACK_IMPORTED_MODULE_15__["default"],
+  component: _components_Results_Results_jsx__WEBPACK_IMPORTED_MODULE_16__["default"],
   exact: true
 }, //{ path: "/fotos", component: PhotoListStrapi },
 {
   path: "/connect/facebook",
-  component: _FBConnect_jsx__WEBPACK_IMPORTED_MODULE_12__["default"]
+  component: _FBConnect_jsx__WEBPACK_IMPORTED_MODULE_13__["default"]
 }, //{ path: "/bewerken/:id", component: PhotoEdit, exact: true },
 {
   path: "/profiel/bewerken/:slug",
-  component: _ProfileEdit_jsx__WEBPACK_IMPORTED_MODULE_13__["default"]
+  component: _ProfileEdit_jsx__WEBPACK_IMPORTED_MODULE_14__["default"]
 }, //{ path: "/report", component: PhotoReport },
 //{ path: "/about", component: About },
 {
@@ -8307,7 +9067,7 @@ const routes = [{
   exact: true
 }, {
   path: "/dashboard",
-  component: _components_Dashboard_Dashboard_jsx__WEBPACK_IMPORTED_MODULE_16__["default"],
+  component: _components_Dashboard_Dashboard_jsx__WEBPACK_IMPORTED_MODULE_17__["default"],
   exact: true
 }, {
   path: "/niet-gevonden",
@@ -8912,6 +9672,17 @@ module.exports = require("react-icons/go");
 
 /***/ }),
 
+/***/ "react-icons/io":
+/*!*********************************!*\
+  !*** external "react-icons/io" ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-icons/io");
+
+/***/ }),
+
 /***/ "react-icons/io5":
 /*!**********************************!*\
   !*** external "react-icons/io5" ***!
@@ -8964,6 +9735,17 @@ module.exports = require("react-leaflet-universal");
 /***/ (function(module, exports) {
 
 module.exports = require("react-router-dom");
+
+/***/ }),
+
+/***/ "react-sanitized-html":
+/*!***************************************!*\
+  !*** external "react-sanitized-html" ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-sanitized-html");
 
 /***/ }),
 

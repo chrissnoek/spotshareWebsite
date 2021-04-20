@@ -21,9 +21,9 @@ const MostRecent = () => {
   });
 
   return (
-    <div className="container px-6 py-6">
+    <div className="">
       <h2>Meest Recent</h2>
-      <div className="grid grid-cols-3 grid-rows-2 gap-4">
+      <div className="">
         {recentPhotos &&
           recentPhotos.photos.map((photo) => {
             return <SocialCard key={photo.id} photo={photo} />;

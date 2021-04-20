@@ -96,7 +96,7 @@ const SearchBox = (props) => {
             <input type="hidden" name="lng" id="lng" />
 
             <input
-              className="rounded px-4 py-2 w-full top-0 left-0 focus:rounded-t"
+              className="rounded border border-gray-300 px-4 py-2 w-full top-0 left-0 focus:rounded-t"
               type="search"
               placeholder="Locatie zoeken"
               onFocus={() => {

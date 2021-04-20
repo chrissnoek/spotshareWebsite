@@ -11,6 +11,8 @@ import FollowButton from "./components/followButton.jsx";
 import useConstructor from "./components/ConstructorHook.jsx";
 import UserProfilePicture from "./components/UserProfilePicture.jsx";
 import { useHistory, useLocation } from "react-router-dom";
+import CreateNotification from "./components/CreateNotification.jsx";
+import LocationCard from "./components/LocationCards.jsx";
 
 const UserProfile = (props) => {
   const [profile, setProfile] = useState(null);
@@ -38,7 +40,7 @@ const UserProfile = (props) => {
     getProfile();
   }, [props]);
 
-  const updateFollow = async (followId, action) => {
+  const updateFollow = async (followId) => {
     //console.log(followId);
     const query = `
       mutation updateUser($input:updateUserInput) {
@@ -56,16 +58,18 @@ const UserProfile = (props) => {
     );
 
     //console.log("before adjusting", profileFollowersArray);
-
+    let action;
     // if the id that is being followed is not already in the array, add it
     if (!profileFollowersArray.includes(followId)) {
       profileFollowersArray.push(followId);
+      action = "add";
     } else if (profileFollowersArray.includes(followId)) {
       // followId is in array, so remove it from array
       const index = profileFollowersArray.indexOf(followId);
       if (index > -1) {
         profileFollowersArray.splice(index, 1);
       }
+      action = "remove";
     }
 
     //console.log("after adjusting", profileFollowersArray);
@@ -97,6 +101,10 @@ const UserProfile = (props) => {
       if (data.errors) {
         console.log("an error happened");
         setProfile(prevProfile);
+      } else {
+        if (action === "add") {
+          await CreateNotification(followId, profile.id, "follow");
+        }
       }
     }
   };
@@ -189,6 +197,22 @@ UserProfile.fetchData = async (match, search, showError) => {
             }
             followings {
               id
+            }
+            favouriteLocations {
+              id
+              title
+              slug
+              location_categories {
+                id
+                label
+              }
+              photos {
+                likes
+                photo {
+                  url
+                  
+                }
+              }
             }
             photos {
               likes
@@ -340,6 +364,8 @@ const UserProfileComponent = (props) => {
             </div>
           </div>
         </div>
+        <hr className="my-3" />
+        <h2 className="my-3">Foto's</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           {profile.photos.map((photo, index) => (
             <PhotoView
@@ -352,6 +378,15 @@ const UserProfileComponent = (props) => {
               }
               photo={photo}
             />
+          ))}
+        </div>
+        <hr className="my-3" />
+        <h2 id="fav" className="my-3">
+          Favoriete locaties
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {profile.favouriteLocations.map((location) => (
+            <LocationCard key={location.id} location={location} />
           ))}
         </div>
       </div>

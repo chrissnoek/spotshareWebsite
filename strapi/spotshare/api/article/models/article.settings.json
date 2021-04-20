@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "articles",
   "info": {
-    "name": "Article"
+    "name": "Article",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -29,6 +31,18 @@
     "slug": {
       "type": "uid",
       "targetField": "title"
+    },
+    "article_comment": {
+      "model": "article-comment",
+      "via": "articles"
+    },
+    "article_categories": {
+      "collection": "article-category",
+      "via": "articles",
+      "dominant": true
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

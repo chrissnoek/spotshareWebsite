@@ -1,19 +1,19 @@
 {
   "timeout": 100,
+  "parser": {
+    "enabled": true,
+    "multipart": true,
+    "formLimit": "500mb",
+    "jsonLimit": "500mb",
+    "formidable": {
+      "maxFileSize": 524288000
+    }
+  },
   "load": {
-    "before": [
-      "responseTime",
-      "logger",
-      "cors",
-      "responses",
-      "gzip"
-    ],
+    "before": ["responseTime", "logger", "cors", "responses", "gzip"],
     "order": [
       "Define the middlewares' load order by putting their name in this array is the right order"
     ],
-    "after": [
-      "parser",
-      "router"
-    ]
+    "after": ["parser", "router"]
   }
 }

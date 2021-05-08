@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Joi from "@hapi/joi";
-import { NavLink } from "react-router-dom";
-import auth from "./services/authService";
+import Link from "next/link";
+import auth from "../services/authService";
 import { FaFacebook } from "react-icons/fa";
 import slugify from "slugify";
-
-import Input from "./Input.jsx";
+import Input from "../components/shared/Input";
 import { FaSpinner } from "react-icons/fa";
 
 const RegisterForm = () => {
@@ -172,8 +171,8 @@ const RegisterForm = () => {
 
   const validate = () => {
     const options = { abortEarly: false, allowUnknown: true };
-    const schema = Joi.object({ ...schema });
-    const { error } = schema.validate(data, options);
+    const _schema = Joi.object({ ...schema });
+    const { error } = _schema.validate(data, options);
     console.log(error);
     if (!error) return null;
 
@@ -262,12 +261,11 @@ const RegisterForm = () => {
               Heb je al een account?
             </span>
 
-            <NavLink
-              className="block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600"
-              to="/inloggen"
-            >
-              Inloggen
-            </NavLink>
+            <Link href="/inloggen">
+              <a className="block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600">
+                Inloggen
+              </a>
+            </Link>
           </div>
         </form>
 

@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import Joi from "@hapi/joi";
-import { NavLink } from "react-router-dom";
-import auth from "./services/authService";
-import Input from "./Input.jsx";
+import Input from "../components/shared/Input";
 import { FaSpinner } from "react-icons/fa";
+import Link from "next/link";
+import graphQLFetch from "../graphQLFetch.js";
 
-const Login = () => {
+const ForgotPassword = () => {
   const [data, setData] = useState({});
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState(false);
+
+  const handleChange = ({ currentTarget: input }) => {
+    const _errors = { ...errors };
+    const errorMessage = validateProperty(input);
+    if (errorMessage) _errors[input.name] = errorMessage;
+    else delete _errors[input.name];
+
+    const _data = { ...data };
+    _data[input.name] = input.value;
+    setData(_data);
+    setErrors(_errors);
+
+    // setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
+  };
 
   const schema = {
     email: Joi.string()
@@ -19,36 +33,6 @@ const Login = () => {
         "any.required": `Vul je je email nog even in? 😉.`,
         "string.email": `Vul je een geldig adres in? 😉.`,
       }),
-    password: Joi.string().required().messages({
-      "string.empty": `Vul je je wachtwoord nog even in? 😉.`,
-      "any.required": `Vul je je wachtwoord nog even in? 😉.`,
-    }),
-  };
-
-  const loginUser = async () => {
-    let input = { ...data };
-
-    Object.defineProperty(
-      input,
-      "identifier",
-      Object.getOwnPropertyDescriptor(input, "email")
-    );
-    delete input["email"];
-
-    const loggedIn = await auth.login(input);
-
-    if (loggedIn === true) {
-      window.location = "/";
-    } else {
-      setLoginError(true);
-    }
-  };
-
-  const doSubmit = () => {
-    // call server
-    // redirect user to homepage
-    console.log("submitted");
-    loginUser();
   };
 
   const validateProperty = ({ name, value }) => {
@@ -77,6 +61,26 @@ const Login = () => {
     return errors;
   };
 
+  const doSubmit = async () => {
+    // call server
+    // redirect user to homepage
+    console.log("submitted");
+
+    const query = `mutation ForgotPassword($email:String!){
+		forgotPassword(email:$email) {
+		  ok
+		}
+	  }`;
+
+    const vars = { email: data.email };
+
+    console.log(vars);
+
+    const result = await graphQLFetch(query, vars, true);
+
+    console.log(result);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -103,21 +107,6 @@ const Login = () => {
       </button>
     );
   };
-
-  const handleChange = ({ currentTarget: input }) => {
-    const _errors = { ...errors };
-    const errorMessage = validateProperty(input);
-    if (errorMessage) _errors[input.name] = errorMessage;
-    else delete _errors[input.name];
-
-    const _data = { ...data };
-    _data[input.name] = input.value;
-    setData(_data);
-    setErrors(_errors);
-
-    // setInputs((inputs) => ({ ...inputs, [e.target.name]: e.target.value }));
-  };
-
   const renderInput = (
     name,
     label,
@@ -149,34 +138,26 @@ const Login = () => {
           className="bg-white w-full  px-8 md:px-16 pt-6 md:py-12 flex flex-col bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col border"
         >
           <h1 className="font-bold text-xl text-green-500 text-center">
-            Inloggen bij Spotshare
+            Wachtwoord resetten
           </h1>
 
           {loginError && <ErrorBox />}
           {renderInput("email", "Email", "Emailadres")}
-          {renderInput(
-            "password",
-            "Wachtwoord",
-            "Vul je wachtwoord in",
-            "password"
-          )}
           <div className="flex items-center justify-between">
-            <div>{renderButton("Log in")}</div>
+            <div>{renderButton("Wachtwoord resetten")}</div>
           </div>
           <div className="flex items-center justify-center">
-            <NavLink
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 mr-4"
-              to="/wachtwoord-vergeten"
-            >
-              Wachtwoord vergeten?
-            </NavLink>{" "}
+            <Link href="/inloggen">
+              <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 mr-4">
+                Inloggen
+              </a>
+            </Link>{" "}
             |
-            <NavLink
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4"
-              to="/aanmelden"
-            >
-              Aanmelden
-            </NavLink>
+            <Link href="/aanmelden">
+              <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4">
+                Aanmelden
+              </a>
+            </Link>
           </div>
         </form>
 
@@ -195,18 +176,4 @@ const Login = () => {
   );
 };
 
-export default Login;
-
-const ErrorBox = () => {
-  return (
-    <div className="p-4 rounded border border-red-500 bg-red-200 text-red-500 font-bold my-4">
-      Gebruikersnaam of wachtwoord is onbekend.{" "}
-      <NavLink
-        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4"
-        to="/wachtwoord-vergeten"
-      >
-        Wachtwoord vergeten?
-      </NavLink>
-    </div>
-  );
-};
+export default ForgotPassword;

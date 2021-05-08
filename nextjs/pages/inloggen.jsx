@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Joi from "@hapi/joi";
-import { NavLink } from "react-router-dom";
-import auth from "./services/authService";
-import Input from "./Input.jsx";
+import Link from "next/link";
+import auth from "../services/authService";
+import Input from "../components/shared/Input";
 import { FaSpinner } from "react-icons/fa";
 
 const Login = () => {
@@ -164,19 +164,17 @@ const Login = () => {
             <div>{renderButton("Log in")}</div>
           </div>
           <div className="flex items-center justify-center">
-            <NavLink
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 mr-4"
-              to="/wachtwoord-vergeten"
-            >
-              Wachtwoord vergeten?
-            </NavLink>{" "}
+            <Link href="/wachtwoord-vergeten">
+              <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 mr-4">
+                Wachtwoord vergeten?
+              </a>
+            </Link>{" "}
             |
-            <NavLink
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4"
-              to="/aanmelden"
-            >
-              Aanmelden
-            </NavLink>
+            <Link href="/aanmelden">
+              <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4">
+                Aanmelden
+              </a>
+            </Link>
           </div>
         </form>
 
@@ -201,12 +199,11 @@ const ErrorBox = () => {
   return (
     <div className="p-4 rounded border border-red-500 bg-red-200 text-red-500 font-bold my-4">
       Gebruikersnaam of wachtwoord is onbekend.{" "}
-      <NavLink
-        className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4"
-        to="/wachtwoord-vergeten"
-      >
-        Wachtwoord vergeten?
-      </NavLink>
+      <Link href="/wachtwoord-vergeten">
+        <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4">
+          Wachtwoord vergeten?
+        </a>
+      </Link>
     </div>
   );
 };

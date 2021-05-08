@@ -22,7 +22,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "5b81892a97c832647c62";
+/******/ 	var hotCurrentHash = "e93d83dbe743b900bd7b";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -1222,8 +1222,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_icons_ai__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_icons_ai__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-icons/fi */ "react-icons/fi");
 /* harmony import */ var react_icons_fi__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_icons_fi__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _services_userContext_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/userContext.js */ "./src/services/userContext.js");
-
 
 
 
@@ -2717,14 +2715,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @hapi/joi */ "@hapi/joi");
 /* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_hapi_joi__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Form_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Form.jsx */ "./src/Form.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _services_authService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/authService */ "./src/services/authService.js");
-/* harmony import */ var _Input_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Input.jsx */ "./src/Input.jsx");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__);
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _services_authService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/authService */ "./src/services/authService.js");
+/* harmony import */ var _Input_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Input.jsx */ "./src/Input.jsx");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
@@ -2757,7 +2753,7 @@ const Login = () => {
     };
     Object.defineProperty(input, "identifier", Object.getOwnPropertyDescriptor(input, "email"));
     delete input["email"];
-    const loggedIn = await _services_authService__WEBPACK_IMPORTED_MODULE_4__["default"].login(input);
+    const loggedIn = await _services_authService__WEBPACK_IMPORTED_MODULE_3__["default"].login(input);
 
     if (loggedIn === true) {
       window.location = "/";
@@ -2832,7 +2828,7 @@ const Login = () => {
       className: "w-full mb-2 mt-2 text-white flex items-center justify-center font-bold py-2 px-4 rounded" + (validate() || Object.keys(errors).length !== 0 || disable ? " bg-gray-500 hover:bg-gray-600" : " bg-blue-500 hover:bg-blue-600"),
       type: "submit",
       disabled: validate() || Object.keys(errors).length !== 0 || disable
-    }, disable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__["FaSpinner"], {
+    }, disable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_5__["FaSpinner"], {
       className: "animate-spin"
     }) : label);
   };
@@ -2852,7 +2848,7 @@ const Login = () => {
   };
 
   const renderInput = (name, label, placeholder, type = "text", classes = "w-full", onBlur = () => {}) => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
       classes: classes,
       name: name,
       label: label,
@@ -2876,10 +2872,10 @@ const Login = () => {
     className: "flex items-center justify-between"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, renderButton("Log in"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex items-center justify-center"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
     className: "inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 mr-4",
     to: "/wachtwoord-vergeten"
-  }, "Wachtwoord vergeten?"), " ", "|", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+  }, "Wachtwoord vergeten?"), " ", "|", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
     className: "inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4",
     to: "/aanmelden"
   }, "Aanmelden"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2899,7 +2895,7 @@ const Login = () => {
 const ErrorBox = () => {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "p-4 rounded border border-red-500 bg-red-200 text-red-500 font-bold my-4"
-  }, "Gebruikersnaam of wachtwoord is onbekend.", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+  }, "Gebruikersnaam of wachtwoord is onbekend.", " ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
     className: "inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600 ml-4",
     to: "/wachtwoord-vergeten"
   }, "Wachtwoord vergeten?"));
@@ -6159,19 +6155,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @hapi/joi */ "@hapi/joi");
 /* harmony import */ var _hapi_joi__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_hapi_joi__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Form_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Form.jsx */ "./src/Form.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _services_authService__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./services/authService */ "./src/services/authService.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
-/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var slugify__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! slugify */ "slugify");
-/* harmony import */ var slugify__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(slugify__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _Input_jsx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Input.jsx */ "./src/Input.jsx");
-
-
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "react-router-dom");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_router_dom__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _services_authService__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./services/authService */ "./src/services/authService.js");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-icons/fa */ "react-icons/fa");
+/* harmony import */ var react_icons_fa__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var slugify__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! slugify */ "slugify");
+/* harmony import */ var slugify__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(slugify__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _Input_jsx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Input.jsx */ "./src/Input.jsx");
 
 
 
@@ -6225,7 +6216,7 @@ const RegisterForm = () => {
       className: "w-full mb-2 mt-2 text-white flex items-center justify-center font-bold py-2 px-4 rounded" + (validate() || Object.keys(errors).length !== 0 || disable ? " bg-gray-500 hover:bg-gray-600" : " bg-blue-500 hover:bg-blue-600"),
       type: "submit",
       disabled: validate() || Object.keys(errors).length !== 0 || disable
-    }, disable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__["FaSpinner"], {
+    }, disable ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaSpinner"], {
       className: "animate-spin"
     }) : label);
   };
@@ -6245,7 +6236,7 @@ const RegisterForm = () => {
   };
 
   const renderInput = (name, label, placeholder, type = "text", classes = "w-full", onBlur = () => {}) => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input_jsx__WEBPACK_IMPORTED_MODULE_8__["default"], {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Input_jsx__WEBPACK_IMPORTED_MODULE_6__["default"], {
       classes: classes,
       name: name,
       label: label,
@@ -6264,7 +6255,7 @@ const RegisterForm = () => {
 
     let valueObj = {};
     valueObj[type] = value;
-    const available = await _services_authService__WEBPACK_IMPORTED_MODULE_4__["default"].checkAvailability(type, valueObj); // if email already exists, add error to email
+    const available = await _services_authService__WEBPACK_IMPORTED_MODULE_3__["default"].checkAvailability(type, valueObj); // if email already exists, add error to email
 
     if (!available) {
       const _errors = { ...errors
@@ -6311,7 +6302,7 @@ const RegisterForm = () => {
     };
     input["role"] = "5eef1a60e3b96d29e2d1d1ac"; // check if slug is available, if not, add number
 
-    input["slug"] = slugify__WEBPACK_IMPORTED_MODULE_7___default()(input.username, {
+    input["slug"] = slugify__WEBPACK_IMPORTED_MODULE_5___default()(input.username, {
       replacement: "-",
       // replace spaces with replacement character, defaults to `-`
       remove: undefined,
@@ -6324,7 +6315,7 @@ const RegisterForm = () => {
     console.log({
       input: input
     });
-    const registered = await _services_authService__WEBPACK_IMPORTED_MODULE_4__["default"].register({
+    const registered = await _services_authService__WEBPACK_IMPORTED_MODULE_3__["default"].register({
       input: input
     });
 
@@ -6374,7 +6365,7 @@ const RegisterForm = () => {
   }, "Welkom bij Spotshare"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
     className: "py-3 bg-blue-500 rounded text-white flex justify-center items-center hover:pointer hover:bg-blue-600",
     href: "https://d3bdf895b473.ngrok.io/connect/facebook"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_6__["FaFacebook"], {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_icons_fa__WEBPACK_IMPORTED_MODULE_4__["FaFacebook"], {
     className: "mr-2"
   }), " Registreer met Facebook"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "flex my-4 justify-center items-center"
@@ -6396,7 +6387,7 @@ const RegisterForm = () => {
     className: "flex justify-center itemst-center w-full"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
     className: "text-gray-600 text-center text-sm mr-2 block"
-  }, "Heb je al een account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["NavLink"], {
+  }, "Heb je al een account?"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__["NavLink"], {
     className: "block align-baseline font-bold text-sm text-blue-500 hover:text-blue-600",
     to: "/inloggen"
   }, "Inloggen"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {

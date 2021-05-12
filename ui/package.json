@@ -71,7 +71,7 @@
     "source-map-support": "^0.5.19",
     "svg-inline-loader": "^0.8.2",
     "swipejs": "^2.2.18",
-    "swiper": "^6.1.2",
+    "swiper": "^6.5.1",
     "url-search-params": "^1.1.0",
     "uuid": "^3.4.0"
   },

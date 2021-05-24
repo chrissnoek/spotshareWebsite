@@ -1,6 +1,11 @@
 import graphQLFetch from "../../graphQLFetch";
 
-export const findNearbyLocations = async (lat, lng, category = "") => {
+export const findNearbyLocations = async (
+  lat,
+  lng,
+  category = "",
+  distance = 100
+) => {
   console.log("lat long form findlocneraby", lat, lng);
   // calculate min and max latitudes
   //echo 'submit';
@@ -14,7 +19,6 @@ export const findNearbyLocations = async (lat, lng, category = "") => {
 
   console.log(lat, lng);
 
-  const distance = 100; //in km
   const radius = 6371; // earth's radius in km = ~6371
 
   function rad2deg(angle) {

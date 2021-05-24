@@ -12,6 +12,10 @@ module.exports = withImages({
     return config;
   },
   images: {
-    domains: ["spotsharenl.s3.eu-central-1.amazonaws.com"],
+    domains: [
+      "spotsharenl.s3.eu-central-1.amazonaws.com",
+      "picsum.photos",
+      "scontent-ams4-1.cdninstagram.com",
+    ],
   },
 });

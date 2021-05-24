@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "photos",
   "info": {
-    "name": "Photo"
+    "name": "Photo",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -31,9 +33,9 @@
       "targetField": "title"
     },
     "user": {
-      "via": "photos",
       "plugin": "users-permissions",
-      "model": "user"
+      "model": "user",
+      "via": "photos"
     },
     "date": {
       "type": "datetime"
@@ -51,8 +53,8 @@
       "type": "integer"
     },
     "location": {
-      "via": "photos",
-      "model": "location"
+      "model": "location",
+      "via": "photos"
     },
     "iso": {
       "type": "string"
@@ -64,21 +66,24 @@
       "type": "string"
     },
     "photo_categories": {
-      "via": "photos",
-      "collection": "photo-category"
+      "collection": "photo-category",
+      "via": "photos"
     },
     "usersLike": {
-      "via": "likedPhotos",
       "plugin": "users-permissions",
-      "collection": "user"
+      "collection": "user",
+      "via": "likedPhotos"
     },
     "comments": {
-      "via": "photo",
-      "collection": "photo-comment"
+      "collection": "photo-comment",
+      "via": "photo"
     },
     "notifications": {
-      "via": "photo",
-      "collection": "notification"
+      "collection": "notification",
+      "via": "photo"
+    },
+    "featured": {
+      "type": "boolean"
     }
   }
 }

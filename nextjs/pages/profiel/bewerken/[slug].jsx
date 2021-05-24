@@ -5,34 +5,15 @@ import Form from "../../../components/shared/Form";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import Joi from "@hapi/joi";
 import slugify from "slugify";
+import { useRouter } from "next/router";
 
-class dataEdit extends Form {
-  static async fetchData(match, search, showError) {
-    console.log(match);
+const MyClassWithRouter = (props) => {
+  const router = useRouter();
+  return <DataEdit {...props} router={router} />;
+};
+export default MyClassWithRouter;
 
-    const query = `query data($slug: String!) {
-            users( where: { slug: $slug } ) {
-              username
-			        email
-              id
-              firstname
-              lastname
-              location
-              profilePicture {
-                url
-              }
-            }
-          }`;
-
-    let {
-      params: { slug },
-    } = match;
-    console.log(slug);
-    const result = await graphQLFetch(query, { slug }, true);
-    console.log(result);
-    return result;
-  }
-
+class DataEdit extends Form {
   componentDidMount() {
     const { data } = this.state;
     if (data === null) {
@@ -40,12 +21,9 @@ class dataEdit extends Form {
     }
   }
 
-  constructor() {
-    super();
-    console.log("store: ", store.initialData);
-    const data = store.initialData ? store.initialData.users[0] : null;
-    console.log("data: ", data);
-    delete store.initialData;
+  constructor(props) {
+    super(props);
+    const data = props.data;
     this.state = {
       data,
       errors: {},
@@ -56,20 +34,9 @@ class dataEdit extends Form {
     this.fileInput = React.createRef();
   }
 
-  componentDidUpdate(prevProps) {
-    console.log(prevProps);
-    const {
-      match: {
-        params: { slug: prevSlug },
-      },
-    } = prevProps;
-    const {
-      match: {
-        params: { slug },
-      },
-    } = this.props;
-    if (prevSlug !== slug) {
-      this.loadData();
+  componentDidUpdate() {
+    if (this.state.data !== this.props.data) {
+      this.setState({ data: this.props.data });
     }
   }
 
@@ -98,17 +65,6 @@ class dataEdit extends Form {
     }),
     location: Joi.string(),
   };
-
-  async loadData() {
-    // get the search query string form url
-    const { match } = this.props;
-    // provide the query with the variables
-    const data = await dataEdit.fetchData(match);
-    console.log("loaded data: ", data);
-    if (data) {
-      this.setState({ data: data.users[0] });
-    }
-  }
 
   uploadFile = (file, redirect, newSlug) => {
     const formData = new FormData();
@@ -325,4 +281,52 @@ class dataEdit extends Form {
   }
 }
 
-export default dataEdit;
+export async function getStaticPaths() {
+  // build the graphql query
+  const query = `query profile {
+    users {
+      slug
+    }
+  }`;
+
+  const vars = {};
+  const result = await graphQLFetch(query, vars, true);
+
+  const paths = result.users.map((user) => ({
+    params: { slug: user.slug },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  // build the graphql query
+  const query = `query data($slug: String!) {
+    users( where: { slug: $slug } ) {
+      username
+      email
+      id
+      firstname
+      lastname
+      location
+      profilePicture {
+        url
+      }
+    }
+  }`;
+
+  const { slug } = params;
+
+  const result = await graphQLFetch(query, { slug }, true);
+  console.log("result", result);
+
+  return {
+    props: {
+      data: result.users[0],
+    },
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every second
+    revalidate: 1, // In seconds
+  };
+}

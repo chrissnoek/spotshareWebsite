@@ -11,7 +11,7 @@ const UserProfilePicture = ({ profile, size = 16 }) => {
       } overflow-hidden rounded-full`}
     >
       <img
-        className={`w-auto h-${size} sm:h-${size + 4} sm:w-${
+        className={`border w-auto h-${size} sm:h-${size + 4} sm:w-${
           size + 4
         } rounded-full mb-2`}
         src={profile.profilePicture.url}

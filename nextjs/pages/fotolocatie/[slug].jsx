@@ -267,49 +267,48 @@ class LocationDetailComponent extends React.Component {
                 </Link>
               ))}
             </span>
-            {!isServer && (
-              <div className="absolute right-0 bottom-0 m-10">
-                <userContext.Consumer>
-                  {(value) => {
-                    console.log(value);
-                    if (value.user) {
-                      let favourite;
-                      if (
-                        value.user &&
-                        locationBySlug.usersFavourites.filter(
-                          (favourites) => favourites.id === value.user.id
-                        ).length > 0
-                      ) {
-                        favourite = true;
-                      } else {
-                        favourite = false;
-                      }
-                      return (
-                        <FavButton
-                          favourite={favourite}
-                          updateFav={this.updateFav}
-                          user={value.user}
-                          likedId={locationBySlug.id}
-                          addTitle="Deze locatie opslaan"
-                          removeTitle="Verwijderen uit opgeslagen locaties"
-                        />
-                      );
-                    }
-                  }}
-                </userContext.Consumer>
 
-                <Link href={`/foto/toevoegen/${locationBySlug.id}`}>
-                  <a className="revealTooltip flex pointer justify-end items-center">
-                    <div className="hidden inline-block bg-white rounded py-1 px-3 h-8">
-                      Foto aan deze locatie toevoegen
-                    </div>
-                    <div className="inline-block bg-white rounded py-2 px-3 h-8">
-                      <FaPlus />
-                    </div>
-                  </a>
-                </Link>
-              </div>
-            )}
+            <div className="absolute right-0 bottom-0 m-10">
+              <userContext.Consumer>
+                {(value) => {
+                  console.log(value);
+                  if (value.user) {
+                    let favourite;
+                    if (
+                      value.user &&
+                      locationBySlug.usersFavourites.filter(
+                        (favourites) => favourites.id === value.user.id
+                      ).length > 0
+                    ) {
+                      favourite = true;
+                    } else {
+                      favourite = false;
+                    }
+                    return (
+                      <FavButton
+                        favourite={favourite}
+                        updateFav={this.updateFav}
+                        user={value.user}
+                        likedId={locationBySlug.id}
+                        addTitle="Deze locatie opslaan"
+                        removeTitle="Verwijderen uit opgeslagen locaties"
+                      />
+                    );
+                  }
+                }}
+              </userContext.Consumer>
+
+              <Link href={`/foto/toevoegen/${locationBySlug.id}`}>
+                <a className="revealTooltip flex pointer justify-end items-center">
+                  <div className="hidden  bg-white rounded py-1 px-3 h-8">
+                    Foto aan deze locatie toevoegen
+                  </div>
+                  <div className="inline-block bg-white rounded py-2 px-3 h-8">
+                    <FaPlus />
+                  </div>
+                </a>
+              </Link>
+            </div>
             {/* 
             <p className="">Bezoekers:</p>
             {locationBySlug.photos.map((photo) => {

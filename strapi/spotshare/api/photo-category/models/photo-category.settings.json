@@ -16,8 +16,8 @@
       "type": "string"
     },
     "photos": {
-      "collection": "photo",
       "via": "photo_categories",
+      "collection": "photo",
       "dominant": true
     }
   }

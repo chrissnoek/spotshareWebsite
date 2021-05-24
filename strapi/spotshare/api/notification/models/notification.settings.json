@@ -30,8 +30,8 @@
       ]
     },
     "photo": {
-      "model": "photo",
-      "via": "notifications"
+      "via": "notifications",
+      "model": "photo"
     }
   }
 }

@@ -22,8 +22,8 @@
       "type": "float"
     },
     "photos": {
-      "collection": "photo",
-      "via": "location"
+      "via": "location",
+      "collection": "photo"
     },
     "slug": {
       "type": "uid",

@@ -13,6 +13,10 @@ import LocationCard from "../../components/shared/LocationCard.jsx";
 const UserProfile = ({ profile: _profile }) => {
   const [profile, setProfile] = useState(_profile);
 
+  useEffect(() => {
+    setProfile(_profile);
+  }, [_profile]);
+
   const updateFollow = async (followId) => {
     //console.log(followId);
     const query = `

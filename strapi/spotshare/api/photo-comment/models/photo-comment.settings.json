@@ -13,8 +13,8 @@
       "type": "richtext"
     },
     "photo": {
-      "model": "photo",
-      "via": "comments"
+      "via": "comments",
+      "model": "photo"
     },
     "user": {
       "plugin": "users-permissions",

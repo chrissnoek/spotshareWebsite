@@ -19,9 +19,9 @@
       "model": "article-comment"
     },
     "user": {
+      "via": "article_comments",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "article_comments"
+      "model": "user"
     },
     "body": {
       "type": "richtext"

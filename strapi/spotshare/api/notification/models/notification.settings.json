@@ -12,14 +12,14 @@
   },
   "attributes": {
     "giver": {
+      "via": "gaveNotifications",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "gaveNotifications"
+      "model": "user"
     },
     "receiver": {
+      "via": "receivedNotifications",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "receivedNotifications"
+      "model": "user"
     },
     "action": {
       "type": "enumeration",

@@ -17,9 +17,9 @@
       "model": "photo"
     },
     "user": {
+      "via": "comments",
       "plugin": "users-permissions",
-      "model": "user",
-      "via": "comments"
+      "model": "user"
     },
     "parent": {
       "model": "photo-comment"

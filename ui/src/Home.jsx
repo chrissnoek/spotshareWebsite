@@ -3,18 +3,13 @@ import { FaRegHeart, FaRegComment } from "react-icons/fa";
 import { userContext } from "./services/userContext.js";
 import { Redirect, Link } from "react-router-dom";
 import Footer from "./components/Footer.jsx";
-import { useRouter } from "next/router";
 
 const Home = (props) => {
-  const router = useRouter();
-
-  const redirect = (slug) => Router.push(slug);
-
   return (
     <userContext.Consumer>
       {(value) => {
         console.log(value);
-        return value.user ? redirect("/dashboard") : <HomeScreen />;
+        return value.user ? <Redirect to="/dashboard" /> : <HomeScreen />;
       }}
     </userContext.Consumer>
   );

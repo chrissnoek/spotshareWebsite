@@ -14,6 +14,35 @@ const MyClassWithRouter = (props) => {
 export default MyClassWithRouter;
 
 class DataEdit extends Form {
+  async fetchData(match, search, showError) {
+    const query = `query data($username: String!) {
+            users( where: { username: $username } ) {
+              username
+			        email
+              id
+              firstname
+              lastname
+              location
+              profilePicture {
+                url
+              }
+            }
+          }`;
+
+    const { data: username } = this.props;
+    const result = await graphQLFetch(query, { username }, true);
+    console.log(result);
+    return result;
+  }
+
+  async loadData() {
+    // provide the query with the variables
+    const result = await this.fetchData();
+    if (result) {
+      this.setState({ data: result.users[0] });
+    }
+  }
+
   componentDidMount() {
     const { data } = this.state;
     if (data === null) {
@@ -23,9 +52,8 @@ class DataEdit extends Form {
 
   constructor(props) {
     super(props);
-    const data = props.data;
     this.state = {
-      data,
+      data: null,
       errors: {},
       photoLoading: false,
       tempFile: null,
@@ -34,30 +62,24 @@ class DataEdit extends Form {
     this.fileInput = React.createRef();
   }
 
-  componentDidUpdate() {
-    if (this.state.data !== this.props.data) {
-      this.setState({ data: this.props.data });
-    }
-  }
+  // componentDidUpdate() {
+  //   if (this.state.data !== this.props.data) {
+  //     this.setState({ data: this.props.data });
+  //   }
+  // }
 
   schema = {
     email: Joi.string()
       .email({ tlds: { allow: false } })
       .required()
       .messages({
-        "string.empty": `Vul je je email nog even in? 😉`,
+        "any.empty": `Vul je je email nog even in? 😉`,
         "any.required": `Vul je je email nog even in? 😉`,
         "string.email": `Vul je een geldig adres in? 😉`,
         "any.invalid": `Dit email adres is al ingebruik.`,
       }),
-    firstname: Joi.string().required().messages({
-      "string.empty": `Vul je je voornaam nog even in? 😉`,
-      "any.required": `Vul je je voornaam nog even in? 😉`,
-    }),
-    lastname: Joi.string().required().messages({
-      "string.empty": `Vul je je achternaam nog even in? 😉`,
-      "any.required": `Vul je je achternaam nog even in? 😉`,
-    }),
+    firstname: Joi.string().allow(null, ""),
+    lastname: Joi.string().allow(null, ""),
     username: Joi.string().regex(/^\S*$/).required().messages({
       "string.empty": `Vul je je gebruikersnaam nog even in? 😉`,
       "any.required": `Vul je je gebruikersnaam nog even in? 😉`,
@@ -92,10 +114,7 @@ class DataEdit extends Form {
       //if the query returns an id in data, the photo is created
       // redirect to created photo
       const doRedirect = () => {
-        const { history } = this.props;
-        history.push({
-          pathname: `/fotograaf/${slug}`,
-        });
+        this.props.router.push(`/fotograaf/${slug}`);
       };
       setTimeout(doRedirect, 2000);
       //window.location = `/fotograaf/${slug}`;
@@ -285,7 +304,7 @@ export async function getStaticPaths() {
   // build the graphql query
   const query = `query profile {
     users {
-      slug
+      username
     }
   }`;
 
@@ -293,7 +312,7 @@ export async function getStaticPaths() {
   const result = await graphQLFetch(query, vars, true);
 
   const paths = result.users.map((user) => ({
-    params: { slug: user.slug },
+    params: { username: user.username.toString() },
   }));
 
   return { paths, fallback: false };
@@ -301,8 +320,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   // build the graphql query
-  const query = `query data($slug: String!) {
-    users( where: { slug: $slug } ) {
+  const query = `query data($username: String!) {
+    users( where: { username: $username } ) {
       username
       email
       id
@@ -315,18 +334,18 @@ export async function getStaticProps({ params }) {
     }
   }`;
 
-  const { slug } = params;
+  const { username } = params;
 
-  const result = await graphQLFetch(query, { slug }, true);
+  const result = await graphQLFetch(query, { username }, true);
   console.log("result", result);
 
   return {
     props: {
-      data: result.users[0],
+      data: username,
     },
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every second
-    revalidate: 1, // In seconds
+    revalidate: 60, // In seconds
   };
 }

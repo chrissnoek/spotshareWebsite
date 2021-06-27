@@ -65,22 +65,6 @@ const NavBar = () => {
           isOpen ? " block" : " hidden"
         }`}
       >
-        <Link href="/fotolocatie/volendam">
-          <a
-            onClick={closeMenu}
-            className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
-          >
-            TestLocatie
-          </a>
-        </Link>
-        <Link href="/foto/haven-volendam">
-          <a
-            onClick={closeMenu}
-            className="block text-white font-semibold rounded hover:bg-gray-800 px-2 py-1"
-          >
-            TestFoto
-          </a>
-        </Link>
         <Link href="/foto/toevoegen">
           <a
             onClick={closeMenu}
@@ -124,7 +108,7 @@ const NavBar = () => {
                 show={openNotifications}
               />
             </div>
-            <Link href={`/fotograaf/${user.slug}`}>
+            <Link href={`/fotograaf/${user.username}`}>
               <a
                 onClick={closeMenu}
                 className="block mt-1 text-white font-semibold rounded hover:bg-gray-800 px-2 py-1 sm:mt-0 sm:ml-2"

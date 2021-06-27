@@ -35,7 +35,10 @@ const Login = () => {
     );
     delete input["email"];
 
+    console.log(input);
+
     const loggedIn = await auth.login(input);
+    console.log("loggedIn", loggedIn);
 
     if (loggedIn === true) {
       window.location = "/";

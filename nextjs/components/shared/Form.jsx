@@ -15,16 +15,17 @@ class Form extends Component {
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
+    console.log(input.value);
     const data = { ...this.state.data };
     data[input.name] = input.value;
+    console.log(data[input.name]);
     this.setState({ data, errors });
   };
 
   validate = () => {
     const options = { abortEarly: false, allowUnknown: true };
-    const schema = Joi.object({ ...this.schema });
-    const { error } = schema.validate(this.state.data, options);
-    console.log(error);
+    const _schema = Joi.object({ ...this.schema });
+    const { error } = _schema.validate(this.state.data, options);
     if (!error) return null;
 
     const errors = {};
@@ -36,11 +37,9 @@ class Form extends Component {
 
   validateProperty = ({ name, value }) => {
     const object = { [name]: value };
-    const schema = Joi.object({ [name]: this.schema[name] });
-    const result = schema.validate(object);
-    console.log(result);
+    const _schema = Joi.object({ [name]: this.schema[name] });
+    const result = _schema.validate(object);
     const error = result.error;
-    console.log("returning", error);
     return error ? error.details[0].message : null;
   };
 

@@ -2,6 +2,30 @@
   "routes": [
     {
       "method": "GET",
+      "path": "/photos/import",
+      "handler": "photo.import",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/photos/restore",
+      "handler": "photo.restore",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/photos/mapthose",
+      "handler": "photo.mapthose",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/photos",
       "handler": "photo.find",
       "config": {

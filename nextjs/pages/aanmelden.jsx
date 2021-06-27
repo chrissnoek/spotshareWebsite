@@ -148,7 +148,7 @@ const RegisterForm = () => {
 
   const createUser = async () => {
     let input = { ...data };
-    input["role"] = "5eef1a60e3b96d29e2d1d1ac";
+    // input["role"] = "5eef1a60e3b96d29e2d1d1ac";
 
     // check if slug is available, if not, add number
     input["slug"] = slugify(input.username, {

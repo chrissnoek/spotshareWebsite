@@ -6,7 +6,8 @@
     "description": ""
   },
   "options": {
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "username": {
@@ -102,20 +103,35 @@
       "dominant": true
     },
     "comments": {
-      "via": "user",
-      "collection": "photo-comment"
+      "collection": "photo-comment",
+      "via": "user"
     },
     "gaveNotifications": {
-      "via": "giver",
-      "collection": "notification"
+      "collection": "notification",
+      "via": "giver"
     },
     "receivedNotifications": {
-      "via": "receiver",
-      "collection": "notification"
+      "collection": "notification",
+      "via": "receiver"
     },
     "article_comments": {
-      "via": "user",
-      "collection": "article-comment"
+      "collection": "article-comment",
+      "via": "user"
+    },
+    "prev_user_id": {
+      "type": "string"
+    },
+    "city": {
+      "type": "string"
+    },
+    "fb_page": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
+    },
+    "insta_page": {
+      "type": "string"
     }
   }
 }

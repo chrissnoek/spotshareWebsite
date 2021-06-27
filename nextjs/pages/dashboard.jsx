@@ -39,9 +39,16 @@ const Dashboard = ({ categories: _categories }) => {
                   <div className="mr-4">
                     <UserProfilePicture profile={value.user} size={10} />
                   </div>
-                  <h1 className="font-bold text-xl leading-tight text-center sm:text-left">
-                    {value.user.username}
-                  </h1>
+                  <div>
+                    <h1 className="font-bold text-xl leading-tight text-center sm:text-left">
+                      {value.user.firstname
+                        ? value.user.firstname + " " + value.user.lastname
+                        : value.user.username}
+                    </h1>
+                    <Link href={`/profiel/bewerken/${value.user.username}`}>
+                      <a className="text-sm">Profiel aanpassen</a>
+                    </Link>
+                  </div>
                 </div>
                 <ul className="mt-6">
                   <li

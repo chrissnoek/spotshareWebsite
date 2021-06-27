@@ -3,6 +3,7 @@ import { FaUserSecret } from "react-icons/fa";
 import ReplyBox from "./ReplyBox.jsx";
 
 export const Comment = ({ item, idx, photoId, addComment, receiver }) => {
+  console.log(item);
   const [showReplyBox, setShowReplyBox] = useState(false);
 
   const replyClick = () => {

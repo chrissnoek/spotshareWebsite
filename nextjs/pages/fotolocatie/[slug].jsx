@@ -12,6 +12,7 @@ import PhotoView from "../../components/shared/PhotoView.jsx";
 import { useRouter } from "next/router";
 
 const LocationDetailStrapi = (props) => {
+  // console.log(props);
   const router = useRouter();
   return (
     <userContext.Consumer>
@@ -71,9 +72,9 @@ class LocationDetailComponent extends React.Component {
 
     if (!isServer && curUser != null && prevCurUser !== curUser) {
       // there is a logged in user
-      console.log(curUser);
-      console.log(this.state);
-      console.log(locationBySlug);
+      // console.log(curUser);
+      // console.log(this.state);
+      // console.log(locationBySlug);
 
       if (
         locationBySlug.usersFavourites.filter(
@@ -123,10 +124,10 @@ class LocationDetailComponent extends React.Component {
     const success = (pos) => {
       var crd = pos.coords;
 
-      console.log("Your current position is:");
-      console.log(`Latitude : ${crd.latitude}`);
-      console.log(`Longitude: ${crd.longitude}`);
-      console.log(`More or less ${crd.accuracy} meters.`);
+      // console.log("Your current position is:");
+      // console.log(`Latitude : ${crd.latitude}`);
+      // console.log(`Longitude: ${crd.longitude}`);
+      // console.log(`More or less ${crd.accuracy} meters.`);
 
       this.setState((prevState) => ({
         ...prevState,
@@ -162,13 +163,13 @@ class LocationDetailComponent extends React.Component {
     const { match } = this.props;
     // provide the query with the variables
     const data = await LocationDetailComponent.fetchData(match);
-    console.log(data);
+    // console.log(data);
     if (data.locationBySlug != null) {
       this.setState({ locationBySlug: data.locationBySlug, isServer: false });
     } else {
-      console.log("return not found");
+      // console.log("return not found");
       this.setState({ redirect: true });
-      console.log(this.state);
+      // console.log(this.state);
     }
   }
 
@@ -200,7 +201,7 @@ class LocationDetailComponent extends React.Component {
         if (index > -1) {
           favArray.splice(index, 1);
         }
-        console.log(favArray);
+        // console.log(favArray);
       } else {
         // not in favourites
         return;
@@ -227,7 +228,7 @@ class LocationDetailComponent extends React.Component {
   render() {
     const { locationBySlug, redirect, isServer } = this.state;
     if (redirect) {
-      console.log("redirect", redirect);
+      // console.log("redirect", redirect);
       this.props.router.push("/niet-gevonden");
     }
     if (locationBySlug === null) return null;
@@ -271,7 +272,7 @@ class LocationDetailComponent extends React.Component {
             <div className="absolute right-0 bottom-0 m-10">
               <userContext.Consumer>
                 {(value) => {
-                  console.log(value);
+                  // console.log(value);
                   if (value.user) {
                     let favourite;
                     if (
@@ -438,6 +439,7 @@ export async function getStaticPaths() {
 
   const vars = {};
   const result = await graphQLFetch(query, vars, true);
+  // console.log("urls", result);
 
   const paths = result.locations.map((location) => ({
     params: { slug: location.slug },
@@ -449,57 +451,57 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // build the graphql query
   const query = `query locationBySlug($slug: String!){
-        locationBySlug(slug: $slug) {
-            title
-            photos {
-                likes
-                id
-                location {
-                  longitude
-                  latitude
-                  id
-                  title
-                  slug
-                }
-                title
-                slug
-                user {
-                  
-                  id
-                  firstname
-                  lastname
-                }
-                photo {
-                    id
-                    name
-                    url
-                }
-            }
-            desc
-            slug
+    locationBySlug(slug: $slug) {
+        title
+        photos(where:{user_null:false}) {
+            likes
             id
-            longitude
-            latitude
-            directions
-            whattoshoot
-            location_categories {
-              label
-              value
-            }
-            months {
-              label
-              value
-            }
-            usersFavourites {
+            location {
+              longitude
+              latitude
               id
+              title
+              slug
+            }
+            title
+            slug
+            user {
+              
+              id
+              firstname
+              lastname
+            }
+            photo {
+                id
+                name
+                url
             }
         }
-    }`;
+        desc
+        slug
+        id
+        longitude
+        latitude
+        directions
+        whattoshoot
+        location_categories {
+          label
+          value
+        }
+        months {
+          label
+          value
+        }
+        usersFavourites {
+          id
+        }
+    }
+}`;
 
   const { slug } = params;
 
   const result = await graphQLFetch(query, { slug }, true);
-  console.log("result", result);
+  // console.log("result", result);
 
   return {
     props: {
@@ -508,6 +510,6 @@ export async function getStaticProps({ params }) {
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every second
-    revalidate: 1, // In seconds
+    revalidate: 60, // In seconds
   };
 }

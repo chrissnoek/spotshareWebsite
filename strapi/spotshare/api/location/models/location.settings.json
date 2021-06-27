@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "locations",
   "info": {
-    "name": "Location"
+    "name": "Location",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "title": {
@@ -41,13 +43,16 @@
       "type": "text"
     },
     "months": {
-      "via": "locations",
-      "collection": "month"
+      "collection": "month",
+      "via": "locations"
     },
     "usersFavourites": {
       "via": "favouriteLocations",
       "plugin": "users-permissions",
       "collection": "user"
+    },
+    "prev_id": {
+      "type": "string"
     }
   }
 }

@@ -1,5 +1,6 @@
 import graphQLFetch from "../graphQLFetch";
 import jwtDecode from "jwt-decode";
+import axios from "axios";
 
 const tokenKey = "token";
 
@@ -19,7 +20,7 @@ export async function register(input) {
             }
           } `;
 
-  const result = await graphQLFetch(query, { input }, true, true);
+  const result = await graphQLFetch(query, input, true, true);
   console.log(result);
   if (!result.errors) {
     // user registered and getting JWT token!
@@ -41,31 +42,51 @@ export async function login(input) {
   if (typeof window === "undefined") {
     return;
   }
-  const query = `mutation login($input: UsersPermissionsLoginInput!) {
-            login(input: $input) {
-              jwt
-              user {
-                id
-                email
-				username
-              }
-            }
-          } `;
 
-  const result = await graphQLFetch(query, { input }, true, true);
+  console.log(input);
+
+  // const query = `mutation login($input: UsersPermissionsLoginInput!) {
+  //           login(input: $input) {
+  //             jwt
+  //             user {
+  //               id
+  //               email
+  // 			username
+  //             }
+  //           }
+  //         } `;
+
+  //const result = await graphQLFetch(query, { input }, true, true);
   //console.log(result);
 
-  console.log(result);
-  if (!result.errors) {
-    // user registered and getting JWT token!
-    const {
-      login: { jwt },
-    } = result;
-    localStorage.setItem(tokenKey, jwt);
+  try {
+    const response = await axios.post("http://localhost:1337/auth/local", {
+      identifier: input.identifier,
+      password: input.password,
+    });
+    console.log("Well done!");
+    console.log("User profile", response.data.user);
+    console.log("User token", response.data.jwt);
+
+    localStorage.setItem(tokenKey, response.data.jwt);
     return true;
-  } else {
-    return result.errors[0];
+  } catch (err) {
+    // Handle Error Here
+    console.log("An error occurred:", err);
+    return err;
   }
+
+  // console.log(result);
+  // if (!result.errors) {
+  //   // user registered and getting JWT token!
+  //   const {
+  //     login: { jwt },
+  //   } = result;
+  //   localStorage.setItem(tokenKey, jwt);
+  //   return true;
+  // } else {
+  //   return result.errors[0];
+  // }
 }
 
 export function logout() {
@@ -83,6 +104,8 @@ export async function checkAvailability(type, value) {
   } `;
 
   console.log(query, type, value);
+
+  if (!value) return;
 
   const result = await graphQLFetch(query, value, true, true);
   console.log(result);
@@ -110,6 +133,16 @@ export async function getCurrentUser() {
                 email
                 username
                 slug
+                firstname
+                lastname
+                location
+                profilePicture {
+                  url
+                }
+                city
+                fb_page
+                website
+                insta_page
                 receivedNotifications {
                   id
                   photo {

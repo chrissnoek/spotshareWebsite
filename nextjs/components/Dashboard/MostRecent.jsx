@@ -24,9 +24,9 @@ const MostRecent = () => {
       <h2>Meest Recent</h2>
       <div className="">
         {recentPhotos &&
-          recentPhotos.photos.map((photo) => {
-            return <SocialCard key={photo.id} photo={photo} />;
-          })}
+          recentPhotos.photos.map((photo) => (
+            <SocialCard key={photo.id} photo={photo} />
+          ))}
       </div>
     </div>
   );
@@ -37,7 +37,7 @@ export default MostRecent;
 MostRecent.fetchData = async (match, search, showError) => {
   // build the graphql query
   const query = `query recentPhotos{
-    photos(limit: 6, sort:"createdAt:desc") {
+    photos(limit: 6, sort:"createdAt:desc", where: {user_null:false}) {
 createdAt
       title
       desc

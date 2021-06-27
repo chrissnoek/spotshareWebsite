@@ -1,6 +1,6 @@
 module.exports = ({ env }) => ({
   upload: {
-    provider: "s3-photo",
+    provider: "aws-s3",
     providerOptions: {
       accessKeyId: env("S3_ACCESSKEYID"),
       secretAccessKey: env("S3_SECRETACCESSKEY"),
@@ -18,7 +18,9 @@ module.exports = ({ env }) => ({
     settings: {
       defaultFrom: "info@spotshare.nl",
       defaultReplyTo: "info@spotshare.nl",
-      testAddress: "chrissnoek8@hotmail.com",
     },
+  },
+  graphql: {
+    amountLimit: 5000,
   },
 });

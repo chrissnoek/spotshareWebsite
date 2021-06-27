@@ -84,6 +84,15 @@
     },
     "featured": {
       "type": "boolean"
+    },
+    "prev_id": {
+      "type": "string"
+    },
+    "prev_location_id": {
+      "type": "string"
+    },
+    "prev_name": {
+      "type": "string"
     }
   }
 }

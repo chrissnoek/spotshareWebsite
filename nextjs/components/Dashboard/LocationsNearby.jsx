@@ -33,7 +33,9 @@ const LocationsNearby = () => {
         .then(async (location) => {
           const _locations = await findNearbyLocations(
             location.latitude,
-            location.longitude
+            location.longitude,
+            "",
+            1.5
           );
           console.log(location, _locations);
           setLocations(_locations);

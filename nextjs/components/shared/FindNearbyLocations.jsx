@@ -4,7 +4,7 @@ export const findNearbyLocations = async (
   lat,
   lng,
   category = "",
-  distance = 100
+  distance = 5
 ) => {
   console.log("lat long form findlocneraby", lat, lng);
   // calculate min and max latitudes

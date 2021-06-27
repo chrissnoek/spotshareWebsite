@@ -4,6 +4,7 @@ import Input from "../components/shared/Input";
 import { FaSpinner } from "react-icons/fa";
 import Link from "next/link";
 import graphQLFetch from "../graphQLFetch.js";
+import axios from "axios";
 
 const ForgotPassword = () => {
   const [data, setData] = useState({});
@@ -76,9 +77,22 @@ const ForgotPassword = () => {
 
     console.log(vars);
 
-    const result = await graphQLFetch(query, vars, true);
+    // Request API.
+    axios
+      .post("http://localhost:1337/auth/forgot-password", {
+        email: data.email, // user's email
+      })
+      .then((response) => {
+        console.log(response);
+        console.log("Your user received an email");
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error.response);
+      });
 
-    console.log(result);
+    // const result = await graphQLFetch(query, vars, true);
+
+    // console.log(result);
   };
 
   const handleSubmit = (e) => {

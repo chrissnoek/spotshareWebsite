@@ -319,7 +319,7 @@ class PhotoDetail extends React.Component {
 
               <div className="w-full">
                 <div className="relative block sm:flex sm:items-center sm:w-full">
-                  <Link href={`/fotograaf/${photoBySlug.user.slug}`}>
+                  <Link href={`/fotograaf/${photoBySlug.user.username}`}>
                     <a className="top-0 left-0 h-full w-full absolute"></a>
                   </Link>
                   <div className="mx-auto sm:mx-0 mb-2 sm:mr-4">
@@ -407,7 +407,7 @@ export async function getStaticPaths() {
   const result = await graphQLFetch(query, vars, true);
 
   const paths = result.photos.map((photo) => ({
-    params: { slug: photo.slug },
+    params: { slug: photo.slug.toString() },
   }));
 
   return { paths, fallback: false };
@@ -482,6 +482,6 @@ export async function getStaticProps({ params }) {
     // Next.js will attempt to re-generate the page:
     // - When a request comes in
     // - At most once every second
-    revalidate: 1, // In seconds
+    revalidate: 60, // In seconds
   };
 }

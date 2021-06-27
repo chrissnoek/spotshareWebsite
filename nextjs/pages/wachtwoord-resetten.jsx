@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import URLSearchParams from "url-search-params";
 import auth from "../services/authService";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const PasswordReset = () => {
   const [data, setData] = useState({});
@@ -91,32 +92,42 @@ const PasswordReset = () => {
     // redirect user to homepage
     console.log("submitted");
 
-    const query = `mutation resetPassword($password: String!, $passwordConfirmation: String!, $code: String!){
-        resetPassword(password:$password, passwordConfirmation:$passwordConfirmation, code:$code) {
-          jwt
-        }
-      }`;
+    // const query = `mutation resetPassword($password: String!, $passwordConfirmation: String!, $code: String!){
+    //     resetPassword(password:$password, passwordConfirmation:$passwordConfirmation, code:$code) {
+    //       jwt
+    //     }
+    //   }`;
 
-    const vars = {
-      password: data.password,
-      passwordConfirmation: data.passwordConfirmation,
-      code: code,
-    };
+    // const vars = {
+    //   password: data.password,
+    //   passwordConfirmation: data.passwordConfirmation,
+    //   code: code,
+    // };
 
-    console.log(vars);
+    // console.log(vars);
 
-    const result = await graphQLFetch(query, vars, true, true);
+    //const result = await graphQLFetch(query, vars, true, true);
 
-    console.log(result);
+    // console.log(result);
 
-    if (result.resetPassword !== null) {
-      auth.setToken(result.resetPassword.jwt);
-      setSuccess(true);
-    } else {
-      // error message
-      console.log("ERROR!");
-      toast.error("Je code is verlopen, probeer het opnieuw.");
-    }
+    axios
+      .post("http://localhost:1337/auth/reset-password", {
+        code: code, // code contained in the reset link of step 3.
+        password: data.password,
+        passwordConfirmation: data.passwordConfirmation,
+      })
+      .then((response) => {
+        console.log(response);
+        console.log("Your user's password has been reset.");
+        auth.setToken(response.data.jwt);
+        setSuccess(true);
+      })
+      .catch((error) => {
+        console.log("An error occurred:", error.response);
+        // error message
+        console.log("ERROR!");
+        toast.error("Je code is verlopen, probeer het opnieuw.");
+      });
   };
 
   const handleSubmit = (e) => {

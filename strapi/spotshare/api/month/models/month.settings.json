@@ -10,8 +10,8 @@
   },
   "attributes": {
     "locations": {
-      "collection": "location",
       "via": "months",
+      "collection": "location",
       "dominant": true
     },
     "label": {

@@ -23,7 +23,7 @@
     "@hapi/joi": "^17.1.1",
     "apollo-boost": "^0.4.7",
     "autoprefixer": "^10.0.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-polyfill": "^6.26.0",
     "commonjs": "0.0.1",
     "core-js": "^2.6.11",

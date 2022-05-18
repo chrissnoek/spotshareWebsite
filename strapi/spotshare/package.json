@@ -23,7 +23,7 @@
     "simple-statistics": "^7.0.7",
     "slug": "^3.3.4",
     "slugify": "^1.5.3",
-    "strapi": "3.6.5",
+    "strapi": "3.6.10",
     "strapi-admin": "3.6.5",
     "strapi-connector-mongoose": "3.6.5",
     "strapi-plugin-content-manager": "3.6.5",

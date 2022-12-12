@@ -35,7 +35,7 @@
     "eslint-plugin-react": "^7.19.0",
     "exif-js": "^2.3.0",
     "exifr": "^4.3.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "graphql": "^15.0.0",
     "gsap": "^3.6.0",
     "http-proxy-middleware": "^1.0.3",
